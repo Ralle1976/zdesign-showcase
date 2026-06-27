@@ -1,754 +1,406 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sattva Yoga — Vinyasa, Yin & Atemarbeit in Lissabon</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --sand:#EFE6D6;
-    --sand-deep:#E4D7BE;
-    --cream:#F7F0E1;
-    --paper:#FBF6EA;
-    --sage:#7C8A6E;
-    --sage-deep:#4F5C45;
-    --sage-shadow:#3A4534;
-    --terra:#B8593A;
-    --terra-deep:#8E3F26;
-    --ink:#2A2620;
-    --ink-soft:#5C5447;
-    --rule:rgba(42,38,32,.18);
-  }
-
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'Inter',system-ui,sans-serif;
-    color:var(--ink);
-    background:var(--paper);
-    line-height:1.6;
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  /* ATMENDER UNTERGRUND */
-  .breath{
-    position:fixed;inset:0;z-index:-2;
-    background:linear-gradient(120deg,#F7F0E1 0%, #EFE6D6 30%, #E4D7BE 55%, #DDD0B5 75%, #EFE6D6 100%);
-    background-size:200% 200%;
-    animation:breathe 16s ease-in-out infinite;
-  }
-  @keyframes breathe{
-    0%{background-position:0% 0%}
-    50%{background-position:100% 100%}
-    100%{background-position:0% 0%}
-  }
-  .breath::after{
-    content:"";position:absolute;inset:0;
-    background:
-      radial-gradient(ellipse at 15% 20%, rgba(124,138,110,.18), transparent 50%),
-      radial-gradient(ellipse at 85% 70%, rgba(184,89,58,.10), transparent 55%);
-    pointer-events:none;
-  }
-
-  /* GLAS-NAV */
-  nav{
-    position:fixed;top:18px;left:50%;transform:translateX(-50%);
-    z-index:100;width:min(1180px, calc(100% - 36px));
-    background:rgba(251,246,234,.62);
-    backdrop-filter:blur(14px) saturate(140%);
-    -webkit-backdrop-filter:blur(14px) saturate(140%);
-    border:1px solid rgba(255,255,255,.5);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 8px 32px rgba(80,60,30,.08);
-    border-radius:2px;
-    padding:14px 26px;
-    display:flex;align-items:center;justify-content:space-between;
-  }
-  .brand{
-    font-family:'Fraunces',serif;font-weight:500;font-size:22px;
-    letter-spacing:-.01em;color:var(--ink);text-decoration:none;
-    display:flex;align-items:center;gap:10px;
-  }
-  .brand-mark{
-    width:26px;height:26px;border-radius:50%;
-    background:linear-gradient(135deg,var(--terra),var(--terra-deep));
-    position:relative;
-  }
-  .brand-mark::after{
-    content:"";position:absolute;inset:6px;border-radius:50%;
-    background:var(--cream);
-  }
-  .nav-links{display:flex;gap:32px;align-items:center}
-  .nav-links a{
-    color:var(--ink);text-decoration:none;font-size:14px;font-weight:400;
-    letter-spacing:.01em;position:relative;padding:4px 0;
-    transition:color .25s ease;
-  }
-  .nav-links a:hover{color:var(--terra-deep)}
-  .nav-links a:focus-visible{outline:2px solid var(--terra);outline-offset:4px}
-  .nav-cta{
-    border:1px solid var(--ink);padding:8px 18px;
-    background:var(--ink);color:var(--cream)!important;
-    transition:background .25s ease;
-  }
-  .nav-cta:hover{background:var(--terra-deep);border-color:var(--terra-deep)}
-
-  /* HERO — EDITORIAL */
-  .hero{
-    padding:160px 32px 90px;
-    max-width:1280px;margin:0 auto;
-    position:relative;
-  }
-  .hero-grid{
-    display:grid;grid-template-columns:1.15fr 1fr;
-    gap:60px;align-items:end;
-  }
-  .eyebrow{
-    font-family:'Inter',sans-serif;font-size:11px;font-weight:500;
-    letter-spacing:.22em;text-transform:uppercase;
-    color:var(--sage-deep);
-    display:flex;align-items:center;gap:14px;
-    margin-bottom:28px;
-  }
-  .eyebrow::before{
-    content:"";width:36px;height:1px;background:var(--sage-deep);
-  }
-  .eyebrow .pg{margin-left:auto;color:var(--ink-soft);letter-spacing:.18em}
-
-  h1{
-    font-family:'Fraunces',serif;
-    font-weight:300;
-    font-size:clamp(48px, 8.4vw, 116px);
-    line-height:.94;
-    letter-spacing:-.035em;
-    color:var(--ink);
-    margin-bottom:34px;
-  }
-  h1 em{
-    font-style:italic;font-weight:400;
-    color:var(--terra-deep);
-    font-variation-settings:"opsz" 120;
-  }
-  .hero-lede{
-    font-family:'Fraunces',serif;font-weight:300;
-    font-size:20px;line-height:1.5;color:var(--ink-soft);
-    max-width:520px;margin-bottom:42px;
-  }
-  .hero-actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-  .btn{
-    display:inline-flex;align-items:center;gap:12px;
-    padding:16px 28px;font-size:14px;font-weight:500;
-    text-decoration:none;letter-spacing:.02em;
-    transition:transform .3s ease, background .25s ease;
-    border-radius:2px;
-  }
-  .btn-primary{
-    background:var(--terra);color:var(--cream);
-    box-shadow:0 6px 24px rgba(184,89,58,.28);
-  }
-  .btn-primary:hover{background:var(--terra-deep)}
-  .btn-ghost{color:var(--ink);border-bottom:1px solid var(--ink);padding:16px 4px}
-  .btn svg{transition:transform .3s ease}
-  .btn:hover svg{transform:translateX(4px)}
-
-  .hero-figure{position:relative}
-  .hero-figure img{
-    width:100%;height:560px;object-fit:cover;
-    border-radius:2px;
-    filter:saturate(.92) contrast(1.02);
-  }
-  .figure-caption{
-    font-family:'Fraunces',serif;font-style:italic;
-    font-size:13px;color:var(--ink-soft);
-    margin-top:14px;padding-left:14px;
-    border-left:2px solid var(--terra);
-    max-width:340px;line-height:1.5;
-  }
-  .figure-caption b{
-    font-style:normal;font-family:'Inter',sans-serif;font-weight:500;
-    color:var(--ink);text-transform:uppercase;letter-spacing:.14em;
-    font-size:10px;display:block;margin-bottom:4px;
-  }
-
-  /* MANIFEST — MAGAZIN SPALTEN */
-  .manifest{
-    padding:120px 32px;
-    max-width:1280px;margin:0 auto;
-    border-top:1px solid var(--rule);
-  }
-  .manifest-head{
-    display:flex;justify-content:space-between;align-items:baseline;
-    margin-bottom:60px;flex-wrap:wrap;gap:20px;
-  }
-  .section-title{
-    font-family:'Fraunces',serif;font-weight:300;
-    font-size:clamp(34px, 4.5vw, 56px);
-    letter-spacing:-.02em;line-height:1.05;
-    max-width:680px;
-  }
-  .section-title em{font-style:italic;color:var(--terra-deep)}
-  .marginalia{
-    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--ink-soft);font-weight:500;
-  }
-
-  .manifest-body{
-    columns:2;column-gap:64px;
-    font-family:'Fraunces',serif;font-weight:300;
-    font-size:17px;line-height:1.65;color:var(--ink);
-  }
-  .manifest-body p{margin-bottom:18px;break-inside:avoid}
-  .dropcap{
-    float:left;font-family:'Fraunces',serif;
-    font-weight:400;font-style:normal;
-    font-size:84px;line-height:.85;
-    color:var(--terra-deep);
-    margin:6px 12px 0 0;
-    font-variation-settings:"opsz" 144;
-  }
-  .pullquote{
-    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-    font-size:24px;line-height:1.35;color:var(--sage-deep);
-    border-top:1px solid var(--rule);
-    border-bottom:1px solid var(--rule);
-    padding:24px 0;margin:24px 0;
-    break-inside:avoid;
-  }
-
-  /* PRAXIS — 3 SPALTEN FEATURE */
-  .praxis{
-    padding:120px 32px;
-    background:linear-gradient(180deg, transparent, rgba(124,138,110,.06) 40%, transparent);
-  }
-  .praxis-inner{max-width:1280px;margin:0 auto}
-  .praxis-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);
-    gap:1px;margin-top:60px;
-    background:var(--rule);
-    border-top:1px solid var(--rule);
-    border-bottom:1px solid var(--rule);
-  }
-  .praxis-card{
-    background:rgba(251,246,234,.5);
-    backdrop-filter:blur(6px);
-    padding:42px 32px 48px;
-    transition:background .35s ease;
-  }
-  .praxis-card:hover{background:var(--paper)}
-  .praxis-icon{
-    width:48px;height:48px;
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:28px;
-    transition:transform .35s ease;
-  }
-  .praxis-card:hover .praxis-icon{transform:translateY(-4px)}
-  .praxis-icon svg{width:100%;height:100%;stroke:var(--sage-deep);fill:none;stroke-width:1.4}
-  .praxis-tag{
-    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--terra);font-weight:600;margin-bottom:10px;
-  }
-  .praxis-card h3{
-    font-family:'Fraunces',serif;font-weight:400;
-    font-size:30px;line-height:1.1;letter-spacing:-.015em;
-    margin-bottom:14px;color:var(--ink);
-  }
-  .praxis-card p{
-    font-size:15px;line-height:1.55;color:var(--ink-soft);
-    margin-bottom:22px;
-  }
-  .praxis-meta{
-    font-family:'Fraunces',serif;font-style:italic;
-    font-size:13px;color:var(--sage-deep);
-    padding-top:18px;border-top:1px dashed var(--rule);
-  }
-
-  /* RETREAT — EDITORIAL SPLIT */
-  .retreat{
-    padding:120px 32px;
-    max-width:1280px;margin:0 auto;
-  }
-  .retreat-grid{
-    display:grid;grid-template-columns:1fr 1.1fr;
-    gap:80px;align-items:center;
-  }
-  .retreat-figure{position:relative}
-  .retreat-figure img{
-    width:100%;height:520px;object-fit:cover;border-radius:2px;
-  }
-  .retreat-figure .stamp{
-    position:absolute;top:-22px;left:-22px;
-    width:120px;height:120px;border-radius:50%;
-    background:var(--terra);color:var(--cream);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-    text-align:center;line-height:1.1;
-    box-shadow:0 12px 32px rgba(184,89,58,.3);
-  }
-  .stamp b{
-    font-family:'Inter',sans-serif;font-style:normal;font-weight:600;
-    font-size:24px;letter-spacing:-.02em;display:block;
-  }
-  .stamp span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:4px}
-
-  .retreat-text h2{
-    font-family:'Fraunces',serif;font-weight:300;
-    font-size:clamp(36px, 4.8vw, 60px);
-    line-height:1.02;letter-spacing:-.025em;
-    margin:18px 0 24px;
-  }
-  .retreat-text h2 em{font-style:italic;color:var(--terra-deep)}
-  .retreat-text > p{
-    font-family:'Fraunces',serif;font-weight:300;
-    font-size:18px;line-height:1.6;color:var(--ink-soft);
-    margin-bottom:32px;
-  }
-  .retreat-facts{
-    display:grid;grid-template-columns:1fr 1fr;gap:24px 40px;
-    margin-bottom:36px;padding:28px 0;
-    border-top:1px solid var(--rule);
-    border-bottom:1px solid var(--rule);
-  }
-  .fact-label{
-    font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--ink-soft);margin-bottom:6px;
-  }
-  .fact-value{
-    font-family:'Fraunces',serif;font-size:18px;color:var(--ink);font-weight:400;
-  }
-
-  /* AUSBILDUNG */
-  .ausbildung{
-    padding:120px 32px;
-    background:var(--sage-deep);color:var(--cream);
-    position:relative;overflow:hidden;
-  }
-  .ausbildung::before{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(120deg, rgba(255,255,255,.04), transparent 50%, rgba(255,255,255,.04));
-    background-size:200% 200%;
-    animation:breathe 18s ease-in-out infinite;
-    pointer-events:none;
-  }
-  .ausbildung-inner{
-    max-width:1280px;margin:0 auto;position:relative;
-    display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
-  }
-  .ausbildung .eyebrow{color:rgba(247,240,225,.7)}
-  .ausbildung .eyebrow::before{background:rgba(247,240,225,.7)}
-  .ausbildung h2{
-    font-family:'Fraunces',serif;font-weight:300;
-    font-size:clamp(36px, 4.8vw, 64px);
-    line-height:1.02;letter-spacing:-.025em;
-    margin-bottom:24px;color:var(--cream);
-  }
-  .ausbildung h2 em{font-style:italic;color:#E8B89A}
-  .ausbildung p{
-    font-family:'Fraunces',serif;font-weight:300;
-    font-size:18px;line-height:1.6;color:rgba(247,240,225,.78);
-    margin-bottom:18px;
-  }
-  .curriculum{
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,.12);
-    padding:42px;
-  }
-  .curriculum h3{
-    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-    font-size:22px;color:#E8B89A;margin-bottom:24px;
-  }
-  .curriculum ul{list-style:none}
-  .curriculum li{
-    display:flex;justify-content:space-between;align-items:baseline;
-    padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1);
-    font-size:15px;
-  }
-  .curriculum li:last-child{border-bottom:none}
-  .curriculum li span:first-child{color:var(--cream)}
-  .curriculum li span:last-child{
-    font-family:'Fraunces',serif;font-style:italic;
-    font-size:13px;color:rgba(247,240,225,.6);
-  }
-
-  /* CTA */
-  .cta{
-    padding:140px 32px 120px;
-    max-width:1280px;margin:0 auto;
-    text-align:center;position:relative;
-  }
-  .cta-frame{
-    padding:80px 40px;
-    background:linear-gradient(135deg, rgba(184,89,58,.08), rgba(124,138,110,.08));
-    border:1px solid var(--rule);
-    position:relative;
-  }
-  .cta-frame::before,.cta-frame::after{
-    content:"";position:absolute;width:40px;height:40px;
-    border:1px solid var(--terra);
-  }
-  .cta-frame::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
-  .cta-frame::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
-  .cta h2{
-    font-family:'Fraunces',serif;font-weight:300;
-    font-size:clamp(40px, 6vw, 80px);
-    line-height:1;letter-spacing:-.03em;
-    margin-bottom:24px;
-  }
-  .cta h2 em{font-style:italic;color:var(--terra-deep)}
-  .cta p{
-    font-family:'Fraunces',serif;font-weight:300;font-size:19px;
-    color:var(--ink-soft);max-width:540px;margin:0 auto 40px;
-    line-height:1.5;
-  }
-  .cta .btn-primary{font-size:15px;padding:18px 36px}
-
-  /* FOOTER */
-  footer{
-    background:var(--ink);color:var(--cream);
-    padding:80px 32px 40px;
-  }
-  .footer-inner{
-    max-width:1280px;margin:0 auto;
-    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;
-    gap:60px;margin-bottom:60px;
-  }
-  .footer-brand{
-    font-family:'Fraunces',serif;font-weight:300;font-size:32px;
-    letter-spacing:-.02em;margin-bottom:18px;
-  }
-  .footer-brand em{font-style:italic;color:#E8B89A}
-  .footer-tag{
-    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
-    color:rgba(247,240,225,.6);font-size:15px;line-height:1.5;
-    max-width:280px;
-  }
-  .footer-col h4{
-    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-    color:#E8B89A;margin-bottom:18px;font-weight:600;
-  }
-  .footer-col ul{list-style:none}
-  .footer-col li{margin-bottom:10px;font-size:14px;color:rgba(247,240,225,.78)}
-  .footer-col a{color:inherit;text-decoration:none;transition:color .25s}
-  .footer-col a:hover{color:var(--cream)}
-  .footer-bottom{
-    max-width:1280px;margin:0 auto;
-    padding-top:30px;border-top:1px solid rgba(247,240,225,.12);
-    display:flex;justify-content:space-between;align-items:center;
-    font-size:12px;color:rgba(247,240,225,.5);flex-wrap:wrap;gap:14px;
-  }
-
-  /* CURSOR-MAGNET ELEMENTE */
-  .magnet{transition:transform .4s cubic-bezier(.2,.7,.3,1)}
-
-  /* REVEAL */
-  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease, transform .9s ease}
-  .reveal.in{opacity:1;transform:none}
-
-  /* RESPONSIVE */
-  @media (max-width:980px){
-    .nav-links{display:none}
-    .hero{padding:130px 22px 70px}
-    .hero-grid,.retreat-grid,.ausbildung-inner{grid-template-columns:1fr;gap:48px}
-    .hero-figure img{height:420px}
-    .manifest-body{columns:1}
-    .praxis-grid{grid-template-columns:1fr}
-    .footer-inner{grid-template-columns:1fr 1fr;gap:40px}
-    .retreat-figure .stamp{width:90px;height:90px;left:12px;top:12px}
-    .retreat-figure .stamp b{font-size:18px}
-  }
-  @media (max-width:560px){
-    .hero{padding:120px 18px 60px}
-    .retreat,.praxis,.manifest,.ausbildung,.cta{padding-left:18px;padding-right:18px}
-    .footer-inner{grid-template-columns:1fr}
-    .retreat-facts{grid-template-columns:1fr}
-    .curriculum{padding:28px}
-  }
-
-  /* A11Y */
-  @media (prefers-reduced-motion: reduce){
-    *,*::before,*::after{
-      animation-duration:.001ms!important;
-      animation-iteration-count:1!important;
-      transition-duration:.001ms!important;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sattva Yoga – Vinyasa, Yin & Atemarbeit</title>
+  <meta name="description" content="Boutique-Yogastudio für Vinyasa, Yin und Atemarbeit. Entdecke unsere kleinen Klassen, Lehrer-Ausbildungen und Retreats.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,700&family=Mulish:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Sattva Yoga Palette - based on user brief */
+      --bg: #F7F2E9; /* Warm Sand */
+      --surface: #FFFFFF;
+      --surface-2: #ECE8E1;
+      --primary: #434E42; /* Dark Sage Green */
+      --primary-soft: #6A7A69;
+      --accent: #C87D5D; /* Terracotta */
+      --accent-soft: #DBA48B;
+      --secondary: #A3B1A1; /* Sage Green */
+      --text: var(--primary);
+      --text-muted: #7E786F;
+      --border: #E0D9CC;
+      --border-soft: #EDE6D9;
+      /* Structural Tokens from Prompt */
+      --radius: 14px;
+      --radius-sm: 8px;
+      --radius-lg: 22px;
+      --shadow: 0 1px 2px rgba(67, 78, 66, 0.04), 0 8px 30px rgba(67, 78, 66, 0.08);
+      --ring: 0 0 0 1px rgba(200, 125, 93, 0.22);
+      --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --font-body: "Mulish", system-ui, -apple-system, "Segoe UI", sans-serif;
     }
-    .reveal{opacity:1;transform:none}
-    .magnet{transform:none!important}
-    html{scroll-behavior:auto}
-  }
-  :focus-visible{outline:2px solid var(--terra);outline-offset:3px;border-radius:2px}
-</style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+      opacity: 0.03;
+      z-index: 100;
+    }
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    section { padding: clamp(80px, 12vw, 140px) 0; }
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; }
+    h1 { font-size: clamp(3.5rem, 8vw + 1rem, 7rem); }
+    h2 { font-size: clamp(2.5rem, 5vw + 1rem, 4rem); margin-bottom: 48px; text-align: center; }
+    h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 16px; }
+    p { font-size: 1rem; line-height: 1.7; color: var(--text-muted); max-width: 65ch; }
+    p:not(:last-child) { margin-bottom: 1rem; }
+    .section-intro { max-width: 600px; margin: 0 auto 64px auto; text-align: center; }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-in.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* KREATIV-DNA: Cinematic Hero */
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: var(--surface);
+      background-color: var(--primary);
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-27%2Fc08d9125-6ace-48b9-87b0-3a90cd31b8c5_aigc.jpeg?Expires=1782661914&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=hVFPaVQ6XhoVV3GDvJ4Au3wyxpU%3D");
+      background-size: cover;
+      background-position: center 40%;
+      opacity: 0.4;
+      transform: scale(1.05);
+      transition: opacity 1.5s ease;
+    }
+    .hero-overlay {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 24px;
+      transition: opacity 1s ease-out;
+    }
+    .hero.scrolled .hero-overlay { opacity: 0; }
+    .letterbox {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 15vh;
+      background: var(--primary);
+      z-index: 1;
+      transition: height 1s ease-out;
+    }
+    .letterbox.top { top: 0; }
+    .letterbox.bottom { bottom: 0; }
+    .hero.scrolled .letterbox { height: 0; }
+
+    /* KREATIV-DNA: Kinetic Typography */
+    .kinetic-title { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25em; }
+    .kinetic-title span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: revealWord 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: calc(var(--w) * 120ms);
+    }
+    @keyframes revealWord {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* KREATIV-DNA: Magnetic CTA & Neon Glow */
+    .cta-button {
+      --glow-opacity: 0.35;
+      --glow-blur: 24px;
+      display: inline-block;
+      position: relative;
+      padding: 18px 36px;
+      margin-top: 48px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--surface);
+      background-color: var(--accent);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 var(--glow-blur) 0 rgba(200, 125, 93, var(--glow-opacity));
+    }
+    .cta-button:hover {
+      transform: scale(1.05);
+      --glow-opacity: 0.6;
+      --glow-blur: 32px;
+    }
+    .cta-button span {
+      display: inline-block;
+      transition: transform 0.2s ease-out;
+    }
+
+    /* Services Section */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .service-card {
+      background-color: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 1px 2px rgba(67, 78, 66, 0.06), 0 12px 40px rgba(67, 78, 66, 0.12);
+    }
+    .service-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .service-card-content { padding: 24px 28px 32px; }
+    .service-card-content .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background-color: var(--secondary);
+      color: var(--surface);
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+    }
+
+    /* Full Bleed Break Section */
+    .full-bleed-break {
+      height: 60vh;
+      min-height: 500px;
+      background-image: url("http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-27%2F23317574-b8e0-4116-930b-387aa3374f33_aigc.jpeg?Expires=1782661913&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=60yhUt8UHFvAfn15C9PSh%2B1iNTg%3D");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+    }
+    
+    /* Retreats Section */
+    .retreats-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .retreats-content img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+    .retreats-content .label {
+      font-family: var(--font-body);
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .retreats-content h3 {
+        font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--surface-2);
+      padding: 80px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    footer h2 { margin-bottom: 24px; }
+    footer p { margin: 0 auto 32px; }
+    footer .copyright {
+      margin-top: 64px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .logo-svg {
+        stroke: var(--primary);
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 24px;
+    }
+
+    /* Accessibility & Responsiveness */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .fade-in { transition: opacity 1s; transform: none; }
+      .kinetic-title span { animation: none; opacity: 1; transform: none; }
+      .cta-button, .service-card { transition: none; }
+      .cta-button:hover { transform: none; }
+      .service-card:hover { transform: none; }
+      .cta-button span { transition: none; }
+      .full-bleed-break { background-attachment: scroll; }
+    }
+    @media (max-width: 768px) {
+      .retreats-content { grid-template-columns: 1fr; }
+      .retreats-content img { order: -1; margin-bottom: 32px; height: 350px; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="breath" aria-hidden="true"></div>
-
-<nav>
-  <a href="#" class="brand">
-    <span class="brand-mark" aria-hidden="true"></span>
-    Sattva
-  </a>
-  <div class="nav-links">
-    <a href="#praxis">Praxis</a>
-    <a href="#retreat">Retreat</a>
-    <a href="#ausbildung">Ausbildung</a>
-    <a href="#cta" class="nav-cta">Stunde buchen</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-grid">
-    <div class="reveal">
-      <div class="eyebrow">
-        Studio Lissabon — Estrela
-        <span class="pg">№ 01 / Frühling 2025</span>
-      </div>
-      <h1>Atem, der <em>bleibt</em>.<br>Körper, der sich <em>erinnert</em>.</h1>
-      <p class="hero-lede">
-        Sattva ist ein Studio für Vinyasa, Yin und Pranayama in der Rua Domingos Sequeira. Zwölf Matten, drei Lehrerinnen, eine Tür, die wirklich schliesst. Wir unterrichten kleine Klassen — nicht als Konzept, sondern weil nur so Yoga entsteht.
-      </p>
-      <div class="hero-actions">
-        <a href="#cta" class="btn btn-primary magnet" data-magnet>
-          Erstes Probetraining
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#praxis" class="btn btn-ghost">Wochenplan ansehen</a>
-      </div>
-    </div>
-    <figure class="hero-figure reveal magnet" data-magnet>
-      <img src="../assets/sattva-yoga-0.jpeg" alt="Sonnenlicht fällt durch die hohen Fenster des Sattva-Yogastudios in Lissabon auf eine leere Matte">
-      <figcaption class="figure-caption">
-        <b>Atelier — Estrela</b>
-        Das Hauptraum-Atelier morgens um 7:14 Uhr, kurz bevor Inês die erste Vinyasa-Runde des Tages öffnet.
-      </figcaption>
-    </figure>
-  </div>
-</header>
-
-<!-- MANIFEST -->
-<section class="manifest" id="manifest">
-  <div class="manifest-head reveal">
-    <h2 class="section-title">Yoga ist bei uns kein <em>Dienstleistungsangebot</em>, sondern eine wöchentliche Übung im Widerstand gegen die Beschleunigung.</h2>
-    <span class="marginalia">Editorial — S. 02</span>
-  </div>
-  <div class="manifest-body reveal">
-    <p><span class="dropcap">W</span>ir haben Sattva 2021 gegründet, nachdem wir elf Jahre lang in Studios zwischen Berlin, Lissabon und Mysore geübt hatten — in Räumen, die oft voller waren, als es der Atem erlaubte. Was uns fehlte, war nicht mehr Angebot, sondern weniger. Ein Raum, in dem eine Lehrerin noch sieht, wenn eine Schulter festhält. Eine Klasse, in der Pranayama nicht die letzten sechs Minuten sind, sondern die ersten dreissig.</p>
-
-    <p class="pullquote">„Zwölf Menschen sind kein Limit — sie sind die Bedingung, unter der Yoga überhaupt erst möglich wird."</p>
-
-    <p>Darum arbeiten wir ohne Drop-in-Massen: Jede Klasse hat maximal zwölf Plätze, jede Schülerin erhält zu Beginn eine kurze Anamnese, jeder Atemzug wird begleitet. Unsere Lehrerinnen — Inês, Mariana und Sofia — unterrichten seit jeweils über einem Jahrzehnt und sprechen Portugiesisch, Englisch und Deutsch.</p>
-
-    <p>Wer zu Sattva findet, bleibt durchschnittlich vier Jahre. Das ist keine Statistik, die wir pflegen — es ist einfach das, was passiert, wenn eine Praxis zur Gewohnheit wird statt zum Termin.</p>
-  </div>
-</section>
-
-<!-- PRAXIS -->
-<section class="praxis" id="praxis">
-  <div class="praxis-inner">
-    <div class="manifest-head reveal">
-      <h2 class="section-title">Drei Säulen, eine <em>Praxis</em>.</h2>
-      <span class="marginalia">S. 04 — Das Programm</span>
-    </div>
-    <div class="praxis-grid">
-      <article class="praxis-card reveal">
-        <div class="praxis-icon magnet" data-magnet>
-          <svg viewBox="0 0 48 48"><path d="M24 6c-4 6-4 12 0 18s4 12 0 18M14 12c4 4 4 8 0 12s-4 8 0 12M34 12c-4 4-4 8 0 12s4 8 0 12M8 24h32"/></svg>
-        </div>
-        <div class="praxis-tag">Praxis 01</div>
-        <h3>Vinyasa<br><em style="font-style:italic;color:var(--terra-deep);font-weight:300">Fluss</em></h3>
-        <p>Dynamische Sequenzen, in denen Atem und Bewegung synchron bleiben. Wir unterrichten langsam — kein Jump-Through-Zirkus, sondern geerdeter Stand, saubere Übergänge, eine Stunde, die am Ende trägt.</p>
-        <div class="praxis-meta">Di &amp; Do · 07:30 &amp; 18:30 · 75 Min.</div>
-      </article>
-
-      <article class="praxis-card reveal">
-        <div class="praxis-icon magnet" data-magnet>
-          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14"/><path d="M24 10v28M10 24h28M14 14l20 20M34 14L14 34"/></svg>
-        </div>
-        <div class="praxis-tag">Praxis 02</div>
-        <h3>Yin<br><em style="font-style:italic;color:var(--terra-deep);font-weight:300">Stille</em></h3>
-        <p>Lange gehaltene Asanas zwischen drei und acht Minuten. Wir arbeiten mit dem Meridian-System nach Sarah Powers — nicht als Esoterik, sondern als konkrete Arbeit am Faszien- und Bindegewebe. Für Nervensystem und tiefe Erschöpfung.</p>
-        <div class="praxis-meta">Mi &amp; So · 19:00 · 90 Min.</div>
-      </article>
-
-      <article class="praxis-card reveal">
-        <div class="praxis-icon magnet" data-magnet>
-          <svg viewBox="0 0 48 48"><path d="M16 24c0-6 4-12 8-12s8 6 8 12-4 12-8 12-8-6-8-12ZM6 24c0 0 6-8 18-8s18 8 18 8-6 8-18 8S6 24 6 24ZM24 14v20"/></svg>
-        </div>
-        <div class="praxis-tag">Praxis 03</div>
-        <h3>Pranayama<br><em style="font-style:italic;color:var(--terra-deep);font-weight:300">Atem</em></h3>
-        <p>Nadi Shodhana, Bhramana, Kapalabhati — geübt nach der Kaivalya-Tradition von Sri O.P. Tiwari. Eine eigene Stunde, kein Anhang. Wer einmal vierzig Minuten nur geatmet hat, versteht, warum Asana ohne Atem nur Gymnastik ist.</p>
-        <div class="praxis-meta">Sa · 08:00 · 60 Min.</div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- RETREAT -->
-<section class="retreat" id="retreat">
-  <div class="retreat-grid">
-    <figure class="retreat-figure reveal">
-      <div class="stamp magnet" data-magnet>
-        <b>7</b>
-        <span>Tage Atlantik</span>
-      </div>
-      <img src="../assets/sattva-yoga-1.jpeg" alt="Eine Küstenlandschaft in der Algarve mit Felsformationen und ruhigem Wasser beim Sattva-Retreat in Portugal">
-      <figcaption class="figure-caption">
-        <b>Retreat Quinta — Aljezur</b>
-        Die Klippen von Praia da Arrifana, acht Gehminuten von der Quinta. Hier finden die Morgenpraxen statt.
-      </figcaption>
-    </figure>
-    <div class="retreat-text reveal">
-      <div class="eyebrow">Retreat — Algarve <span class="pg">S. 08</span></div>
-      <h2>Sieben Tage <em>Stille</em> an der Algarve.</h2>
-      <p>Vom 4. bis 11. Mai 2025 ziehen wir uns in eine kleine Quinta bei Aljezur zurück — zwölf Plätze, zwei Praxisräume, ein Garten, das Meer in Gehweite. Morgens Vinyasa, mittags Schweigen, abends Yin. Dazwischen: Zeit, die nicht verplant ist.</p>
-
-      <div class="retreat-facts">
-        <div>
-          <div class="fact-label">Termin</div>
-          <div class="fact-value">4. – 11. Mai 2025</div>
-        </div>
-        <div>
-          <div class="fact-label">Ort</div>
-          <div class="fact-value">Quinta Aljezur, Portugal</div>
-        </div>
-        <div>
-          <div class="fact-label">Plätze</div>
-          <div class="fact-value">12 — davon 4 noch frei</div>
-        </div>
-        <div>
-          <div class="fact-label">Investition</div>
-          <div class="fact-value">ab 1.240 € inkl. Unterkunft</div>
-        </div>
-      </div>
-
-      <a href="#" class="btn btn-primary magnet" data-magnet>
-        Bewerbung senden
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  <header class="hero" id="hero">
+    <div class="letterbox top"></div>
+    <div class="hero-bg"></div>
+    <div class="hero-overlay">
+      <h1 class="kinetic-title">
+        Sattva Yoga Studio
+      </h1>
+      <a href="#contact" class="cta-button" id="magnetic-cta">
+        <span class="cta-text">Entdecke unsere Kurse</span>
       </a>
     </div>
-  </div>
-</section>
+    <div class="letterbox bottom"></div>
+  </header>
 
-<!-- AUSBILDUNG -->
-<section class="ausbildung" id="ausbildung">
-  <div class="ausbildung-inner">
-    <div class="reveal">
-      <div class="eyebrow">Lehrer-Ausbildung — 200h YA <span class="pg" style="color:rgba(247,240,225,.5)">S. 12</span></div>
-      <h2>Ein Jahr, das deine <em>Praxis</em> lehrt.</h2>
-      <p>Unsere 200-Stunden-Ausbildung beginnt jedes Jahr im Oktober und endet im Juni. Sie ist zertifiziert durch Yoga Alliance und richtet sich an Menschen, die bereits mindestens drei Jahre praktizieren — nicht an alle, die einen Schein brauchen.</p>
-      <p>Wir arbeiten in vier Gruppen zu maximal acht Personen. Anatomy mit einem Physiotherapeuten, Philosophie mit einem Sanskrit-Lehrer aus Mysore, Sequencing mit Inês. Asana wird nicht demonstriert, sondern unterrichtet — das ist der Unterschied.</p>
-    </div>
-    <div class="curriculum reveal magnet" data-magnet>
-      <h3>Curriculum 2025 / 26</h3>
-      <ul>
-        <li><span>Technik &amp; Praxis</span><span>100 h</span></li>
-        <li><span>Methodik des Unterrichtens</span><span>40 h</span></li>
-        <li><span>Anatomie &amp; Physiologie</span><span>30 h</span></li>
-        <li><span>Philosophie &amp; Ethik</span><span>20 h</span></li>
-        <li><span>Praktikum &amp; Mentoring</span><span>10 h</span></li>
-        <li><span>Beginn</span><span>04. Okt 2025</span></li>
-        <li><span>Kosten</span><span>3.450 € — Raten möglich</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
+  <main>
+    <section id="services">
+      <div class="container">
+        <div class="section-intro fade-in">
+          <h2>Finde deine Praxis</h2>
+          <p>Ob dynamisches Vinyasa, regenerierendes Yin oder fokussierte Atemarbeit – bei uns findest du einen Raum, um in kleinen, persönlichen Gruppen zu wachsen.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card fade-in" style="transition-delay: 100ms;">
+            <div class="service-card-content">
+              <span class="tag" style="background-color: var(--accent-soft); color: var(--primary);">Dynamisch</span>
+              <h3>Vinyasa Flow</h3>
+              <p>Fließe durch kreative Sequenzen, die Kraft, Flexibilität und Achtsamkeit verbinden. Synchronisiere Bewegung und Atem zu einer meditativen Praxis.</p>
+            </div>
+          </div>
+          <div class="service-card fade-in" style="transition-delay: 200ms;">
+             <div class="service-card-content">
+              <span class="tag" style="background-color: var(--secondary);">Regenerativ</span>
+              <h3>Yin & Restore</h3>
+              <p>Tauche tief in passive Dehnungen ein, die das Bindegewebe ansprechen und den Geist beruhigen. Ein Weg zu tiefer Entspannung und innerer Ruhe.</p>
+            </div>
+          </div>
+          <div class="service-card fade-in" style="transition-delay: 300ms;">
+             <div class="service-card-content">
+              <span class="tag">Fokussiert</span>
+              <h3>Atem & Meditation</h3>
+              <p>Lerne Pranayama-Techniken, um deine Energie zu lenken und den Geist zu klären. Finde Stille und Präsenz in geführten Meditationssitzungen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- CTA -->
-<section class="cta" id="cta">
-  <div class="cta-frame reveal">
-    <div class="eyebrow" style="justify-content:center;margin-bottom:24px">Probetraining — kostenfrei</div>
-    <h2>Komm atmen.<br><em>Den Rest machen wir</em>.</h2>
-    <p>Das erste Probetraining ist kostenfrei und unverbindlich. Schreib uns zwei Sätze über deine Praxis — wir melden uns innerhalb von 24 Stunden mit einem Terminvorschlag.</p>
-    <a href="mailto:hallo@sattva-yoga.pt" class="btn btn-primary magnet" data-magnet>
-      Termin vereinbaren
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-  </div>
-</section>
+    <section class="full-bleed-break" aria-label="Atmosphärisches Bild eines ruhigen Raumes mit Pflanzen und sanftem Licht"></section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">Sattva <em>Yoga</em></div>
-      <p class="footer-tag">Ein Boutique-Studio in Lissabon. Vinyasa, Yin &amp; Pranayama in kleinen Klassen — gegründet 2021 von Inês, Mariana und Sofia.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Studio</h4>
-      <ul>
-        <li>Rua Domingos Sequeira 47</li>
-        <li>1350-119 Lissabon</li>
-        <li>Estrela, Portugal</li>
-        <li><a href="tel:+351210000000">+351 21 000 0000</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Öffnungszeiten</h4>
-      <ul>
-        <li>Mo – Fr · 07:00 – 21:00</li>
-        <li>Sa · 08:00 – 13:00</li>
-        <li>So · 09:00 – 12:00</li>
-        <li><a href="#">Wochenplan als PDF</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Links</h4>
-      <ul>
-        <li><a href="#manifest">Über uns</a></li>
-        <li><a href="#retreat">Retreat 2025</a></li>
-        <li><a href="#ausbildung">Ausbildung</a></li>
-        <li><a href="mailto:hallo@sattva-yoga.pt">hallo@sattva-yoga.pt</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 Sattva Yoga Lda. — Lissabon</span>
-    <span>Impressum · Datenschutz · AGB</span>
-  </div>
-</footer>
+    <section id="retreats">
+      <div class="container">
+        <div class="retreats-content">
+          <div class="retreats-text fade-in">
+            <p class="label">Vertiefe deine Praxis</p>
+            <h3>Retreats & Ausbildung</h3>
+            <p>Neben unseren täglichen Klassen bieten wir intensive Teacher Trainings und unvergessliche Yoga-Retreats an Orten wie Portugal an. Eine Einladung, tiefer in die Welt des Yoga einzutauchen und dich mit einer passionierten Gemeinschaft zu verbinden.</p>
+            <p>Unsere Ausbildungen sind international zertifiziert und legen Wert auf eine fundierte, persönliche Betreuung.</p>
+          </div>
+          <div class="fade-in" style="transition-delay: 150ms;">
+            <img src="../assets/sattva-yoga-cream-1.jpeg" alt="Hände halten behutsam eine Schale mit Kräutern, Symbol für Achtsamkeit und Naturverbundenheit.">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<script>
-  // CURSOR-MAGNET
-  (function(){
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduce) return;
-    const magnets = document.querySelectorAll('[data-magnet]');
-    magnets.forEach(el => {
-      const strength = 10;
-      el.addEventListener('mousemove', e => {
-        const r = el.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
-        const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
-        el.style.transform = `translate(${x*strength}px, ${y*strength}px)`;
-      });
-      el.addEventListener('mouseleave', () => {
-        el.style.transform = '';
-      });
+  <footer id="contact">
+    <div class="container fade-in">
+        <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.2">
+            <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 3C14.2091 3 16 4.79086 16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3Z" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 21C9.79086 21 8 19.2091 8 17C8 14.7909 9.79086 13 12 13C14.2091 13 16 14.7909 16 17C16 19.2091 14.2091 21 12 21Z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      <h2>Werde Teil unserer Gemeinschaft</h2>
+      <p>Melde dich für unseren Newsletter an und erhalte den aktuellen Kursplan sowie Neuigkeiten zu Workshops und Retreats.</p>
+      <a href="#" class="cta-button">Newsletter abonnieren</a>
+      <p class="copyright">&copy; 2024 Sattva Yoga Studio. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // KINETIC TYPOGRAPHY
+      const title = document.querySelector('.kinetic-title');
+      if (title) {
+        title.innerHTML = title.textContent.trim().split(' ').map((word, index) => `<span style="--w: ${index};">${word}</span>`).join(' ');
+      }
+
+      // CINEMATIC HERO SCROLL
+      const hero = document.getElementById('hero');
+      if (hero) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 50) {
+            hero.classList.add('scrolled');
+          } else {
+            hero.classList.remove('scrolled');
+          }
+        }, { passive: true });
+      }
+
+      // MAGNETIC CTA
+      const cta = document.getElementById('magnetic-cta');
+      if (cta) {
+        const ctaText = cta.querySelector('.cta-text');
+        const strength = 20;
+
+        cta.addEventListener('mousemove', (e) => {
+          const { left, top, width, height } = cta.getBoundingClientRect();
+          const x = e.clientX - left - width / 2;
+          const y = e.clientY - top - height / 2;
+          
+          window.requestAnimationFrame(() => {
+             ctaText.style.transform = `translate(${x / strength}px, ${y / strength}px)`;
+          });
+        });
+
+        cta.addEventListener('mouseleave', () => {
+            ctaText.style.transform = 'translate(0, 0)';
+        });
+      }
+
+      // FADE-IN ON SCROLL
+      const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     });
-  })();
-
-  // REVEAL ON SCROLL
-  (function(){
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const items = document.querySelectorAll('.reveal');
-    if(reduce || !('IntersectionObserver' in window)){
-      items.forEach(i => i.classList.add('in'));
-      return;
-    }
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(en => {
-        if(en.isIntersecting){
-          en.target.classList.add('in');
-          io.unobserve(en.target);
-        }
-      });
-    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
-    items.forEach(i => io.observe(i));
-  })();
-</script>
+  </script>
 
 </body>
 </html>
