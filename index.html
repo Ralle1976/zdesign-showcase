@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Z.Design — Autonom generiertes Web-Design auf Agentur-Niveau</title>
+<meta name="description" content="Z.Design generiert komplette, art-directed Landing Pages auf Agentur-Niveau — live, animiert, individuell. 10 Flagship-Designs als Live-Demo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0a0a0f; --surface:#13131c; --text:#f5f5f7; --muted:#9a9aa8; --accent:#7c5cff; --accent2:#22d3ee; --border:#26263a; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; line-height:1.6; overflow-x:hidden; }
+  .wrap { max-width:1240px; margin:0 auto; padding:0 24px; }
+  /* HERO */
+  header.hero { position:relative; padding:120px 0 90px; text-align:center; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:-30% -10% auto; height:520px;
+    background:radial-gradient(60% 60% at 30% 20%,rgba(124,92,255,.35),transparent 70%),
+               radial-gradient(50% 50% at 80% 30%,rgba(34,211,238,.28),transparent 70%); filter:blur(20px); z-index:0; }
+  .badge { position:relative; display:inline-block; padding:7px 16px; border:1px solid var(--border); border-radius:999px;
+    font-size:13px; color:var(--muted); letter-spacing:.04em; margin-bottom:28px; background:rgba(255,255,255,.02); }
+  .badge b { color:var(--accent2); }
+  h1 { position:relative; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(38px,7vw,78px);
+    line-height:1.02; letter-spacing:-.03em; }
+  h1 .grad { background:linear-gradient(120deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .sub { position:relative; max-width:680px; margin:26px auto 0; color:var(--muted); font-size:clamp(17px,2.2vw,21px); }
+  .stats { position:relative; display:flex; gap:40px; justify-content:center; flex-wrap:wrap; margin-top:48px; }
+  .stat b { display:block; font-family:'Space Grotesk',sans-serif; font-size:38px; }
+  .stat span { color:var(--muted); font-size:14px; }
+  /* GRID */
+  section.gallery { padding:70px 0 100px; }
+  .gallery h2 { font-family:'Space Grotesk',sans-serif; font-size:clamp(26px,4vw,38px); letter-spacing:-.02em; margin-bottom:8px; }
+  .gallery p { color:var(--muted); margin-bottom:44px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:28px; }
+  .card { display:block; background:var(--surface); border:1px solid var(--border); border-radius:18px; overflow:hidden;
+    text-decoration:none; color:inherit; transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .3s; }
+  .card:hover { transform:translateY(-6px); border-color:var(--accent); box-shadow:0 20px 50px rgba(124,92,255,.22); }
+  .thumb { position:relative; height:300px; overflow:hidden; background:#000; }
+  .thumb iframe { position:absolute; top:0; left:0; width:1280px; height:1600px; border:0;
+    transform:scale(.34); transform-origin:top left; pointer-events:none; }
+  .meta { padding:20px 22px 8px; }
+  .meta h3 { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:600; }
+  .meta span { color:var(--muted); font-size:14px; }
+  .open { display:block; padding:0 22px 22px; color:var(--accent2); font-size:14px; font-weight:500; }
+  footer { border-top:1px solid var(--border); padding:40px 0; color:var(--muted); font-size:14px; text-align:center; }
+  footer a { color:var(--accent2); text-decoration:none; }
+  @media (prefers-reduced-motion:reduce){ .card{transition:none} .card:hover{transform:none} }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <span class="badge">🤖 Autonom generiert · <b>10/10 QC</b> · live &amp; animiert</span>
+      <h1>Web-Design auf <span class="grad">Agentur-Niveau</span>.<br>Autonom generiert.</h1>
+      <p class="sub">Z.Design generiert komplette, art-directed Landing Pages — mit echter Fotografie, Bewegung und individueller Kreativ-DNA. Kein Template, keine zwei Designs gleich. Diese 10 Flagship-Designs sind <strong>live</strong>.</p>
+      <div class="stats">
+        <div class="stat"><b>10</b><span>Flagship-Designs</span></div>
+        <div class="stat"><b>10</b><span>verschiedene Branchen</span></div>
+        <div class="stat"><b>100%</b><span>QC bestanden</span></div>
+        <div class="stat"><b>35 KB</b><span>Ø pro Design</span></div>
+      </div>
+    </div>
+  </header>
+  <section class="gallery">
+    <div class="wrap">
+      <h2>Flagship-Galerie</h2>
+      <p>Jedes Design hat eine eigene Struktur-Geste, Bewegung und Materialität — bewusst divers generiert. Klicken für die volle, animierte Live-Ansicht.</p>
+      <div class="grid">
+    <a class="card" href="designs/orathai-thai-spa.html" target="_blank" rel="noopener">
+      <div class="thumb"><iframe src="designs/orathai-thai-spa.html" title="Orathai Thai Spa" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta">
+        <h3>Orathai Thai Spa</h3>
+        <span>Spa · Wellness</span>
+      </div>
+      <span class="open">Live ansehen →</span>
+    </a>
+    <a class="card" href="designs/forno-nero.html" target="_blank" rel="noopener">
+      <div class="thumb"><iframe src="designs/forno-nero.html" title="Forno Nero" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta">
+        <h3>Forno Nero</h3>
+        <span>Gastronomie · Pizza</span>
+      </div>
+      <span class="open">Live ansehen →</span>
+    </a>
+    <a class="card" href="designs/maison-lumen.html" target="_blank" rel="noopener">
+      <div class="thumb"><iframe src="designs/maison-lumen.html" title="Maison Lumen" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta">
+        <h3>Maison Lumen</h3>
+        <span>Parfum · Luxury</span>
+      </div>
+      <span class="open">Live ansehen →</span>
+    </a>
+    <a class="card" href="designs/studio-beton.html" target="_blank" rel="noopener">
+      <div class="thumb"><iframe src="designs/studio-beton.html" title="Studio Beton" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta">
+        <h3>Studio Beton</h3>
+        <span>Architektur</span>
+      </div>
+      <span class="open">Live ansehen →</span>
+    </a>
+    <a class="card" href="designs/vault3.html" target="_blank" rel="noopener">
+      <div class="thumb"><iframe src="designs/vault3.html" title="Vault3" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta">
+        <h3>Vault3</h3>
+        <span>Web3 · Fintech</span>
+      </div>
+      <span class="open">Live ansehen →</span>
+    </a>
+    <a class="card" href="designs/puls-festival.html" target="_blank" rel="noopener">
+      <div class="thumb"><iframe src="designs/puls-festival.html" title="Puls Festival" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta">
+        <h3>Puls Festival</h3>
+        <span>Music · Event</span>
+      </div>
+      <span class="open">Live ansehen →</span>
+    </a>
+    <a class="card" href="designs/alpenpfad.html" target="_blank" rel="noopener">
+      <div class="thumb"><iframe src="designs/alpenpfad.html" title="Alpenpfad" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta">
+        <h3>Alpenpfad</h3>
+        <span>Outdoor · Reise</span>
+      </div>
+      <span class="open">Live ansehen →</span>
+    </a>
+    <a class="card" href="designs/kanzlei-nordstern.html" target="_blank" rel="noopener">
+      <div class="thumb"><iframe src="designs/kanzlei-nordstern.html" title="Kanzlei Nordstern" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta">
+        <h3>Kanzlei Nordstern</h3>
+        <span>Law · Corporate</span>
+      </div>
+      <span class="open">Live ansehen →</span>
+    </a>
+    <a class="card" href="designs/sattva-yoga.html" target="_blank" rel="noopener">
+      <div class="thumb"><iframe src="designs/sattva-yoga.html" title="Sattva Yoga" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta">
+        <h3>Sattva Yoga</h3>
+        <span>Yoga · Health</span>
+      </div>
+      <span class="open">Live ansehen →</span>
+    </a>
+    <a class="card" href="designs/prisma-analytics.html" target="_blank" rel="noopener">
+      <div class="thumb"><iframe src="designs/prisma-analytics.html" title="Prisma Analytics" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta">
+        <h3>Prisma Analytics</h3>
+        <span>SaaS · KI</span>
+      </div>
+      <span class="open">Live ansehen →</span>
+    </a>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="wrap">
+      Z.Design — autonomes KI-Web-Design. Designs live gerendert in iframes, Bilder lokal gebündelt.<br>
+      <a href="https://github.com/Ralle1976/zdesign" target="_blank" rel="noopener">GitHub →</a>
+    </div>
+  </footer>
+</body>
+</html>
