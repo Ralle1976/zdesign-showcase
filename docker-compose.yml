@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    container_name: zdesign-showcase
+    restart: unless-stopped
+    # Bound to localhost: host nginx reverse-proxies z.design.ralle1976.cloud -> here
+    ports:
+      - "127.0.0.1:8081:80"
