@@ -3,969 +3,1201 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prisma Analytics — Intelligente Produkt-Analytics</title>
+  <title>Prisma — Premium KI-Analytics & Kohorten-Intelligenz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f4f7fa;
-      --surface: #ffffff;
-      --surface-2: #eef2f7;
-      --primary: #0f172a;
-      --primary-soft: #1e293b;
-      --accent: #4f46e5;
-      --accent-soft: #06b6d4;
-      --text: #0f172a;
-      --text-muted: #475569;
-      --border: #e2e8f0;
-      --border-soft: #f1f5f9;
+      --bg: #030712;
+      --surface: #0b0f19;
+      --surface-2: #111827;
+      --primary: #6366f1;
+      --primary-soft: #818cf8;
+      --accent: #06b6d4;
+      --accent-soft: #22d3ee;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #1e293b;
+      --border-soft: #334155;
       --radius: 12px;
       --radius-sm: 8px;
-      --radius-lg: 18px;
-      --shadow: 0 0 0 1px #e2e8f0, 0 1px 2px rgba(15, 23, 42, 0.04);
-      --ring: 0 0 0 1px #cbd5e1;
-      --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
+      --radius-lg: 20px;
+      --shadow: 0 0 0 1px rgba(99, 102, 241, 0.15), 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+      --ring: 0 0 0 2px rgba(6, 182, 212, 0.4);
+      --font-display: "Space Grotesk", -apple-system, sans-serif;
+      --font-body: "Plus Jakarta Sans", -apple-system, sans-serif;
     }
 
-    /* Base Reset & Grain Texture */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       background-color: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+      overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    /* Typography */
+    /* Noise Overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      opacity: 0.02;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* Custom Cursor */
+    @media (pointer: fine) {
+      body { cursor: none; }
+      a, button, input, textarea, .interactive { cursor: none; }
+      .custom-cursor {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease;
+        box-shadow: 0 0 10px var(--accent);
+      }
+      .custom-cursor.hover {
+        width: 48px;
+        height: 48px;
+        background-color: rgba(6, 182, 212, 0.08);
+        border: 1px solid var(--accent);
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .custom-cursor { display: none !important; }
+      body { cursor: auto !important; }
+      * {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+      }
+    }
+
+    /* Typography & Layout */
     h1, h2, h3 {
       font-family: var(--font-display);
-      font-weight: 500;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-    p {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: var(--text-muted);
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
     }
 
-    /* Navigation */
-    .nav {
-      position: fixed;
+    p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header */
+    header {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 10;
+      background-color: rgba(3, 7, 18, 0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      padding: 1.2rem 2rem;
+    }
+
+    .nav-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(244, 247, 250, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-soft);
     }
+
     .logo {
       font-family: var(--font-display);
       font-size: 1.6rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text);
+      letter-spacing: -0.02em;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    .logo-mark {
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--accent-soft);
-      transform: rotate(45deg);
+
+    .logo::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 3px;
+      display: inline-block;
     }
+
     .nav-links {
       display: flex;
       gap: 2.5rem;
-      font-size: 0.9rem;
-      font-weight: 500;
+      align-items: center;
     }
+
     .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 500;
       transition: color 0.2s ease;
     }
+
     .nav-links a:hover {
       color: var(--accent);
     }
 
-    /* Immersive Hero */
-    .hero {
-      position: relative;
-      min-height: 90vh;
-      display: flex;
-      align-items: center;
-      padding: 7rem 2rem 3rem 2rem;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -10%;
-      right: -10%;
-      width: 50%;
-      height: 50%;
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, rgba(79, 70, 229, 0.04) 50%, transparent 100%);
-      z-index: 1;
-      pointer-events: none;
-    }
-    .hero-grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 3.5rem;
-      align-items: center;
-      width: 100%;
-    }
-    .hero-content {
-      z-index: 2;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.75rem;
-      background: var(--surface-2);
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--shadow);
-    }
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent-soft);
-      border-radius: 50%;
-    }
-    
-    /* Glitch Title */
-    .glitch-container {
-      position: relative;
-      margin-bottom: 1.2rem;
-    }
-    .hero-title {
-      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
-      color: var(--primary);
-      position: relative;
-    }
-    .hero-title::before, .hero-title::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--bg);
-      clip-path: rect(0 0 0 0);
-    }
-    .hero-title::before {
-      left: 2px;
-      text-shadow: -1px 0 var(--accent-soft);
-    }
-    .hero-title::after {
-      left: -2px;
-      text-shadow: -1px 0 var(--accent);
-    }
-    
-    @keyframes glitch-anim-1 {
-      0%, 95%, 100% { clip-path: inset(100% 0 0 0); }
-      96% { clip-path: inset(10% 0 85% 0); }
-      97% { clip-path: inset(40% 0 43% 0); }
-      98% { clip-path: inset(70% 0 5% 0); }
-      99% { clip-path: inset(2% 0 90% 0); }
-    }
-    @keyframes glitch-anim-2 {
-      0%, 95%, 100% { clip-path: inset(100% 0 0 0); }
-      96% { clip-path: inset(80% 0 5% 0); }
-      97% { clip-path: inset(15% 0 70% 0); }
-      98% { clip-path: inset(50% 0 30% 0); }
-      99% { clip-path: inset(30% 0 60% 0); }
-    }
-
-    .hero-lead {
-      font-size: clamp(1.15rem, 1.8vw, 1.4rem);
-      font-family: var(--font-display);
-      margin-bottom: 2rem;
-      max-width: 540px;
-    }
-    .cta-group {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.9rem 1.8rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
       font-size: 0.95rem;
-      font-weight: 500;
-      border-radius: var(--radius);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       border: none;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
-    }
-    .btn-primary:hover {
-      background: #4338ca;
-      transform: translateY(-2px);
-    }
-    .btn-secondary {
-      background: var(--surface-2);
-      color: var(--text);
-      box-shadow: var(--shadow);
-    }
-    .btn-secondary:hover {
-      background: var(--border);
-      transform: translateY(-2px);
+      background: none;
     }
 
-    /* Hero Immersive Image Frame */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text);
+      box-shadow: 0 0 0 1px var(--border-soft);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--surface-2);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    /* Section 1: Hero */
+    .hero {
+      padding: 8rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -10%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      bottom: -10%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      background: linear-gradient(135deg, #ffffff 60%, var(--accent-soft));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content p {
+      font-size: clamp(1.1rem, 2vw, 1.25rem);
+      margin-bottom: 2.5rem;
+      max-width: 580px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
     .hero-image-wrapper {
       position: relative;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: var(--shadow), 0 20px 40px rgba(15, 23, 42, 0.08);
-      aspect-ratio: 4/3;
-      max-height: 500px;
-      width: 100%;
+      box-shadow: var(--shadow);
+      background-color: var(--surface-2);
+      aspect-ratio: 4/5;
+      border: 1px solid var(--border);
     }
+
     .hero-image-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hero-image-wrapper:hover img {
-      transform: scale(1.03);
     }
 
-    /* Bento Grid */
-    .section {
-      padding: 5rem 2rem;
-      max-width: 1400px;
-      margin: 0 auto;
+    /* Decorative Parallax Shapes */
+    .deco-shape {
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.3;
     }
-    .section-header {
-      margin-bottom: 3rem;
-      max-width: 600px;
+
+    /* Section 2: Horizontal Scroll (Leistungen) */
+    .scroll-container {
+      height: 220vh; /* FIX 1: Tightened from 300vh to improve scroll rhythm */
+      position: relative;
     }
-    .section-tag {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-      display: block;
+
+    .sticky-wrapper {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    .section-title {
-      font-size: clamp(2.2rem, 3.5vw, 3rem);
-      color: var(--primary);
-      margin-bottom: 1rem;
+
+    .scroll-header {
+      padding: 3rem 0 1.5rem;
     }
-    
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+
+    .scroll-header h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      background: linear-gradient(135deg, #ffffff, var(--primary-soft));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .bento-card {
-      background: var(--surface);
+
+    .horizontal-track {
+      display: flex;
+      gap: 3rem;
+      padding: 1.5rem 0;
+      width: max-content;
+      will-change: transform;
+      padding-left: 10%;
+    }
+
+    .feature-card {
+      width: 420px;
+      background-color: var(--surface);
       border-radius: var(--radius-lg);
-      padding: 2.2rem;
+      padding: 3rem;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
+      height: 460px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      border: 1px solid var(--border);
     }
-    .bento-card:hover {
+
+    .feature-card:hover {
       transform: translateY(-4px);
-      box-shadow: var(--ring), 0 12px 24px rgba(15, 23, 42, 0.04);
+      border-color: var(--accent);
     }
-    .bento-card.span-2 {
-      grid-column: span 2;
-    }
-    .bento-card.span-3 {
-      grid-column: span 3;
-    }
-    .card-icon {
-      width: 44px;
-      height: 44px;
+
+    .feature-icon-box {
+      width: 56px;
+      height: 56px;
       border-radius: var(--radius-sm);
-      background: var(--surface-2);
+      background-color: var(--surface-2);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--accent);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
     }
-    .card-icon svg {
-      width: 22px;
-      height: 22px;
+
+    .feature-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
     }
-    .card-title {
-      font-size: 1.6rem;
-      margin-bottom: 0.75rem;
+
+    .feature-card p {
+      font-size: 1rem;
+      line-height: 1.6;
     }
-    .card-meta {
+
+    .feature-meta {
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--accent-soft);
-      margin-top: 1.5rem;
-      letter-spacing: 0.05em;
       text-transform: uppercase;
-    }
-
-    /* Concrete Metrics Banner */
-    .metrics-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 3.5rem;
-      border-top: 1px solid var(--border);
-      padding-top: 3.5rem;
-    }
-    .metric-item {
-      text-align: left;
-    }
-    .metric-value {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      letter-spacing: 0.05em;
       color: var(--accent);
-      margin-bottom: 0.25rem;
-    }
-    .metric-label {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-muted);
+      margin-top: auto;
     }
 
-    /* Pricing */
+    .scroll-progress-container {
+      position: absolute;
+      bottom: 4rem;
+      left: 10%;
+      width: 80%;
+      height: 2px;
+      background-color: var(--border);
+    }
+
+    .scroll-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.1s ease-out;
+    }
+
+    /* Section 3: Pricing (Bento-Grid) */
+    .pricing {
+      padding: 6rem 0; /* FIX 1: Reduced vertical padding from 10rem to 6rem */
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+
+    .pricing-header h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      margin-bottom: 1rem;
+    }
+
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      align-items: stretch;
+      gap: 2rem;
+      align-items: stretch; /* FIX 3: Force all cards to have identical height */
     }
-    .price-card {
-      background: var(--surface);
+
+    .pricing-card {
+      background-color: var(--bg);
       border-radius: var(--radius-lg);
-      padding: 2.5rem 2rem;
+      padding: 3rem;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       position: relative;
-      transition: transform 0.3s ease;
+      border: 1px solid var(--border);
+      height: 100%; /* FIX 3: Full height within grid cell */
     }
-    .price-card.featured {
-      background: var(--surface-2);
-      box-shadow: var(--ring);
+
+    .pricing-card.featured {
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
     }
-    .price-card.featured::before {
-      content: "Empfohlen";
+
+    .badge {
       position: absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      background: var(--accent);
-      color: #fff;
+      top: 2rem;
+      right: 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #ffffff;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
       font-size: 0.75rem;
       font-weight: 600;
-      padding: 0.25rem 0.6rem;
-      border-radius: var(--radius-sm);
       text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    .price-header h3 {
+
+    .pricing-card h3 {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
+      color: #ffffff;
     }
-    .price-desc {
+
+    .pricing-desc {
       font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-    .price-amount {
       margin-bottom: 2rem;
     }
-    .price-num {
+
+    .price {
       font-family: var(--font-display);
-      font-size: 3rem;
-      color: var(--primary);
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: baseline;
     }
-    .price-period {
-      font-size: 0.95rem;
+
+    .price span {
+      font-family: var(--font-body);
+      font-size: 1rem;
       color: var(--text-muted);
+      margin-left: 0.5rem;
     }
-    .price-features {
+
+    .pricing-features {
       list-style: none;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex-grow: 1; /* FIX 3: Push the button to the absolute bottom of the card */
     }
-    .price-features li {
+
+    .pricing-features li {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       font-size: 0.95rem;
       color: var(--text-muted);
-      margin-bottom: 0.75rem;
     }
-    .price-features svg {
-      width: 16px;
-      height: 16px;
-      color: var(--accent-soft);
+
+    .pricing-features svg {
+      color: var(--accent);
       flex-shrink: 0;
     }
 
-    /* Immersive Story / Atmosphere */
-    .atmosphere-section {
-      background: var(--primary);
-      color: var(--bg);
+    .pricing-card .btn {
+      width: 100%;
+      margin-top: auto; /* FIX 3: Align all CTA buttons to a single baseline */
+    }
+
+    /* Section 4: Über uns / Stimmung */
+    .about {
+      padding: 7rem 0; /* FIX 1: Tightened padding from 10rem to 7rem */
       position: relative;
-      overflow: hidden;
-      padding: 6rem 2rem;
     }
-    .atmosphere-section p {
-      color: var(--border-soft);
-    }
-    .atmosphere-grid {
-      max-width: 1400px;
-      margin: 0 auto;
+
+    .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 4rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
       align-items: center;
     }
-    .atmosphere-images {
+
+    .about-images {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: repeat(12, 1fr);
+      position: relative;
     }
-    .atmosphere-img-frame {
+
+    .about-img-1 {
+      grid-column: 1 / 9;
+      z-index: 2;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      aspect-ratio: 3/4;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
     }
-    .atmosphere-img-frame img {
+
+    /* FIX 2: Stylized Code Block Terminal instead of generic wave graphic */
+    .about-terminal {
+      grid-column: 5 / -1;
+      margin-top: 6rem;
+      z-index: 3;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-soft);
+      background-color: #050811;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.85rem;
+      color: #e2e8f0;
+    }
+
+    .terminal-header {
+      background-color: #0b0f19;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.red { background-color: #ef4444; }
+    .terminal-dot.yellow { background-color: #f59e0b; }
+    .terminal-dot.green { background-color: #10b981; }
+
+    .terminal-title {
+      margin-left: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+      line-height: 1.5;
+      overflow-x: auto;
+    }
+
+    .code-keyword { color: #f43f5e; }
+    .code-string { color: #10b981; }
+    .code-comment { color: #64748b; }
+    .code-function { color: #3b82f6; }
+    .code-number { color: #f59e0b; }
+
+    .about-img-1 img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-    .atmosphere-title {
-      color: var(--bg);
-      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
-      margin-bottom: 1.5rem;
-    }
-    .atmosphere-quote {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 1.4rem;
-      line-height: 1.5;
-      margin-top: 2rem;
-      border-left: 2px solid var(--accent-soft);
-      padding-left: 1.5rem;
+      display: block;
     }
 
-    /* Contact */
+    .about-content h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #ffffff, var(--accent-soft));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .about-content p {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .quote-block {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .quote-text {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    .quote-author {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    /* Section 5: Kontakt */
+    .contact {
+      padding: 8rem 0;
+      background-color: var(--surface-2);
+      border-top: 1px solid var(--border);
+    }
+
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
-      gap: 4rem;
+      gap: 5rem;
     }
-    .contact-info h3 {
-      font-size: 2rem;
-      margin-bottom: 1.2rem;
-    }
-    .contact-details {
-      margin-top: 2.5rem;
-    }
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
+
+    .contact-info h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
       margin-bottom: 1.5rem;
     }
+
+    .contact-details {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
     .contact-item-icon {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: var(--radius-sm);
-      background: var(--surface-2);
+      background-color: var(--surface);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--accent);
+      border: 1px solid var(--border);
     }
-    .contact-item-icon svg {
-      width: 20px;
-      height: 20px;
-    }
+
     .contact-form {
-      background: var(--surface);
-      padding: 2.5rem;
+      background-color: var(--surface);
+      padding: 3.5rem;
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
+      border: 1px solid var(--border);
     }
+
     .form-group {
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
     }
-    .form-label {
+
+    .form-group label {
       display: block;
       font-size: 0.85rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      color: var(--text-muted);
     }
-    .form-input, .form-textarea {
+
+    .form-control {
       width: 100%;
-      padding: 0.85rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
+      padding: 1rem;
       border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background-color: var(--bg);
+      color: var(--text);
       font-family: var(--font-body);
       font-size: 1rem;
-      color: var(--text);
-      transition: all 0.2s ease;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .form-input:focus, .form-textarea:focus {
+
+    .form-control:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: var(--ring);
-    }
-    .form-textarea {
-      resize: vertical;
-      min-height: 100px;
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
     }
 
     /* Footer */
-    .footer {
+    footer {
+      background-color: var(--bg);
+      color: var(--text-muted);
+      padding: 4rem 0;
+      font-size: 0.9rem;
       border-top: 1px solid var(--border);
-      padding: 3rem 2rem;
-      background: var(--surface);
     }
-    .footer-content {
-      max-width: 1400px;
-      margin: 0 auto;
+
+    footer p {
+      color: var(--text-muted);
+    }
+
+    .footer-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .footer-text {
-      font-size: 0.9rem;
-      color: var(--text-muted);
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
     }
 
-    /* Scroll Reveal Animation Classes */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-    }
-    .reveal.in {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive adjustments */
+    /* Responsive */
     @media (max-width: 1024px) {
-      .hero-grid, .atmosphere-grid, .contact-grid {
+      .hero-grid {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 3rem;
       }
-      .bento-grid {
-        grid-template-columns: 1fr;
-      }
-      .bento-card.span-2, .bento-card.span-3 {
-        grid-column: span 1;
+      .hero-image-wrapper {
+        max-width: 500px;
+        margin: 0 auto;
+        aspect-ratio: 4/3;
       }
       .pricing-grid {
         grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
       }
-      .metrics-row {
+      .about-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 4rem;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
       }
     }
 
-    /* Accessibility */
-    @media (prefers-reduced-motion: reduce) {
-      .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
       }
-      .hero-title::before, .hero-title::after {
-        display: none !important;
+      .scroll-container {
+        height: auto;
       }
-      .btn, .bento-card, .hero-image-wrapper img {
-        transform: none !important;
-        transition: none !important;
+      .sticky-wrapper {
+        position: relative;
+        height: auto;
+      }
+      .horizontal-track {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 2rem;
+      }
+      .feature-card {
+        width: 100%;
+        height: auto;
+      }
+      .scroll-progress-container {
+        display: none;
+      }
+      .about-terminal {
+        margin-top: 2rem;
+        grid-column: 1 / -1;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="logo">
-      <div class="logo-mark"></div>
-      Prisma Analytics
-    </div>
-    <div class="nav-links">
-      <a href="#leistungen">Leistungen</a>
-      <a href="#preise">Preise</a>
-      <a href="#ueber-uns">Über uns</a>
-      <a href="#kontakt">Kontakt</a>
-    </div>
-  </nav>
+  <div class="custom-cursor" id="customCursor"></div>
 
-  <!-- Section 1: Hero -->
-  <header class="hero">
-    <div class="hero-grid">
-      <div class="hero-content reveal" style="transition-delay: 100ms;">
-        <div class="badge">
-          <div class="badge-dot"></div>
-          SDK v2.4.0 Live
-        </div>
-        <div class="glitch-container">
-          <h1 class="hero-title" data-text="Präzise Daten. Klare Erkenntnisse.">Präzise Daten. Klare Erkenntnisse.</h1>
-        </div>
-        <p class="hero-lead">
-          Prisma Analytics liefert hochpräzises Echtzeit-Event-Tracking und tiefgehende Kohortenanalysen für moderne Produktteams. Ganz ohne Overhead.
-        </p>
-        <div class="cta-group">
-          <button class="btn btn-primary magnet">Jetzt starten</button>
-          <button class="btn btn-secondary magnet">Dokumentation</button>
-        </div>
-      </div>
-      <div class="hero-image-wrapper reveal" style="transition-delay: 300ms;">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Modernes UI Analytics Dashboard Mockup">
-      </div>
+  <!-- Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo interactive">PRISMA</a>
+      <nav class="nav-links">
+        <a href="#leistungen" class="interactive">Leistungen</a>
+        <a href="#preise" class="interactive">Preise</a>
+        <a href="#stimmung" class="interactive">Philosophie</a>
+        <a href="#kontakt" class="btn btn-secondary interactive magnet">Demo anfordern</a>
+      </nav>
     </div>
   </header>
 
-  <!-- Section 2: Leistungen -->
-  <section id="leistungen" class="section">
-    <div class="section-header reveal">
-      <span class="section-tag">Technologie</span>
-      <h2 class="section-title">Entwickelt für die Zukunft der Produktanalyse.</h2>
-      <p>Unsere Infrastruktur verarbeitet Millionen von Ereignissen pro Sekunde, um Ihnen sofortige und handfeste Erkenntnisse zu liefern.</p>
-    </div>
-
-    <div class="bento-grid">
-      <div class="bento-card span-2 reveal" style="transition-delay: 100ms;">
-        <div>
-          <div class="card-icon">
-            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
-          </div>
-          <h3 class="card-title">Echtzeit-Event-Tracking</h3>
-          <p>Verfolgen Sie Nutzerinteraktionen in Millisekunden. Unser optimiertes SDK garantiert Datenkonsistenz über alle Plattformen hinweg.</p>
+  <!-- Section 1: Hero -->
+  <section class="hero">
+    <!-- Parallax Deco Element -->
+    <svg class="deco-shape parallax" data-speed="-0.15" style="top: 15%; left: 5%; width: 120px; height: 120px; color: var(--border-soft);" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+      <circle cx="50" cy="50" r="40" stroke-dasharray="4 4"/>
+    </svg>
+    
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>Die Synthese aus präziser Messung und Kohorten-Intelligenz.</h1>
+        <p>Prisma liefert latenzfreie Analytics für anspruchsvolle Entwickler und Plattformen. DSGVO-konform, ohne Cookies, optimiert für modernste Web-Architekturen.</p>
+        <div class="hero-actions">
+          <a href="#kontakt" class="btn btn-primary interactive magnet">Tracking starten</a>
+          <a href="#leistungen" class="btn btn-secondary interactive magnet">Dokumentation lesen</a>
         </div>
-        <span class="card-meta">Latenz &lt; 14.2ms</span>
       </div>
-
-      <div class="bento-card reveal" style="transition-delay: 200ms;">
-        <div>
-          <div class="card-icon">
-            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.109A11.386 11.386 0 0110.089 20c-2.207 0-4.277-.62-6.034-1.693L15 19.128zm0-12.83a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <h3 class="card-title">Kohorten</h3>
-          <p>Segmentieren Sie Zielgruppen nach komplexen Verhaltensmustern.</p>
-        </div>
-        <span class="card-meta">Dynamische Filter</span>
-      </div>
-
-      <div class="bento-card reveal" style="transition-delay: 100ms;">
-        <div>
-          <div class="card-icon">
-            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/></svg>
-          </div>
-          <h3 class="card-title">Modernes Dashboard</h3>
-          <p>Keine starren Tabellen. Visualisieren Sie Trichter und Pfade intuitiv.</p>
-        </div>
-        <span class="card-meta">Custom Views</span>
-      </div>
-
-      <div class="bento-card span-2 reveal" style="transition-delay: 200ms;">
-        <div>
-          <div class="card-icon">
-            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253"/></svg>
-          </div>
-          <h3 class="card-title">Globale Edge-Infrastruktur</h3>
-          <p>Daten werden direkt am nächstgelegenen Edge-Knotenpunkt verarbeitet, um Datenverlust bei Verbindungsabbrüchen vollständig zu eliminieren.</p>
-        </div>
-        <span class="card-meta">GDPR-konform</span>
-      </div>
-    </div>
-
-    <!-- Real Metrics -->
-    <div class="metrics-row reveal">
-      <div class="metric-item">
-        <div class="metric-value">1.2B+</div>
-        <div class="metric-label">Verarbeitete Events monatlich</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">14.2ms</div>
-        <div class="metric-label">Durchschnittliche SDK-Latenz</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-value">99.98%</div>
-        <div class="metric-label">Garantierte API-Verfügbarkeit</div>
+      <div class="hero-image-wrapper interactive">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Schnittstelle eines modernen Analytics-Dashboards mit Diagrammen und Datenvisualisierungen">
       </div>
     </div>
   </section>
 
-  <!-- Section 3: Preise -->
-  <section id="preise" class="section">
-    <div class="section-header reveal">
-      <span class="section-tag">Tarife</span>
-      <h2 class="section-title">Skalierbare Preise für wachsende Produkte.</h2>
-      <p>Wählen Sie den passenden Plan für Ihr Team. Keine versteckten Gebühren, jederzeit monatlich kündbar.</p>
+  <!-- Section 2: Horizontal Scroll (Leistungen) -->
+  <section id="leistungen" class="scroll-container">
+    <div class="sticky-wrapper">
+      <div class="container">
+        <div class="scroll-header">
+          <h2>Präzision auf jedem Layer.</h2>
+        </div>
+      </div>
+      
+      <div class="horizontal-track">
+        <!-- Card 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Echtzeit Event-Pipeline</h3>
+            <p>Erfassung kritischer Nutzerinteraktionen unter 10 Millisekunden Latenz. Verarbeiten Sie Millionen Events ohne Verzögerung.</p>
+          </div>
+          <div class="feature-meta">01 / Latenzfrei</div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Privacy-First Kohorten</h3>
+            <p>Automatische Segmentierung und Verhaltensanalyse ohne Speicherung personenbezogener Daten. Vollständig DSGVO-konform.</p>
+          </div>
+          <div class="feature-meta">02 / Konformität</div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2 12 2"/>
+              <polyline points="2 17 12 22 22 17"/>
+              <polyline points="2 12 12 17 22 12"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Universal SDK</h3>
+            <p>Ein extrem leichtgewichtiges 4KB-Skript, das sich nahtlos in React, Next.js, Vue und Svelte integrieren lässt.</p>
+          </div>
+          <div class="feature-meta">03 / Integration</div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Prädiktive Trichter</h3>
+            <p>Erkennen Sie Abwanderungsmuster, bevor sie entstehen. KI-gestützte Vorhersagemodelle analysieren Nutzerpfade in Echtzeit.</p>
+          </div>
+          <div class="feature-meta">04 / Prognose</div>
+        </div>
+      </div>
+
+      <div class="scroll-progress-container">
+        <div class="scroll-progress-bar"></div>
+      </div>
     </div>
+  </section>
 
-    <div class="pricing-grid">
-      <div class="price-card reveal" style="transition-delay: 100ms;">
-        <div class="price-header">
-          <h3>Starter</h3>
-          <p class="price-desc">Für kleine Projekte und MVPs.</p>
-          <div class="price-amount">
-            <span class="price-num">€0</span>
-            <span class="price-period">/ Monat</span>
-          </div>
-        </div>
-        <ul class="price-features">
-          <li>
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            Bis zu 100.000 Events / Mo
-          </li>
-          <li>
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            30 Tage Datenaufbewahrung
-          </li>
-          <li>
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            Standard-Dashboards
-          </li>
-        </ul>
-        <button class="btn btn-secondary magnet">Kostenlos starten</button>
+  <!-- Section 3: Pricing -->
+  <section id="preise" class="pricing">
+    <div class="container">
+      <div class="pricing-header">
+        <h2>Transparente Pläne für wachsende Plattformen.</h2>
+        <p>Wählen Sie die passende Dimension für Ihr Datenvolumen. Keine versteckten Gebühren.</p>
       </div>
 
-      <div class="price-card featured reveal" style="transition-delay: 200ms;">
-        <div class="price-header">
-          <h3>Pro</h3>
-          <p class="price-desc">Für ambitionierte Produktteams.</p>
-          <div class="price-amount">
-            <span class="price-num">€89</span>
-            <span class="price-period">/ Monat</span>
+      <div class="pricing-grid">
+        <!-- Plan 1 -->
+        <div class="pricing-card">
+          <div>
+            <h3>Starter</h3>
+            <p class="pricing-desc">Für Entwickler und experimentelle Projekte.</p>
+            <div class="price">0 € <span>/ Monat</span></div>
           </div>
+          <ul class="pricing-features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Bis zu 50.000 Events / Monat
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              14 Tage Datenaufbewahrung
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Standard Kohorten-Analyse
+            </li>
+          </ul>
+          <a href="#kontakt" class="btn btn-secondary interactive magnet">Kostenlos starten</a>
         </div>
-        <ul class="price-features">
-          <li>
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            Bis zu 10 Mio. Events / Mo
-          </li>
-          <li>
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            1 Jahr Datenaufbewahrung
-          </li>
-          <li>
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            Erweiterte Kohortenanalysen
-          </li>
-          <li>
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            E-Mail-Support (24h)
-          </li>
-        </ul>
-        <button class="btn btn-primary magnet">Pro testen</button>
-      </div>
 
-      <div class="price-card reveal" style="transition-delay: 300ms;">
-        <div class="price-header">
-          <h3>Enterprise</h3>
-          <p class="price-desc">Für Großunternehmen mit hohen Ansprüchen.</p>
-          <div class="price-amount">
-            <span class="price-num">Individuell</span>
+        <!-- Plan 2 -->
+        <div class="pricing-card featured">
+          <span class="badge">Beliebt</span>
+          <div>
+            <h3>Professional</h3>
+            <p class="pricing-desc">Für etablierte Anwendungen und SaaS-Plattformen.</p>
+            <div class="price">99 € <span>/ Monat</span></div>
           </div>
+          <ul class="pricing-features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Bis zu 1.000.000 Events / Monat
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              90 Tage Datenaufbewahrung
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Prädiktive Trichtermodelle
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              E-Mail & Slack Support
+            </li>
+          </ul>
+          <a href="#kontakt" class="btn btn-primary interactive magnet">Jetzt aktivieren</a>
         </div>
-        <ul class="price-features">
-          <li>
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            Unbegrenzte Events
-          </li>
-          <li>
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            Eigene Daten-Retention-Policies
-          </li>
-          <li>
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            SLA-Garantien & Dedicated Support
-          </li>
-        </ul>
-        <button class="btn btn-secondary magnet">Vertrieb kontaktieren</button>
+
+        <!-- Plan 3 -->
+        <div class="pricing-card">
+          <div>
+            <h3>Enterprise</h3>
+            <p class="pricing-desc">Für globale Konzerne mit maximalen Ansprüchen.</p>
+            <div class="price">Individuell</div>
+          </div>
+          <ul class="pricing-features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Unbegrenzte Events
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Unbegrenzte Aufbewahrung
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Eigene Server-Instanz (On-Premise)
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              SLA-Garantie & Dedicated Engineer
+            </li>
+          </ul>
+          <a href="#kontakt" class="btn btn-secondary interactive magnet">Vertrieb kontaktieren</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Section 4: Über uns / Stimmung -->
-  <section id="ueber-uns" class="atmosphere-section">
-    <div class="atmosphere-grid">
-      <div class="atmosphere-images reveal">
-        <div class="atmosphere-img-frame magnet">
-          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Technische Lichtwellen und Netzwerkstrukturen">
+  <section id="stimmung" class="about">
+    <div class="container about-grid">
+      <div class="about-images">
+        <div class="about-img-1 interactive">
+          <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80" alt="Detaillierte Analyse-Grafiken auf einem dunklen Bildschirm">
         </div>
-        <div class="atmosphere-img-frame magnet" style="margin-top: 2rem;">
-          <img src="https://images.unsplash.com/photo-1527474305487-b87b222841cc?auto=format&fit=crop&w=600&q=80" alt="Präzise geometrische Lichtspiegelung in Cyan">
+        <!-- FIX 2: Stylized Code Block Terminal instead of generic wave graphic -->
+        <div class="about-terminal interactive">
+          <div class="terminal-header">
+            <div class="terminal-dot red"></div>
+            <div class="terminal-dot yellow"></div>
+            <div class="terminal-dot green"></div>
+            <div class="terminal-title">prisma-integration.ts</div>
+          </div>
+          <div class="terminal-body">
+            <p><span class="code-keyword">import</span> Prisma <span class="code-keyword">from</span> <span class="code-string">'@prisma/analytics-sdk'</span>;</p>
+            <br>
+            <p><span class="code-keyword">const</span> <span class="code-function">prisma</span> = <span class="code-keyword">new</span> <span class="code-function">Prisma</span>({</p>
+            <p>&nbsp;&nbsp;apiKey: <span class="code-string">'pm_live_8f3a9d2c'</span>,</p>
+            <p>&nbsp;&nbsp;cohortIntelligence: <span class="code-keyword">true</span>,</p>
+            <p>&nbsp;&nbsp;privacyMode: <span class="code-string">'strict'</span></p>
+            <p>});</p>
+            <br>
+            <p><span class="code-comment">// Latenzfreie Event-Erfassung</span></p>
+            <p><span class="code-keyword">await</span> <span class="code-function">prisma.track</span>(<span class="code-string">'conversion'</span>, {</p>
+            <p>&nbsp;&nbsp;value: <span class="code-number">42.00</span>,</p>
+            <p>&nbsp;&nbsp;currency: <span class="code-string">'EUR'</span></p>
+            <p>});</p>
+          </div>
         </div>
       </div>
-      <div class="reveal" style="transition-delay: 200ms;">
-        <span class="section-tag" style="color: var(--accent-soft);">Unsere Philosophie</span>
-        <h2 class="atmosphere-title">Wo Ästhetik auf absolute Präzision trifft.</h2>
-        <p>Wir glauben, dass technische Werkzeuge nicht nur funktional, sondern auch inspirierend sein sollten. Prisma Analytics wurde mit dem Anspruch entwickelt, die Lücke zwischen komplexer Datenverarbeitung und intuitiver Bedienbarkeit zu schließen.</p>
-        <div class="atmosphere-quote">
-          „Die Klarheit unserer Benutzeroberfläche spiegelt die Reinheit unserer Daten wider.“
+      <div class="about-content">
+        <h2>Klarheit statt Komplexität.</h2>
+        <p>Wir glauben, dass Daten keine Belastung für die Privatsphäre Ihrer Nutzer sein dürfen. Prisma wurde entwickelt, um tiefste Einsichten zu gewähren, ohne jemals die Grenze der digitalen Souveränität zu überschreiten.</p>
+        <p>Unsere Algorithmen arbeiten mathematisch präzise auf aggregierten Kohortenstrukturen, anstatt individuelle Identitäten zu tracken.</p>
+        
+        <div class="quote-block">
+          <p class="quote-text">„Mit Prisma haben wir die Ladezeit unseres Dashboards halbiert und gleichzeitig die Datenqualität signifikant gesteigert.”</p>
+          <p class="quote-author">Dr. Helena Brand, CTO bei Vektor Space</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Section 5: Kontakt -->
-  <section id="kontakt" class="section">
-    <div class="contact-grid">
-      <div class="contact-info reveal">
-        <span class="section-tag">Kontakt</span>
-        <h3>Lassen Sie uns ins Gespräch kommen.</h3>
-        <p>Haben Sie Fragen zur Integration oder benötigen Sie ein maßgeschneidertes Angebot? Unser Team antwortet Ihnen innerhalb weniger Stunden.</p>
+  <section id="kontakt" class="contact">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <h2>Bereit für die nächste Ära der Analytik?</h2>
+        <p>Lassen Sie uns gemeinsam besprechen, wie Prisma Ihre Datenstrategie verändern kann. Fordern Sie eine persönliche Live-Demo an.</p>
         
         <div class="contact-details">
           <div class="contact-item">
             <div class="contact-item-icon">
-              <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
             </div>
-            <div>
-              <strong>Schreiben Sie uns</strong>
-              <p>hello@prisma-analytics.io</p>
-            </div>
+            <span>hello@prisma-analytics.io</span>
           </div>
           <div class="contact-item">
             <div class="contact-item-icon">
-              <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0z"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
             </div>
-            <div>
-              <strong>Hauptsitz</strong>
-              <p>München, Deutschland</p>
-            </div>
+            <span>München, Deutschland</span>
           </div>
         </div>
       </div>
 
-      <form class="contact-form reveal" style="transition-delay: 200ms;" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir melden uns in Kürze.');">
-        <div class="form-group">
-          <label class="form-label" for="name">Name</label>
-          <input class="form-input" type="text" id="name" required placeholder="Ihr Name">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="email">E-Mail-Adresse</label>
-          <input class="form-input" type="email" id="email" required placeholder="name@unternehmen.de">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="message">Nachricht</label>
-          <textarea class="form-textarea" id="message" required placeholder="Wie können wir Ihnen helfen?"></textarea>
-        </div>
-        <button class="btn btn-primary magnet" type="submit" style="width: 100%;">Anfrage senden</button>
-      </form>
+      <div class="contact-form">
+        <form id="demoForm" onsubmit="event.preventDefault(); alert('Demo-Anfrage erfolgreich übermittelt.');">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-control interactive" required placeholder="Ihr Name">
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail-Adresse</label>
+            <input type="email" id="email" class="form-control interactive" required placeholder="ihre.adresse@firma.de">
+          </div>
+          <div class="form-group">
+            <label for="company">Unternehmen</label>
+            <input type="text" id="company" class="form-control interactive" required placeholder="Firma GmbH">
+          </div>
+          <div class="form-group">
+            <label for="message">Nachricht (Optional)</label>
+            <textarea id="message" rows="4" class="form-control interactive" placeholder="Wie können wir Ihnen helfen?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary interactive magnet" style="width: 100%;">Demo-Termin vereinbaren</button>
+        </form>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="logo">
-        <div class="logo-mark"></div>
-        Prisma Analytics
-      </div>
-      <div class="footer-text">
-        &copy; 2026 Prisma Analytics GmbH. Alle Rechte vorbehalten.
-      </div>
+  <footer>
+    <div class="container footer-container">
+      <a href="#" class="footer-logo interactive">PRISMA</a>
+      <p>&copy; 2026 Prisma Analytics GmbH. Alle Rechte vorbehalten. | <a href="#" class="interactive" style="color: var(--text-muted); text-decoration: none;">Impressum</a></p>
     </div>
   </footer>
 
   <script>
-    // Scroll Reveal (Intersection Observer)
-    const revealElements = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-        }
-      });
-    }, { threshold: 0.1 });
+    // Custom Cursor
+    const cursor = document.getElementById('customCursor');
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
 
-    revealElements.forEach(el => observer.observe(el));
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
 
-    // Cursor Magnet Interaction
+    function animateCursor() {
+      const lerp = 0.15;
+      cursorX += (mouseX - cursorX) * lerp;
+      cursorY += (mouseY - cursorY) * lerp;
+      if (cursor) {
+        cursor.style.left = `${cursorX}px`;
+        cursor.style.top = `${cursorY}px`;
+      }
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    const interactives = document.querySelectorAll('.interactive');
+    interactives.forEach(elem => {
+      elem.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      elem.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // Magnet Effect
     const magnets = document.querySelectorAll('.magnet');
-    
-    // Deactivate on touch devices and if reduced motion is preferred
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    if (!prefersReducedMotion && window.innerWidth > 768) {
-      magnets.forEach(magnet => {
-        magnet.addEventListener('mousemove', (e) => {
-          const bound = magnet.getBoundingClientRect();
-          const x = e.clientX - bound.left - (bound.width / 2);
-          const y = e.clientY - bound.top - (bound.height / 2);
-          magnet.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
-          magnet.style.transition = 'transform 0.1s ease-out';
-        });
-
-        magnet.addEventListener('mouseleave', () => {
-          magnet.style.transform = 'translate(0px, 0px)';
-          magnet.style.transition = 'transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1)';
-        });
+    magnets.forEach(elem => {
+      elem.addEventListener('mousemove', (e) => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const rect = elem.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        elem.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
       });
-    }
+      elem.addEventListener('mouseleave', () => {
+        elem.style.transform = 'translate(0px, 0px)';
+      });
+    });
 
-    // Trigger Glitch Keyframe Animation programmatically for premium feeling
-    const title = document.querySelector('.hero-title');
-    if (title && !prefersReducedMotion) {
-      setInterval(() => {
-        title.style.animation = 'none';
-        // force reflow
-        title.offsetHeight; 
-        
-        // Randomly choose one of the glitch animations
-        const anim = Math.random() > 0.5 ? 'glitch-anim-1' : 'glitch-anim-2';
-        title.style.animation = `${anim} 0.3s linear`;
-      }, 5500);
-    }
+    // Parallax Depth
+    const parallaxElems = document.querySelectorAll('.parallax');
+    window.addEventListener('scroll', () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const scrolled = window.scrollY;
+      parallaxElems.forEach(elem => {
+        const speed = parseFloat(elem.getAttribute('data-speed')) || 0.2;
+        elem.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    });
+
+    // Horizontal Scroll
+    const scrollContainer = document.querySelector('.scroll-container');
+    const horizontalTrack = document.querySelector('.horizontal-track');
+    const progressBar = document.querySelector('.scroll-progress-bar');
+
+    window.addEventListener('scroll', () => {
+      if (!scrollContainer || !horizontalTrack) return;
+      if (window.innerWidth <= 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        horizontalTrack.style.transform = 'none';
+        return;
+      }
+
+      const rect = scrollContainer.getBoundingClientRect();
+      const viewHeight = window.innerHeight;
+
+      if (rect.top <= 0 && rect.bottom >= viewHeight) {
+        const totalScrollable = rect.height - viewHeight;
+        const scrolled = -rect.top;
+        const progress = scrolled / totalScrollable;
+
+        const trackWidth = horizontalTrack.scrollWidth;
+        const maxTranslate = trackWidth - window.innerWidth + (window.innerWidth * 0.1);
+        const translateAmt = progress * maxTranslate;
+
+        horizontalTrack.style.transform = `translateX(-${translateAmt}px)`;
+        if (progressBar) progressBar.style.width = `${progress * 100}%`;
+      } else if (rect.top > 0) {
+        horizontalTrack.style.transform = 'translateX(0px)';
+        if (progressBar) progressBar.style.width = '0%';
+      } else if (rect.bottom < viewHeight) {
+        const trackWidth = horizontalTrack.scrollWidth;
+        const maxTranslate = trackWidth - window.innerWidth + (window.innerWidth * 0.1);
+        horizontalTrack.style.transform = `translateX(-${maxTranslate}px)`;
+        if (progressBar) progressBar.style.width = '100%';
+      }
+    });
   </script>
 </body>
 </html>

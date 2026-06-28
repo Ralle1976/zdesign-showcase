@@ -3,89 +3,206 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vault3 — Das hochsichere Multi-Chain-Terminal für Ihre digitalen Assets</title>
+  <title>Vault3 — Sovereign Multi-Chain Custody</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #060510;
-      --surface: #0c0a21;
-      --surface-2: #141133;
-      --primary: #f1f0fb;
-      --primary-soft: #a5a1d2;
-      --accent: #00f0ff;
-      --accent-purple: #bf46ff;
-      --accent-soft: #70efff;
-      --border: #1f1a4a;
-      --border-soft: #141138;
-      --radius: 12px;
+      --bg: #06050c;
+      --surface: rgba(13, 11, 28, 0.45);
+      --surface-2: rgba(22, 18, 42, 0.6);
+      --primary: #f1f0f7;
+      --primary-soft: #c9c5d8;
+      --accent: #00f2fe; /* High-Tech Cyan */
+      --accent-violet: #bd00ff; /* High-Tech Violet */
+      --accent-gradient: linear-gradient(135deg, #00f2fe 0%, #bd00ff 100%);
+      --text: #e2def2;
+      --text-muted: #8e8a9f;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(0, 242, 254, 0.2);
+      --radius: 16px;
       --radius-sm: 8px;
-      --radius-lg: 20px;
-      --shadow: 0 0 30px rgba(0, 240, 255, 0.05), 0 20px 60px rgba(0, 0, 0, 0.8);
-      --ring: 0 0 0 2px rgba(0, 240, 255, 0.3);
-      --font-display: "Space Grotesk", system-ui, -apple-system, sans-serif;
+      --radius-lg: 24px;
+      --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+      --ring: 0 0 0 2px rgba(0, 242, 254, 0.3);
+      --font-display: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
       --font-body: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-      --font-mono: "JetBrains Mono", monospace;
+      --font-mono: "Space Mono", monospace;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      scroll-behavior: smooth;
     }
 
-    html {
-      scroll-behavior: smooth;
-      background-color: var(--bg);
-      color: var(--primary);
-      font-family: var(--font-body);
-      -webkit-font-smoothing: antialiased;
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
     }
 
     body {
-      overflow-x: hidden;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
       line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(189, 0, 255, 0.05) 0%, transparent 40%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
     }
 
-    /* Film-Korn-Effekt */
-    .grain-overlay {
-      position: fixed;
-      inset: 0;
+    /* Ambient Glow Orbs */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(140px);
+      z-index: -1;
+      opacity: 0.12;
       pointer-events: none;
-      z-index: 9999;
-      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.035;
-      mix-blend-mode: overlay;
+    }
+    .orb-1 {
+      top: 15%;
+      left: -10%;
+      width: 45vw;
+      height: 45vw;
+      background: var(--accent);
+    }
+    .orb-2 {
+      top: 55%;
+      right: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: var(--accent-violet);
     }
 
-    /* Scroll-Reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Typography */
+    h1, h2, h3, .font-display {
+      font-family: var(--font-display);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--primary);
     }
 
-    .reveal.in {
-      opacity: 1;
-      transform: translateY(0);
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.2rem);
     }
 
-    .reveal-stagger > * {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    h2 {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      margin-bottom: 1.5rem;
     }
 
-    .reveal-stagger.in > * {
-      opacity: 1;
-      transform: translateY(0);
+    h3 {
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      margin-bottom: 1rem;
+      font-weight: 700;
     }
 
-    .reveal-stagger.in > *:nth-child(1) { transition-delay: 80ms; }
-    .reveal-stagger.in > *:nth-child(2) { transition-delay: 160ms; }
-    .reveal-stagger.in > *:nth-child(3) { transition-delay: 240ms; }
-    .reveal-stagger.in > *:nth-child(4) { transition-delay: 320ms; }
+    p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 55ch;
+    }
+
+    /* Layout Utilities */
+    .container {
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 95vh;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    @media (min-width: 992px) {
+      .split-section {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+      .split-section.reverse {
+        grid-template-columns: 0.9fr 1.1fr;
+      }
+      .split-section.reverse > .content-block {
+        order: 2;
+      }
+      .split-section.reverse > .media-block {
+        order: 1;
+      }
+    }
+
+    .content-block {
+      padding: 6rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .media-block {
+      height: 100%;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+      border-left: 1px solid var(--border);
+    }
+
+    .split-section.reverse .media-block {
+      border-left: none;
+      border-right: 1px solid var(--border);
+    }
+
+    @media (max-width: 991px) {
+      .media-block {
+        min-height: 400px;
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+    }
+
+    .media-block img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.2) contrast(1.1) brightness(0.8);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .media-block::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(6, 5, 12, 0) 50%, rgba(6, 5, 12, 0.8));
+      pointer-events: none;
+    }
+
+    .media-block:hover img {
+      transform: scale(1.05);
+    }
 
     /* Navigation */
     header {
@@ -94,16 +211,15 @@
       left: 0;
       width: 100%;
       z-index: 100;
-      background: linear-gradient(to bottom, var(--bg) 50%, transparent);
-      border-bottom: 1px solid var(--border-soft);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(6, 5, 12, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s, padding 0.3s;
     }
 
-    .nav-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 1.25rem 1.5rem;
+    .nav-inner {
+      height: 90px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -111,675 +227,210 @@
 
     .logo {
       font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-weight: 800;
+      font-size: 1.6rem;
+      text-decoration: none;
       color: var(--primary);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logo span {
-      color: var(--accent);
-      font-size: 0.9em;
-    }
-
-    nav {
-      display: none;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    @media (min-width: 768px) {
-      nav {
-        display: flex;
-      }
-    }
-
-    nav a {
-      color: var(--primary-soft);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    .nav-cta {
-      border: 1px solid var(--accent);
-      padding: 0.5rem 1.25rem;
-      border-radius: var(--radius-sm);
-      color: var(--accent) !important;
-      font-family: var(--font-mono);
-      font-size: 0.8rem !important;
-      text-transform: uppercase;
       letter-spacing: 0.05em;
-      background: rgba(0, 240, 255, 0.03);
-      transition: all 0.3s ease;
-    }
-
-    .nav-cta:hover {
-      background: var(--accent);
-      color: var(--bg) !important;
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding: 7.5rem 1.5rem 4rem;
-      overflow: hidden;
-    }
-
-    .hero-glow {
-      position: absolute;
-      top: 10%;
-      right: -10%;
-      width: 50vw;
-      height: 50vw;
-      background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(191, 70, 255, 0.05) 50%, transparent 80%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .hero-glow-left {
-      position: absolute;
-      bottom: -10%;
-      left: -10%;
-      width: 40vw;
-      height: 40vw;
-      background: radial-gradient(circle, rgba(191, 70, 255, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .hero-grid {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3.5rem;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    @media (min-width: 992px) {
-      .hero-grid {
-        grid-template-columns: 1.2fr 0.8fr;
-      }
-    }
-
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .tagline {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
     }
 
-    .tagline::before {
-      content: '';
-      display: inline-block;
-      width: 16px;
-      height: 2px;
-      background-color: var(--accent);
-    }
-
-    h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.25rem, 6vw, 4rem);
-      line-height: 1.1;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-    }
-
-    h1 span {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-desc {
-      font-size: 1.05rem;
-      color: var(--primary-soft);
-      max-width: 540px;
-      margin-bottom: 2.5rem;
-    }
-
-    /* Multi-Chain Badges */
-    .chain-selector {
-      margin-bottom: 2.5rem;
-      width: 100%;
-    }
-
-    .chain-selector-title {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      color: var(--primary-soft);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
-    }
-
-    .chain-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .chain-badge {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 0.4rem 0.8rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.75rem;
-      font-family: var(--font-mono);
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .chain-badge:hover {
-      border-color: var(--accent);
-      background: var(--surface-2);
-    }
-
-    .chain-dot {
-      width: 6px;
-      height: 6px;
+    .logo-mark {
+      width: 12px;
+      height: 12px;
+      background: var(--accent-gradient);
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 6px var(--accent);
+      box-shadow: 0 0 15px var(--accent);
     }
 
-    .chain-dot.purple {
-      background: var(--accent-purple);
-      box-shadow: 0 0 6px var(--accent-purple);
+    .nav-links {
+      display: none;
+      gap: 3rem;
     }
 
-    .cta-group {
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Mobile Menu Button */
+    .menu-toggle {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-      width: 100%;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
-      color: var(--bg);
+      flex-direction: column;
+      gap: 6px;
+      background: none;
       border: none;
-      padding: 0.9rem 2rem;
-      font-family: var(--font-display);
-      font-weight: 600;
-      font-size: 0.95rem;
-      border-radius: var(--radius-sm);
       cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.2);
+      padding: 0.5rem;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(191, 70, 255, 0.4);
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
     }
 
-    .btn-secondary {
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.02);
-      color: var(--primary);
-      padding: 0.9rem 2rem;
-      font-family: var(--font-display);
-      font-weight: 500;
-      font-size: 0.95rem;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--primary);
+      transition: 0.3s;
     }
 
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      background: rgba(0, 240, 255, 0.05);
-    }
-
-    .hero-visual {
-      position: relative;
-      display: flex;
+    /* Buttons */
+    .magnetic-button {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-    }
-
-    .image-frame {
+      background: var(--surface-2);
       border: 1px solid var(--border);
-      padding: 10px;
-      background: var(--surface);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      width: 100%;
+      color: var(--primary);
+      padding: 1.1rem 2.4rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
       position: relative;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow);
+      max-width: fit-content;
+      overflow: hidden;
     }
 
-    .image-frame::after {
+    .magnetic-button::before {
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: var(--radius-lg);
-      box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.2);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+
+    .magnetic-button:hover::before {
+      transform: translateX(100%);
+    }
+
+    .magnetic-button .btn-content {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: transform 0.2s ease-out;
       pointer-events: none;
     }
 
-    .image-frame img {
-      border-radius: var(--radius);
-      display: block;
-      width: 100%;
-      height: auto;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: var(--bg);
+      border: none;
+      box-shadow: 0 4px 20px rgba(0, 242, 254, 0.25);
     }
 
-    .image-frame:hover img {
-      transform: scale(1.02);
+    .btn-primary:hover {
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.5), 0 0 15px rgba(189, 0, 255, 0.3);
+      transform: translateY(-2px);
     }
 
-    /* Metrics Bar */
-    .metrics-bar {
-      background: var(--surface);
-      border-top: 1px solid var(--border-soft);
-      border-bottom: 1px solid var(--border-soft);
-      padding: 3rem 1.5rem;
+    /* Kinetic Typography */
+    .kinetic-title {
+      margin-bottom: 2rem;
+    }
+
+    .kinetic-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(30px) rotate(1deg);
+      animation: reveal-word 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: calc(var(--w) * 120ms);
+    }
+
+    @keyframes reveal-word {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+      }
+    }
+
+    /* Premium Shimmer Text */
+    .shimmer-text {
       position: relative;
-    }
-
-    .metrics-grid {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2.5rem;
-      text-align: center;
-    }
-
-    .metric-item h4 {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      font-weight: 700;
+      display: inline-block;
       color: var(--accent);
-      margin-bottom: 0.25rem;
+      background: linear-gradient(120deg, var(--accent) 20%, var(--accent-violet) 50%, var(--accent) 80%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 4s linear infinite;
     }
 
-    .metric-item p {
-      color: var(--primary-soft);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-family: var(--font-mono);
+    @keyframes shine {
+      to {
+        background-position: 200% center;
+      }
     }
 
-    /* NFT-Galerie Section */
-    .nft-gallery {
-      padding: 8rem 1.5rem;
-      background: var(--bg);
+    /* Features Section */
+    .grid-section {
+      padding: 10rem 0;
+      border-bottom: 1px solid var(--border);
       position: relative;
     }
 
     .section-header {
-      max-width: 1300px;
-      margin: 0 auto 4rem;
-      text-align: center;
+      margin-bottom: 5rem;
+      max-width: 700px;
     }
 
-    .section-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-
-    .section-header h2 span {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section-header p {
-      color: var(--primary-soft);
-      max-width: 600px;
-      margin: 0 auto;
-      font-size: 1rem;
-    }
-
-    .nft-grid {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .nft-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1rem;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nft-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--accent);
-      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
-    }
-
-    .nft-image-wrapper {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      aspect-ratio: 1;
-      margin-bottom: 1rem;
-    }
-
-    .nft-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .nft-card:hover .nft-image-wrapper img {
-      transform: scale(1.05);
-    }
-
-    .nft-badge {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      background: rgba(6, 5, 16, 0.8);
-      border: 1px solid var(--accent);
+    .section-header .tag {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
       color: var(--accent);
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: var(--radius-sm);
-      backdrop-filter: blur(4px);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      display: block;
+      margin-bottom: 1rem;
     }
 
-    .nft-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.75rem;
-    }
-
-    .nft-title {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    .nft-id {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--primary-soft);
-    }
-
-    .nft-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.5rem;
-      padding-top: 0.75rem;
-      border-top: 1px solid var(--border-soft);
-      font-size: 0.8rem;
-    }
-
-    .nft-price-label {
-      color: var(--primary-soft);
-    }
-
-    .nft-price {
-      font-family: var(--font-mono);
-      color: var(--accent-purple);
-      font-weight: 700;
-    }
-
-    /* Staking Section */
-    .staking-section {
-      padding: 8rem 1.5rem;
-      background: var(--surface);
-      border-top: 1px solid var(--border-soft);
-      border-bottom: 1px solid var(--border-soft);
-      position: relative;
-    }
-
-    .staking-container {
-      max-width: 1300px;
-      margin: 0 auto;
+    .feature-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    @media (min-width: 992px) {
-      .staking-container {
-        grid-template-columns: 1fr 1.1fr;
-      }
-    }
-
-    .staking-info h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
-
-    .staking-info h2 span {
-      color: var(--accent);
-    }
-
-    .staking-info p {
-      color: var(--primary-soft);
-      margin-bottom: 2rem;
-      font-size: 1.05rem;
-    }
-
-    .staking-features {
-      list-style: none;
-      display: grid;
-      gap: 1rem;
-    }
-
-    .staking-features li {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.95rem;
-      color: var(--primary);
-    }
-
-    .staking-features svg {
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    /* Staking Dashboard Mockup */
-    .staking-dashboard {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-
-    .staking-dashboard::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-purple));
-    }
-
-    .dash-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .dash-title {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--primary-soft);
-    }
-
-    .dash-status {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-    }
-
-    .dash-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .dash-stat {
-      background: var(--surface);
-      border: 1px solid var(--border-soft);
-      padding: 1.25rem;
-      border-radius: var(--radius);
-    }
-
-    .dash-stat-label {
-      font-size: 0.75rem;
-      color: var(--primary-soft);
-      margin-bottom: 0.5rem;
-    }
-
-    .dash-stat-value {
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .dash-stat-value.highlight {
-      color: var(--accent);
-    }
-
-    .staking-calculator {
-      background: var(--surface);
-      border: 1px solid var(--border-soft);
-      padding: 1.5rem;
-      border-radius: var(--radius);
-    }
-
-    .calc-label {
-      font-size: 0.8rem;
-      color: var(--primary-soft);
-      margin-bottom: 0.75rem;
-      display: block;
-    }
-
-    .calc-input-group {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .calc-input {
-      flex: 1;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 0.75rem 1rem;
-      color: var(--primary);
-      font-family: var(--font-mono);
-      font-size: 1rem;
-    }
-
-    .calc-input:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-
-    .calc-btn {
-      background: var(--accent);
-      color: var(--bg);
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-family: var(--font-display);
-      font-weight: 600;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .calc-btn:hover {
-      background: var(--accent-soft);
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-    }
-
-    /* Core Features Section */
-    .features {
-      padding: 8rem 1.5rem;
-      background: var(--bg);
-      position: relative;
-    }
-
-    .features-grid {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
     .feature-card {
       background: var(--surface);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-lg);
-      padding: 3rem 2.5rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      padding: 3.5rem 2.5rem;
+      border-radius: var(--radius);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
@@ -792,15 +443,15 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      background: var(--accent-gradient);
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.4s;
     }
 
     .feature-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--border);
-      box-shadow: var(--shadow);
+      transform: translateY(-8px);
+      border-color: rgba(0, 242, 254, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 242, 254, 0.1);
     }
 
     .feature-card:hover::before {
@@ -809,724 +460,505 @@
 
     .feature-icon {
       color: var(--accent);
+      width: 40px;
+      height: 40px;
       margin-bottom: 2rem;
-      display: inline-block;
+      filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.5));
     }
 
-    .feature-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-
-    .feature-card p {
-      color: var(--primary-soft);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    /* Editorial Section */
-    .editorial {
-      padding: 0;
-      background: var(--bg);
-      position: relative;
-    }
-
-    .editorial-row {
-      display: flex;
-      flex-wrap: wrap;
-      min-height: 70vh;
-      align-items: stretch;
-    }
-
-    .editorial-row.reverse {
-      flex-direction: row-reverse;
-    }
-
-    .editorial-col-img {
-      flex: 1 1 100%;
-      position: relative;
-      min-height: 350px;
-    }
-
-    @media (min-width: 768px) {
-      .editorial-col-img {
-        flex: 1 1 50%;
-      }
-    }
-
-    .editorial-col-img img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .editorial-col-text {
-      flex: 1 1 100%;
-      padding: 4rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: var(--surface);
-      border-left: 1px solid var(--border-soft);
-    }
-
-    @media (min-width: 768px) {
-      .editorial-col-text {
-        flex: 1 1 50%;
-        padding: 6rem 4rem;
-      }
-    }
-
-    .editorial-row.reverse .editorial-col-text {
-      border-left: none;
-      border-right: 1px solid var(--border-soft);
-    }
-
-    .editorial-col-text h3 {
-      font-family: var(--font-display);
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
-
-    .editorial-col-text p {
-      color: var(--primary-soft);
-      font-size: 1rem;
-      line-height: 1.8;
-      max-width: 580px;
-      margin-bottom: 2rem;
-    }
-
-    /* Pricing Section */
-    .pricing {
-      padding: 8rem 1.5rem;
-      position: relative;
-    }
-
+    /* Pricing/Staking Tiers */
     .pricing-grid {
-      max-width: 1000px;
-      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 3rem;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-top: 4rem;
+    }
+
+    @media (min-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
     .pricing-card {
       background: var(--surface);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-lg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
       padding: 4rem 2.5rem;
+      border-radius: var(--radius);
       display: flex;
       flex-direction: column;
       position: relative;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .pricing-card.featured {
-      border-color: var(--accent);
+      border-color: var(--accent-violet);
       background: var(--surface-2);
-      box-shadow: var(--shadow);
+      box-shadow: 0 15px 45px rgba(189, 0, 255, 0.15);
     }
 
-    .badge {
+    .pricing-card.featured::after {
+      content: 'EMPFOHLEN';
       position: absolute;
-      top: 2rem;
-      right: 2.5rem;
-      background: var(--accent-purple);
-      color: var(--primary);
+      top: 24px;
+      right: 24px;
       font-family: var(--font-mono);
       font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 0.3rem 0.8rem;
-      border-radius: var(--radius-sm);
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
     }
 
-    .pricing-card h3 {
+    .pricing-tier {
       font-family: var(--font-display);
-      font-size: 1.8rem;
+      font-size: 1.75rem;
       font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
-    .pricing-desc {
-      color: var(--primary-soft);
-      font-size: 0.9rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .price {
-      font-family: var(--font-display);
+    .pricing-rate {
       font-size: 3rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: baseline;
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--accent);
+      margin: 2rem 0;
+      line-height: 1;
+      text-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
     }
 
-    .price span {
+    .pricing-rate span {
+      font-size: 0.95rem;
+      color: var(--text-muted);
       font-family: var(--font-body);
-      font-size: 1rem;
-      color: var(--primary-soft);
-      margin-left: 0.5rem;
+      font-weight: 400;
+      display: block;
+      margin-top: 0.5rem;
     }
 
-    .price-features {
+    .pricing-features {
       list-style: none;
-      margin-bottom: 3.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      margin-bottom: 3rem;
     }
 
-    .price-features li {
+    .pricing-features li {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      color: var(--primary-soft);
-      font-size: 0.95rem;
     }
 
-    .price-features svg {
-      color: var(--accent);
-      flex-shrink: 0;
+    .pricing-features li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--accent-violet);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-violet);
     }
 
-    .pricing-card .btn-primary, .pricing-card .btn-secondary {
-      width: 100%;
-      text-align: center;
-      margin-top: auto;
-    }
-
-    /* Contact Section */
-    .contact {
-      padding: 8rem 1.5rem;
-      background: var(--bg);
-      position: relative;
-    }
-
-    .contact-container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: var(--surface);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-lg);
-      padding: 4rem 2.5rem;
-      box-shadow: var(--shadow);
-    }
-
+    /* Contact Form */
     .contact-form {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.75rem;
       margin-top: 3rem;
+      max-width: 550px;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
 
     .form-group label {
+      font-family: var(--font-mono);
       font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--primary-soft);
-      font-family: var(--font-mono);
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
     }
 
     .form-group input, .form-group textarea {
-      background: var(--surface-2);
+      background: rgba(13, 11, 28, 0.8);
       border: 1px solid var(--border);
+      padding: 1.1rem;
+      color: var(--text);
       border-radius: var(--radius-sm);
-      padding: 1rem;
-      color: var(--primary);
       font-family: var(--font-body);
       font-size: 1rem;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
 
     .form-group input:focus, .form-group textarea:focus {
       outline: none;
       border-color: var(--accent);
       box-shadow: var(--ring);
+      background: var(--surface-2);
+    }
+
+    /* Stats Block */
+    .stats-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2.5rem;
+    }
+
+    .stat-item .stat-val {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2.8rem;
+      color: var(--accent);
+      line-height: 1.1;
+      text-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+    }
+
+    .stat-item .stat-lbl {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 0.5rem;
     }
 
     /* Footer */
     footer {
-      background: var(--bg);
-      border-top: 1px solid var(--border-soft);
-      padding: 4rem 1.5rem;
+      background: rgba(6, 5, 12, 0.9);
+      border-top: 1px solid var(--border);
+      padding: 6rem 0;
+      position: relative;
     }
 
-    .footer-container {
-      max-width: 1300px;
-      margin: 0 auto;
+    .footer-inner {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 3rem;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 2rem;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
     }
 
     .footer-meta {
-      color: var(--primary-soft);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
-    .footer-status {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-      color: var(--primary-soft);
-      background: var(--surface);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-soft);
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent);
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 767px) {
-      .cta-group {
-        flex-direction: column;
-      }
-      .btn-primary, .btn-secondary {
-        width: 100%;
-        text-align: center;
-      }
-    }
-
+    /* Accessibility & Performance */
     @media (prefers-reduced-motion: reduce) {
-      .reveal, .reveal-stagger > *, .image-frame img {
-        transition: none !important;
-        transform: none !important;
-        opacity: 1 !important;
+      .kinetic-word {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+      .shimmer-text {
+        animation: none;
+        background: none;
+        -webkit-text-fill-color: var(--accent);
+      }
+      .media-block:hover img {
+        transform: none;
+      }
+      .magnetic-button {
+        transition: none;
+      }
+      .magnetic-button::before {
+        display: none;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="grain-overlay"></div>
+  <!-- Ambient Background Glows -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
 
-  <header>
-    <div class="nav-container">
-      <a href="#" class="logo">VAULT<span>³</span></a>
-      <nav>
-        <a href="#multi-chain">Multi-Chain</a>
-        <a href="#nft-galerie">NFT-Galerie</a>
+  <!-- Header -->
+  <header id="site-header">
+    <div class="container nav-inner">
+      <a href="#" class="logo" aria-label="Vault3 Homepage">
+        <div class="logo-mark"></div>
+        VAULT3
+      </a>
+      <nav class="nav-links" aria-label="Hauptnavigation">
+        <a href="#features">Leistungen</a>
         <a href="#staking">Staking</a>
-        <a href="#preise">Konditionen</a>
-        <a href="#kontakt" class="nav-cta">Terminal öffnen</a>
+        <a href="#about">Über uns</a>
+        <a href="#contact" class="magnetic-button btn-primary" style="padding: 0.75rem 1.5rem;">
+          <span class="btn-content">Terminal starten</span>
+        </a>
       </nav>
+      <button class="menu-toggle" aria-label="Menü öffnen" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-glow"></div>
-    <div class="hero-glow-left"></div>
-    <div class="hero-grid">
-      <div class="hero-content reveal-stagger">
-        <div class="tagline">Next-Gen Web3 Terminal</div>
-        <h1>Das ultimative Terminal für Ihre <span>digitalen Werte.</span></h1>
-        <p class="hero-desc">Vault3 vereint kompromisslose Multi-Chain-Sicherheit mit einer hochmodernen Benutzeroberfläche. Verwalten, staken und präsentieren Sie Ihre Krypto-Assets an einem einzigen, sicheren Ort.</p>
-        
-        <!-- Multi-Chain Selector -->
-        <div class="chain-selector" id="multi-chain">
-          <div class="chain-selector-title">Unterstützte Netzwerke</div>
-          <div class="chain-badges">
-            <span class="chain-badge"><span class="chain-dot"></span>Ethereum</span>
-            <span class="chain-badge"><span class="chain-dot purple"></span>Solana</span>
-            <span class="chain-badge"><span class="chain-dot"></span>Arbitrum</span>
-            <span class="chain-badge"><span class="chain-dot purple"></span>Polygon</span>
-            <span class="chain-badge"><span class="chain-dot"></span>Avalanche</span>
-            <span class="chain-badge"><span class="chain-dot purple"></span>Cosmos</span>
-          </div>
-        </div>
-
-        <div class="cta-group">
-          <a href="#kontakt" class="btn-primary">Terminal initialisieren</a>
-          <a href="#nft-galerie" class="btn-secondary">Features erkunden</a>
-        </div>
+  <!-- Hero Section (Split-Screen) -->
+  <section class="split-section" style="margin-top: 90px;">
+    <div class="content-block">
+      <div class="container" style="padding: 0;">
+        <h1 class="kinetic-title">
+          <span class="kinetic-word" style="--w: 1">Souveräne</span>
+          <span class="kinetic-word" style="--w: 2">Sicherheit</span>
+          <span class="kinetic-word" style="--w: 3">für</span>
+          <span class="kinetic-word" style="--w: 4">Ihre</span>
+          <span class="kinetic-word shimmer-text" style="--w: 5">Assets</span>
+        </h1>
+        <p style="margin-bottom: 3rem; font-size: 1.15rem; line-height: 1.7;">
+          Vault3 definiert das institutionelle Multi-Chain-Staking neu. Verwalten Sie NFTs, Liquid-Staking-Derivate und native Krypto-Assets über ein einziges, kryptografisch verifiziertes Portal.
+        </p>
+        <a href="#contact" class="magnetic-button btn-primary">
+          <span class="btn-content">
+            Zugang anfordern
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
       </div>
-      <div class="hero-visual reveal">
-        <div class="image-frame" style="max-width: 480px; margin: 0 auto;">
-          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Futuristische 3D-Kryptografie-Visualisierung">
-        </div>
-      </div>
+    </div>
+    <div class="media-block">
+      <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80" alt="Abstrakte 3D-Visualisierung eines dezentralen Blockchain-Netzwerks mit leuchtenden Knotenpunkten">
     </div>
   </section>
 
-  <!-- METRICS BAR -->
-  <section class="metrics-bar">
-    <div class="metrics-grid reveal-stagger">
-      <div class="metric-item">
-        <h4>$4.2B+</h4>
-        <p>Gesicherte Werte</p>
+  <!-- Leistungen Section -->
+  <section id="features" class="grid-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">Architektur</span>
+        <h2>Kompromisslose Sicherheit</h2>
+        <p>Entwickelt für die Anforderungen moderner On-Chain-Portfolios. Keine Kompromisse bei Sicherheit und Geschwindigkeit.</p>
       </div>
-      <div class="metric-item">
-        <h4>24+</h4>
-        <p>Integrierte Blockchains</p>
-      </div>
-      <div class="metric-item">
-        <h4>&lt; 1.2s</h4>
-        <p>Transaktionslatenz</p>
-      </div>
-      <div class="metric-item">
-        <h4>0.00%</h4>
-        <p>Sicherheitsvorfälle</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- NFT-GALERIE SECTION -->
-  <section class="nft-gallery" id="nft-galerie">
-    <div class="section-header reveal">
-      <h2>Kuratierte <span>NFT-Galerie</span></h2>
-      <p>Visualisieren und verwalten Sie Ihre wertvollsten digitalen Artefakte direkt in Ihrer gesicherten Enklave.</p>
-    </div>
-    <div class="nft-grid reveal-stagger">
-      <!-- NFT Card 1 -->
-      <div class="nft-card">
-        <div class="nft-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=600&q=80" alt="Cyberpunk Mesh NFT">
-          <span class="nft-badge">Ethereum</span>
-        </div>
-        <div class="nft-info">
-          <span class="nft-title">Aether Mesh</span>
-          <span class="nft-id">#0912</span>
-        </div>
-        <div class="nft-meta">
-          <span class="nft-price-label">Letzter Wert</span>
-          <span class="nft-price">14.5 ETH</span>
-        </div>
-      </div>
-      <!-- NFT Card 2 -->
-      <div class="nft-card">
-        <div class="nft-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=600&q=80" alt="Neon Grid NFT">
-          <span class="nft-badge">Solana</span>
-        </div>
-        <div class="nft-info">
-          <span class="nft-title">Hyperion Core</span>
-          <span class="nft-id">#4402</span>
-        </div>
-        <div class="nft-meta">
-          <span class="nft-price-label">Letzter Wert</span>
-          <span class="nft-price">320 SOL</span>
-        </div>
-      </div>
-      <!-- NFT Card 3 -->
-      <div class="nft-card">
-        <div class="nft-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=600&q=80" alt="3D Geometry NFT">
-          <span class="nft-badge">Arbitrum</span>
-        </div>
-        <div class="nft-info">
-          <span class="nft-title">Quantum Prism</span>
-          <span class="nft-id">#8819</span>
-        </div>
-        <div class="nft-meta">
-          <span class="nft-price-label">Letzter Wert</span>
-          <span class="nft-price">8.2 ETH</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STAKING SECTION -->
-  <section class="staking-section" id="staking">
-    <div class="staking-container">
-      <div class="staking-info reveal-stagger">
-        <div class="tagline">Maximale Effizienz</div>
-        <h2>Sicheres Staking direkt aus der <span>Cold Storage</span>.</h2>
-        <p>Generieren Sie Erträge, ohne die Kontrolle über Ihre Private Keys abzugeben. Vault3 verbindet Sie nahtlos mit den vertrauenswürdigsten Validatoren des Ökosystems.</p>
-        <ul class="staking-features">
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Keine Mindestlaufzeit bei ausgewählten Pools
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Automatische Reinvestition (Auto-Compounding)
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Echtzeit-Ertrags-Tracking im Dashboard
-          </li>
-        </ul>
-      </div>
-
-      <!-- Staking Dashboard Mockup -->
-      <div class="staking-dashboard reveal">
-        <div class="dash-header">
-          <span class="dash-title">Staking-Terminal</span>
-          <span class="dash-status"><span class="status-dot"></span> Live</span>
-        </div>
-        <div class="dash-grid">
-          <div class="dash-stat">
-            <div class="dash-stat-label">Total Staked</div>
-            <div class="dash-stat-value">$124,850.00</div>
-          </div>
-          <div class="dash-stat">
-            <div class="dash-stat-label">Durchschnittliche APY</div>
-            <div class="dash-stat-value highlight">12.4%</div>
-          </div>
-        </div>
-        <div class="staking-calculator">
-          <span class="calc-label">Ertrags-Rechner (ETH)</span>
-          <div class="calc-input-group">
-            <input type="number" class="calc-input" value="10" placeholder="Betrag eingeben">
-            <button class="calc-btn">Stake</button>
-          </div>
-          <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--primary-soft);">
-            <span>Geschätzter Jahresertrag:</span>
-            <span style="font-family:var(--font-mono); color:var(--accent);">~ 1.24 ETH</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CORE FEATURES (SICHERHEITSARCHITEKTUR) -->
-  <section class="features">
-    <div class="section-header reveal">
-      <h2>Sicherheitsarchitektur</h2>
-      <p>Kryptografische Exzellenz trifft auf intuitive Kontrolle.</p>
-    </div>
-    <div class="features-grid reveal-stagger">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <div class="feature-grid">
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
+          <h3>Multi-Chain MPC</h3>
+          <p>Multi-Party Computation eliminiert Single Points of Failure. Unterstützt Ethereum, Arbitrum und Optimism nativ.</p>
         </div>
-        <h3>Isolierte Schlüssel</h3>
-        <p>Ihre Private Keys werden in hardwarebasierten Enklaven (TEE) isoliert generiert. Keine Netzwerkschnittstelle berührt jemals Ihr kryptografisches Fundament.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-            <polyline points="2 17 12 22 22 17"></polyline>
-            <polyline points="2 12 12 17 22 12"></polyline>
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
           </svg>
+          <h3>NFT-Kuratierung</h3>
+          <p>Visualisieren und sichern Sie Ihre hochkarätigen Sammlungen in einem dedizierten, hochsicheren Tresorraum.</p>
         </div>
-        <h3>Multi-Chain Hub</h3>
-        <p>Verwalten Sie NFTs, ERC-20 und native Protokoll-Token über ein einziges, rituell gestaltetes Dashboard. Nahtlose Interaktion mit allen führenden Netzwerken.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <line x1="12" y1="2" x2="12" y2="6"></line>
-            <line x1="12" y1="18" x2="12" y2="22"></line>
-            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-            <line x1="2" y1="12" x2="6" y2="12"></line>
-            <line x1="18" y1="12" x2="22" y2="12"></line>
-            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
-            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
           </svg>
+          <h3>Direktes Staking</h3>
+          <p>Generieren Sie Erträge direkt aus dem Cold Storage. Volle Kontrolle über Ihre privaten Schlüssel bleibt bestehen.</p>
         </div>
-        <h3>Kuratiertes Staking</h3>
-        <p>Delegieren Sie Ihre Assets direkt an handverlesene, institutionelle Validatoren. Maximale Erträge bei minimalem Gegenparteirisiko.</p>
       </div>
     </div>
   </section>
 
-  <!-- EDITORIAL SECTION -->
-  <section class="editorial">
-    <div class="editorial-row">
-      <div class="editorial-col-img reveal">
-        <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80" alt="Sichere Server-Infrastruktur">
+  <!-- Staking/Preise Section -->
+  <section id="staking" class="grid-section" style="background: var(--surface-2); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">Konditionen</span>
+        <h2>Staking-Tarife</h2>
+        <p>Wählen Sie die passende Stufe für Ihr Delegationsvolumen. Transparente Gebührenstrukturen ohne versteckte Kosten.</p>
       </div>
-      <div class="editorial-col-text reveal-stagger">
-        <div class="tagline">Das Manifest</div>
-        <h3>Souveränität neu definiert.</h3>
-        <p>Wir glauben, dass die Zukunft des Eigentums digital ist, aber die Werkzeuge zu seiner Sicherung oft seelenlos sind. Vault3 wurde nicht für die Masse geschaffen, sondern für jene, die Ästhetik und absolute Souveränität als Einheit begreifen.</p>
-        <p>Jede Codezeile unseres Open-Source-Kerns wurde von unabhängigen Sicherheitsprüfern verifiziert. Keine Hintertüren. Keine Kompromisse.</p>
-      </div>
-    </div>
-
-    <div class="editorial-row reverse">
-      <div class="editorial-col-img reveal">
-        <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80" alt="Kryptografische Geometrie">
-      </div>
-      <div class="editorial-col-text reveal-stagger">
-        <div class="tagline">Die Technologie</div>
-        <h3>Mathematische Gewissheit.</h3>
-        <p>Durch den Einsatz von Multi-Party-Computation (MPC) und modernsten Zero-Knowledge-Schnittstellen eliminieren wir den Single Point of Failure. Ihr Vermögen bleibt unantastbar – selbst wenn die physische Welt ins Wanken gerät.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-tier">Standard</div>
+          <p>Für private Sammler und aktive DeFi-Nutzer.</p>
+          <div class="pricing-rate">4.2% <span>durchschnittliche APY</span></div>
+          <ul class="pricing-features">
+            <li>Bis zu 50 ETH Delegationsvolumen</li>
+            <li>Standard Multi-Chain Support</li>
+            <li>24h Support-Reaktionszeit</li>
+          </ul>
+          <a href="#contact" class="magnetic-button" style="margin-top: auto; width: 100%;">
+            <span class="btn-content">Delegieren</span>
+          </a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-tier" style="color: var(--accent);">Professional</div>
+          <p>Für wachsende Portfolios und DAOs.</p>
+          <div class="pricing-rate" style="color: var(--accent-violet); text-shadow: 0 0 20px rgba(189, 0, 255, 0.3);">5.8% <span>durchschnittliche APY</span></div>
+          <ul class="pricing-features">
+            <li>Unbegrenztes Delegationsvolumen</li>
+            <li>Erweiterter MPC-Schutz</li>
+            <li>Priorisierter Support (unter 2h)</li>
+          </ul>
+          <a href="#contact" class="magnetic-button btn-primary" style="margin-top: auto; width: 100%;">
+            <span class="btn-content">Jetzt Starten</span>
+          </a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-tier">Institutional</div>
+          <p>Maßgeschneiderte Lösungen für Fonds.</p>
+          <div class="pricing-rate">Individuell <span>auf Anfrage</span></div>
+          <ul class="pricing-features">
+            <li>Eigene Validatoren-Infrastruktur</li>
+            <li>SLA-Garantien</li>
+            <li>Persönlicher Key Account Manager</li>
+          </ul>
+          <a href="#contact" class="magnetic-button" style="margin-top: auto; width: 100%;">
+            <span class="btn-content">Kontaktieren</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING SECTION -->
-  <section class="pricing" id="preise">
-    <div class="section-header reveal">
-      <h2>Die Konditionen</h2>
-      <p>Klarheit und Transparenz für anspruchsvolle Akteure.</p>
+  <!-- Über uns (Split-Screen) -->
+  <section id="about" class="split-section reverse">
+    <div class="content-block">
+      <div class="container" style="padding: 0;">
+        <span class="tag" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 1rem;">Philosophie</span>
+        <h2>Die Souveränität der Dezentralisierung</h2>
+        <p style="margin-bottom: 1.5rem;">
+          Wir glauben, dass wahre Souveränität im Web3 nur durch absolute Kontrolle über die eigenen Schlüssel erreicht werden kann. Vault3 wurde gegründet, um die Lücke zwischen kompromissloser Sicherheit und intuitiver Bedienbarkeit zu schließen.
+        </p>
+        <p style="margin-bottom: 2rem;">
+          Unser Team besteht aus Kryptografen und Sicherheitsforschern mit jahrzehntelanger Erfahrung im Schutz digitaler Assets.
+        </p>
+        
+        <div class="stats-container">
+          <div class="stat-item">
+            <div class="stat-val">3</div>
+            <div class="stat-lbl">Unterstützte Blockchains</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">$12.4M</div>
+            <div class="stat-lbl">Gesichertes Volumen</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="pricing-grid reveal-stagger">
-      <div class="pricing-card">
-        <h3>Sovereign</h3>
-        <p class="pricing-desc">Für individuelle Hüter digitaler Werte.</p>
-        <div class="price">€0<span>/ lebenslang</span></div>
-        <ul class="price-features">
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Selbstverwaltete Schlüssel
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Multi-Chain-Support
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Zutritt zur NFT-Galerie
-          </li>
-        </ul>
-        <a href="#kontakt" class="btn-secondary">Jetzt starten</a>
-      </div>
-
-      <div class="pricing-card featured">
-        <div class="badge">Empfohlen</div>
-        <h3>Consul</h3>
-        <p class="pricing-desc">Für Institutionen und Family Offices.</p>
-        <div class="price">€250<span>/ Monat</span></div>
-        <ul class="price-features">
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Multi-Party-Computation (MPC)
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Priorisierter Validator-Zugang
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            24/7 Dedizierter Support
-          </li>
-          <li>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            Eigene RPC-Knotenpunkte
-          </li>
-        </ul>
-        <a href="#kontakt" class="btn-primary">Zugang anfordern</a>
-      </div>
+    <div class="media-block">
+      <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="Futuristische, fließende 3D-Formen in leuchtendem Violett und Cyan, die digitale Assets symbolisieren">
     </div>
   </section>
 
-  <!-- CONTACT SECTION -->
-  <section class="contact" id="kontakt">
-    <div class="contact-container reveal">
-      <div style="text-align: center; margin-bottom: 2rem;">
-        <div class="tagline" style="justify-content: center;">Initialisierung</div>
-        <h2 style="font-family: var(--font-display); font-size: 2.5rem; color: var(--primary);">Verbindung herstellen</h2>
-        <p style="color: var(--primary-soft); margin-top: 0.5rem;">Treten Sie ein in die Sphäre der sicheren Verwahrung.</p>
+  <!-- Kontakt (Split-Screen) -->
+  <section id="contact" class="split-section">
+    <div class="content-block">
+      <div class="container" style="padding: 0;">
+        <span class="tag" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.2em; display: block; margin-bottom: 1rem;">Onboarding</span>
+        <h2>Sichern Sie Ihr Erbe</h2>
+        <p>Nehmen Sie Kontakt mit unserem Onboarding-Team auf, um eine geführte Demonstration der Vault3-Plattform zu erhalten.</p>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Anfrage erfolgreich übermittelt.');">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" required placeholder="Ihr Name">
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail-Adresse</label>
+            <input type="email" id="email" required placeholder="name@domain.com">
+          </div>
+          <div class="form-group">
+            <label for="message">Nachricht</label>
+            <textarea id="message" rows="4" required placeholder="Wie können wir Ihnen helfen?"></textarea>
+          </div>
+          <button type="submit" class="magnetic-button btn-primary" style="border: none; width: 100%;">
+            <span class="btn-content">Anfrage senden</span>
+          </button>
+        </form>
       </div>
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Verbindung wird initialisiert...');">
-        <div class="form-group">
-          <label for="name">Name oder Entität</label>
-          <input type="text" id="name" placeholder="Sovereign Actor" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Sichere E-Mail-Adresse</label>
-          <input type="email" id="email" placeholder="entität@protokoll.im" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Nachricht zur Absicht</label>
-          <textarea id="message" rows="4" placeholder="Beschreiben Sie Ihre Anforderungen an die Verwahrung..." required></textarea>
-        </div>
-        <button type="submit" class="btn-primary" style="width: 100%;">Zugangsschlüssel anfordern</button>
-      </form>
+    </div>
+    <div class="media-block">
+      <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80" alt="Abstrakte, leuchtende geometrische Formen in Cyan und Violett, die ein sicheres Web3-Interface darstellen">
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <div class="footer-container">
+    <div class="container footer-inner">
+      <a href="#" class="logo" aria-label="Vault3 Homepage">
+        <div class="logo-mark"></div>
+        VAULT3
+      </a>
       <div class="footer-meta">
-        <p>&copy; 2026 Vault3. Alle Rechte vorbehalten. Kryptografisch gesichert.</p>
-        <p style="font-size: 0.75rem; margin-top: 0.5rem; color: var(--primary-soft);">Drücken Sie <kbd style="background: var(--surface); padding: 2px 5px; border-radius: 3px; border: 1px solid var(--border-soft);">[K]</kbd> für den Schnellzugang.</p>
-      </div>
-      <div class="footer-status">
-        <span class="status-dot"></span>
-        <span>Netzwerk-Status: Synchronisiert (Block #19,482,091)</span>
+        &copy; 2026 Vault3 Technologies. Alle Rechte vorbehalten.
       </div>
     </div>
   </footer>
 
   <script>
-    // Scroll Reveal Observer
-    const revealCallback = (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          observer.unobserve(entry.target);
-        }
-      });
-    };
-
-    const revealObserver = new IntersectionObserver(revealCallback, {
-      root: null,
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
-
-    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
-      revealObserver.observe(el);
-    });
-
-    // Keyboard Shortcut Interaction
-    document.addEventListener('keydown', e => {
-      if (e.key === 'k' || e.key === 'K') {
-        const contactSection = document.getElementById('kontakt');
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth' });
-          const firstInput = contactSection.querySelector('input');
-          if (firstInput) setTimeout(() => firstInput.focus(), 800);
-        }
+    // Header background transition on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('site-header');
+      if (window.scrollY > 50) {
+        header.style.background = 'rgba(6, 5, 12, 0.95)';
+        header.style.padding = '5px 0';
+      } else {
+        header.style.background = 'rgba(6, 5, 12, 0.75)';
+        header.style.padding = '0';
       }
     });
+
+    // Magnetic Button Interaction
+    document.querySelectorAll('.magnetic-button').forEach(btn => {
+      const content = btn.querySelector('.btn-content');
+      
+      btn.addEventListener('mousemove', e => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        content.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px)`;
+        btn.style.transform = 'scale(1.02)';
+        btn.style.boxShadow = '0 15px 35px rgba(0, 242, 254, 0.2)';
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        content.style.transform = 'translate(0, 0)';
+        btn.style.transform = 'scale(1)';
+        btn.style.boxShadow = 'var(--shadow)';
+      });
+    });
+
+    // Simple Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const nav = document.querySelector('.nav-links');
+      if (nav.style.display === 'flex') {
+        nav.style.display = 'none';
+      } else {
+        nav.style.display = 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.position = 'absolute';
+        nav.style.top = '90px';
+        nav.style.left = '0';
+        nav.style.width = '100%';
+        nav.style.background = 'rgba(13, 11, 28, 0.95)';
+        nav.style.backdropFilter = 'blur(24px)';
+        nav.style.padding = '2rem';
+        nav.style.borderBottom = '1px solid var(--border)';
+        nav.style.gap = '1.5rem';
+      }
+    }
   </script>
 </body>
 </html>

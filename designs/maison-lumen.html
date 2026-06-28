@@ -9,49 +9,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f4ed;
-      --surface: #faf9f5;
-      --surface-2: #edebe2;
-      --primary: #141413;
-      --primary-soft: #30302e;
-      --accent: #c96442;
-      --accent-soft: #d97757;
-      --text: #141413;
-      --text-muted: #5e5d59;
-      --border: #e8e6dc;
-      --border-soft: #f0eee6;
-      --radius: 12px;
-      --radius-sm: 8px;
-      --radius-lg: 18px;
-      --shadow: 0 0 0 1px #e8e6dc, 0 1px 2px rgba(20, 20, 19, 0.04);
-      --ring: 0 0 0 1px #d1cfc5;
+      --bg: #FBFAF8;
+      --surface: #F4F1EC;
+      --surface-2: #EBE7E0;
+      --primary: #1A1A1A;
+      --primary-soft: #2D2D2D;
+      --accent: #B58A6A;
+      --accent-soft: #C49F83;
+      --text: #1A1A1A;
+      --text-muted: #8C857C;
+      --border: #E7E1D8;
+      --border-soft: #EFEBE4;
+      --radius: 0px;
+      --radius-sm: 0px;
+      --radius-lg: 0px;
+      --shadow: 0 0 0 1px var(--border), 0 4px 20px rgba(26, 26, 26, 0.03);
+      --ring: 0 0 0 1px var(--border);
       --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
       --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
     }
 
-    /* Reset & Base */
-    *, *::before, *::after {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
       background-color: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
-      line-height: 1.6;
       overflow-x: hidden;
-      position: relative;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
 
-    /* Noise Texture Overlay */
+    /* Subtle Paper Grain Overlay */
     body::before {
       content: "";
       position: fixed;
@@ -59,20 +52,18 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      content: "";
-      opacity: 0.03;
-      z-index: 9999;
+      opacity: 0.04;
       pointer-events: none;
+      z-index: 9999;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
     /* Typography */
-    h1, h2, h3, h4 {
+    h1, h2, h3 {
       font-family: var(--font-display);
-      font-weight: 500;
+      font-weight: 400;
+      letter-spacing: -0.01em;
       line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--primary);
     }
 
     p {
@@ -80,638 +71,420 @@
       font-size: 1.05rem;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    /* Layout Utility */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
     /* Navigation */
-    .nav-header {
+    header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 1000;
-      background: rgba(245, 244, 237, 0.75);
+      z-index: 100;
+      background: rgba(251, 250, 248, 0.8);
       backdrop-filter: blur(14px) saturate(140%);
-      border-bottom: 1px solid rgba(20, 20, 19, 0.06);
-      transition: transform 0.3s ease;
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border-bottom: 1px solid var(--border-soft);
     }
 
     .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 80px;
     }
 
-    .logo {
+    .brand-logo {
       font-family: var(--font-display);
       font-size: 1.8rem;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      text-decoration: none;
+      color: var(--primary);
       font-weight: 500;
     }
 
     .nav-links {
       display: flex;
-      gap: 3rem;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      gap: 40px;
     }
 
     .nav-links a {
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background-color: var(--accent);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      border: 1px solid var(--primary);
-      padding: 0.6rem 1.5rem;
-      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      border-radius: var(--radius-sm);
-      transition: all 0.3s ease;
+      transition: color 0.3s;
     }
 
-    .nav-cta:hover {
-      background-color: var(--primary);
-      color: var(--bg);
+    .nav-links a:hover {
+      color: var(--accent);
     }
 
     /* Hero Section */
     .hero {
+      position: relative;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding-top: 120px;
-      padding-bottom: 60px;
-      position: relative;
+      text-align: center;
+      padding: 120px 20px 80px;
       overflow: hidden;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 4rem;
-      align-items: center;
+    .hero-title {
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      line-height: 0.95;
+      margin-bottom: 30px;
+      max-width: 1000px;
     }
 
-    .hero-content {
-      z-index: 2;
-    }
-
-    .hero-tagline {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-
-    /* Kinetic Typography */
-    .kinetic-title {
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      line-height: 1.05;
-      margin-bottom: 2rem;
-    }
-
-    .kinetic-title span {
+    .hero-title span {
       display: inline-block;
       opacity: 0;
-      transform: translateY(30px) rotate(1deg);
-      animation: revealWord 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transform: translateY(40px) rotate(1deg);
+      animation: revealUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes revealWord {
+    .hero-title span:nth-child(1) { animation-delay: 0.1s; }
+    .hero-title span:nth-child(2) { animation-delay: 0.25s; }
+
+    @keyframes revealUp {
       to {
         opacity: 1;
         transform: translateY(0) rotate(0);
       }
     }
 
-    .hero-desc {
-      font-size: 1.25rem;
-      max-width: 500px;
-      margin-bottom: 3rem;
-      line-height: 1.6;
+    .hero-subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-style: italic;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 40px;
     }
 
-    .hero-buttons {
-      display: flex;
-      gap: 1.5rem;
+    /* Parallax Decorative Background Text */
+    .parallax-text {
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: 28vw;
+      color: var(--surface);
+      z-index: -2;
+      pointer-events: none;
+      white-space: nowrap;
+      top: 15%;
+      left: 5%;
+      user-select: none;
+    }
+
+    /* Buttons & CTAs */
+    .btn {
+      display: inline-flex;
       align-items: center;
+      gap: 12px;
+      padding: 16px 36px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.85rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+      cursor: pointer;
     }
 
     .btn-primary {
-      background-color: var(--accent);
-      color: #ffffff;
-      padding: 1rem 2.5rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      box-shadow: var(--shadow);
+      background: var(--primary);
+      color: var(--bg);
     }
 
     .btn-primary:hover {
-      background-color: var(--accent-soft);
-      transform: translateY(-2px);
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
     }
 
     .btn-secondary {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      border-bottom: 1px solid var(--primary);
-      padding-bottom: 4px;
+      border-color: var(--border);
     }
 
     .btn-secondary:hover {
-      color: var(--accent);
-      border-color: var(--accent);
+      border-color: var(--primary);
+      background: rgba(26, 26, 26, 0.02);
     }
 
-    .hero-image-wrapper {
+    /* Section Utility */
+    section {
+      padding: 140px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
       position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      aspect-ratio: 3/4;
-      box-shadow: var(--shadow);
-      transform: translateY(0);
-    }
-
-    /* Parallax Decorative Elements */
-    .parallax-bg {
-      position: absolute;
-      right: -5%;
-      top: 10%;
-      width: 40%;
-      height: 80%;
-      background: radial-gradient(circle, rgba(237, 235, 226, 0.6) 0%, rgba(245, 244, 237, 0) 70%);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* Bento Grid (Leistungen) */
-    .bento-section {
-      padding: 100px 0;
-      background-color: var(--surface);
-      border-top: 1px solid var(--border-soft);
-      border-bottom: 1px solid var(--border-soft);
     }
 
     .section-header {
-      text-align: center;
-      margin-bottom: 5rem;
+      margin-bottom: 80px;
+      max-width: 600px;
     }
 
-    .section-subtitle {
-      font-size: 0.9rem;
+    .category {
+      display: block;
       text-transform: uppercase;
       letter-spacing: 0.2em;
+      font-size: 0.8rem;
       color: var(--accent);
-      margin-bottom: 1rem;
-      display: block;
+      margin-bottom: 16px;
     }
 
     .section-title {
-      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
     }
 
-    .bento-grid {
+    /* Mosaic Gallery (Struktur-Geste) */
+    .mosaic-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      grid-auto-rows: 240px;
-      gap: 1.5rem;
+      gap: 32px;
+      grid-auto-flow: dense;
     }
 
-    .bento-card {
-      background-color: var(--bg);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: var(--shadow);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    .mosaic-item {
       position: relative;
       overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .bento-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(20, 20, 19, 0.04), var(--shadow);
+    .mosaic-item:hover {
+      transform: scale(1.015);
+      z-index: 5;
+      box-shadow: var(--shadow);
     }
 
-    /* Bento Spans */
-    .span-4 { grid-column: span 4; }
-    .span-5 { grid-column: span 5; }
-    .span-7 { grid-column: span 7; }
-    .span-8 { grid-column: span 8; }
-    .row-2 { grid-row: span 2; }
-
-    .bento-card.image-card {
-      padding: 0;
-    }
-
-    .bento-card.image-card img {
+    .mosaic-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .bento-card.image-card:hover img {
-      transform: scale(1.03);
+    .mosaic-item:hover img {
+      transform: scale(1.04);
     }
 
-    .bento-card .card-icon {
-      color: var(--accent);
-      margin-bottom: 1.5rem;
+    /* Grid Spans */
+    .span-8 { grid-column: span 8; height: 600px; }
+    .span-4 { grid-column: span 4; height: 600px; }
+    .span-6 { grid-column: span 6; height: 500px; }
+    .span-12 { grid-column: span 12; height: 450px; }
+
+    .mosaic-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 40px;
+      background: linear-gradient(to top, rgba(26,26,26,0.8) 0%, rgba(26,26,26,0) 100%);
+      color: var(--bg);
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
 
-    .bento-card h3 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+    .mosaic-item:hover .mosaic-content {
+      opacity: 1;
     }
 
-    .bento-card p {
+    .mosaic-content h3 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .mosaic-content p {
+      color: var(--surface);
       font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    .bento-card .card-footer {
-      margin-top: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
     }
 
     /* Pricing Section */
-    .pricing-section {
-      padding: 100px 0;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 4rem;
-    }
-
-    .pricing-card {
-      background-color: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 3rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .pricing-card.featured {
-      background-color: var(--surface-2);
-      border-color: var(--accent);
-    }
-
-    .pricing-card.featured::before {
-      content: "Bestseller";
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-    }
-
-    .pricing-card h3 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .pricing-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-    }
-
-    .pricing-price {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      color: var(--primary);
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: baseline;
-    }
-
-    .pricing-price span {
-      font-size: 1rem;
-      font-family: var(--font-body);
-      color: var(--text-muted);
-      margin-left: 0.5rem;
-    }
-
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 3rem;
-    }
-
-    .pricing-features li {
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--border-soft);
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .pricing-features svg {
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .pricing-card .btn-primary {
-      margin-top: auto;
-      text-align: center;
-    }
-
-    /* Philosophy / About Section */
-    .about-section {
-      padding: 120px 0;
-      background-color: var(--surface-2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-grid {
+    .pricing-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6rem;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .pricing-list {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .pricing-item {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 30px;
+    }
+
+    .pricing-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .pricing-header h3 {
+      font-size: 1.8rem;
+    }
+
+    .price {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--accent);
+    }
+
+    .pricing-desc {
+      font-size: 0.95rem;
+      max-width: 500px;
+    }
+
+    /* About Section */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px;
       align-items: center;
     }
 
-    .about-images {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      position: relative;
+    .about-text {
+      padding-right: 40px;
     }
 
-    .about-img-1 {
-      grid-column: 1 / span 9;
-      z-index: 2;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .about-img-2 {
-      grid-column: 5 / span 8;
-      margin-top: 30%;
-      z-index: 1;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .about-content h2 {
-      font-size: clamp(2.5rem, 4vw, 3.5rem);
-      margin-bottom: 2rem;
-    }
-
-    .about-content p {
+    .about-text p {
+      margin-bottom: 24px;
       font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.7;
+    }
+
+    .about-quote {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      line-height: 1.2;
+      color: var(--accent);
+      margin-top: 40px;
+      border-left: 2px solid var(--accent);
+      padding-left: 24px;
     }
 
     /* Contact Section */
-    .contact-section {
-      padding: 100px 0;
-      background-color: var(--bg);
-    }
-
-    .contact-grid {
+    .contact-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 80px;
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
     }
 
     .contact-info h2 {
       font-size: 3rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .contact-details {
-      margin-top: 3rem;
-    }
-
-    .contact-detail-item {
-      margin-bottom: 2rem;
-    }
-
-    .contact-detail-item h4 {
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .contact-detail-item p {
-      font-size: 1.1rem;
-      color: var(--primary);
+      margin-bottom: 24px;
     }
 
     .contact-form {
-      background-color: var(--surface);
-      border: 1px solid var(--border);
-      padding: 3.5rem;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
 
     .form-group {
-      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .form-group label {
-      display: block;
-      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
     }
 
-    .form-control {
-      width: 100%;
-      background-color: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 1rem;
+    .form-group input, .form-group textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
       font-family: var(--font-body);
       font-size: 1rem;
-      color: var(--primary);
-      transition: border-color 0.3s ease;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.3s;
     }
 
-    .form-control:focus {
-      outline: none;
-      border-color: var(--accent);
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--primary);
     }
 
     /* Footer */
     footer {
-      background-color: var(--primary);
-      color: var(--bg);
-      padding: 5rem 0 3rem 0;
-      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      padding: 60px 40px;
+      background: var(--surface);
     }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 4rem;
-      margin-bottom: 4rem;
-    }
-
-    .footer-brand h3 {
-      color: var(--bg);
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .footer-brand p {
-      color: #8c857c;
-      max-width: 320px;
-    }
-
-    .footer-links h4 {
-      color: var(--bg);
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
-    }
-
-    .footer-links ul {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 0.75rem;
-    }
-
-    .footer-links a {
-      color: #8c857c;
-    }
-
-    .footer-links a:hover {
-      color: var(--bg);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 2rem;
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
-      color: #8c857c;
-      font-size: 0.8rem;
+      align-items: center;
     }
 
-    /* Responsive Design */
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive adjustments */
     @media (max-width: 1024px) {
-      .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: auto;
-      }
-      .span-4, .span-5, .span-7, .span-8 {
-        grid-column: span 2;
-      }
-      .pricing-grid {
+      .mosaic-grid { gap: 20px; }
+      .span-8, .span-4, .span-6 { grid-column: span 12; height: 450px; }
+      .pricing-container, .about-layout, .contact-wrapper {
         grid-template-columns: 1fr;
+        gap: 60px;
       }
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-      }
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
+      .about-text { padding-right: 0; }
     }
 
     @media (max-width: 768px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .hero-desc {
-        margin: 0 auto 3rem auto;
-      }
-      .hero-buttons {
-        justify-content: center;
-      }
-      .nav-links {
-        display: none;
-      }
-      .bento-grid {
-        grid-template-columns: 1fr;
-      }
-      .span-4, .span-5, .span-7, .span-8 {
-        grid-column: span 1;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
+      section { padding: 80px 20px; }
+      .nav-links { display: none; }
+      .contact-wrapper { padding: 40px 20px; }
+      footer { padding: 40px 20px; }
+      .footer-container { flex-direction: column; gap: 20px; text-align: center; }
     }
 
     /* Accessibility */
     @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-delay: 0s !important;
-        animation-duration: 0s !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0s !important;
-        scroll-behavior: auto !important;
+      .hero-title span {
+        animation: none !important;
+        opacity: 1 !important;
         transform: none !important;
+      }
+      .parallax-text {
+        transform: none !important;
+      }
+      .mosaic-item:hover {
+        transform: none !important;
+      }
+      .mosaic-item img {
+        transition: none !important;
       }
     }
   </style>
@@ -719,337 +492,171 @@
 <body>
 
   <!-- Navigation -->
-  <header class="nav-header">
-    <div class="container nav-container">
-      <a href="#" class="logo">Maison Lumen</a>
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand-logo">Lumen</a>
       <nav class="nav-links">
         <a href="#kollektion">Kollektion</a>
         <a href="#philosophie">Philosophie</a>
-        <a href="#preise">Preise</a>
-        <a href="#atelier">Atelier</a>
+        <a href="#audienz">Audienz</a>
       </nav>
-      <a href="#atelier" class="nav-cta">Termin buchen</a>
     </div>
   </header>
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="parallax-bg" data-speed="0.1"></div>
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <span class="hero-tagline">Handgemalte Nischendüfte</span>
-        <h1 class="kinetic-title">
-          <span style="animation-delay: 0.1s;">Düfte,</span>
-          <span style="animation-delay: 0.2s;">die</span>
-          <span style="animation-delay: 0.3s;">im</span>
-          <span style="animation-delay: 0.4s;">Schatten</span>
-          <span style="animation-delay: 0.5s;">der</span>
-          <span style="animation-delay: 0.6s;">Erinnerung</span>
-          <span style="animation-delay: 0.7s;">leuchten.</span>
-        </h1>
-        <p class="hero-desc">Maison Lumen kreiert flüssige Poesie. In unserem Atelier entstehen streng limitierte, handabgefüllte Signature-Parfums für jene, die das Unsichtbare suchen.</p>
-        <div class="hero-buttons">
-          <a href="#kollektion" class="btn-primary">Kollektion entdecken</a>
-          <a href="#philosophie" class="btn-secondary">Unsere Philosophie</a>
-        </div>
-      </div>
-      <div class="hero-image-wrapper" data-speed="0.15">
-        <img src="../assets/maison-lumen-cream-1.jpeg" alt="Maison Lumen Flakon Nahaufnahme in warmem, natürlichem Licht" style="width:100%;height:auto;object-fit:cover">
-      </div>
-    </div>
+    <div class="parallax-text" data-speed="0.15">LUMEN</div>
+    <h1 class="hero-title">
+      <span>Maison</span> <span>Lumen</span>
+    </h1>
+    <p class="hero-subtitle">Die Alchemie des Lichts — eingefangen in flüssiger Form.</p>
+    <a href="#kollektion" class="btn btn-primary">
+      Entdecken
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
   </section>
 
-  <!-- Bento Grid Section (Leistungen) -->
-  <section class="bento-section" id="kollektion">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-subtitle">Das Handwerk</span>
-        <h2 class="section-title">Die Anatomie des Duftes</h2>
+  <!-- Mosaic Gallery (Struktur-Geste) -->
+  <section id="kollektion">
+    <div class="section-header">
+      <span class="category">Die Vision</span>
+      <h2 class="section-title">Lichtskulpturen</h2>
+    </div>
+
+    <div class="mosaic-grid">
+      <!-- Item 1: Big Image -->
+      <div class="mosaic-item span-8">
+        <img src="../assets/maison-lumen-cream-1.jpeg" alt="Maison Lumen Flakon im Gegenlicht">
+        <div class="mosaic-content">
+          <h3>N° I: Solis</h3>
+          <p>Die Architektur der Wärme. Reife Feige, Bergamotte und flüssiges Amber.</p>
+        </div>
       </div>
 
-      <div class="bento-grid">
-        <!-- Card 1 (Text) -->
-        <div class="bento-card span-5 row-2">
-          <div>
-            <div class="card-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>
-                <path d="M12 6V12L16 14"/>
-              </svg>
-            </div>
-            <h3>7 Signature Parfums</h3>
-            <p>Unsere Kollektion besteht aus exakt sieben sorgsam kuratierten Meisterwerken. Jede Formel bleibt unverändert, jede Charge wird in Kleinstmengen von maximal 150 Flakons pro Saison von Hand gemischt.</p>
-          </div>
-          <div class="card-footer">
-            <span>Limitierte Editionen</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
-            </svg>
-          </div>
-        </div>
+      <!-- Item 2: Text Box -->
+      <div class="mosaic-item span-4" style="background: var(--surface); padding: 40px; justify-content: center;">
+        <span class="category" style="margin-bottom: 24px;">Handwerk</span>
+        <h3 style="font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 16px; font-weight: 400;">Der Schliff</h3>
+        <p style="color: var(--text-muted); font-size: 1rem;">Jeder Flakon wird aus schwerem Kristallglas geformt, das die Brechung des Lichts maximiert und den goldenen Ton des Elixiers zelebriert.</p>
+      </div>
 
-        <!-- Card 2 (Image) -->
-        <div class="bento-card span-7 row-2 image-card">
-          <img src="../assets/maison-lumen-cream-2.jpeg" alt="Ästhetische Labor- und Abfüllwerkzeuge im Maison Lumen Atelier">
+      <!-- Item 3: Medium Image -->
+      <div class="mosaic-item span-4">
+        <img src="../assets/maison-lumen-cream-2.jpeg" alt="Flakon im weichen Morgenlicht">
+        <div class="mosaic-content">
+          <h3>N° II: Crepusculum</h3>
+          <p>Die Mystik der blauen Stunde. Weihrauch, Iris und feines Wildleder.</p>
         </div>
+      </div>
 
-        <!-- Card 3 (Text) -->
-        <div class="bento-card span-7">
-          <div>
-            <h3>Nox Amber</h3>
-            <p>Ein tiefer, fast sakraler Akkord aus rauchigem Zedernholz, handgepflücktem Jasmin und warmem, dunklem Amber. Kreiert für die stillen Stunden der Nacht.</p>
-          </div>
-          <div class="card-footer">
-            <span>Kopfnote: Bergamotte · Herznote: Jasmin · Basis: Amber</span>
-          </div>
-        </div>
-
-        <!-- Card 4 (Stat/Text) -->
-        <div class="bento-card span-5">
-          <div>
-            <h3>100%</h3>
-            <p>Echte, naturreine Essenzen aus Grasse und dem Himalaya. Wir verzichten vollständig auf synthetische Streckmittel.</p>
-          </div>
-          <div class="card-footer">
-            <span>Reinheit & Herkunft</span>
-          </div>
+      <!-- Item 4: Medium Image -->
+      <div class="mosaic-item span-8">
+        <img src="../assets/maison-lumen-cream-3.jpeg" alt="Minimalistisches Stillleben mit Flakon">
+        <div class="mosaic-content">
+          <h3>N° III: Aurora</h3>
+          <p>Die Klarheit des Morgens. Weißer Tee, frischer Jasmin und kühler Moschus.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Pricing Section -->
-  <section class="pricing-section" id="preise">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-subtitle">Die Kollektion</span>
-        <h2 class="section-title">Erlesene Optionen</h2>
+  <section style="background-color: var(--surface); max-width: 100%; width: 100%;">
+    <div style="max-width: 1400px; margin: 0 auto;" class="pricing-container">
+      <div>
+        <span class="category">Die Kollektion</span>
+        <h2 class="section-title" style="margin-bottom: 24px;">Editionen & Preise</h2>
+        <p style="max-width: 480px; margin-bottom: 40px;">Unsere Parfums sind in streng limitierten Chargen erhältlich. Jede Edition ist einzeln nummeriert und wird in einer handgefertigten Schatulle geliefert.</p>
+        <a href="#audienz" class="btn btn-secondary">Reservierung anfragen</a>
       </div>
-
-      <div class="pricing-grid">
-        <!-- Plan 1 -->
-        <div class="pricing-card">
-          <h3>Discovery Set</h3>
-          <p class="pricing-subtitle">Drei Signature-Düfte zum Kennenlernen</p>
-          <div class="pricing-price">85 €<span>/ 3 x 10ml</span></div>
-          <ul class="pricing-features">
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Nox Amber, Vesper & Aura Silex
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Inklusive handgeschriebener Duftnotizen
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Gutschein für einen Vollflakon
-            </li>
-          </ul>
-          <a href="#atelier" class="btn-primary">Set bestellen</a>
+      <div class="pricing-list">
+        <div class="pricing-item">
+          <div class="pricing-header">
+            <h3>Solis Eau de Parfum</h3>
+            <span class="price">210 €</span>
+          </div>
+          <p class="pricing-desc">100 ml · Die Essenz des Spätsommers. Warm, strahlend, langanhaltend.</p>
         </div>
-
-        <!-- Plan 2 (Featured) -->
-        <div class="pricing-card featured">
-          <h3>Signature Flakon</h3>
-          <p class="pricing-subtitle">Ihr persönlicher Flakon im Lederetui</p>
-          <div class="pricing-price">220 €<span>/ 100ml</span></div>
-          <ul class="pricing-features">
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Wahl aus allen 7 Signature-Düften
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Handnummerierter Kristallflakon
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Echtheitszertifikat des Parfumeurs
-            </li>
-          </ul>
-          <a href="#atelier" class="btn-primary">Duft wählen</a>
+        <div class="pricing-item">
+          <div class="pricing-header">
+            <h3>Crepusculum Extrait</h3>
+            <span class="price">240 €</span>
+          </div>
+          <p class="pricing-desc">100 ml · Höchste Konzentration. Ein tiefer, rauchiger Akkord für die Nacht.</p>
         </div>
-
-        <!-- Plan 3 -->
-        <div class="pricing-card">
-          <h3>L'Atelier Privé</h3>
-          <p class="pricing-subtitle">Ein maßgeschneiderter Duft, nur für Sie</p>
-          <div class="pricing-price">650 €<span>/ Einmalig</span></div>
-          <ul class="pricing-features">
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Private 3-stündige Duft-Session
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Exklusive Rezeptur (nur für Sie gesichert)
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Zwei 100ml Flakons inklusive
-            </li>
-          </ul>
-          <a href="#atelier" class="btn-primary">Session anfragen</a>
+        <div class="pricing-item">
+          <div class="pricing-header">
+            <h3>Aurora Eau de Parfum</h3>
+            <span class="price">195 €</span>
+          </div>
+          <p class="pricing-desc">100 ml · Reine Klarheit. Ein stiller Begleiter für den Tag.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Philosophy / About Section -->
-  <section class="about-section" id="philosophie">
-    <div class="container about-grid">
-      <div class="about-images">
-        <div class="about-img-1" data-speed="0.05">
-          <img src="../assets/maison-lumen-cream-3.jpeg" alt="Lichtspiel und Schattenwurf auf edlen Parfumflaschen" style="width:100%;height:auto;object-fit:cover">
-        </div>
+  <!-- About Section -->
+  <section id="philosophie" class="about-layout">
+    <div class="about-text">
+      <span class="category">Philosophie</span>
+      <h2 class="section-title" style="margin-bottom: 30px;">Die Architektur des Unsichtbaren</h2>
+      <p>Wir glauben nicht an flüchtige Trends. Ein Duft von Maison Lumen ist eine unsichtbare Skulptur, die sich im Raum entfaltet und eine bleibende Aura hinterlässt.</p>
+      <p>In unserem Atelier in Grasse wählen wir nur die kostbarsten Rohstoffe aus nachhaltigem Anbau. Jedes Detail, von der Ernte bis zum Schliff des Flakons, folgt dem Streben nach absoluter Perfektion.</p>
+      <div class="about-quote">
+        „Licht lässt sich nicht festhalten — aber man kann seinen Schatten riechen.“
       </div>
-      <div class="about-content">
-        <span class="section-subtitle">Die Philosophie</span>
-        <h2>Die Kunst des Weglassens</h2>
-        <p>Ein großer Duft entsteht nicht durch die Menge seiner Zutaten, sondern durch die Klarheit seiner Absicht. Bei Maison Lumen binden wir flüchtige Momente in zeitlose Essenzen.</p>
-        <p>Unsere Parfumeure arbeiten abseits des industriellen Taktes. Wir geben den Rohstoffen die Zeit, die sie zum Reifen benötigen — oft über viele Monate in dunklen Eichenfässern.</p>
-      </div>
+    </div>
+    <div style="position: relative;">
+      <!-- Decorative geometric frame -->
+      <div style="position: absolute; border: 1px solid var(--accent); top: -20px; left: -20px; right: 20px; bottom: 20px; z-index: -1;"></div>
+      <img src="../assets/maison-lumen-cream-1.jpeg" alt="Manufaktur Details" style="width: 100%; height: 600px; object-fit: cover;">
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section class="contact-section" id="atelier">
-    <div class="container contact-grid">
+  <section id="audienz">
+    <div class="contact-wrapper">
       <div class="contact-info">
-        <span class="section-subtitle">Reservierung</span>
-        <h2>Besuchen Sie unser Atelier</h2>
-        <p>Erleben Sie die Kreation Ihres persönlichen Duftes in einer privaten Konsultation. Nur nach vorheriger Terminabsprache.</p>
-        
-        <div class="contact-details">
-          <div class="contact-detail-item">
-            <h4>Adresse</h4>
-            <p>Maison Lumen Atelier<br>Bleibtreustraße 12, 10623 Berlin</p>
-          </div>
-          <div class="contact-detail-item">
-            <h4>Kontakt</h4>
-            <p>atelier@maisonlumen.de<br>+49 (0) 30 884 920</p>
-          </div>
+        <span class="category">Atelier</span>
+        <h2>Eine private Audienz</h2>
+        <p style="margin-bottom: 30px; max-width: 450px;">Erleben Sie die Kollektion im Rahmen einer persönlichen, privaten Konsultation in unserem Salon. Wir nehmen uns Zeit, um Ihren persönlichen Signatur-Duft zu finden.</p>
+        <p style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em;">Öffnungszeiten: Nur nach Vereinbarung.</p>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Vielen Dank. Wir werden uns in Kürze mit Ihnen in Verbindung setzen.');">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" required>
         </div>
-      </div>
-
-      <div class="contact-form">
-        <form id="appointmentForm" onsubmit="handleFormSubmit(event)">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" class="form-control" required placeholder="Ihr vollständiger Name">
-          </div>
-          <div class="form-group">
-            <label for="email">E-Mail-Adresse</label>
-            <input type="email" id="email" class="form-control" required placeholder="name@beispiel.de">
-          </div>
-          <div class="form-group">
-            <label for="service">Gewünschtes Erlebnis</label>
-            <select id="service" class="form-control">
-              <option>Kollektions-Verkostung (60 Min)</option>
-              <option>L'Atelier Privé (Maßgeschneiderter Duft)</option>
-              <option>Abholung & Refill</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Nachricht / Wunschtermin</label>
-            <textarea id="message" class="form-control" rows="4" placeholder="Teilen Sie uns Ihre Wünsche mit..."></textarea>
-          </div>
-          <button type="submit" class="btn-primary" style="width: 100%; border: none; cursor: pointer;">Anfrage senden</button>
-        </form>
-      </div>
+        <div class="form-group">
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Wunschtermin & Nachricht</label>
+          <textarea id="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Termin anfragen</button>
+      </form>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h3>Maison Lumen</h3>
-          <p>Feine Nischendüfte aus handwerklicher Manufaktur. Jedes Parfum eine eigene, leuchtende Geschichte.</p>
-        </div>
-        <div class="footer-links">
-          <h4>Kollektion</h4>
-          <ul>
-            <li><a href="#kollektion">Nox Amber</a></li>
-            <li><a href="#kollektion">Lumen Vesper</a></li>
-            <li><a href="#kollektion">Aura Silex</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Rechtliches</h4>
-          <ul>
-            <li><a href="#">Impressum</a></li>
-            <li><a href="#">Datenschutz</a></li>
-            <li><a href="#">AGB</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 Maison Lumen. Alle Rechte vorbehalten.</p>
-        <p>Handabgefüllt in Deutschland</p>
-      </div>
+    <div class="footer-container">
+      <a href="#" class="brand-logo" style="font-size: 1.4rem;">Lumen</a>
+      <p class="footer-copy">&copy; 2026 Maison Lumen. Alle Rechte vorbehalten. Impressum & Datenschutz.</p>
     </div>
   </footer>
 
   <script>
-    // Parallax Depth Effect
+    // Parallax effect for decorative elements
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY;
-      const parallaxElements = document.querySelectorAll('[data-speed]');
-      
-      parallaxElements.forEach(el => {
-        const speed = parseFloat(el.getAttribute('data-speed'));
-        const limit = 150; // Max pixels to translate
-        let yPos = scrolled * speed;
-        if (yPos > limit) yPos = limit;
-        el.style.transform = `translateY(${yPos}px)`;
+      document.querySelectorAll('.parallax-text').forEach(el => {
+        const speed = parseFloat(el.getAttribute('data-speed')) || 0.1;
+        el.style.transform = `translateY(${scrolled * speed}px)`;
       });
     });
-
-    // Simple Form Submission Interaction
-    function handleFormSubmit(event) {
-      event.preventDefault();
-      const form = event.target;
-      const button = form.querySelector('button');
-      const originalText = button.textContent;
-      
-      button.textContent = "Wird gesendet...";
-      button.style.backgroundColor = "var(--accent-soft)";
-      button.disabled = true;
-
-      setTimeout(() => {
-        form.innerHTML = `
-          <div style="text-align: center; padding: 2rem 0;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" style="margin-bottom: 1.5rem;">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-              <polyline points="22 4 12 14.01 9 11.01"/>
-            </svg>
-            <h3 style="margin-bottom: 1rem;">Anfrage erhalten</h3>
-            <p style="color: var(--text-muted);">Wir werden uns innerhalb von 24 Stunden persönlich bei Ihnen melden, um Ihren Wunschtermin zu bestätigen.</p>
-          </div>
-        `;
-      }, 1200);
-    }
   </script>
 </body>
 </html>

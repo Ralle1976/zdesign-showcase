@@ -1,30 +1,30 @@
-<!doctype html>
+<!doctype html>`
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orathai — Luxus Thai Wellness & Spa</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Orathai — Traditionelle Thai-Massage &amp; Wellness</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAF6EE;
+      --bg: #FBF6EA;
       --surface: #FFFFFF;
-      --surface-2: #F3ECE0;
-      --primary: #231B15;
-      --primary-soft: #4E3F30;
-      --accent: #B88E2F;
-      --accent-soft: #E2C785;
-      --text: #2D241C;
-      --text-muted: #6E5E4F;
-      --border: #E6DCC8;
-      --border-soft: #F0E8D9;
-      --radius: 12px;
-      --radius-sm: 6px;
-      --radius-lg: 20px;
-      --shadow: 0 4px 20px rgba(35, 27, 21, 0.04), 0 10px 40px rgba(35, 27, 21, 0.06);
-      --ring: 0 0 0 2px rgba(184, 142, 47, 0.15);
-      --font-display: "Cormorant Garamond", Georgia, serif;
-      --font-body: "Mulish", system-ui, sans-serif;
+      --surface-2: #F4ECD8;
+      --primary: #2A2118;
+      --primary-soft: #5C4B38;
+      --accent: #B0892F;
+      --accent-soft: #D9B96A;
+      --text: #2A2118;
+      --text-muted: #6B5D49;
+      --border: #E7DCC4;
+      --border-soft: #F0E8D4;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --radius-lg: 22px;
+      --shadow: 0 1px 2px rgba(42, 33, 24, 0.04), 0 8px 30px rgba(42, 33, 24, 0.06);
+      --ring: 0 0 0 1px rgba(176, 137, 47, 0.22);
+      --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --font-body: "Mulish", system-ui, -apple-system, "Segoe UI", sans-serif;
     }
 
     * {
@@ -33,1064 +33,764 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      background-color: var(--bg);
+      background: linear-gradient(120deg, var(--bg), var(--surface-2), var(--bg));
+      background-size: 200% 200%;
+      animation: ambientGlow 14s ease-in-out infinite;
       color: var(--text);
       font-family: var(--font-body);
-      line-height: 1.65;
       overflow-x: hidden;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
     }
 
-    /* Typography */
-    h1, h2, h3, h4 {
-      font-family: var(--font-display);
-      font-weight: 400;
-      line-height: 1.15;
-      color: var(--primary);
-    }
-
-    h1 {
-      font-size: clamp(2.8rem, 6vw, 4.8rem);
-      letter-spacing: -0.02em;
-    }
-
-    h2 {
-      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-      letter-spacing: -0.01em;
-    }
-
-    h3 {
-      font-size: clamp(1.5rem, 3vw, 2rem);
-    }
-
-    em {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 400;
-    }
-
-    p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      font-weight: 300;
-    }
-
-    .section-label {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      font-weight: 700;
-      display: block;
-      margin-bottom: 1.2rem;
-    }
-
-    /* Gold-Accented Dividers */
-    .gold-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      margin: 4rem auto;
-      max-width: 500px;
-      padding: 0 1.5rem;
-    }
-
-    .gold-divider .line {
-      height: 1px;
-      flex-grow: 1;
-      background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
-    }
-
-    .gold-divider .diamond {
-      width: 6px;
-      height: 6px;
-      background-color: var(--accent);
-      transform: rotate(45deg);
-    }
-
-    /* Navigation */
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 5%;
-      position: sticky;
-      top: 0;
-      background-color: rgba(250, 246, 238, 0.94);
-      backdrop-filter: blur(12px);
-      z-index: 100;
-      border-bottom: 1px solid var(--border-soft);
-      transition: all 0.3s ease;
-    }
-
-    .logo {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 3rem;
-    }
-
-    .nav-links a {
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-decoration: none;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      position: relative;
-      padding: 0.5rem 0;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 1px;
-      background-color: var(--accent);
-      transition: width 0.3s ease, left 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-      left: 0;
-    }
-
-    /* Buttons & CTAs */
-    .btn-primary {
-      background-color: var(--primary);
-      color: var(--bg);
-      border: 1px solid var(--primary);
-      padding: 1.1rem 2.2rem;
-      font-family: var(--font-body);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.75rem;
-      border-radius: var(--radius);
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: var(--shadow);
-    }
-
-    .btn-primary:hover {
-      background-color: var(--accent);
-      border-color: var(--accent);
-      color: var(--surface);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background-color: transparent;
-      color: var(--primary);
-      border: 1px solid var(--border);
-      padding: 1.1rem 2.2rem;
-      font-family: var(--font-body);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.75rem;
-      border-radius: var(--radius);
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .btn-secondary:hover {
-      background-color: var(--surface-2);
-      border-color: var(--accent-soft);
-      transform: translateY(-2px);
-    }
-
-    /* Hero Section */
-    .split-section {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      min-height: calc(100vh - 90px);
-      align-items: center;
-      position: relative;
-    }
-
-    .text-side {
-      padding: 6% 10%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .image-side {
-      height: 100%;
-      min-height: 600px;
-      position: relative;
-      overflow: hidden;
-      padding: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .image-frame {
-      width: 100%;
-      height: 100%;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 12px solid var(--surface);
-      position: relative;
-    }
-
-    .image-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .image-frame:hover img {
-      transform: scale(1.04);
-    }
-
-    .hero-lead {
-      font-size: 1.25rem;
-      margin-top: 1.8rem;
-      margin-bottom: 3rem;
-      font-weight: 300;
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .gradient-glow-title {
-      background: linear-gradient(135deg, var(--primary) 30%, var(--accent) 60%, var(--primary) 90%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: textShine 10s ease infinite;
-    }
-
-    @keyframes textShine {
+    @keyframes ambientGlow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* Section Headers */
-    .section-header {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto 4rem auto;
-      padding: 0 1.5rem;
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 9999;
     }
 
-    .section-title {
-      margin-bottom: 1.5rem;
+    /* Custom Cursor */
+    .custom-cursor {
+      width: 12px;
+      height: 12px;
+      background: var(--primary);
+      mix-blend-mode: difference;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s, height 0.25s, background-color 0.25s;
+    }
+    .custom-cursor.active {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-soft);
     }
 
-    .section-subtitle {
-      font-size: 1.15rem;
-      max-width: 600px;
+    @media (pointer: coarse) {
+      body { cursor: auto; }
+      .custom-cursor { display: none; }
+    }
+
+    /* Layout & Spacing */
+    .container {
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 0 24px;
     }
 
-    /* Services Section */
-    .services-section {
-      padding: 8% 5%;
-      background-color: var(--surface);
-      border-top: 1px solid var(--border-soft);
-      border-bottom: 1px solid var(--border-soft);
-      position: relative;
+    section {
+      padding: 100px 0;
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .service-card {
-      background-color: var(--bg);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-soft);
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(35, 27, 21, 0.08);
-      border-color: var(--accent-soft);
-    }
-
-    .card-image-wrapper {
-      height: 320px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .card-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .service-card:hover .card-image-wrapper img {
-      transform: scale(1.06);
-    }
-
-    .card-content {
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .card-meta {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .card-title {
-      font-size: 1.8rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .card-desc {
-      font-size: 1rem;
-      line-height: 1.65;
-    }
-
-    /* Pricing Section */
-    .pricing-section {
-      padding: 8% 5%;
-    }
-
-    .pricing-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 6rem;
-      align-items: center;
-    }
-
-    .pricing-info {
-      padding-right: 3rem;
-    }
-
-    .pricing-lead {
-      font-size: 1.2rem;
-      margin-top: 1.5rem;
-      margin-bottom: 2.5rem;
-      line-height: 1.7;
-    }
-
-    .pricing-note {
-      background-color: var(--surface);
-      border-left: 4px solid var(--accent);
-      padding: 2rem;
-      border-radius: var(--radius);
-      font-size: 1rem;
-      box-shadow: var(--shadow);
-    }
-
-    .pricing-list {
-      display: flex;
-      flex-direction: column;
-      gap: 2.2rem;
-      background-color: var(--surface);
-      padding: 3.5rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow);
-    }
-
-    .pricing-item {
-      border-bottom: 1px solid var(--border-soft);
-      padding-bottom: 1.8rem;
-    }
-
-    .pricing-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .pricing-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
+    /* Typography */
+    h1, h2, h3 {
       font-family: var(--font-display);
-      font-size: 1.7rem;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
       color: var(--primary);
     }
 
-    .pricing-dots {
-      flex-grow: 1;
-      border-bottom: 1px dotted var(--border);
-      margin: 0 1.5rem;
-      opacity: 0.6;
-    }
+    h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); }
+    h2 { font-size: clamp(2.2rem, 4vw, 3rem); }
+    h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
 
-    .pricing-price {
-      font-weight: 500;
-      color: var(--accent);
-    }
-
-    .pricing-desc {
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-top: 0.6rem;
-    }
-
-    /* About Section */
-    .about-section {
-      border-top: 1px solid var(--border-soft);
-      background-color: var(--surface);
-    }
-
-    .about-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-    }
-
-    .about-lead {
-      font-size: 1.35rem;
-      margin: 1.8rem 0;
-      line-height: 1.6;
-      color: var(--primary-soft);
-    }
-
-    .about-body {
+    p {
       font-size: 1.05rem;
-      margin-bottom: 3rem;
-    }
-
-    .about-signature {
-      display: flex;
-      flex-direction: column;
-      border-top: 1px solid var(--border-soft);
-      padding-top: 2rem;
-    }
-
-    .sig-name {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      color: var(--accent);
-      font-style: italic;
-    }
-
-    .sig-title {
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
+      line-height: 1.65;
       color: var(--text-muted);
-      margin-top: 0.4rem;
-      font-weight: 700;
-    }
-
-    /* Editorial Atmosphere Gallery */
-    .atmosphere-gallery {
-      padding: 6% 5%;
-      background-color: var(--bg);
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .gallery-item {
-      height: 350px;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 6px solid var(--surface);
-      position: relative;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.08);
-    }
-
-    /* Contact & Booking Section */
-    .contact-section {
-      padding: 8% 5%;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 6rem;
-      align-items: start;
-    }
-
-    .contact-details {
-      padding-right: 3rem;
-    }
-
-    .contact-lead {
-      font-size: 1.2rem;
-      margin: 1.8rem 0 3.5rem 0;
-      line-height: 1.7;
-    }
-
-    .contact-info-blocks {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-    }
-
-    .info-block {
-      border-bottom: 1px solid var(--border-soft);
-      padding-bottom: 2rem;
-    }
-
-    .info-block:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .info-label {
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .info-text {
-      font-size: 1.1rem;
-      color: var(--primary-soft);
       font-weight: 300;
     }
 
-    .contact-form-wrapper {
-      background-color: var(--surface);
-      padding: 4.5rem;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header */
+    header {
+      padding: 30px 0;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+    }
+    .logo span {
+      font-size: 1rem;
+      font-style: italic;
+      letter-spacing: 0;
+      color: var(--accent);
+      margin-left: 4px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--bg);
+    }
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      border-color: var(--border);
+      background: transparent;
+      color: var(--primary);
+    }
+    .btn-secondary:hover {
+      background: var(--surface-2);
+      transform: translateY(-2px);
+    }
+
+    /* Hero */
+    .hero {
+      padding-top: 180px;
+      padding-bottom: 80px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .hero-tagline {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .hero-title em {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .hero-image-wrapper {
+      position: relative;
       border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
+      padding: 14px;
+      background: var(--surface);
       border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow);
+    }
+    .hero-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .booking-form {
+    /* Bento Grid (Leistungen) */
+    .bento-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px auto;
+    }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+    .bento-card {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 40px;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      justify-content: space-between;
+      min-height: 320px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
-    .form-group {
+    .bento-card:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--border);
+    }
+    .bento-card-header {
       display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    .bento-card-icon {
+      color: var(--accent);
+      width: 40px;
+      height: 40px;
+    }
+    .bento-card-title {
+      margin-top: auto;
+      margin-bottom: 12px;
+    }
+    
+    /* Bento Spans */
+    .span-7 { grid-column: span 7; }
+    .span-5 { grid-column: span 5; }
+    .span-12 { grid-column: span 12; }
+    
+    /* Full bleed image card to break grid */
+    .bento-card.full-bleed {
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .bento-card.full-bleed img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bento-card.full-bleed:hover img {
+      transform: scale(1.04);
     }
 
-    .form-group-row {
+    /* Pricing Section */
+    .pricing {
+      background: var(--surface-2);
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .pricing-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 80px;
+    }
+    .pricing-header {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .pricing-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .pricing-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pricing-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .pricing-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+    .pricing-dots {
+      flex-grow: 1;
+      border-bottom: 1px dotted var(--border);
+      margin: 0 12px;
+    }
+    .pricing-price {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .pricing-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
     }
 
-    .form-label {
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 700;
-      color: var(--primary-soft);
+    /* About Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
+      align-items: center;
     }
-
-    .form-input, .form-select {
-      background-color: var(--bg);
+    .about-image-wrapper {
+      position: relative;
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      background: var(--surface);
       border: 1px solid var(--border-soft);
-      padding: 1.2rem;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      color: var(--text);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+    .about-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .about-quote {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-style: italic;
+      color: var(--primary-soft);
+      line-height: 1.3;
+      border-left: 2px solid var(--accent);
+      padding-left: 24px;
+      margin: 12px 0;
     }
 
-    .form-input:focus, .form-select:focus {
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: stretch;
+    }
+    .contact-form-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 50px;
+      box-shadow: var(--shadow);
+    }
+    .form-group {
+      margin-bottom: 24px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .form-control {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-family: var(--font-body);
+      color: var(--text);
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    .form-control:focus {
       outline: none;
       border-color: var(--accent);
       box-shadow: var(--ring);
     }
-
-    .form-submit-btn {
-      margin-top: 1.5rem;
-      width: 100%;
-      padding: 1.3rem;
-      font-size: 0.85rem;
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 0;
+    }
+    .info-block {
+      margin-bottom: 40px;
+    }
+    .info-block h4 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+    .info-block p {
+      font-size: 1.05rem;
+      line-height: 1.6;
     }
 
     /* Footer */
-    .footer {
-      background-color: var(--primary);
+    footer {
+      background: var(--primary);
       color: var(--bg);
-      padding: 5rem 5%;
-      border-top: 1px solid var(--primary-soft);
+      padding: 60px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
-
-    .footer-content {
-      max-width: 1300px;
-      margin: 0 auto;
+    .footer-grid {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-
-    .footer-logo {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      letter-spacing: 0.12em;
-      color: var(--bg);
-    }
-
     .footer-copy {
       font-size: 0.9rem;
-      color: var(--border-soft);
-      font-weight: 300;
+      opacity: 0.6;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
     }
 
-    .footer-copy a {
-      color: var(--accent-soft);
-      text-decoration: none;
-      margin-left: 1.5rem;
-      transition: color 0.3s ease;
-    }
-
-    .footer-copy a:hover {
-      color: var(--surface);
-      text-decoration: underline;
-    }
-
-    /* Reveal Animations */
-    .section-hidden {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .section-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 1150px) {
-      .split-section, .about-split {
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .hero-grid, .pricing-grid, .about-grid, .contact-grid {
         grid-template-columns: 1fr;
+        gap: 50px;
       }
-      .image-side, .about-image-side {
-        min-height: 500px;
-        height: 500px;
-        padding: 2rem 5%;
+      .hero-image-wrapper, .about-image-wrapper {
+        max-width: 500px;
+        margin: 0 auto;
       }
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-      }
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .pricing-container, .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 5rem;
-      }
-      .pricing-info, .contact-details {
-        padding-right: 0;
+      .span-7, .span-5 {
+        grid-column: span 12;
       }
     }
 
-    @media (max-width: 850px) {
+    @media (max-width: 768px) {
       .nav-links {
         display: none;
       }
-      .services-grid {
-        grid-template-columns: 1fr;
+      section {
+        padding: 60px 0;
       }
-      .text-side {
-        padding: 10% 5%;
+      .bento-card {
+        padding: 30px;
+        min-height: 280px;
       }
       .contact-form-wrapper {
-        padding: 3rem 2rem;
+        padding: 30px;
       }
     }
 
-    @media (max-width: 600px) {
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-      .form-group-row {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      .footer-content {
-        flex-direction: column;
-        gap: 2.5rem;
-        text-align: center;
-      }
-      .footer-copy a {
-        display: block;
-        margin-left: 0;
-        margin-top: 0.75rem;
-      }
-    }
-
-    /* Accessibility */
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-delay: -1ms !important;
-        animation-duration: 1ms !important;
-        animation-iteration-count: 1 !important;
-        background-attachment: initial !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0s !important;
-        transition-delay: 0s !important;
-        transform: none !important;
+      body {
+        animation: none !important;
       }
-      .section-hidden {
-        opacity: 1 !important;
+      .custom-cursor {
+        display: none !important;
+      }
+      .magnetic {
         transform: none !important;
+        transition: none !important;
+      }
+      * {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        transition-duration: 0s !important;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav-container">
-    <a href="#" class="logo">ORATHAI</a>
-    <div class="nav-links">
-      <a href="#rituale">Rituale</a>
-      <a href="#preise">Preise</a>
-      <a href="#philosophie">Philosophie</a>
-      <a href="#kontakt">Kontakt</a>
-    </div>
-    <a href="#kontakt" class="btn-primary">Termin Buchen</a>
-  </nav>
+  <div class="custom-cursor"></div>
 
-  <!-- Hero Section -->
-  <section class="split-section">
-    <div class="text-side">
-      <span class="section-label">Traditionelle Thai-Wellness</span>
-      <h1 class="gradient-glow-title">Ein Refugium der <em>absoluten</em> Stille.</h1>
-      <p class="hero-lead">Erleben Sie die jahrhundertealte Heilkunst Thailands im Herzen der Stadt. Jede Berührung folgt dem Rhythmus Ihres Atems und führt Sie zurück in Ihre eigene Mitte.</p>
-      <div class="hero-actions">
-        <a href="#kontakt" class="btn-primary">Ritual buchen</a>
-        <a href="#rituale" class="btn-secondary">Unsere Rituale</a>
-      </div>
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo magnetic">ORATHAI<span>Spa</span></a>
+      <nav class="nav-links">
+        <a href="#leistungen" class="magnetic">Leistungen</a>
+        <a href="#preise" class="magnetic">Preise</a>
+        <a href="#philosophie" class="magnetic">Philosophie</a>
+        <a href="#kontakt" class="btn btn-secondary magnetic">Termin buchen</a>
+      </nav>
     </div>
-    <div class="image-side">
-      <div class="image-frame">
-        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=80" alt="Exklusives Thai Spa Ambiente mit professioneller Massage-Therapie">
-      </div>
-    </div>
-  </section>
+  </header>
 
-  <!-- Gold Divider -->
-  <div class="gold-divider">
-    <div class="line"></div>
-    <div class="diamond"></div>
-    <div class="line"></div>
-  </div>
-
-  <!-- Leistungen (Services Section) -->
-  <section id="rituale" class="services-section">
-    <div class="section-header">
-      <span class="section-label">Heilsame Berührung</span>
-      <h2 class="section-title">Ausgewählte Rituale</h2>
-      <p class="section-subtitle">Jedes Ritual wird individuell auf Ihre Bedürfnisse abgestimmt und entfaltet eine tiefe, nachhaltige Wirkung.</p>
-    </div>
-    <div class="services-grid">
-      <!-- Card 1 -->
-      <div class="service-card">
-        <div class="card-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=800&q=80" alt="Traditionelle Thai Massage und Dehnung">
-        </div>
-        <div class="card-content">
-          <span class="card-meta">Nuad Thai</span>
-          <h3 class="card-title">Traditionelle Thai-Massage</h3>
-          <p class="card-desc">Eine kraftvolle Kombination aus sanftem Dehnen, rhythmischem Druck und gezielter Akupressur entlang der Energielinien.</p>
-        </div>
-      </div>
-      <!-- Card 2 -->
-      <div class="service-card">
-        <div class="card-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80" alt="Aroma-Öl Massage mit ätherischen Ölen">
-        </div>
-        <div class="card-content">
-          <span class="card-meta">Aromatherapie</span>
-          <h3 class="card-title">Aroma-Öl Massage</h3>
-          <p class="card-desc">Fließende Massagebewegungen vereint mit handverlesenen, warmen ätherischen Ölen für tiefe mentale Entspannung.</p>
-        </div>
-      </div>
-      <!-- Card 3 -->
-      <div class="service-card">
-        <div class="card-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Hot Stone Massage mit warmen Basaltsteinen">
-        </div>
-        <div class="card-content">
-          <span class="card-meta">Hot Stone Ritual</span>
-          <h3 class="card-title">Hot Stone Massage</h3>
-          <p class="card-desc">Die Kombination aus tiefenwirksamer Wärme geschmeidiger Basaltsteine und sanfter Massage löst tief sitzende Verspannungen.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gold Divider -->
-  <div class="gold-divider">
-    <div class="line"></div>
-    <div class="diamond"></div>
-    <div class="line"></div>
-  </div>
-
-  <!-- Preise Section -->
-  <section id="preise" class="pricing-section">
-    <div class="pricing-container">
-      <div class="pricing-info">
-        <span class="section-label">Wertschätzung & Zeit</span>
-        <h2 class="section-title">Unsere Tarife</h2>
-        <p class="pricing-lead">Schenken Sie sich selbst Zeit. Alle Behandlungen beinhalten ein kurzes Vorgespräch sowie ein traditionelles Fußbad und thailändischen Kräutertee zum Nachruhen.</p>
-        <div class="pricing-note">
-          <p><strong>Hinweis:</strong> Bitte erscheinen Sie ca. 10 Minuten vor Ihrem Termin, um entspannt anzukommen und Ihren Alltag hinter sich zu lassen.</p>
-        </div>
-      </div>
-      <div class="pricing-list">
-        <div class="pricing-item">
-          <div class="pricing-header">
-            <span class="pricing-name">Traditionelle Thai-Massage</span>
-            <span class="pricing-dots"></span>
-            <span class="pricing-price">ab 85 €</span>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="hero-tagline">Traditionelle Thai-Massage &amp; Wellness</span>
+          <h1 class="hero-title">Zeitlose Stille.<br>Tiefe <em>Entlastung.</em></h1>
+          <p>Ein Rückzugsort der Achtsamkeit im Herzen des Alltags. Erleben Sie die heilende Kraft jahrhundertealter thailändischer Heilkunst, vereint mit der tiefen Entspannung warmer Aroma-Öle.</p>
+          <div class="hero-actions">
+            <a href="#kontakt" class="btn btn-primary magnetic">Ritual buchen</a>
+            <a href="#leistungen" class="btn btn-secondary magnetic">Angebote entdecken</a>
           </div>
-          <p class="pricing-desc">60 Minuten: 85 € &nbsp;|&nbsp; 90 Minuten: 120 €</p>
         </div>
-        <div class="pricing-item">
-          <div class="pricing-header">
-            <span class="pricing-name">Aroma-Öl Massage</span>
-            <span class="pricing-dots"></span>
-            <span class="pricing-price">ab 95 €</span>
+        <div class="hero-image-wrapper">
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=1200&q=80" alt="Luxuriöser, warm beleuchteter thailändischer Massageraum mit einer Massage-Liege und Orchideen">
           </div>
-          <p class="pricing-desc">60 Minuten: 95 € &nbsp;|&nbsp; 90 Minuten: 135 €</p>
-        </div>
-        <div class="pricing-item">
-          <div class="pricing-header">
-            <span class="pricing-name">Hot Stone Ritual</span>
-            <span class="pricing-dots"></span>
-            <span class="pricing-price">115 €</span>
-          </div>
-          <p class="pricing-desc">75 Minuten Tiefenentspannung mit Basaltsteinen</p>
-        </div>
-        <div class="pricing-item">
-          <div class="pricing-header">
-            <span class="pricing-name">Kräuterstempel-Therapie</span>
-            <span class="pricing-dots"></span>
-            <span class="pricing-price">140 €</span>
-          </div>
-          <p class="pricing-desc">90 Minuten mit warmen, thailändischen Kräuterkompressen</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Gold Divider -->
-  <div class="gold-divider">
-    <div class="line"></div>
-    <div class="diamond"></div>
-    <div class="line"></div>
-  </div>
-
-  <!-- Über uns Section -->
-  <section id="philosophie" class="about-section">
-    <div class="about-split">
-      <div class="image-side about-image-side">
-        <div class="image-frame">
-          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80" alt="Atmosphärisches Thai Spa Detail mit Orchideen und Steinen">
+    <!-- Leistungen (Bento Grid) -->
+    <section id="leistungen">
+      <div class="container">
+        <div class="bento-header">
+          <span class="hero-tagline">Unsere Rituale</span>
+          <h2>Die Kunst der Berührung</h2>
         </div>
-      </div>
-      <div class="text-side">
-        <span class="section-label">Unsere Philosophie</span>
-        <h2 class="section-title">Die Kunst der <em>achtsamen</em> Berührung</h2>
-        <p class="about-lead">Bei Orathai verbinden wir jahrhundertealtes Heilwissen mit einem modernen Gespür für Ästhetik und Ruhe. Unser Ziel ist es, Ihnen einen Raum der absoluten Erholung zu schenken.</p>
-        <p class="about-body">Unsere zertifizierten Therapeutinnen wurden in den renommiertesten Schulen Thailands ausgebildet. Mit präziser Technik und tiefer Empathie lösen sie Blockaden und stellen den natürlichen Energiefluss Ihres Körpers wieder her.</p>
-        <div class="about-signature">
-          <span class="sig-name">Orathai S.</span>
-          <span class="sig-title">Gründerin & Leitende Therapeutin</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Atmosphere Gallery Section -->
-  <section class="atmosphere-gallery">
-    <div class="section-header">
-      <span class="section-label">Impressionen</span>
-      <h2 class="section-title">Einblick in unsere Oase</h2>
-    </div>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80" alt="Spa Details">
-      </div>
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Entspannung und Meditation">
-      </div>
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=600&q=80" alt="Heiße Steine Massage">
-      </div>
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Kräuterstempel Details">
-      </div>
-    </div>
-  </section>
-
-  <!-- Gold Divider -->
-  <div class="gold-divider">
-    <div class="line"></div>
-    <div class="diamond"></div>
-    <div class="line"></div>
-  </div>
-
-  <!-- Kontakt & Booking Section -->
-  <section id="kontakt" class="contact-section">
-    <div class="contact-grid">
-      <div class="contact-details">
-        <span class="section-label">Kontakt & Reservierung</span>
-        <h2 class="section-title">Planen Sie Ihre Auszeit</h2>
-        <p class="contact-lead">Wir freuen uns darauf, Sie in unserem Refugium begrüßen zu dürfen. Reservieren Sie Ihren Wunschtermin ganz bequem online oder kontaktieren Sie uns direkt.</p>
         
-        <div class="contact-info-blocks">
-          <div class="info-block">
-            <h4 class="info-label">Anschrift</h4>
-            <p class="info-text">Orathai Thai Wellness<br>Sophienstraße 12, 10178 Berlin</p>
+        <div class="bento-grid">
+          <!-- Card 1 -->
+          <div class="bento-card span-7">
+            <div class="bento-card-header">
+              <svg viewBox="0 0 100 100" class="bento-card-icon" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M50,25 C55,45 55,55 50,75 C45,55 45,45 50,25 Z" />
+                <path d="M50,35 C35,45 35,60 50,75 C40,65 42,50 50,35 Z" />
+                <path d="M50,35 C65,45 65,60 50,75 C60,65 58,50 50,35 Z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="bento-card-title">Nuad Thai</h3>
+              <p>Die traditionelle thailändische Heilmassage kombiniert sanfte Dehnungen, Akupressur und die gezielte Aktivierung der Energielinien (Sen-Sibil), um Blockaden tiefgreifend zu lösen.</p>
+            </div>
           </div>
-          <div class="info-block">
-            <h4 class="info-label">Öffnungszeiten</h4>
-            <p class="info-text">Montag – Sonntag: 10:00 – 21:00 Uhr<br><em>Nur nach vorheriger Terminvereinbarung</em></p>
+
+          <!-- Card 2: Full Bleed Image Break -->
+          <div class="bento-card span-5 full-bleed">
+            <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Warme Massageöle, Blüten und traditionelle thailändische Kräuterstempel auf einem Holztisch">
           </div>
-          <div class="info-block">
-            <h4 class="info-label">Direkter Kontakt</h4>
-            <p class="info-text">Telefon: +49 (0) 30 123 456 78<br>E-Mail: reservierung@orathai-spa.de</p>
+
+          <!-- Card 3 -->
+          <div class="bento-card span-5">
+            <div class="bento-card-header">
+              <svg viewBox="0 0 100 100" class="bento-card-icon" fill="none" stroke="currentColor" stroke-width="1.2">
+                <circle cx="50" cy="50" r="25" />
+                <path d="M50,10 L50,25 M50,75 L50,90 M10,50 L25,50 M75,50 L90,50" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="bento-card-title">Aroma-Öl-Massage</h3>
+              <p>Warme, naturreine Öle fließen in harmonischen Streichbewegungen über die Haut. Ein Fest für die Sinne, das langanhaltende geistige Ruhe schenkt.</p>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bento-card span-7">
+            <div class="bento-card-header">
+              <svg viewBox="0 0 100 100" class="bento-card-icon" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M50,20 C30,35 30,65 50,80 C70,65 70,35 50,20 Z" />
+                <path d="M50,40 L50,60" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="bento-card-title">Kräuterstempel-Ritual</h3>
+              <p>Traditionelle thailändische Heilkräuter entfalten im heißen Wasserdampf ihre volle Wirkung. Die warmen Stempel fördern die Durchblutung und lockern die Muskulatur.</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="contact-form-wrapper">
-        <form class="booking-form" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir werden uns in Kürze mit Ihrem Terminvorschlag bei Ihnen melden.');">
-          <div class="form-group">
-            <label for="name" class="form-label">Ihr Name</label>
-            <input type="text" id="name" class="form-input" placeholder="z.B. Maria Müller" required>
-          </div>
-          <div class="form-group">
-            <label for="email" class="form-label">E-Mail-Adresse</label>
-            <input type="email" id="email" class="form-input" placeholder="ihre@adresse.de" required>
-          </div>
-          <div class="form-group">
-            <label for="ritual" class="form-label">Gewünschtes Ritual</label>
-            <select id="ritual" class="form-select" required>
-              <option value="" disabled selected>Bitte wählen...</option>
-              <option value="thai">Traditionelle Thai-Massage</option>
-              <option value="oil">Aroma-Öl Massage</option>
-              <option value="stone">Hot Stone Ritual</option>
-              <option value="herbal">Kräuterstempel-Therapie</option>
-            </select>
-          </div>
-          <div class="form-group-row">
-            <div class="form-group">
-              <label for="date" class="form-label">Wunschdatum</label>
-              <input type="date" id="date" class="form-input" required>
-            </div>
-            <div class="form-group">
-              <label for="time" class="form-label">Uhrzeit</label>
-              <input type="time" id="time" class="form-input" required>
-            </div>
-          </div>
-          <button type="submit" class="btn-primary form-submit-btn">Terminanfrage Senden</button>
-        </form>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
+    <!-- Preise Section -->
+    <section id="preise" class="pricing">
+      <div class="container pricing-grid">
+        <div class="pricing-header">
+          <div>
+            <span class="hero-tagline">Preise &amp; Rituale</span>
+            <h2>Wählen Sie Ihre Zeit</h2>
+          </div>
+          <p style="margin-top: 24px;">Jede Behandlung wird individuell auf Ihre Bedürfnisse abgestimmt. Planen Sie bitte zusätzlich 10 Minuten für ein Vorgespräch und Nachruhen ein.</p>
+        </div>
+        <div class="pricing-list">
+          <div class="pricing-item">
+            <div class="pricing-row">
+              <span class="pricing-name">Nuad Thai Klassik</span>
+              <span class="pricing-dots"></span>
+              <span class="pricing-price">75 €</span>
+            </div>
+            <span class="pricing-desc">Ganzkörperbehandlung · 60 Minuten</span>
+          </div>
+          <div class="pricing-item">
+            <div class="pricing-row">
+              <span class="pricing-name">Nuad Thai Intensiv</span>
+              <span class="pricing-dots"></span>
+              <span class="pricing-price">105 €</span>
+            </div>
+            <span class="pricing-desc">Ganzkörperbehandlung inklusive Dehnungen · 90 Minuten</span>
+          </div>
+          <div class="pricing-item">
+            <div class="pricing-row">
+              <span class="pricing-name">Aroma-Öl-Entspannung</span>
+              <span class="pricing-dots"></span>
+              <span class="pricing-price">80 €</span>
+            </div>
+            <span class="pricing-desc">Fließende Massage mit warmen Ölen · 60 Minuten</span>
+          </div>
+          <div class="pricing-item">
+            <div class="pricing-row">
+              <span class="pricing-name">Kräuterstempel-Ritual</span>
+              <span class="pricing-dots"></span>
+              <span class="pricing-price">125 €</span>
+            </div>
+            <span class="pricing-desc">Kombination aus Massage &amp; heißen Stempeln · 90 Minuten</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Über Uns / Philosophie -->
+    <section id="philosophie">
+      <div class="container about-grid">
+        <div class="about-image-wrapper">
+          <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Eine professionelle Masseurin führt eine achtsame, entspannende Massage auf dem Rücken einer Kundin durch">
+          </div>
+        </div>
+        <div class="about-content">
+          <span class="hero-tagline">Unsere Philosophie</span>
+          <h2>Die Kunst der achtsamen Berührung</h2>
+          <p class="about-quote">„Heilung geschieht dort, wo der Geist zur Ruhe kommt und der Körper atmen darf.“</p>
+          <p>Bei Orathai pflegen wir die authentische thailändische Massage als ganzheitliches Ritual für Körper und Geist. Unsere Therapeutinnen sind in den renommiertesten Schulen Thailands ausgebildet und bringen die tiefe Weisheit des Nuad Thai direkt zu Ihnen. Jede Berührung folgt dem Rhythmus Ihres Atems.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontakt & Buchung -->
+    <section id="kontakt">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <div>
+            <span class="hero-tagline">Reservierung</span>
+            <h2>Finden Sie Ihre Ruhezeit</h2>
+            <p style="margin-top: 16px; margin-bottom: 40px;">Senden Sie uns Ihren Terminwunsch. Wir bestätigen Ihre Buchung innerhalb weniger Stunden.</p>
+          </div>
+          <div class="info-block">
+            <h4>Öffnungszeiten</h4>
+            <p>Montag — Samstag: 10:00 bis 20:00 Uhr<br>Sonntags auf Anfrage</p>
+          </div>
+          <div class="info-block">
+            <h4>Anschrift</h4>
+            <p>Orathai Wellness<br>Kaiserstraße 42, 60311 Frankfurt am Main</p>
+          </div>
+        </div>
+        <div class="contact-form-wrapper">
+          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir melden uns in Kürze bei Ihnen.');">
+            <div class="form-group">
+              <label for="name">Ihr Name</label>
+              <input type="text" id="name" class="form-control" required placeholder="z.B. Maria Müller">
+            </div>
+            <div class="form-group">
+              <label for="email">E-Mail-Adresse</label>
+              <input type="email" id="email" class="form-control" required placeholder="name@beispiel.de">
+            </div>
+            <div class="form-group">
+              <label for="treatment">Wunschbehandlung</label>
+              <select id="treatment" class="form-control">
+                <option>Nuad Thai Klassik (60 Min.)</option>
+                <option>Nuad Thai Intensiv (90 Min.)</option>
+                <option>Aroma-Öl-Entspannung (60 Min.)</option>
+                <option>Kräuterstempel-Ritual (90 Min.)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Wunschtermin &amp; Nachricht</label>
+              <textarea id="message" class="form-control" rows="4" placeholder="Teilen Sie uns Ihren Wunschtag und Uhrzeit mit..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary magnetic" style="width: 100%; justify-content: center;">Terminanfrage senden</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
       <span class="footer-logo">ORATHAI</span>
-      <p class="footer-copy">&copy; 2026 Orathai Thai Wellness. Alle Rechte vorbehalten. | <a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+      <span class="footer-copy">&copy; 2026 Orathai Thai-Wellness. Alle Rechte vorbehalten.</span>
     </div>
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Reveal Animations on Scroll
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('section-visible');
-          }
-        });
-      }, { threshold: 0.1 });
+    // Custom Cursor tracking
+    const cursor = document.querySelector('.custom-cursor');
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
 
-      document.querySelectorAll('section').forEach(section => {
-        section.classList.add('section-hidden');
-        observer.observe(section);
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+      let dx = mouseX - cursorX;
+      let dy = mouseY - cursorY;
+      cursorX += dx * 0.15;
+      cursorY += dy * 0.15;
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover effect on links and magnetic elements
+    const interactiveElements = document.querySelectorAll('a, button, select, input, textarea, .magnetic');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+    });
+
+    // Magnetic Effect
+    const magneticElements = document.querySelectorAll('.magnetic');
+    magneticElements.forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        el.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'translate(0px, 0px)';
       });
     });
   </script>
 </body>
-</html>
+</html>`
