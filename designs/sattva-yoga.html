@@ -3,566 +3,630 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sattva Yoga — Vinyasa, Yin & Atemarbeit</title>
+  <title>Sattva Yoga — Boutique-Studio für Vinyasa, Yin &amp; Atemarbeit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f4ed;
-      --surface: #faf9f5;
-      --surface-2: #edebe2;
-      --primary: #141413;
-      --primary-soft: #30302e;
-      --accent: #c96442;
-      --accent-soft: #d97757;
-      --text: #141413;
-      --text-muted: #5e5d59;
-      --border: #e8e6dc;
-      --border-soft: #f0eee6;
-      --radius: 12px;
-      --radius-sm: 8px;
-      --radius-lg: 24px;
-      --shadow: 0 10px 30px -10px rgba(20, 20, 19, 0.06), 0 1px 2px rgba(20, 20, 19, 0.02);
-      --ring: 0 0 0 1px #d1cfc5;
-      --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
+      --bg: #f7f6f0;
+      --surface: #fcfbfa;
+      --surface-2: #f0eee4;
+      --primary: #1a1a18;
+      --primary-soft: #3a3a37;
+      --accent: #bd5a38;
+      --accent-soft: #d46d4b;
+      --text: #2b2a27;
+      --text-muted: #6b6962;
+      --border: #e3e1d5;
+      --border-soft: #ebe9dd;
+      --radius: 8px;
+      --radius-sm: 4px;
+      --radius-lg: 16px;
+      --shadow: 0 4px 20px -2px rgba(26, 26, 24, 0.04), 0 0 0 1px rgba(26, 26, 24, 0.02);
+      --ring: 0 0 0 2px rgba(189, 90, 56, 0.15);
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     }
 
-    * {
+    /* Base Reset & Typography */
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       background-color: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
-      line-height: 1.65;
-      overflow-x: hidden;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* Film Grain Overlay */
+    /* Subtle Paper Texture Overlay */
     body::before {
       content: "";
       position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      opacity: 0.04;
-      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      z-index: 9999;
     }
 
-    /* Animated Background Geste */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+      line-height: 1.15;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-weight: 300;
+      font-size: 0.975rem;
+    }
+
+    /* Header Nav */
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.75rem 3rem;
+      border-bottom: 1px solid var(--border-soft);
+      background-color: rgba(247, 246, 240, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .main-nav a:hover {
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      background-color: var(--primary);
+      color: var(--surface) !important;
+      padding: 0.65rem 1.5rem;
+      border-radius: var(--radius-sm);
+      transition: background-color 0.3s ease, transform 0.2s ease !important;
+    }
+
+    .nav-cta:hover {
+      background-color: var(--accent) !important;
+      transform: translateY(-1px);
+    }
+
+    /* Animated Background */
     .animated-bg {
-      background: linear-gradient(120deg, var(--bg), var(--surface-2), var(--bg));
-      background-size: 200% 200%;
-      animation: gradientShift 14s ease-in-out infinite;
+      background: linear-gradient(135deg, #f7f6f0, #f2efe4, #f7f6f0);
+      background-size: 400% 400%;
+      animation: breathe 18s ease-in-out infinite;
     }
 
-    @keyframes gradientShift {
+    @keyframes breathe {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* Organic Background Blobs for Flow */
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      z-index: -1;
-      opacity: 0.6;
-      pointer-events: none;
-    }
-    .blob-1 {
-      top: 10%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      background-color: rgba(201, 100, 66, 0.1);
-    }
-    .blob-2 {
-      bottom: 20%;
-      left: -10%;
-      width: 600px;
-      height: 600px;
-      background-color: rgba(217, 119, 87, 0.08);
-    }
-
-    /* Typography scale */
-    h1, h2, h3 {
-      font-family: var(--font-display);
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-    }
-
-    h1 { font-size: clamp(2.8rem, 6.5vw, 5.5rem); }
-    h2 { font-size: clamp(2.2rem, 4.5vw, 3.6rem); }
-    h3 { font-size: clamp(1.6rem, 2.8vw, 2.4rem); }
-
-    p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    /* Layout Elements */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-    }
-
-    .section-spacing {
-      padding: 9rem 0;
-    }
-
-    /* Header */
-    header {
-      padding: 2rem 0;
+    /* Hero Section */
+    .hero-section {
+      padding: 7rem 3rem;
       border-bottom: 1px solid var(--border-soft);
-      position: relative;
-      z-index: 10;
     }
 
-    .nav-wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 400;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 3rem;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .nav-links a {
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background-color: var(--accent);
-      transition: width 0.3s ease;
-    }
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    /* Hero Section - Asymmetrical & Overlapping */
     .hero-grid {
+      max-width: 1280px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.1fr 1fr;
       gap: 5rem;
       align-items: center;
     }
 
-    .hero-text-content {
+    .hero-content {
       display: flex;
       flex-direction: column;
-      gap: 2.5rem;
-      z-index: 2;
+      gap: 1.75rem;
     }
 
-    .glow-title {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+    .eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Text-Gradient + Glow Effect */
+    .glow-text {
+      font-size: clamp(2.75rem, 5.5vw, 4.75rem);
+      font-weight: 300;
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--primary) 30%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: textGlow 8s ease-in-out infinite;
     }
 
-    @keyframes textGlow {
-      0%, 100% { text-shadow: 0 0 30px rgba(201, 100, 66, 0); }
-      50% { text-shadow: 0 0 40px rgba(201, 100, 66, 0.12); }
-    }
-
-    .hero-meta {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .hero-meta::before {
-      content: "";
-      width: 40px;
-      height: 1px;
-      background-color: var(--accent);
-    }
-
-    /* Overlapping Image Frame */
-    .hero-image-wrapper {
-      position: relative;
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      background: var(--surface);
-      box-shadow: var(--shadow);
-      transform: rotate(1deg);
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hero-image-wrapper::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      pointer-events: none;
-    }
-
-    .hero-image-inner {
-      border-radius: calc(var(--radius-lg) - 8px);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero-image-inner img {
-      display: block;
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .hero-image-wrapper:hover {
-      transform: rotate(0deg) scale(1.01);
-    }
-    .hero-image-wrapper:hover img {
-      transform: scale(1.05);
-    }
-
-    /* Editorial Section (Magazin-Geste) */
-    .editorial-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.8fr;
-      gap: 5rem;
-      border-top: 1px solid var(--border);
-      padding-top: 6rem;
-    }
-
-    .editorial-sidebar {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-style: italic;
-      color: var(--accent);
-      line-height: 1.3;
+    .lead {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--text-muted);
       font-weight: 300;
     }
 
-    .editorial-text {
-      column-count: 2;
-      column-gap: 4rem;
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: var(--text-muted);
-      text-align: justify;
-    }
-
-    .drop-cap::first-letter {
-      font-family: var(--font-display);
-      font-size: 5.5rem;
-      float: left;
-      line-height: 0.75;
-      margin-right: 1rem;
-      margin-top: 0.25rem;
-      color: var(--accent);
-      font-weight: 400;
-    }
-
-    /* Leistungen / Classes */
-    .class-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
-      margin-top: 4rem;
-    }
-
-    .class-card {
-      background-color: var(--surface);
-      border-radius: var(--radius-lg);
-      padding: 3.5rem 2.5rem;
-      box-shadow: var(--shadow);
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+    .hero-actions {
       display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      position: relative;
-      border: 1px solid var(--border-soft);
-    }
-
-    .class-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: var(--radius-lg);
-      border: 1px solid transparent;
-      transition: border-color 0.4s ease;
-      pointer-events: none;
-    }
-
-    .class-card:hover::after {
-      border-color: var(--accent-soft);
-    }
-
-    .class-icon {
-      color: var(--accent);
-      width: 40px;
-      height: 40px;
-      opacity: 0.85;
-    }
-
-    .class-card h3 {
-      font-size: 1.9rem;
-    }
-
-    .class-card p {
-      font-size: 0.98rem;
-      line-height: 1.7;
-    }
-
-    /* Stimmung / Galerie - Organic Overlapping Layout */
-    .stimmung-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 6rem;
-      align-items: center;
-    }
-
-    .stimmung-images {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      position: relative;
-      padding: 3rem 0;
-    }
-
-    .stimmung-images .img-container {
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      background: var(--surface);
-      padding: 0.8rem;
-      border: 1px solid var(--border);
-    }
-
-    .stimmung-images .img-container img {
-      display: block;
-      border-radius: calc(var(--radius-lg) - 8px);
-      transition: transform 1s ease;
-    }
-
-    .stimmung-images .img-container:hover img {
-      transform: scale(1.03);
-    }
-
-    /* Asymmetric Overlaps */
-    .stimmung-images .img-container-1 {
-      grid-column: 1 / 8;
-      grid-row: 1;
-      transform: translateY(-20px) rotate(-2deg);
-      z-index: 2;
-    }
-
-    .stimmung-images .img-container-2 {
-      grid-column: 6 / 13;
-      grid-row: 1;
-      transform: translateY(40px) rotate(3deg);
-      z-index: 1;
-      margin-top: 4rem;
-    }
-
-    /* Pricing Section */
-    .pricing-header {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 4rem auto;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
-    }
-
-    .pricing-card {
-      background-color: var(--surface);
-      border-radius: var(--radius-lg);
-      padding: 4rem 2.5rem;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 2.5rem;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border-soft);
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .pricing-card.featured {
-      background-color: var(--surface-2);
-      border-color: var(--accent-soft);
-    }
-
-    .pricing-card.featured::after {
-      content: "Empfohlen";
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .price-value {
-      font-family: var(--font-display);
-      font-size: 3.8rem;
-      color: var(--primary);
-      line-height: 1;
-      margin: 1.5rem 0;
-    }
-
-    .price-value span {
-      font-size: 1.1rem;
-      font-family: var(--font-body);
-      color: var(--text-muted);
-    }
-
-    .pricing-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .pricing-features li {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
-
-    .pricing-features svg {
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    /* Button Styling */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.1rem 2.2rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-      border: none;
+      gap: 1.25rem;
+      margin-top: 1rem;
     }
 
     .btn-primary {
       background-color: var(--accent);
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(201, 100, 66, 0.2);
+      color: var(--surface);
+      padding: 0.95rem 2rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(189, 90, 56, 0.2);
     }
 
     .btn-primary:hover {
       background-color: var(--accent-soft);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(201, 100, 66, 0.3);
+      box-shadow: 0 6px 20px rgba(189, 90, 56, 0.3);
+      transform: translateY(-1px);
     }
 
-    .btn-outline {
+    .btn-primary:active {
+      transform: translateY(1px);
+    }
+
+    .btn-secondary {
       background-color: transparent;
-      box-shadow: var(--ring);
       color: var(--primary);
+      padding: 0.95rem 2rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background-color 0.3s, transform 0.2s, border-color 0.3s;
+      border: 1px solid var(--border);
     }
 
-    .btn-outline:hover {
+    .btn-secondary:hover {
       background-color: var(--surface-2);
-      transform: translateY(-2px);
+      border-color: var(--text-muted);
+      transform: translateY(-1px);
     }
 
-    /* Kontakt */
-    .kontakt-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 6rem;
+    /* Image Frame & Captions */
+    .image-frame {
       background-color: var(--surface);
+      padding: 0.9rem;
       border-radius: var(--radius-lg);
-      padding: 6rem;
       box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .image-frame:hover {
+      transform: translateY(-4px);
+    }
+
+    .image-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      aspect-ratio: 4 / 5;
+    }
+
+    .image-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .image-frame:hover img {
+      transform: scale(1.03);
+    }
+
+    .image-caption {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 0.25rem 0;
+    }
+
+    /* Sections General */
+    .section {
+      padding: 7.5rem 3rem;
+      border-bottom: 1px solid var(--border-soft);
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      max-width: 650px;
+      margin-bottom: 4.5rem;
+    }
+
+    .section-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .section h2 {
+      font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+      font-weight: 300;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Classes / Feature Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    /* 3D Hover Tilt Card */
+    .tilt-card {
+      background-color: var(--surface);
       border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 2.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .tilt-card:hover {
+      box-shadow: 0 20px 40px rgba(26, 26, 24, 0.05), var(--ring);
+    }
+
+    .card-icon {
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background-color: var(--bg);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .tilt-card:hover .card-icon {
+      background-color: var(--accent);
+      color: var(--surface);
+    }
+
+    .tilt-card h3 {
+      font-size: 1.75rem;
+      font-weight: 400;
+    }
+
+    .tilt-card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .card-meta {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-top: auto;
+      font-weight: 600;
+    }
+
+    /* Editorial Layout (Philosophy) */
+    .editorial-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .editorial-sidebar {
+      position: sticky;
+      top: 7.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .marginalia {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .editorial-columns {
+      column-count: 2;
+      column-gap: 3rem;
+      text-align: justify;
+    }
+
+    .editorial-columns p {
+      margin-bottom: 1.75rem;
+      font-size: 0.975rem;
+      line-height: 1.8;
+    }
+
+    /* Drop-Cap (Initial) */
+    .drop-cap::first-letter {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      float: left;
+      line-height: 0.75;
+      margin-right: 0.75rem;
+      margin-top: 0.15rem;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    /* Pricing Section */
+    .tarife-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    .tarif-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 2.5rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tarif-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(26, 26, 24, 0.05);
+    }
+
+    .tarif-card.featured {
+      background-color: var(--surface-2);
+      border-color: var(--border);
+    }
+
+    .tarif-badge {
+      position: absolute;
+      top: 1.75rem;
+      right: 1.75rem;
+      background-color: var(--accent);
+      color: var(--surface);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+    }
+
+    .tarif-header h3 {
+      font-size: 1.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .price {
+      font-family: var(--font-display);
+      font-size: 3.25rem;
+      color: var(--primary);
+      line-height: 1;
+      margin-top: 0.5rem;
+    }
+
+    .price .period {
+      font-size: 1rem;
+      font-family: var(--font-body);
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .tarif-desc {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .tarif-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-top: auto;
+      margin-bottom: 1rem;
+    }
+
+    .tarif-features li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .tarif-features li::before {
+      content: "—";
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .full-width {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Mood Section */
+    .mood-section {
+      background-color: var(--surface-2);
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+      max-width: 100%;
+    }
+
+    .mood-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .mood-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .mood-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+    }
+
+    blockquote {
+      font-size: 2.5rem;
+      line-height: 1.3;
+      color: var(--primary);
+      font-family: var(--font-display);
+      font-style: italic;
+    }
+
+    .quote-author {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: -1rem;
+    }
+
+    .mood-context {
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    /* Contact Section */
+    .kontakt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 6rem;
     }
 
     .kontakt-info {
       display: flex;
       flex-direction: column;
-      gap: 3rem;
+      gap: 2.5rem;
+    }
+
+    .kontakt-lead {
+      font-size: 1.15rem;
+      line-height: 1.75;
     }
 
     .kontakt-details {
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      margin-top: 1rem;
     }
 
-    .kontakt-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .kontakt-item span:first-child {
-      font-size: 0.8rem;
+    .detail-item strong {
+      display: block;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       color: var(--accent);
-      font-weight: 500;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
     }
 
-    .kontakt-item span:last-child {
-      font-size: 1.15rem;
-      color: var(--primary);
-      font-family: var(--font-display);
+    .detail-item p {
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .kontakt-form-container {
+      background-color: var(--surface);
+      padding: 4rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-soft);
     }
 
     .kontakt-form {
       display: flex;
       flex-direction: column;
-      gap: 1.8rem;
+      gap: 1.75rem;
     }
 
     .form-group {
@@ -572,379 +636,403 @@
     }
 
     .form-group label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: var(--text-muted);
-      font-weight: 500;
+      font-weight: 600;
     }
 
-    .form-control {
+    .form-group input, .form-group select, .form-group textarea {
       background-color: var(--bg);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-soft);
       border-radius: var(--radius-sm);
-      padding: 1.1rem;
+      padding: 0.95rem 1.15rem;
       font-family: var(--font-body);
-      font-size: 1rem;
       color: var(--text);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      font-size: 0.95rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      width: 100%;
     }
 
-    .form-control:focus {
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(201, 100, 66, 0.1);
+      box-shadow: var(--ring);
     }
 
     /* Footer */
-    footer {
+    .site-footer {
       background-color: var(--primary);
-      color: var(--surface);
-      padding: 6rem 0;
-      font-size: 0.95rem;
+      color: var(--surface-2);
+      padding: 5rem 3rem;
+      border-top: 1px solid var(--primary-soft);
     }
 
-    footer p {
-      color: #b5b4ad;
-    }
-
-    .footer-wrapper {
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-top: 1px solid var(--primary-soft);
-      padding-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 2.5rem;
+      font-size: 0.85rem;
+      color: #9a9892;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 1024px) {
-      .hero-grid, .class-cards, .pricing-grid, .stimmung-grid, .kontakt-wrapper {
+    .footer-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .footer-links a {
+      color: #9a9892;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-soft);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1100px) {
+      .hero-grid, .editorial-layout, .tarife-grid, .mood-grid, .kontakt-grid {
         grid-template-columns: 1fr;
         gap: 4rem;
       }
-      .stimmung-images {
-        max-width: 600px;
-        margin: 0 auto;
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
-      .stimmung-images .img-container {
-        transform: none !important;
+      .editorial-sidebar {
+        position: static;
       }
-      .stimmung-images .img-container-2 {
-        margin-top: 0;
-      }
-      .kontakt-wrapper {
-        padding: 4rem 2.5rem;
+      .image-wrapper {
+        aspect-ratio: 16 / 9;
       }
     }
 
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
+      .site-header {
+        padding: 1.5rem;
       }
-      .editorial-grid {
+      .hero-section, .section {
+        padding: 5rem 1.5rem;
+      }
+      .card-grid {
         grid-template-columns: 1fr;
-        gap: 3rem;
       }
-      .editorial-text {
+      .editorial-columns {
         column-count: 1;
       }
-      .section-spacing {
-        padding: 6rem 0;
+      .site-header {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+      .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.25rem;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+      .kontakt-form-container {
+        padding: 2.5rem 1.5rem;
       }
     }
 
     /* Accessibility: Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
+      *, *::before, *::after {
+        animation-delay: -1ms !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        background-attachment: initial !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
       }
-      body::before {
-        display: none;
+      .glow-text {
+        animation: none !important;
+        background: none !important;
+        -webkit-text-fill-color: var(--primary) !important;
+      }
+      .tilt-card, .image-frame {
+        transform: none !important;
+        transition: none !important;
+      }
+      .animated-bg {
+        animation: none !important;
       }
     }
   </style>
 </head>
-<body class="animated-bg">
+<body>
 
-  <!-- Organic Background Blobs -->
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-
-  <!-- Header -->
-  <header>
-    <div class="container nav-wrapper">
-      <div class="logo">Sattva</div>
-      <nav class="nav-links">
-        <a href="#klassen">Klassen</a>
-        <a href="#philosophie">Philosophie</a>
-        <a href="#preise">Preise</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-      <a href="#kontakt" class="btn btn-outline" style="padding: 0.7rem 1.4rem; font-size: 0.8rem;">Klasse buchen</a>
-    </div>
+  <!-- Navigation -->
+  <header class="site-header">
+    <a href="#" class="logo">Sattva</a>
+    <nav class="main-nav">
+      <a href="#klassen">Klassen</a>
+      <a href="#philosophie">Philosophie</a>
+      <a href="#tarife">Tarife</a>
+      <a href="#kontakt" class="nav-cta">Klasse buchen</a>
+    </nav>
   </header>
 
   <!-- Hero Section -->
-  <section class="container section-spacing">
+  <section class="hero-section animated-bg">
     <div class="hero-grid">
-      <div class="hero-text-content">
-        <div class="hero-meta">Boutique Yoga in Schwabing</div>
-        <h1 class="glow-title">Raum für bewusste Bewegung und Stille.</h1>
-        <p>Sattva Yoga ist ein Rückzugsort im Herzen der Stadt. Inmitten von warmem Holz, sanftem Morgenlicht und einer Atmosphäre der Klarheit begleiten wir Sie auf Ihrem Weg zu innerer Balance und körperlicher Kraft.</p>
-        <div>
-          <a href="#klassen" class="btn btn-primary">Unsere Klassen entdecken</a>
+      <div class="hero-content">
+        <span class="eyebrow">Ein Refugium für Körper &amp; Geist</span>
+        <h1 class="glow-text">Raum für Atem &amp; Stille</h1>
+        <p class="lead">Ein Boutique-Yoga-Studio im Herzen von Hamburg-Eppendorf. Erlebe präzise ausgerichtetes Vinyasa, regeneratives Yin Yoga und klärende Atemarbeit in einer Atmosphäre von natürlicher Eleganz.</p>
+        <div class="hero-actions">
+          <a href="#klassen" class="btn-primary">Unsere Klassen</a>
+          <a href="#philosophie" class="btn-secondary">Das Studio entdecken</a>
         </div>
       </div>
-      <div class="hero-image-wrapper">
-        <div class="hero-image-inner">
-          <!-- FIX 1: Sun-drenched yoga studio featuring warm wooden floors, indoor plants, and soft morning light -->
-          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80" alt="Sattva Yoga Studio Atmosphäre mit warmem Holzboden, Pflanzen und sanftem Morgenlicht" style="width:100%;height:580px;object-fit:cover">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Magazin Editorial Section -->
-  <section class="container section-spacing" id="philosophie">
-    <div class="editorial-grid">
-      <div class="editorial-sidebar">
-        „Die Praxis des Yoga ist kein Ziel, sondern ein stetiges Heimkehren zu sich selbst.“
-      </div>
-      <div>
-        <div class="editorial-text">
-          <p class="drop-cap">Sattva repräsentiert im Sanskrit die Qualität von Reinheit, Harmonie und Klarheit. In unserem Studio kultivieren wir diese Werte durch eine präzise, achtsame Praxis. Wir glauben nicht an laute Fitness-Trends, sondern an die transformative Tiefe traditioneller Techniken, angepasst an den modernen Alltag. Unser Raum ist bewusst reduziert gestaltet, um den Geist bereits beim Betreten zur Ruhe kommen zu lassen. Maximal 12 Teilnehmer pro Klasse garantieren eine persönliche und anatomisch fundierte Begleitung durch unsere erfahrenen Lehrerinnen.</p>
+      <div class="hero-media">
+        <div class="image-frame">
+          <div class="image-wrapper">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80" alt="Minimalistisches Yoga-Studio im weichen, goldenen Morgenlicht">
+          </div>
+          <div class="image-caption">Fig. 01 — Die Klarheit des frühen Morgens im Sattva Studio.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Leistungen / Klassen -->
-  <section class="container section-spacing" id="klassen">
-    <h2 style="text-align: center; margin-bottom: 1rem;">Unsere Praxisformen</h2>
-    <p style="text-align: center; max-width: 600px; margin: 0 auto 4rem auto;">Drei Säulen für Ihren Körper und Geist. Jede Klasse wird individuell auf das Niveau der anwesenden Praktizierenden abgestimmt.</p>
-    
-    <div class="class-cards">
-      <!-- Card 1 -->
-      <div class="class-card tilt-card">
-        <svg class="class-icon" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M5.22 5.22l13.56 13.56M18.78 5.22L5.22 18.78"></path>
-        </svg>
+  <!-- Klassen Sektion -->
+  <section id="klassen" class="section">
+    <div class="section-header">
+      <span class="section-number">01 / KLASSEN</span>
+      <h2>Unsere Praxisformen</h2>
+      <p>Drei Säulen für deine innere Balance, geleitet von erfahrenen Lehrern in kleinen Gruppen von maximal 12 Teilnehmern.</p>
+    </div>
+    <div class="card-grid">
+      <!-- Vinyasa Card -->
+      <div class="tilt-card">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+          </svg>
+        </div>
         <h3>Vinyasa Flow</h3>
-        <p>Dynamische, fließende Bewegungen im Einklang mit der Atmung. Kräftigt die Tiefenmuskulatur, fördert die Flexibilität und bringt den Geist in einen Zustand fokussierter Meditation.</p>
+        <p>Ein dynamischer, fließender Stil, der Bewegung und Atem präzise synchronisiert. Kraftvoll, reinigend und meditativ zugleich, um den Geist im Fluss zu beruhigen.</p>
+        <span class="card-meta">Dienstags &amp; Donnerstags • 75 Min</span>
       </div>
-
-      <!-- Card 2 -->
-      <div class="class-card tilt-card">
-        <svg class="class-icon" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8M8 12h8"></path>
-        </svg>
+      <!-- Yin Card -->
+      <div class="tilt-card">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 3a9 9 0 1 0 9 9 9.75 9.75 0 0 0-.67-3.4 6.75 6.75 0 0 1-11.6-6.27A9.75 9.75 0 0 0 12 3Z"/>
+          </svg>
+        </div>
         <h3>Yin Yoga</h3>
-        <p>Passive, lang gehaltene Dehnungen, die tief in das Fasziengewebe wirken. Ein regenerativer Ausgleich, der das Nervensystem beruhigt und tief sitzende Verspannungen löst.</p>
+        <p>Passives, tiefgehendes Halten der Asanas. Wir dehnen das Fasziennetzwerk, stimulieren die Meridiane und finden tiefe geistige Ruhe und physische Regeneration.</p>
+        <span class="card-meta">Mittwochs &amp; Sonntags • 90 Min</span>
       </div>
-
-      <!-- Card 3 -->
-      <div class="class-card tilt-card">
-        <svg class="class-icon" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15M12 4.5L19.5 12 12 19.5"></path>
-        </svg>
-        <h3>Pranayama & Atem</h3>
-        <p>Gezielte Atemtechniken zur Regulierung der Lebensenergie. Erhöht das Lungenvolumen, verbessert die Sauerstoffaufnahme und führt in eine tiefe, meditative Klarheit.</p>
+      <!-- Breathwork Card -->
+      <div class="tilt-card">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/>
+            <path d="M8 12h8M12 8v8"/>
+          </svg>
+        </div>
+        <h3>Atemarbeit</h3>
+        <p>Die bewusste Lenkung der Lebensenergie (Pranayama). Durch gezielte Techniken klären wir das Nervensystem, bauen Stress ab und wecken neue Lebenskraft.</p>
+        <span class="card-meta">Freitags • 60 Min</span>
       </div>
     </div>
   </section>
 
-  <!-- Stimmung / Galerie (Asymmetric & Overlapping) -->
-  <section class="container section-spacing">
-    <div class="stimmung-grid">
-      <!-- FIX 3 & 4: Overlapping images, breaking the rigid grid layout, organic feel -->
-      <div class="stimmung-images">
-        <div class="img-container img-container-1">
-          <!-- FIX 2 & 4: Authentic imagery of gentle yoga poses with subtle human presence -->
-          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80" alt="Yogapraxis im sanften Licht für innere Ruhe und Balance" style="width:100%;height:380px;object-fit:cover">
+  <!-- Philosophie Sektion (Editorial layout) -->
+  <section id="philosophie" class="section">
+    <div class="editorial-layout">
+      <div class="editorial-sidebar">
+        <div class="marginalia">
+          <span>SATTVA JOURNAL</span>
+          <span>AUSGABE N° 04</span>
         </div>
-        <div class="img-container img-container-2">
-          <!-- FIX 2 & 4: Cropped, soft-focus shot of hands in a mudra to build emotional connection -->
-          <img src="https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?auto=format&fit=crop&w=800&q=80" alt="Detailaufnahme von Händen im Mudra während einer Meditation" style="width:100%;height:380px;object-fit:cover">
+        <div class="image-frame">
+          <div class="image-wrapper">
+            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80" alt="Eine Praktizierende in einer friedvollen, achtsamen Meditationshaltung auf Holzboden">
+          </div>
+          <div class="image-caption">Fig. 02 — Präzision in der Hingabe. Die Kunst des feinen Justierens.</div>
         </div>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 2rem; z-index: 2;">
-        <div class="hero-meta">Unsere Philosophie</div>
-        <h2>Ein Ort, der atmet.</h2>
-        <p>Jedes Detail in unserem Studio wurde mit Bedacht gewählt. Die handverlesenen Holzböden strahlen natürliche Wärme aus, während die sorgfältig platzierten Pflanzen die Raumluft reinigen. Hier finden Sie die Ruhe, die im Alltag oft verloren geht.</p>
-        <p>Unsere Klassen zeichnen sich durch Präzision und Tiefe aus. Wir begleiten Sie achtsam und individuell – ob Einsteiger oder langjährig Praktizierende.</p>
+      <div class="editorial-main">
+        <span class="section-number">02 / PHILOSOPHIE</span>
+        <h2 style="margin-bottom: 2.5rem;">Der Weg zurück zu dir selbst</h2>
+        <div class="editorial-columns">
+          <p class="drop-cap">
+            Sattva bedeutet im Sanskrit Reinheit, Harmonie und Licht. In einer Welt, die sich immer schneller dreht, schaffen wir einen physischen und mentalen Gegenpol. Unser Studio ist bewusst minimalistisch gestaltet: Warme Eichendielen unter den Füßen, handverlesene, luftreinigende Pflanzen und weiches, natürliches Licht, das den Raum im Tagesverlauf sanft verwandelt.
+          </p>
+          <p>
+            Wir glauben nicht an akrobatische Höchstleistungen, sondern an die transformative Kraft der Kontinuität. Jede Klasse bei Sattva ist eine Einladung, den eigenen Rhythmus wiederzufinden. Unsere Lehrer unterrichten mit tiefer anatomischer Präzision und Raum für das individuelle Erleben.
+          </p>
+          <p>
+            Nach der Praxis laden wir dich ein, in unserer Tee-Lounge zu verweilen. Bei biologischem Kräutertee und ausgewählter Literatur kannst du das Erlebte nachwirken lassen und dich mit Gleichgesinnten austauschen. Es ist mehr als Yoga — es ist ein Heimkommen.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Preise Section -->
-  <section class="container section-spacing" id="preise">
-    <div class="pricing-header">
-      <div class="hero-meta" style="justify-content: center; margin-bottom: 1rem;">Wertschätzung</div>
-      <h2>Investition in Ihre Präsenz</h2>
-      <p>Transparente Preise ohne versteckte Kosten. Wählen Sie das Format, das am besten zu Ihrem Lebensrhythmus passt.</p>
+  <!-- Tarife Sektion -->
+  <section id="tarife" class="section">
+    <div class="section-header">
+      <span class="section-number">03 / INVESTITION</span>
+      <h2>Wertschätzung &amp; Tarife</h2>
+      <p>Wähle den Weg, der am besten zu deiner aktuellen Lebensphase passt. Keine versteckten Gebühren.</p>
     </div>
-
-    <div class="pricing-grid">
-      <!-- Card 1 -->
-      <div class="pricing-card tilt-card">
-        <div>
-          <h3>Probeklasse</h3>
-          <p>Zum Kennenlernen unseres Raumes</p>
-          <div class="price-value">18€ <span>/ Klasse</span></div>
+    <div class="tarife-grid">
+      <!-- Tarif 1 -->
+      <div class="tarif-card">
+        <div class="tarif-header">
+          <h3>Probestunde</h3>
+          <div class="price">15 €</div>
         </div>
-        <ul class="pricing-features">
-          <li>
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
-            Gültig für alle regulären Klassen
-          </li>
-          <li>
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
-            Inklusive Leihmatte & Tee
-          </li>
+        <p class="tarif-desc">Perfekt, um unser Studio, die Lehrer und die Atmosphäre kennenzulernen.</p>
+        <ul class="tarif-features">
+          <li>Einmalig buchbar für Neukunden</li>
+          <li>Inklusive Premium-Leihmatte</li>
+          <li>Freie Klassenwahl</li>
         </ul>
-        <a href="#kontakt" class="btn btn-outline">Jetzt buchen</a>
+        <a href="#kontakt" class="btn-secondary full-width">Jetzt buchen</a>
       </div>
-
-      <!-- Card 2 -->
-      <div class="pricing-card featured tilt-card">
-        <div>
-          <h3>Mitgliedschaft</h3>
-          <p>Für Ihre kontinuierliche Praxis</p>
-          <div class="price-value">95€ <span>/ Monat</span></div>
-        </div>
-        <ul class="pricing-features">
-          <li>
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
-            Unbegrenzter Zugang zu allen Klassen
-          </li>
-          <li>
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
-            10% Rabatt auf Wochenend-Workshops
-          </li>
-          <li>
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
-            Monatlich kündbar
-          </li>
-        </ul>
-        <a href="#kontakt" class="btn btn-primary">Mitglied werden</a>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="pricing-card tilt-card">
-        <div>
+      <!-- Tarif 2 -->
+      <div class="tarif-card featured">
+        <div class="tarif-badge">Empfohlen</div>
+        <div class="tarif-header">
           <h3>10er-Karte</h3>
-          <p>Maximale Flexibilität</p>
-          <div class="price-value">165€ <span>/ 10 Klassen</span></div>
+          <div class="price">165 €</div>
         </div>
-        <ul class="pricing-features">
-          <li>
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
-            6 Monate gültig ab Kauf
-          </li>
-          <li>
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
-            Übertragbar auf Freunde
-          </li>
+        <p class="tarif-desc">Maximale Flexibilität für deine regelmäßige Praxis ohne Bindung.</p>
+        <ul class="tarif-features">
+          <li>4 Monate Gültigkeit</li>
+          <li>Übertragbar auf Partner/Freunde</li>
+          <li>Inklusive aller Hilfsmittel</li>
         </ul>
-        <a href="#kontakt" class="btn btn-outline">Karte erwerben</a>
+        <a href="#kontakt" class="btn-primary full-width">Karte erwerben</a>
+      </div>
+      <!-- Tarif 3 -->
+      <div class="tarif-card">
+        <div class="tarif-header">
+          <h3>Sattva Unlimited</h3>
+          <div class="price">95 € <span class="period">/ Mon.</span></div>
+        </div>
+        <p class="tarif-desc">Für alle, die Yoga fest in ihren Alltag integrieren möchten.</p>
+        <ul class="tarif-features">
+          <li>Unbegrenzter Zugang zu allen Klassen</li>
+          <li>10% Rabatt auf alle Workshops</li>
+          <li>Monatlich kündbar nach 3 Monaten</li>
+        </ul>
+        <a href="#kontakt" class="btn-secondary full-width">Mitglied werden</a>
       </div>
     </div>
   </section>
 
-  <!-- Kontakt & Buchung -->
-  <section class="container section-spacing" id="kontakt">
-    <div class="kontakt-wrapper">
-      <div class="kontakt-info">
-        <div>
-          <div class="hero-meta" style="margin-bottom: 1rem;">Kontakt</div>
-          <h2>Besuchen Sie uns.</h2>
-          <p>Haben Sie Fragen zu unseren Klassen oder möchten Sie einen Platz reservieren? Schreiben Sie uns, wir antworten Ihnen innerhalb von 24 Stunden.</p>
+  <!-- Stimmung Sektion -->
+  <section class="section mood-section">
+    <div class="mood-container">
+      <div class="mood-grid">
+        <div class="mood-text-block">
+          <span class="section-number">04 / ATMOSPHÄRE</span>
+          <blockquote>
+            „Der Körper ist der Tempel, der Atem ist das Gebet.“
+          </blockquote>
+          <p class="quote-author">— B.K.S. Iyengar</p>
+          <p class="mood-context">
+            Unser Studio ist ein Rückzugsort. Ein Ort, an dem das Außen verblasst und das Innen Raum gewinnt. Jedes Detail, von den biologischen Leinenkissen bis hin zur sanften Akustik, wurde sorgsam ausgewählt, um deinen Geist zu beruhigen.
+          </p>
         </div>
+        <div class="mood-image-block">
+          <div class="image-frame">
+            <div class="image-wrapper">
+              <img src="https://images.unsplash.com/photo-1600881333168-2ef49b341f30?auto=format&fit=crop&w=800&q=80" alt="Hochwertiges Yoga-Equipment wie Korkblöcke, ein Leinen-Bolster und eine Matte auf hellem Holzboden">
+            </div>
+            <div class="image-caption">Fig. 03 — Hochwertige Hilfsmittel unterstützen dich in deiner Praxis.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt Sektion -->
+  <section id="kontakt" class="section">
+    <div class="kontakt-grid">
+      <div class="kontakt-info">
+        <span class="section-number">05 / KONTAKT</span>
+        <h2>Finde deinen Weg zu uns</h2>
+        <p class="kontakt-lead">Hast du Fragen zu unseren Klassen oder möchtest du deinen ersten Besuch planen? Schreib uns oder komm einfach vorbei.</p>
         
         <div class="kontakt-details">
-          <div class="kontakt-item">
-            <span>Adresse</span>
-            <span>Kaiserstraße 14, 80801 München-Schwabing</span>
+          <div class="detail-item">
+            <strong>Adresse</strong>
+            <p>Sattva Yoga Studio<br>Eppendorfer Landstraße 104<br>20249 Hamburg</p>
           </div>
-          <div class="kontakt-item">
-            <span>E-Mail</span>
-            <span>hallo@sattva-yoga-muc.de</span>
+          <div class="detail-item">
+            <strong>Öffnungszeiten</strong>
+            <p>Montag — Freitag: 06:30 — 21:00 Uhr<br>Samstag &amp; Sonntag: 08:00 — 18:00 Uhr</p>
           </div>
-          <div class="kontakt-item">
-            <span>Telefon</span>
-            <span>+49 (0) 89 244 123 45</span>
+          <div class="detail-item">
+            <strong>Direktkontakt</strong>
+            <p>hallo@sattvayoga-hamburg.de<br>+49 (0) 40 123 456 78</p>
           </div>
         </div>
       </div>
-
-      <form class="kontakt-form" action="#" method="POST">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" class="form-control" required placeholder="Ihr vollständiger Name">
-        </div>
-        <div class="form-group">
-          <label for="email">E-Mail-Adresse</label>
-          <input type="email" id="email" class="form-control" required placeholder="ihre.mail@adresse.de">
-        </div>
-        <div class="form-group">
-          <label for="klasse">Gewünschte Klasse / Anfrage</label>
-          <select id="klasse" class="form-control">
-            <option>Probeklasse — Vinyasa Flow</option>
-            <option>Probeklasse — Yin Yoga</option>
-            <option>Anfrage Studio-Mitgliedschaft</option>
-            <option>Allgemeine Anfrage</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="nachricht">Nachricht (Optional)</label>
-          <textarea id="nachricht" class="form-control" rows="4" placeholder="Ihre Nachricht an uns..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Anfrage senden</button>
-      </form>
+      <div class="kontakt-form-container">
+        <form class="kontakt-form" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir melden uns in Kürze bei dir.');">
+          <div class="form-group">
+            <label for="name">Dein Name</label>
+            <input type="text" id="name" required placeholder="Helene Fischer">
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail-Adresse</label>
+            <input type="email" id="email" required placeholder="helene@beispiel.de">
+          </div>
+          <div class="form-group">
+            <label for="klasse">Gewünschte Praxis</label>
+            <select id="klasse">
+              <option>Vinyasa Flow (Probestunde)</option>
+              <option>Yin Yoga (Probestunde)</option>
+              <option>Atemarbeit &amp; Pranayama (Probestunde)</option>
+              <option>Allgemeine Anfrage</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Deine Nachricht</label>
+            <textarea id="message" rows="4" placeholder="Teile uns gerne mit, ob du bereits Yoga-Erfahrung hast oder körperliche Besonderheiten mitbringst..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Anfrage senden</button>
+        </form>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
-        <div>
-          <div class="logo" style="color: var(--surface); margin-bottom: 1.5rem;">Sattva</div>
-          <p style="font-size: 0.85rem; line-height: 1.8;">Ein Ort für bewusste Präsenz, Bewegung und tiefe Regeneration im Herzen von München.</p>
-        </div>
-        <div>
-          <h4 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 400;">Klassen</h4>
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.85rem;">
-            <li><a href="#klassen" style="color: #b5b4ad;">Vinyasa Flow</a></li>
-            <li><a href="#klassen" style="color: #b5b4ad;">Yin Yoga</a></li>
-            <li><a href="#klassen" style="color: #b5b4ad;">Atemarbeit</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 400;">Rechtliches</h4>
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.85rem;">
-            <li><a href="#" style="color: #b5b4ad;">Impressum</a></li>
-            <li><a href="#" style="color: #b5b4ad;">Datenschutz</a></li>
-            <li><a href="#" style="color: #b5b4ad;">AGB</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 400;">Öffnungszeiten</h4>
-          <p style="font-size: 0.85rem; line-height: 1.8; color: #b5b4ad;">Montag – Freitag: 07:00 – 21:00 Uhr<br>Samstag & Sonntag: 09:00 – 18:00 Uhr</p>
-        </div>
-      </div>
-      <div class="footer-wrapper">
-        <p>© 2026 Sattva Yoga Studio. Alle Rechte vorbehalten.</p>
-        <p style="font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;">Handcrafted with Mindful Presence</p>
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>&copy; 2024 Sattva Yoga GmbH. Alle Rechte vorbehalten.</p>
+      <div class="footer-links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">AGB</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // 3D Hover-Tilt Geste für Karten
+    // 3D Tilt Effect on Cards
     document.querySelectorAll('.tilt-card').forEach(card => {
       card.addEventListener('mousemove', e => {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -954,20 +1042,14 @@
         const y = e.clientY - rect.top;
         const xc = rect.width / 2;
         const yc = rect.height / 2;
-        const dx = x - xc;
-        const dy = y - yc;
+        const angleX = (yc - y) / 20;
+        const angleY = (x - xc) / 20;
         
-        // Sanfte Rotation basierend auf Mausposition (max. 5 Grad)
-        const rx = -(dy / yc) * 5;
-        const ry = (dx / xc) * 5;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02, 1.02, 1.02)`;
-        card.style.boxShadow = '0 20px 40px rgba(20, 20, 19, 0.08), 0 0 0 1px var(--accent-soft)';
+        card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.01, 1.01, 1.01)`;
       });
       
       card.addEventListener('mouseleave', () => {
         card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        card.style.boxShadow = 'var(--shadow)';
       });
     });
   </script>
