@@ -1,475 +1,1100 @@
 <!doctype html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Lumen – Olfaktorische Signaturen</title>
-    <meta name="description" content="Maison Lumen kreiert handgefertigte Nischendüfte in Berlin. Entdecken Sie unsere sieben Signaturen, buchen Sie eine private Duftberatung oder besuchen Sie unser Atelier.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg: #f5f4ed;
-        --surface: #faf9f5;
-        --surface-2: #edebe2;
-        --primary: #141413;
-        --primary-soft: #30302e;
-        --accent: #c96442;
-        --accent-soft: #d97757;
-        --text: #141413;
-        --text-muted: #5e5d59;
-        --border: #e8e6dc;
-        --border-soft: #f0eee6;
-        --radius: 12px;
-        --radius-sm: 8px;
-        --radius-lg: 18px;
-        --shadow: 0 0 0 1px #e8e6dc, 0 1px 2px rgba(20, 20, 19, 0.04);
-        --ring: 0 0 0 1px #d1cfc5;
-        --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-        --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
-      }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison Lumen — Handgemalte Nischendüfte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f4ed;
+      --surface: #faf9f5;
+      --surface-2: #edebe2;
+      --primary: #141413;
+      --primary-soft: #30302e;
+      --accent: #c96442;
+      --accent-soft: #d97757;
+      --text: #141413;
+      --text-muted: #5e5d59;
+      --border: #e8e6dc;
+      --border-soft: #f0eee6;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 18px;
+      --shadow: 0 0 0 1px #e8e6dc, 0 1px 2px rgba(20, 20, 19, 0.04);
+      --ring: 0 0 0 1px #d1cfc5;
+      --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
+      --glass-bg: rgba(250, 249, 245, 0.75);
+      --glass-border: rgba(232, 230, 220, 0.6);
+    }
 
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      
-      html { scroll-behavior: smooth; }
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-      body {
-        background-color: var(--bg);
-        color: var(--text);
-        font-family: var(--font-body);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    }
 
-      .film-grain {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 100;
-        opacity: 0.05;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        mix-blend-mode: overlay;
-      }
+    /* Typography */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
 
-      h1, h2, h3 {
-        font-family: var(--font-display);
-        font-weight: 500;
-        line-height: 1.1;
-        letter-spacing: -0.025em;
-        color: var(--primary);
-      }
-      h1 { font-size: clamp(3.5rem, 10vw + 1rem, 8rem); }
-      h2 { font-size: clamp(2.5rem, 6vw + 1rem, 4.5rem); }
-      h3 { font-size: clamp(1.5rem, 4vw + 0.5rem, 2.25rem); }
-      p { max-width: 65ch; margin-bottom: 1rem; }
-      a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
-      a:hover { color: var(--accent-soft); }
+    p {
+      color: var(--text-muted);
+    }
 
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
+    /* Layout & Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-      section {
-        padding: clamp(4rem, 10vh, 8rem) 0;
-        position: relative;
-      }
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border-bottom: 1px solid var(--glass-border);
+      transition: background 0.3s ease;
+    }
 
-      .btn {
-        display: inline-block;
-        font-family: var(--font-body);
-        font-weight: 500;
-        font-size: 1rem;
-        background-color: var(--accent);
-        color: var(--surface);
-        padding: 14px 28px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.2s, transform 0.1s;
-        border-radius: var(--radius-sm);
-      }
-      .btn:hover { background-color: var(--accent-soft); }
-      .btn:active { transform: translateY(1px); }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
 
-      /* Neo-Brutalism Gesture */
-      .brutalist-card {
-        background-color: var(--surface);
-        border: 2px solid var(--primary);
-        box-shadow: 6px 6px 0 var(--primary);
-        padding: 2rem;
-        transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-      }
-      .brutalist-card:hover {
-        transform: translate(-3px, -3px);
-        box-shadow: 9px 9px 0 var(--primary-soft);
-      }
-      
-      /* Header */
-      .main-header {
-        padding: 24px 0;
-        position: absolute;
-        width: 100%;
-        z-index: 10;
-      }
-      .main-header .container { display: flex; justify-content: space-between; align-items: center; }
-      .logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--primary); text-decoration: none; }
-      .main-nav ul { list-style: none; display: flex; gap: 2rem; }
-      .main-nav a { color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
-      .main-nav a:hover { color: var(--text); }
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: var(--primary);
+    }
 
-      /* Hero */
-      .hero {
-        min-height: 80vh;
-        display: flex;
-        align-items: center;
-        padding-top: 12rem;
-        padding-bottom: 6rem;
-      }
-      .hero h1 { max-width: 12ch; }
-      .hero p {
-        font-size: 1.25rem;
-        color: var(--text-muted);
-        max-width: 45ch;
-        margin-top: 2rem;
-        margin-bottom: 2.5rem;
-      }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
 
-      /* Services */
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 3rem;
-        margin-top: 4rem;
-      }
-      .service-card h3 { margin-bottom: 1rem; }
-      .service-card p { color: var(--text-muted); font-size: 0.95rem; }
-      .service-icon {
-        width: 40px; height: 40px;
-        stroke: var(--accent);
-        stroke-width: 1.5;
-        fill: none;
-        margin-bottom: 1.5rem;
-      }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
 
-      /* About Section */
-      .about-section { background-color: var(--surface-2); }
-      .about-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 4rem;
-        align-items: center;
-      }
-      @media (min-width: 768px) { .about-grid { grid-template-columns: 1fr 1fr; } }
-      .about-image-wrapper {
-        border: 2px solid var(--primary);
-        padding: 1rem;
-        background-color: var(--surface);
-      }
-      .about-image-wrapper img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        max-height: 600px;
-        object-fit: cover;
-      }
-      .about-content h2 { margin-bottom: 2rem; }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
 
-      /* Pricing Section */
-      .pricing-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 3rem;
-        margin-top: 4rem;
-        justify-content: center;
-      }
-      .price-card {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-      }
-      .price-card .price {
-        font-family: var(--font-display);
-        font-size: 3.5rem;
-        font-weight: 500;
-        margin: 1.5rem 0;
-      }
-      .price-card .price-card-body {
-        flex-grow: 1;
-        padding: 1.5rem 0;
-        border-top: 2px solid var(--primary);
-        border-bottom: 2px solid var(--primary);
-      }
-      .price-card ul { list-style: none; margin-bottom: 2rem; }
-      .price-card li { margin-bottom: 0.5rem; color: var(--text-muted); }
-      .price-card .btn { margin-top: auto; }
+    .nav-cta {
+      background: var(--primary);
+      color: var(--bg);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+    }
 
-      /* Image Showcase */
-      .image-showcase { padding: 0; }
-      .image-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      }
-      @media (min-width: 768px) { .image-grid { grid-template-columns: 1fr 2fr; } }
-      .image-grid img {
-        width: 100%;
-        height: 100%;
-        min-height: 400px;
-        object-fit: cover;
-        display: block;
-      }
-      .image-text {
-        background-color: var(--primary);
-        color: var(--bg);
-        padding: clamp(2rem, 8vw, 6rem);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .image-text h2 { color: var(--bg); }
-      .image-text p { color: var(--border); }
+    .nav-cta:hover {
+      background: var(--primary-soft);
+    }
 
-      /* Contact */
-      .contact-section { text-align: center; }
-      .contact-section h2 { margin-bottom: 1.5rem; }
-      .contact-section p {
-        max-width: 50ch;
-        margin-left: auto;
-        margin-right: auto;
-        color: var(--text-muted);
-        margin-bottom: 3rem;
-      }
-      .contact-details {
-        font-style: normal;
-        margin-top: 3rem;
-        color: var(--text-muted);
-      }
+    .nav-cta:active {
+      transform: translateY(2px);
+    }
 
-      /* Footer */
-      .main-footer {
-        padding: 3rem 0;
-        border-top: 2px solid var(--border);
-        margin-top: 4rem;
-      }
-      .main-footer .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-      }
+    /* Hero Section */
+    .hero {
+      padding-top: 180px;
+      padding-bottom: 100px;
+      position: relative;
+      overflow: hidden;
+    }
 
-      /* Animations */
-      .stagger-children > * {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-      }
-      .stagger-children.is-visible > * {
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-content {
+      z-index: 2;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .kinetic-title {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      margin-bottom: 32px;
+    }
+
+    .kinetic-title span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(30px) rotate(1deg);
+      animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: calc(var(--w) * 100ms);
+    }
+
+    @keyframes reveal {
+      to {
         opacity: 1;
+        transform: translateY(0) rotate(0);
+      }
+    }
+
+    .hero-desc {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin-bottom: 40px;
+      font-family: var(--font-display);
+      font-style: italic;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--surface);
+      border: none;
+      padding: 16px 32px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-soft);
+    }
+
+    .btn-primary:active {
+      transform: translateY(2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--border);
+      padding: 16px 32px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.1s ease, border-color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(2px);
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      height: 550px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    /* Bento Grid Section (Kollektion) */
+    .bento-section {
+      padding: 100px 0;
+      background-color: var(--surface);
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 280px;
+      gap: 24px;
+    }
+
+    .bento-card {
+      background: var(--bg);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .bento-card.span-2-col {
+      grid-column: span 2;
+    }
+
+    .bento-card.span-2-row {
+      grid-row: span 2;
+    }
+
+    .bento-card.image-card {
+      padding: 0;
+    }
+
+    .bento-card.image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-num {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-family: var(--font-body);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    .card-title {
+      font-size: 2rem;
+      margin-top: 12px;
+      margin-bottom: 16px;
+    }
+
+    .card-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    .card-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-action {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-action svg {
+      transition: transform 0.2s ease;
+    }
+
+    .card-action:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Atelier Section (Über uns) */
+    .atelier-section {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .atelier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .atelier-images {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .atelier-img-wrapper {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .atelier-img-wrapper.offset {
+      transform: translateY(40px);
+    }
+
+    .atelier-content h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      margin-bottom: 32px;
+    }
+
+    .atelier-content p {
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+
+    .atelier-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
+    }
+
+    .stat-item h4 {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .stat-item p {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      padding: 100px 0;
+      background-color: var(--surface-2);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-soft);
+    }
+
+    .pricing-card.featured {
+      border: 1px solid var(--accent-soft);
+      position: relative;
+    }
+
+    .badge {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: var(--accent);
+      color: var(--surface);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pricing-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+
+    .pricing-title {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .pricing-price {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--primary);
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 40px;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      color: var(--text-muted);
+    }
+
+    .pricing-features svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Interactive Perfume Finder Section */
+    .finder-section {
+      padding: 100px 0;
+      background: var(--surface);
+    }
+
+    .finder-box {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--bg);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .finder-steps {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .finder-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .finder-btn.active {
+      background: var(--accent);
+      color: var(--surface);
+      border-color: var(--accent);
+    }
+
+    .finder-result {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-soft);
+      min-height: 120px;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 120px 0;
+      background-color: var(--bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .contact-info h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      margin-bottom: 24px;
+    }
+
+    .contact-details {
+      margin-top: 40px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .contact-item h5 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .form-control {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      color: var(--text);
+      transition: border-color 0.2s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary);
+      color: var(--surface);
+      padding: 80px 0 40px;
+      border-top: 1px solid var(--primary-soft);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--surface);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .footer-desc {
+      color: var(--border);
+      max-width: 300px;
+      font-size: 0.95rem;
+    }
+
+    .footer-col h5 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+      color: var(--accent-soft);
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+      color: var(--border);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--surface);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--primary-soft);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--border);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 250px;
+      }
+      .bento-card.span-2-col {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid, .atelier-grid, .pricing-grid, .contact-grid, .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .bento-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+      }
+      .bento-card.span-2-col, .bento-card.span-2-row {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+      .atelier-images {
+        grid-template-columns: 1fr;
+      }
+      .atelier-img-wrapper.offset {
         transform: translateY(0);
       }
-      .stagger-children.is-visible > * {
-        transition-delay: calc(var(--i) * 100ms);
+      .hero-image-wrapper {
+        height: 400px;
       }
+    }
 
-      @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-        }
-        .stagger-children > * { transform: none; }
-        [data-speed] { transform: none !important; }
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .kinetic-title span {
+        animation: none;
+        opacity: 1;
+        transform: none;
       }
-    </style>
+      .bento-card:hover {
+        transform: none;
+      }
+      [data-speed] {
+        transform: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="film-grain"></div>
 
-    <header class="main-header">
-        <div class="container">
-            <a href="#" class="logo">Maison Lumen</a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#services">Signaturen</a></li>
-                    <li><a href="#about">Atelier</a></li>
-                    <li><a href="#contact">Kontakt</a></li>
-                </ul>
-            </nav>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo">Maison Lumen</a>
+      <div class="nav-links">
+        <a href="#kollektion">Kollektion</a>
+        <a href="#atelier">Das Atelier</a>
+        <a href="#preise">Preise</a>
+        <a href="#beratung">Beratung</a>
+        <a href="#beratung" class="nav-cta">Entdecken</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="tagline">Haute Parfumerie</span>
+        <h1 class="kinetic-title">
+          <span style="--w: 1">Düfte</span>
+          <span style="--w: 2">aus</span>
+          <span style="--w: 3">Licht</span>
+          <span style="--w: 4">und</span>
+          <span style="--w: 5">Schatten.</span>
+        </h1>
+        <p class="hero-desc">Sieben handgefertigte Signature-Düfte, komponiert in Grasse, vollendet im eigenen Atelier. Jeder Flakon ein handgemaltes Unikat.</p>
+        <div class="hero-actions">
+          <a href="#kollektion" class="btn-primary">Kollektion ansehen</a>
+          <a href="#atelier" class="btn-secondary">Das Handwerk</a>
         </div>
-    </header>
+      </div>
+      <div class="hero-image-wrapper" data-speed="0.05">
+        <img src="../assets/maison-lumen-cream-1.jpeg" alt="Maison Lumen Duftflakon Nahaufnahme im warmen Licht" style="width:100%;height:auto;object-fit:cover">
+      </div>
+    </div>
+  </header>
 
-    <main>
-        <section class="hero" id="home">
-            <div class="container">
-                <div data-speed="0.2">
-                    <h1>Olfaktorische Signaturen.</h1>
-                    <p>Maison Lumen komponiert Düfte als flüchtige Skulpturen. Handgefertigt in Berlin aus den seltensten Essenzen der Welt.</p>
-                    <a href="#services" class="btn">Kollektion entdecken</a>
-                </div>
-            </div>
-        </section>
+  <!-- Bento Grid Section (Kollektion) -->
+  <section class="bento-section" id="kollektion">
+    <div class="container">
+      <div class="section-header">
+        <span class="tagline">Die Kollektion</span>
+        <h2 class="section-title">Sieben Signaturen</h2>
+        <p class="section-subtitle">Eine sorgsam kuratierte Auswahl an Duftporträts, die sich auf der Haut entfalten und Geschichten erzählen.</p>
+      </div>
 
-        <section id="services">
-            <div class="container">
-                <h2 data-speed="0.1">Handwerk &amp; Kreation</h2>
-                <div class="services-grid stagger-children">
-                    <div class="brutalist-card">
-                        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
-                        <h3>Die Sieben Essenzen</h3>
-                        <p>Unsere kuratierte Kollektion von sieben Unisex-Parfums. Jedes erzählt eine eigene Geschichte, von holziger Tiefe bis zu zitrischer Flüchtigkeit. Entwickelt über 24 Monate.</p>
-                    </div>
-                    <div class="brutalist-card">
-                        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        <h3>Private Duftberatung</h3>
-                        <p>In einer 90-minütigen Session in unserem Atelier finden wir Ihre persönliche Duftsignatur. Eine intime Reise durch Noten, Akkorde und Erinnerungen.</p>
-                    </div>
-                    <div class="brutalist-card">
-                        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                        <h3>Atelier-Erlebnis</h3>
-                        <p>Besuchen Sie uns nach Vereinbarung in unserem Berliner Atelier. Erleben Sie den Prozess, die Rohstoffe und die Philosophie hinter Maison Lumen aus erster Hand.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="bento-grid">
+        <!-- Card 1 -->
+        <div class="bento-card span-2-col">
+          <div>
+            <span class="card-num">N° 1</span>
+            <h3 class="card-title">L'Aube Dorée</h3>
+            <p class="card-desc">Weißer Tee, Bergamotte und warmer Sand. Ein Duft wie das erste, sanfte Licht des Tages über den Hügeln der Provence.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#preise" class="card-action">
+              Spezifikationen
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </div>
 
-        <section class="about-section" id="about">
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-image-wrapper" data-speed="0.2">
-                      <img src="../assets/maison-lumen-cream-1.jpeg" alt="Ein minimalistisch eingerichtetes Atelier mit einem Holztisch, auf dem verschiedene Parfümflakons und botanische Elemente arrangiert sind." loading="lazy">
-                    </div>
-                    <div class="about-content">
-                        <h2>Die Alchemie des Moments</h2>
-                        <p>Wir glauben, dass Parfum mehr ist als ein Accessoire. Es ist eine unsichtbare Architektur, ein Echo der Persönlichkeit. Jeder Flakon von Maison Lumen ist das Ergebnis kompromissloser handwerklicher Präzision und der Suche nach dem perfekten, unvergesslichen Moment.</p>
-                        <p>Unsere Ingredienzien werden von kleinen, unabhängigen Produzenten bezogen, die unsere Werte von Nachhaltigkeit und Qualität teilen. Von Vetiver aus Haiti bis zu Iriswurzel aus der Toskana – wir verwenden nur das Echte.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Card 2 (Image) -->
+        <div class="bento-card span-2-row image-card">
+          <img src="../assets/maison-lumen-cream-2.jpeg" alt="Ästhetische Komposition von Rohstoffen und Flakons">
+        </div>
 
-        <section class="image-showcase">
-            <div class="image-grid">
-                <div class="image-text">
-                    <h2>Der Flakon</h2>
-                    <p>Reduziert auf das Wesentliche. Schweres, geschliffenes Glas, eine handpolierte Kappe aus Bakelit und ein Etikett aus Büttenpapier. Jedes Detail ist eine bewusste Entscheidung gegen das Laute und für das Bleibende.</p>
-                </div>
-                <img src="../assets/maison-lumen-cream-2.jpeg" alt="Detailaufnahme eines eleganten, minimalistischen Parfümflakons, der im warmen, weichen Licht auf einer strukturierten Oberfläche steht." loading="lazy">
-            </div>
-        </section>
+        <!-- Card 3 -->
+        <div class="bento-card">
+          <div>
+            <span class="card-num">N° 4</span>
+            <h3 class="card-title">Ambre Nuit</h3>
+            <p class="card-desc">Dunkles Amber, Vanille-Absolue und rauchiges Zedernholz. Tiefgründig und hypnotisierend.</p>
+          </div>
+        </div>
 
-        <section id="pricing">
-            <div class="container">
-                <h2 style="text-align: center;">Ihre Signatur</h2>
-                <div class="pricing-grid stagger-children">
-                    <div class="brutalist-card price-card">
-                        <h3>Die Kollektion</h3>
-                        <div class="price-card-body">
-                            <div class="price">185 €</div>
-                            <ul>
-                                <li>Ein Flakon (50ml) nach Wahl</li>
-                                <li>Aus den Sieben Essenzen</li>
-                                <li>Inklusive Probenset</li>
-                                <li>Handverpackt</li>
-                            </ul>
-                        </div>
-                        <a href="#contact" class="btn">Anfragen</a>
-                    </div>
-                    <div class="brutalist-card price-card">
-                        <h3>Private Konsultation</h3>
-                        <div class="price-card-body">
-                            <div class="price">350 €</div>
-                            <ul>
-                                <li>90-minütige Duftberatung</li>
-                                <li>Im Berliner Atelier</li>
-                                <li>Inklusive einem 50ml Flakon</li>
-                                <li>Persönliche Archivierung des Duftprofils</li>
-                            </ul>
-                        </div>
-                        <a href="#contact" class="btn">Termin buchen</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Card 4 -->
+        <div class="bento-card">
+          <div>
+            <span class="card-num">N° 7</span>
+            <h3 class="card-title">Ombre Bleue</h3>
+            <p class="card-desc">Maritime Noten gepaart mit Iris-Wurzel und feinstem Wildleder. Kühl und elegant zugleich.</p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="bento-card span-2-col">
+          <div>
+            <span class="card-num">Das Unikat</span>
+            <h3 class="card-title">Handbemalte Flakons</h3>
+            <p class="card-desc">Jeder Flakon wird im Atelier mit flüssigem Blattgold und Pigmenten veredelt. Kein Muster gleicht dem anderen – ein echtes Einzelstück für Ihre Sammlung.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Atelier Section (Über uns) -->
+  <section class="atelier-section" id="atelier">
+    <div class="container atelier-grid">
+      <div class="atelier-images">
+        <div class="atelier-img-wrapper" data-speed="0.02">
+          <img src="../assets/maison-lumen-cream-3.jpeg" alt="Manuelle Abfüllung und Veredelung im Atelier" style="width:100%;height:auto;object-fit:cover">
+        </div>
+        <div class="atelier-img-wrapper offset" data-speed="-0.02">
+          <img src="../assets/maison-lumen-cream-1.jpeg" alt="Details der handgefertigten Parfums" style="width:100%;height:auto;object-fit:cover">
+        </div>
+      </div>
+      <div class="atelier-content">
+        <span class="tagline">Die Philosophie</span>
+        <h2>Langsame Kunst für die Sinne</h2>
+        <p>Wir glauben an die Entschleunigung im Zeitalter der Massenproduktion. Unsere natürlichen Essenzen reifen drei Monate lang in Fässern aus französischer Eiche, bevor sie in Kleinstauflagen abgefüllt werden.</p>
+        <p>Maison Lumen wurde mit der Vision gegründet, Parfüm als flüssige Kunst zu betrachten. Unsere Inhaltsstoffe stammen aus nachhaltigem, biologischem Anbau und werden von Hand selektiert.</p>
         
-        <section class="image-showcase">
-            <div class="image-grid" style="grid-template-columns: 2fr 1fr;">
-                 <img src="../assets/maison-lumen-cream-3.jpeg" alt="Eine Person trägt mit einer Pipette eine duftende Essenz auf einen Teststreifen auf, umgeben von Laborgeräten und botanischen Zutaten." loading="lazy">
-                <div class="image-text" data-speed="0.1">
-                    <h2>Das Atelier</h2>
-                    <p>Ein Ort der Stille und Konzentration. Hier, zwischen Glas und botanischen Extrakten, nehmen unsere Kompositionen Form an. Jeder Duft ist eine Reflexion, ein Gedanke, in eine Formel übersetzt.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact-section" id="contact">
-            <div class="container">
-                <h2>In Kontakt treten</h2>
-                <p>Für Termine, Anfragen oder um einfach nur Hallo zu sagen, erreichen Sie uns per E-Mail. Unser Atelier in Berlin-Mitte ist nur nach Vereinbarung für Besucher geöffnet.</p>
-                <a href="mailto:atelier@maisonlumen.de" class="btn">atelier@maisonlumen.de</a>
-                <address class="contact-details">
-                    Maison Lumen<br>
-                    Linienstraße 84, 10119 Berlin<br>
-                    (Nur nach Vereinbarung)
-                </address>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <span>&copy; 2024 Maison Lumen</span>
-            <span>Impressum & Datenschutz</span>
+        <div class="atelier-stats">
+          <div class="stat-item">
+            <h4>7</h4>
+            <p>Signature Düfte</p>
+          </div>
+          <div class="stat-item">
+            <h4>100%</h4>
+            <p>Handarbeit</p>
+          </div>
+          <div class="stat-item">
+            <h4>90</h4>
+            <p>Tage Reifezeit</p>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Stagger-Fade Animation
-            const animatedContainers = document.querySelectorAll('.stagger-children');
-            if (animatedContainers.length > 0) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1 });
+  <!-- Interactive Scent Finder -->
+  <section class="finder-section">
+    <div class="container">
+      <div class="finder-box">
+        <span class="tagline">Interaktiver Finder</span>
+        <h3 class="card-title" style="font-size: 2.5rem; margin-bottom: 16px;">Finden Sie Ihre Duftrichtung</h3>
+        <p class="card-desc" style="margin-bottom: 32px;">Wählen Sie eine bevorzugte Atmosphäre, um eine persönliche Empfehlung zu erhalten.</p>
+        
+        <div class="finder-steps">
+          <button class="finder-btn active" onclick="selectScent('frisch', this)">Frische Meeresbrise</button>
+          <button class="finder-btn" onclick="selectScent('holzig', this)">Warmer Waldboden</button>
+          <button class="finder-btn" onclick="selectScent('blumig', this)">Sinnlicher Garten</button>
+        </div>
 
-                animatedContainers.forEach(container => {
-                    [...container.children].forEach((child, i) => {
-                        child.style.setProperty('--i', i);
-                    });
-                    observer.observe(container);
-                });
-            }
+        <div class="finder-result" id="finder-result">
+          <h4 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 8px; color: var(--accent);">N° 7 Ombre Bleue</h4>
+          <p class="card-desc">Ein kühler, eleganter Duft mit Iris-Wurzel, Meersalz und feinstem Wildleder. Perfekt für Liebhaber von Klarheit und Weite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            // Parallax Effect
-            const parallaxElements = document.querySelectorAll('[data-speed]');
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  <!-- Pricing Section -->
+  <section class="pricing-section" id="preise">
+    <div class="container">
+      <div class="section-header">
+        <span class="tagline">Angebote</span>
+        <h2 class="section-title">Erleben Sie Maison Lumen</h2>
+        <p class="section-subtitle">Beginnen Sie Ihre Reise mit unserem Probierset oder wählen Sie direkt Ihren persönlichen Signatur-Flakon.</p>
+      </div>
 
-            if (!prefersReducedMotion && parallaxElements.length > 0) {
-                const updateParallax = () => {
-                    const scrollY = window.scrollY;
-                    parallaxElements.forEach(el => {
-                        const speed = parseFloat(el.dataset.speed);
-                        const offset = scrollY * speed;
-                        el.style.transform = `translateY(${offset}px)`;
-                    });
-                };
-                window.addEventListener('scroll', updateParallax, { passive: true });
-                updateParallax();
-            }
-        });
-    </script>
+      <div class="pricing-grid">
+        <!-- Plan 1 -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3 class="pricing-title">Discovery Set</h3>
+            <div class="pricing-price">45 €</div>
+            <p style="margin-top: 8px; font-size: 0.9rem;">Ideal zum Kennenlernen</p>
+          </div>
+          <ul class="pricing-features">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Alle 7 Signature-Düfte (je 2ml)
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Inklusive edler Aufbewahrungsbox
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              45 € Gutschein für Ihren Vollflakon
+            </li>
+          </ul>
+          <a href="#beratung" class="btn-secondary" style="text-align: center; margin-top: auto;">Set bestellen</a>
+        </div>
+
+        <!-- Plan 2 -->
+        <div class="pricing-card featured">
+          <span class="badge">Beliebt</span>
+          <div class="pricing-header">
+            <h3 class="pricing-title">Signature Flakon</h3>
+            <div class="pricing-price">185 €</div>
+            <p style="margin-top: 8px; font-size: 0.9rem;">Ihr persönliches Meisterwerk</p>
+          </div>
+          <ul class="pricing-features">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              50ml Eau de Parfum nach Wahl
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Handbemalter Kristallflakon (Unikat)
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Zertifikat mit Unterschrift des Kreateurs
+            </li>
+          </ul>
+          <a href="#beratung" class="btn-primary" style="text-align: center; margin-top: auto;">Duft wählen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="beratung">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <span class="tagline">Atelier-Besuch</span>
+        <h2>Olfaktorische Beratung</h2>
+        <p>Besuchen Sie uns in unserem Atelier für eine persönliche Duftreise oder kontaktieren Sie uns bei Fragen zu unseren Kreationen.</p>
+        
+        <div class="contact-details">
+          <div class="contact-item">
+            <div>
+              <h5>Maison Lumen Atelier</h5>
+              <p>Auguststraße 42, 10119 Berlin</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div>
+              <h5>Öffnungszeiten</h5>
+              <p>Dienstag – Samstag: 11:00 – 19:00 Uhr</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div>
+              <h5>Kontakt</h5>
+              <p>atelier@maisonlumen.de<br>+49 (0) 30 1234567</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir werden uns in Kürze bei Ihnen melden.');">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-control" required placeholder="Ihr Name">
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail-Adresse</label>
+            <input type="email" id="email" class="form-control" required placeholder="ihre.email@beispiel.de">
+          </div>
+          <div class="form-group">
+            <label for="message">Nachricht oder Terminanfrage</label>
+            <textarea id="message" class="form-control" rows="5" required placeholder="Wie können wir Ihnen helfen?"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%;">Anfrage senden</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <span class="footer-logo">Maison Lumen</span>
+        <p class="footer-desc">Die Essenz der Langsamkeit. Handgefertigte Parfums für Menschen, die das Besondere suchen.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Kollektion</h5>
+        <ul>
+          <li><a href="#kollektion">L'Aube Dorée</a></li>
+          <li><a href="#kollektion">Ambre Nuit</a></li>
+          <li><a href="#kollektion">Ombre Bleue</a></li>
+          <li><a href="#preise">Discovery Set</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Manufaktur</h5>
+        <ul>
+          <li><a href="#atelier">Das Handwerk</a></li>
+          <li><a href="#atelier">Inhaltsstoffe</a></li>
+          <li><a href="#beratung">Atelier-Termine</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Rechtliches</h5>
+        <ul>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">Versand & Retouren</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2024 Maison Lumen. Alle Rechte vorbehalten.</p>
+      <p>Gestaltet mit Fokus auf das Wesentliche.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Parallax Depth Effect
+    window.addEventListener('scroll', () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const parallaxElements = document.querySelectorAll('[data-speed]');
+      const scrollY = window.pageYOffset;
+      
+      parallaxElements.forEach(el => {
+        const speed = parseFloat(el.getAttribute('data-speed'));
+        el.style.transform = `translateY(${scrollY * speed}px)`;
+      });
+    });
+
+    // Interactive Scent Finder Logic
+    const scents = {
+      frisch: {
+        title: "N° 7 Ombre Bleue",
+        desc: "Ein kühler, eleganter Duft mit Iris-Wurzel, Meersalz und feinstem Wildleder. Perfekt für Liebhaber von Klarheit und Weite."
+      },
+      holzig: {
+        title: "N° 4 Ambre Nuit",
+        desc: "Dunkles Amber, Bourbon-Vanille und rauchiges Zedernholz. Tiefgründig, geheimnisvoll und wärmend für die kühleren Stunden."
+      },
+      blumig: {
+        title: "N° 1 L'Aube Dorée",
+        desc: "Weißer Tee, frische Bergamotte und zarte Jasmin-Noten auf einem Bett aus warmem Sand. Belebend und elegant."
+      }
+    };
+
+    function selectScent(type, btn) {
+      // Update Active Button
+      document.querySelectorAll('.finder-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Update Content with subtle fade
+      const resultBox = document.getElementById('finder-result');
+      resultBox.style.opacity = '0';
+      
+      setTimeout(() => {
+        resultBox.innerHTML = `
+          <h4 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 8px; color: var(--accent);">${scents[type].title}</h4>
+          <p class="card-desc">${scents[type].desc}</p>
+        `;
+        resultBox.style.opacity = '1';
+      }, 200);
+    }
+  </script>
 </body>
 </html>

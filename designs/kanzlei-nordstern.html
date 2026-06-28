@@ -1,406 +1,807 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kanzlei Nordstern — Ihr Kurs im Wirtschaftsrecht</title>
-  <meta name="description" content="Kanzlei Nordstern ist Ihre Boutique-Wirtschaftskanzlei für den Mittelstand. Spezialisiert auf M&A, Gesellschaftsrecht und Arbeitsrecht.">
+  <title>Kanzlei Nordstern — Boutique für M&A und Gesellschaftsrecht</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f4ed;
-      --surface: #faf9f5;
-      --surface-2: #edebe2;
-      --primary: #141413;
-      --primary-soft: #30302e;
-      --accent: #c96442;
-      --accent-soft: #d97757;
-      --text: #141413;
-      --text-muted: #5e5d59;
-      --border: #e8e6dc;
-      --border-soft: #f0eee6;
-      --radius: 12px;
-      --radius-sm: 8px;
-      --radius-lg: 18px;
-      --shadow: 0 0 0 1px var(--border), 0 1px 2px rgba(20, 20, 19, 0.04);
-      --ring: 0 0 0 1px #d1cfc5;
-      --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
+      --bg: #faf9f5;
+      --surface: #f4f2ea;
+      --surface-2: #ebe8dc;
+      --primary: #1c1b18;
+      --primary-soft: #33312c;
+      --accent: #8c6d50; /* Sophisticated bronze */
+      --accent-soft: #a38568;
+      --text: #242320;
+      --text-muted: #66635a;
+      --border: #e3dfd3;
+      --border-soft: #eeebe0;
+      --radius: 8px;
+      --radius-sm: 4px;
+      --radius-lg: 16px;
+      --shadow: 0 1px 2px rgba(28, 27, 24, 0.02), 0 4px 12px rgba(28, 27, 24, 0.03);
+      --ring: 0 0 0 1px var(--accent);
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background-color: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
+      font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%235e5d59' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
-    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    section { padding: clamp(4rem, 10vh, 8rem) 0; }
+    /* Film Grain Overlay */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      mix-blend-mode: overlay;
+    }
 
+    /* Typography */
     h1, h2, h3 {
       font-family: var(--font-display);
-      font-weight: 500;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
       color: var(--primary);
     }
-    h1 { font-size: clamp(3.5rem, 10vw, 7rem); }
-    h2 { font-size: clamp(2.5rem, 6vw, 4rem); }
-    h3 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
-    p { font-size: 1.1rem; max-width: 65ch; margin-bottom: 1rem; }
-    p.lead { font-size: 1.25rem; color: var(--text-muted); }
-    a { color: var(--accent); text-decoration: none; }
 
-    .btn {
-      display: inline-block;
-      padding: 14px 28px;
-      font-family: var(--font-body);
-      font-weight: 500;
-      font-size: 1rem;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: 1px solid transparent;
-    }
-    .btn-primary {
-      background-color: var(--accent);
-      color: var(--surface);
-      border-color: var(--accent);
-    }
-    .btn-primary:hover { background-color: var(--accent-soft); border-color: var(--accent-soft); }
-    .btn-secondary {
-      background-color: transparent;
-      color: var(--primary-soft);
-      box-shadow: var(--shadow);
-    }
-    .btn-secondary:hover { background-color: var(--surface-2); }
+    h1 { font-size: clamp(2.5rem, 5vw, 4.2rem); }
+    h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
+    h3 { font-size: clamp(1.5rem, 2vw, 2rem); }
 
+    p {
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Layout Elements */
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
     header {
-      position: sticky;
-      top: 16px;
-      z-index: 10;
-      padding: 12px 0;
-      margin: 0 24px 24px;
-      border-radius: var(--radius);
-      background: rgba(250, 249, 245, 0.6);
-      backdrop-filter: blur(12px) saturate(120%);
-      -webkit-backdrop-filter: blur(12px) saturate(120%);
-      box-shadow: 0 0 0 1px rgba(224, 222, 212, 0.8);
-    }
-    .navbar { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; color: var(--primary); }
-    .nav-links { display: none; }
-    @media (min-width: 768px) {
-      .nav-links { display: flex; gap: 2rem; }
-      .nav-links a { color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
-      .nav-links a:hover { color: var(--primary); }
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-soft);
     }
 
-    .hero {
-      min-height: 80vh;
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      transition: var(--transition);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Robust Split Screen Layout */
+    .split-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .split-container {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      width: 100%;
+      z-index: 2;
+    }
+
+    .split-content {
+      grid-column: 1 / span 6;
+      padding: 140px 48px 100px 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      text-align: center;
     }
-    .hero h1 {
-      background: linear-gradient(90deg, var(--accent) 0%, var(--primary-soft) 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: text-glow 10s linear infinite;
-    }
-    .hero .lead { margin: 2rem auto 2.5rem; }
-    .hero .buttons { display: flex; justify-content: center; gap: 1rem; }
 
-    @keyframes text-glow {
-      to { background-position: 200% center; }
+    .split-section.alternate .split-content {
+      grid-column: 7 / span 6;
+      padding: 140px 0 100px 48px;
     }
-    
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: minmax(180px, auto);
-      gap: 24px;
-    }
-    .bento-item {
-      background-color: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+
+    .split-media {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 1;
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .bento-item:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 0 0 1px var(--border), 0 8px 16px rgba(20, 20, 19, 0.06);
+
+    .split-section.alternate .split-media {
+      left: 0;
+      right: auto;
     }
-    .bento-item img {
+
+    .split-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: grayscale(15%) sepia(10%);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .split-section:hover .split-media img {
+      transform: scale(1.03);
+    }
+
+    /* Hero Section Specifics */
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: inline-block;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      margin: 24px 0 40px 0;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* Premium Button */
+    .btn-premium {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary);
+      border: 1px solid var(--primary);
       border-radius: var(--radius-sm);
-    }
-    .bento-item.no-padding { padding: 0; }
-    .bento-item .icon {
-        width: 32px;
-        height: 32px;
-        color: var(--accent);
-        margin-bottom: 12px;
-    }
-    .bento-item h3 { margin-bottom: 8px; font-size: 1.75rem; }
-    .bento-item p { color: var(--text-muted); font-size: 1rem; line-height: 1.5; }
-    .bento-item .stat-number {
-        font-family: var(--font-display);
-        font-size: clamp(3rem, 8vw, 5rem);
-        line-height: 1;
-        font-weight: 500;
-        color: var(--primary);
-    }
-    .bento-item .stat-label {
-        color: var(--text-muted);
-        font-size: 1rem;
-        max-width: 15ch;
-    }
-    .bento-item.quote {
-        justify-content: center;
-        text-align: center;
-        background-color: var(--surface-2);
-    }
-    .bento-item.quote p {
-        font-family: var(--font-display);
-        font-size: 1.5rem;
-        font-style: italic;
-        color: var(--primary-soft);
-        max-width: 30ch;
-        margin: 0 auto;
-    }
-    .bento-item.quote footer {
-        margin-top: 1rem;
-        font-size: 0.9rem;
-        color: var(--text-muted);
+      padding: 16px 32px;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+      width: fit-content;
+      overflow: hidden;
     }
 
-    @media (min-width: 768px) {
-      .bento-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-      .bento-item:nth-child(2) { grid-column: span 2; }
-      .bento-item:nth-child(3) { grid-column: span 1; justify-content: center; text-align: center; }
-      .bento-item:nth-child(4) { grid-column: span 1; }
-      .bento-item:nth-child(5) { grid-column: span 2; }
-      .bento-item:nth-child(6) { grid-column: span 2; grid-row: span 2; }
-      .bento-item:nth-child(7) { grid-column: span 2; }
-    }
-    @media (max-width: 767px) {
-      .bento-grid { grid-template-columns: 1fr; }
-      .bento-item { grid-column: span 1 !important; grid-row: span 1 !important; min-height: 250px; }
-      .bento-item.no-padding { min-height: 300px; }
+    .btn-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--bg);
+      font-weight: 500;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 2;
+      transition: var(--transition);
     }
 
-    .about-section {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 4rem;
-        align-items: center;
-    }
-    @media (min-width: 992px) {
-      .about-section { grid-template-columns: 2fr 3fr; }
-      .about-section .image-wrapper { order: 2; }
-    }
-    .about-section .image-wrapper {
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        position: relative;
-    }
-    .about-section img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    .btn-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--accent);
+      transform: translateY(100%);
+      transition: var(--transition);
+      z-index: 1;
     }
 
-    .contact-section { text-align: center; }
-    .contact-section h2 { margin-bottom: 1rem; }
-    .contact-section .lead { margin: 0 auto 2.5rem; }
+    .btn-premium:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
 
-    footer {
-      padding: 3rem 0;
-      border-top: 1px solid var(--border);
-      text-align: center;
+    .btn-premium:hover::before {
+      transform: translateY(0);
+    }
+
+    /* Standard Sections */
+    section.standard-section {
+      padding: 120px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .section-header {
+      margin-bottom: 80px;
+      max-width: 640px;
+    }
+
+    .section-header h2 {
+      margin-top: 12px;
+    }
+
+    /* Expertise Section (Cards Grid) */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .expertise-card {
+      background-color: var(--surface);
+      padding: 48px 40px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-soft);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .expertise-card:hover {
+      transform: translateY(-4px);
+      background-color: var(--bg);
+      border-color: var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      stroke: var(--accent);
+      stroke-width: 1.25;
+      fill: none;
+      margin-bottom: 32px;
+    }
+
+    .expertise-card h3 {
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .expertise-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Transaktionen & Honorare */
+    .pricing-wrapper {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .metrics-list {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .metric-item {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 32px;
+    }
+
+    .metric-number {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      font-weight: 600;
       color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .pricing-card {
+      background-color: var(--surface);
+      padding: 56px 48px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+    }
+
+    .pricing-card h3 {
+      margin-bottom: 24px;
+    }
+
+    .pricing-list {
+      list-style: none;
+      margin-bottom: 40px;
+    }
+
+    .pricing-list li {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .pricing-list li span:first-child {
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .pricing-list li span:last-child {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    /* Form Styling */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-top: 40px;
+      max-width: 100%;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text);
+      transition: var(--transition);
+      border-radius: 0;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-bottom-color: var(--accent);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #b5b1a5;
+      font-weight: 300;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: var(--surface-2);
+      padding: 100px 0 40px 0;
       font-size: 0.9rem;
     }
-    .footer-links { margin-top: 1rem; display: flex; justify-content: center; gap: 1.5rem; }
 
-    .parallax-bg {
-        position: absolute;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        filter: blur(100px);
-        opacity: 0.15;
-        z-index: -1;
-    }
-    .parallax-1 {
-        top: 10vh;
-        left: -5vw;
-        background: var(--accent-soft);
-    }
-    .parallax-2 {
-        top: 60vh;
-        right: -10vw;
-        background: var(--primary-soft);
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 80px;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
+    .footer-brand h3 {
+      color: var(--bg);
+      margin-bottom: 20px;
+    }
+
+    .footer-brand p {
+      color: #9e9b90;
+      font-weight: 300;
+    }
+
+    .footer-title {
+      color: var(--bg);
+      margin-bottom: 24px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: #9e9b90;
+      transition: var(--transition);
+      font-weight: 300;
+    }
+
+    .footer-links a:hover {
+      color: var(--bg);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--primary-soft);
+      padding-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      color: #7d7a70;
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+
+    /* Animations (Stagger Fade) */
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .stagger-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      header {
+        position: relative;
+        background-color: var(--bg);
       }
-      .hero h1 { animation: none; }
-      .parallax-bg { display: none; }
+
+      .split-section {
+        min-height: auto;
+        flex-direction: column;
+      }
+
+      .split-container {
+        grid-template-columns: 1fr;
+      }
+
+      .split-content {
+        grid-column: 1 / -1 !important;
+        padding: 80px 24px !important;
+      }
+
+      .split-media {
+        position: relative;
+        width: 100%;
+        height: 50vh;
+        left: auto !important;
+        right: auto !important;
+      }
+
+      .expertise-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .pricing-wrapper {
+        grid-template-columns: 1fr;
+        gap: 56px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+
+    /* Accessibility: Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .stagger-item {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .btn-premium, .btn-premium::before, .split-media img {
+        transform: none !important;
+        transition: none !important;
+      }
+      .expertise-card:hover {
+        transform: none !important;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="parallax-bg parallax-1" data-speed="0.3"></div>
-  <div class="parallax-bg parallax-2" data-speed="0.15"></div>
+  <div class="grain"></div>
 
   <header>
-    <div class="container navbar">
-      <a href="#" class="logo">Kanzlei Nordstern</a>
-      <nav class="nav-links">
-        <a href="#kompetenzen">Kompetenzen</a>
+    <div class="container nav-wrapper">
+      <div class="logo">Nordstern</div>
+      <nav class="nav-links" aria-label="Hauptnavigation">
+        <a href="#expertise">Expertise</a>
+        <a href="#transaktionen">Honorare</a>
         <a href="#philosophie">Philosophie</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
-      <a href="#kontakt" class="btn btn-primary" style="display: none; @media (min-width: 768px) { display: inline-block; }">Mandat anfragen</a>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+    <!-- Section 1: Hero (Split Screen) -->
+    <section id="hero" class="split-section">
+      <div class="container split-container">
+        <div class="split-content">
+          <span class="badge">M&A und Gesellschaftsrecht</span>
+          <h1>Präzision im Gesellschaftsrecht. Weitblick bei Transaktionen.</h1>
+          <p class="hero-desc">Als spezialisierte Boutique-Kanzlei begleiten wir mittelständische Unternehmen, Family Offices und Gründer durch komplexe Transaktionen und strategische Restrukturierungen.</p>
+          <a href="#kontakt" class="btn-premium">
+            <span class="btn-content">
+              Erstgespräch vereinbaren
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="split-media">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Minimalistischer, moderner Konferenzraum der Kanzlei Nordstern">
+      </div>
+    </section>
+
+    <!-- Section 2: Expertise / Leistungen -->
+    <section id="expertise" class="standard-section">
       <div class="container">
-        <h1>Ihr Kurs im Wirtschaftsrecht.</h1>
-        <p class="lead">Kanzlei Nordstern navigiert den deutschen Mittelstand mit strategischer Weitsicht und persönlicher Hingabe durch komplexe rechtliche Gewässer.</p>
-        <div class="buttons">
-          <a href="#kompetenzen" class="btn btn-primary">Unsere Expertise</a>
-          <a href="#kontakt" class="btn btn-secondary">Erstgespräch vereinbaren</a>
+        <div class="section-header">
+          <span class="badge">Unsere Leistungen</span>
+          <h2>Fokussierte Rechtsberatung für unternehmerischen Erfolg</h2>
+        </div>
+        <div class="expertise-grid">
+          <div class="expertise-card stagger-item">
+            <svg class="card-icon" viewBox="0 0 24 24"><path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"/><path d="M18 8h4a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-4"/><path d="M11 5v14"/></svg>
+            <h3>Mergers & Acquisitions</h3>
+            <p>Strukturierung, Due Diligence und Verhandlungsführung bei Unternehmenskäufen und -verkäufen (M&A) sowie Joint Ventures.</p>
+          </div>
+          <div class="expertise-card stagger-item">
+            <svg class="card-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <h3>Gesellschaftsrecht</h3>
+            <p>Gründung, Gesellschaftervereinbarungen, Corporate Governance und die rechtssichere Begleitung von Hauptversammlungen.</p>
+          </div>
+          <div class="expertise-card stagger-item">
+            <svg class="card-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <h3>Nachfolgeplanung</h3>
+            <p>Steuerlich optimierte und familiengerechte Übergabe von Betriebsvermögen an die nächste Generation oder externe Käufer.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="kompetenzen">
+    <!-- Section 3: Transaktionsvolumen & Honorarstruktur -->
+    <section id="transaktionen" class="standard-section">
       <div class="container">
-        <div class="bento-grid">
-          
-          <div class="bento-item no-padding" data-speed="0.1">
-            <img src="../assets/kanzlei-nordstern-cream-1.jpeg" alt="Ein moderner, heller Konferenzraum mit Holztisch und Design-Stühlen, der Professionalität ausstrahlt.">
-          </div>
-          
-          <div class="bento-item">
-            <div>
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg>
-              <h3>M&A-Transaktionen</h3>
-              <p>Wir begleiten Käufe und Verkäufe von Unternehmen oder Unternehmensteilen mit juristischer Präzision und unternehmerischem Verständnis.</p>
+        <div class="section-header">
+          <span class="badge">Zahlen & Transparenz</span>
+          <h2>Nachweisbare Expertise, kalkulierbare Honorare</h2>
+        </div>
+        <div class="pricing-wrapper">
+          <div class="metrics-list">
+            <div class="metric-item stagger-item">
+              <div class="metric-number">1,2 Mrd. €</div>
+              <div class="metric-label">Begleitetes Transaktionsvolumen seit Gründung</div>
+            </div>
+            <div class="metric-item stagger-item">
+              <div class="metric-number">74</div>
+              <div class="metric-label">Erfolgreich abgeschlossene M&A-Mandate</div>
+            </div>
+            <div class="metric-item stagger-item">
+              <div class="metric-number">100 %</div>
+              <div class="metric-label">Fokus auf Wirtschafts- und Gesellschaftsrecht</div>
             </div>
           </div>
-
-          <div class="bento-item">
-            <div class="stat-number">150+</div>
-            <div class="stat-label">Erfolgreich begleitete Transaktionen</div>
+          <div class="pricing-card stagger-item">
+            <h3>Unsere Honorarstruktur</h3>
+            <p style="margin-bottom: 24px;">Wir glauben an Transparenz statt unvorhersehbarer Stundenabrechnungen. Für Standardprojekte bieten wir klare, wertbasierte Pauschalen.</p>
+            <ul class="pricing-list">
+              <li>
+                <span>M&A-Begleitung (Due Diligence)</span>
+                <span>Nach Aufwand</span>
+              </li>
+              <li>
+                <span>Gesellschaftsrechtliche Restrukturierung</span>
+                <span>Ab 7.500 €</span>
+              </li>
+              <li>
+                <span>Laufende Corporate Governance</span>
+                <span>Ab 1.800 € / Mo.</span>
+              </li>
+            </ul>
+            <p style="font-size: 0.8rem; line-height: 1.5; font-weight: 300;">Alle Honorarsätze verstehen sich zzgl. gesetzlicher USt. und Auslagen. Individuelle Angebote erstellen wir nach einer ersten kostenfreien Ersteinschätzung.</p>
           </div>
-          
-          <div class="bento-item quote">
-            <p>„Unser Ziel ist nicht der schnelle Abschluss, sondern die nachhaltig beste Lösung für Ihr Unternehmen.“</p>
-            <footer>— Dr. Alena Schmidt, Partnerin</footer>
-          </div>
-          
-          <div class="bento-item">
-            <div>
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
-              <h3>Gesellschaftsrecht</h3>
-              <p>Von der Gründung über Umstrukturierungen bis zur Nachfolgeplanung – wir gestalten die rechtliche Basis für Ihren Erfolg.</p>
-            </div>
-          </div>
-          
-          <div class="bento-item no-padding" data-speed="0.1">
-            <img src="../assets/kanzlei-nordstern-cream-2.jpeg" alt="Eine Person sitzt an einem Schreibtisch in einer klassischen Bibliothek und arbeitet konzentriert.">
-          </div>
-          
-          <div class="bento-item">
-            <div>
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.962A3.375 3.375 0 0 1 15 12.75v-1.5a3.375 3.375 0 0 1 3.375-3.375V7.5a3.375 3.375 0 0 1-3.375 3.375v-1.5a3.375 3.375 0 0 1-3.375-3.375V3.75M3 13.5v-1.5A3.375 3.375 0 0 1 6.375 8.625v1.5A3.375 3.375 0 0 1 9.75 13.5v-1.5A3.375 3.375 0 0 1 13.125 8.625v1.5" /></svg>
-              <h3>Strategisches Arbeitsrecht</h3>
-              <p>Wir beraten und vertreten Sie in allen kollektiv- und individualarbeitsrechtlichen Fragen, immer mit Blick auf Ihre Unternehmensziele.</p>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <section id="philosophie" class="about-section">
-      <div class="container about-section">
-        <div class="image-wrapper" data-speed="0.05">
-          <img src="../assets/kanzlei-nordstern-cream-3.jpeg" alt="Ein eleganter, holzgetäfelter Raum mit einem großen Fenster, das warmes Licht hereinlässt und eine Atmosphäre von Seriosität und Ruhe schafft.">
+    <!-- Section 4: Über uns / Philosophie (Split Screen Alternate) -->
+    <section id="philosophie" class="split-section alternate">
+      <div class="container split-container">
+        <div class="split-content">
+          <span class="badge">Philosophie</span>
+          <h2>Juristischer Tiefgang trifft unternehmerisches Denken</h2>
+          <p class="hero-desc" style="margin-bottom: 24px;">Wir verstehen uns nicht als reine Gutachter, sondern als strategische Partner unserer Mandanten. Jedes Mandat wird persönlich von einem Partner betreut — ohne Informationsverlust durch wechselnde Teams.</p>
+          <p style="font-size: 0.95rem;">Durch unsere langjährige Erfahrung in internationalen Großkanzleien garantieren wir höchste fachliche Qualität, gepaart mit der Agilität und persönlichen Nähe einer hochspezialisierten Boutique.</p>
         </div>
-        <div class="content-wrapper">
-          <h2>Partnerschaft auf Augenhöhe.</h2>
-          <p>Wir verstehen uns nicht nur als Rechtsberater, sondern als strategische Partner des Mittelstands. Diskretion, Vertrauen und ein tiefes Verständnis für die Kultur und die Herausforderungen von Familienunternehmen und inhabergeführten Betrieben sind das Fundament unserer Arbeit.</p>
-          <p>Der Nordstern war seit jeher ein verlässlicher Orientierungspunkt. Diesem Leitbild folgen wir: Wir bieten klare, verständliche und umsetzbare rechtliche Lösungen, die Ihnen Sicherheit geben und den Weg für zukünftiges Wachstum ebnen. Ihre Ziele sind unser Maßstab.</p>
-        </div>
+      </div>
+      <div class="split-media">
+        <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=1200&q=80" alt="Elegantes, modernes Besprechungszimmer mit Blick auf architektonische Details">
       </div>
     </section>
 
-    <section id="kontakt" class="contact-section">
-      <div class="container">
-        <h2>Beginnen wir das Gespräch.</h2>
-        <p class="lead">Jede erfolgreiche Partnerschaft beginnt mit einem vertrauensvollen Austausch. Kontaktieren Sie uns für ein unverbindliches und streng vertrauliches Erstgespräch.</p>
-        <a href="mailto:kontakt@kanzlei-nordstern.de" class="btn btn-primary">kontakt@kanzlei-nordstern.de</a>
+    <!-- Section 5: Kontakt (Split Screen) -->
+    <section id="kontakt" class="split-section">
+      <div class="container split-container">
+        <div class="split-content">
+          <span class="badge">Erstgespräch</span>
+          <h2>Lassen Sie uns über Ihr Vorhaben sprechen</h2>
+          <p style="margin-bottom: 24px;">Nutzen Sie unser vertrauliches Kontaktformular für eine unverbindliche Anfrage. Wir melden uns innerhalb von 24 Stunden persönlich bei Ihnen.</p>
+          
+          <form class="contact-form" action="#" method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" required placeholder="Dr. Albert Müller">
+            </div>
+            <div class="form-group">
+              <label for="email">E-Mail-Adresse</label>
+              <input type="email" id="email" required placeholder="mueller@unternehmen.de">
+            </div>
+            <div class="form-group">
+              <label for="message">Ihr Anliegen (M&A, Gesellschaftsrecht, Nachfolge)</label>
+              <textarea id="message" rows="3" required placeholder="Kurze Beschreibung Ihres Vorhabens..."></textarea>
+            </div>
+            <button type="submit" class="btn-premium" style="width: 100%;">
+              <span class="btn-content">Anfrage vertraulich senden</span>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="split-media">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="Professionelles Arbeitsumfeld bei Kanzlei Nordstern">
       </div>
     </section>
   </main>
 
   <footer>
     <div class="container">
-      <p>&copy; 2024 Kanzlei Nordstern Partnerschaft mbB. Alle Rechte vorbehalten.</p>
-      <div class="footer-links">
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Kanzlei Nordstern</h3>
+          <p>Partnerschaft von Rechtsanwälten mbB<br>Spezialisiert auf M&A, Gesellschaftsrecht und Nachfolge.</p>
+        </div>
+        <div>
+          <div class="footer-title">Standorte</div>
+          <p style="color: #9e9b90; line-height: 1.8; font-weight: 300;">Hamburg — Neuer Wall 42<br>München — Maximilianstraße 15</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-title">Rechtliches</div>
+          <a href="#">Impressum</a>
+          <a href="#">Datenschutz</a>
+          <a href="#">Berufsrechtliche Hinweise</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Kanzlei Nordstern. Alle Rechte vorbehalten.</span>
+        <span>Zugelassen bei der Hanseatischen Rechtsanwaltskammer Hamburg.</span>
       </div>
     </div>
   </footer>
 
   <script>
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduceMotion) {
-      const parallaxElements = document.querySelectorAll('[data-speed]');
-      window.addEventListener('scroll', () => {
-        const scrollY = window.pageYOffset;
-        parallaxElements.forEach(el => {
-          const speed = parseFloat(el.dataset.speed);
-          el.style.transform = `translateY(${scrollY * speed}px)`;
-        });
-      });
-    }
-  </script>
+    // Stagger-Fade Intersection Observer
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.05
+    };
 
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Add delay based on element index for a natural stagger effect
+          setTimeout(() => {
+            entry.target.classList.add('is-visible');
+          }, index * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.stagger-item').forEach(item => {
+      observer.observe(item);
+    });
+  </script>
 </body>
 </html>

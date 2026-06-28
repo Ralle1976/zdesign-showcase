@@ -3,508 +3,1053 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orathai Thai Spa – Traditionelle Wellness in München</title>
-  <meta name="description" content="Erleben Sie authentische Thai-Massagen und luxuriöse Spa-Rituale im Orathai Thai Spa in München. Ein Refugium der Ruhe und Erneuerung.">
+  <title>Orathai — Luxus Thai Spa & Wellness München</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Mulish:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #FBF6EA;
       --surface: #FFFFFF;
-      --surface-2: #F4ECD8;
+      --surface-2: #F5EFE0;
       --primary: #2A2118;
       --primary-soft: #5C4B38;
       --accent: #B0892F;
       --accent-soft: #D9B96A;
       --text: #2A2118;
       --text-muted: #6B5D49;
-      --border: #E7DCC4;
-      --border-soft: #F0E8D4;
+      --border: #DCD0B4;
+      --border-soft: #EFE6CE;
       --radius: 14px;
       --radius-sm: 8px;
       --radius-lg: 22px;
       --shadow: 0 1px 2px rgba(42, 33, 24, 0.04), 0 8px 30px rgba(42, 33, 24, 0.06);
+      --ring: 0 0 0 1px rgba(176, 137, 47, 0.22);
       --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
       --font-body: "Mulish", system-ui, -apple-system, "Segoe UI", sans-serif;
     }
 
-    /* Minimal Reset & Base Styles */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       background-color: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
-      font-size: 16px;
+      overflow-x: hidden;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
     }
-    body::after {
-      content: '';
+
+    /* Fixed Grain-Noise Overlay for Handmade Warmth */
+    body::before {
+      content: "";
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none;
-      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
-      opacity: 0.03;
-      z-index: 100;
+      z-index: 9999;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: var(--radius-sm);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
     }
 
     /* Typography */
-    h1, h2, h3 {
+    h1, h2, h3, .display-font {
       font-family: var(--font-display);
-      font-weight: 500;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      font-weight: 400;
+      line-height: 1.2;
       color: var(--primary);
     }
-    h1 { font-size: clamp(3.2rem, 8vw, 5.5rem); }
-    h2 { font-size: clamp(2.5rem, 6vw, 3.5rem); }
-    h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
-    p { max-width: 65ch; margin-bottom: 1rem; color: var(--text-muted); }
-    a { color: var(--accent); text-decoration: none; transition: color 0.3s ease; }
-    a:hover { color: var(--accent-soft); }
-    .subheading {
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--primary); /* FIX 2: Contrast corrected. Changed from --accent to --primary. */
-      margin-bottom: 1rem;
+
+    p {
+      color: var(--text-muted);
+      font-weight: 300;
     }
 
-    /* Layout & Containers */
+    .italic {
+      font-style: italic;
+    }
+
+    /* Reusable Components */
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
     .container {
-      width: 100%;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 2rem;
     }
-    section {
-      padding: clamp(4rem, 10vh, 8rem) 0;
-      position: relative;
-    }
 
-    /* Header & Navigation */
-    .main-header {
+    /* Glassmorphism Navigation */
+    header {
       position: fixed;
-      top: 1rem;
-      left: 1rem;
-      right: 1rem;
-      z-index: 50;
-      padding: 1rem 1.5rem;
-      border-radius: var(--radius);
-      background: rgba(251, 246, 234, 0.6);
-      backdrop-filter: blur(12px) saturate(120%);
-      -webkit-backdrop-filter: blur(12px) saturate(120%);
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
-    }
-    .main-nav { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: 1.5rem; color: var(--primary); }
-    .nav-links { display: none; list-style: none; gap: 2rem; }
-    .nav-links a { font-weight: 600; color: var(--primary-soft); }
-    .nav-links a:hover { color: var(--accent); }
-    .cta-button {
-      display: inline-block;
-      background-color: var(--accent);
-      color: var(--surface);
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(176, 137, 47, 0.2);
-    }
-    .cta-button:hover {
-      background-color: var(--accent-soft);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(176, 137, 47, 0.3);
-    }
-
-    /* Hero Section */
-    .hero {
-      padding-top: clamp(10rem, 25vh, 15rem);
-      padding-bottom: clamp(5rem, 15vh, 10rem);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-    }
-    .hero-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
-      position: relative;
-    }
-    .hero-content {
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    .hero-image {
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      line-height: 0;
-    }
-    .hero-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--text-muted);
-      margin: 2rem auto;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease 0.8s, transform 0.8s ease 0.8s;
-    }
-    .hero.is-visible p, .hero.is-visible .cta-button {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .hero .cta-button {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease 1s, transform 0.8s ease 1s;
-    }
-
-    /* Services Section (Bento Grid) */
-    .services-intro { text-align: center; margin-bottom: 4rem; }
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .bento-item {
-      background-color: var(--surface);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      min-height: 320px;
-    }
-    .bento-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 2px 5px rgba(42, 33, 24, 0.06), 0 12px 40px rgba(42, 33, 24, 0.1);
-    }
-    .bento-item h3 { color: var(--primary); margin-bottom: 0.5rem; }
-    .bento-item p { font-size: 0.9rem; margin-bottom: 0; }
-    .bento-item img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      transition: transform 0.5s ease;
-    }
-    .bento-item:hover img { transform: scale(1.05); }
-    .bento-item::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(42, 33, 24, 0.7) 0%, rgba(42, 33, 24, 0) 60%);
-      z-index: 1;
-    }
-    .bento-item > * { position: relative; z-index: 2; }
-    .bento-item h3, .bento-item p { color: var(--surface); }
-    .bento-item.text-card { background-color: var(--surface-2); justify-content: center; }
-    .bento-item.text-card h3, .bento-item.text-card p { color: var(--text); }
-    .bento-item.text-card .lotus-icon {
-        width: 48px; height: 48px;
-        stroke: var(--accent);
-        margin-bottom: 1rem;
-    }
-    
-    /* Full Bleed Image Section */
-    .full-bleed-section {
-      padding: 0;
-      height: 60vh;
-      min-height: 400px;
-      overflow: hidden;
-      position: relative;
-    }
-    .full-bleed-section img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    /* FIX 4: Parallax container setup */
-    .parallax-bg {
-      height: 130%;
-      position: absolute;
-      top: -15%;
+      top: 0;
       left: 0;
-      width: 100%;
+      right: 0;
+      z-index: 100;
+      background: rgba(251, 246, 234, 0.85);
+      backdrop-filter: blur(14px) saturate(140%);
+      border-bottom: 1px solid var(--border-soft);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--primary);
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      text-decoration: none;
+      padding: 0.6rem 1.5rem;
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-lg);
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Magnetic CTA Button */
+    .btn-magnetic {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.1rem 2.4rem;
+      background: var(--primary);
+      color: var(--bg);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-lg);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-magnetic:hover {
+      box-shadow: 0 12px 30px rgba(176, 137, 47, 0.25);
+    }
+
+    .btn-content {
+      display: inline-block;
+      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
     }
 
-    /* About Section */
-    .about-section { background-color: var(--surface-2); }
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
+    /* Text-Gradient + Glow Animation */
+    .glow-title {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glowMove 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowMove {
+      0% { filter: drop-shadow(0 0 2px rgba(176,137,47,0.05)); }
+      100% { filter: drop-shadow(0 0 12px rgba(176,137,47,0.25)); }
+    }
+
+    /* Hero Section - Asymmetric Layout */
+    .hero {
+      padding: 180px 0 100px;
+      min-height: 90vh;
+      display: flex;
       align-items: center;
     }
-    .about-image { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
-    .about-image img { width: 100%; height: auto; display: block; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      background: var(--surface-2);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-image-wrapper img {
+      border-radius: var(--radius);
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-image-wrapper:hover img {
+      transform: scale(1.02);
+    }
+
+    /* Horizontal Scroll Section (Leistungen) */
+    .horizontal-scroll-container {
+      position: relative;
+      background: var(--surface-2);
+      overflow: hidden;
+    }
+
+    .sticky-wrapper {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .scroll-header-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 10vw;
+      margin-bottom: 3rem;
+    }
+
+    .scroll-header {
+      max-width: 600px;
+    }
+
+    /* Interactive Indicators for Carousel */
+    .scroll-navigation {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: rgba(251, 246, 234, 0.6);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      backdrop-filter: blur(8px);
+    }
+
+    .scroll-hint {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .scroll-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+
+    .scroll-arrow {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+      animation: arrowPulse 1.5s infinite alternate;
+    }
+
+    @keyframes arrowPulse {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(6px); }
+    }
+
+    .scroll-track {
+      display: flex;
+      will-change: transform;
+      padding: 0 10vw;
+      gap: 3.5rem;
+      transition: transform 0.1s cubic-bezier(0.1, 0.8, 0.2, 1);
+    }
+
+    .scroll-card {
+      flex: 0 0 460px;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 3.5rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 480px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .scroll-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(42, 33, 24, 0.08);
+    }
+
+    .scroll-card h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .scroll-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* The single full-bleed break card */
+    .scroll-card.break-card {
+      padding: 0;
+      background: none;
+      border: none;
+      box-shadow: none;
+    }
+
+    .scroll-card.break-card:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .scroll-card.break-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .progress-bar-container {
+      position: absolute;
+      bottom: 40px;
+      left: 10vw;
+      right: 10vw;
+      height: 2px;
+      background: var(--border);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.1s ease;
+    }
+
+    /* Rituale & Preise Section */
+    .preise {
+      padding: 120px 0;
+    }
+
+    .preise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: flex-start;
+    }
+
+    .preise-image {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .preise-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .preis-item {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1.5rem;
+    }
+
+    .preis-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+
+    .preis-title {
+      font-size: 1.5rem;
+      font-family: var(--font-display);
+      color: var(--primary);
+    }
+
+    .preis-value {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .preis-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Über Uns Section */
+    .about {
+      padding: 120px 0;
+      background: var(--surface-2);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-content {
+      max-width: 540px;
+    }
+
+    .about-title {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-text {
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    /* Kontakt Section */
+    .kontakt {
+      padding: 120px 0;
+    }
+
+    .kontakt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+
+    .kontakt-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .kontakt-title {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-value {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .booking-form {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary-soft);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* High-Contrast Form Fields */
+    .form-input {
+      width: 100%;
+      padding: 1.1rem;
+      border: 1.5px solid var(--border);
+      background: #FCF9F2;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(176, 137, 47, 0.15);
+    }
 
     /* Footer */
-    .main-footer {
-      background-color: var(--primary-soft);
+    footer {
+      background: var(--primary);
       color: var(--bg);
-      padding: 3rem 0;
-      text-align: center;
-    }
-    .main-footer p { color: var(--bg); opacity: 0.8; margin: 0; font-size: 0.9rem; }
-    .main-footer .logo { color: var(--bg); margin-bottom: 1rem; }
-
-    /* Animation & Accessibility */
-    .kinetic-heading .word-wrapper { display: inline-block; clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
-    .kinetic-heading .word {
-      display: inline-block;
-      transform: translateY(110%);
-      transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .hero.is-visible .kinetic-heading .word { transform: translateY(0); }
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-delay: -1ms !important;
-        animation-duration: 1ms !important;
-        animation-iteration-count: 1 !important;
-        background-attachment: initial !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0s !important;
-        transition-delay: 0s !important;
-      }
-      .kinetic-heading .word { transform: translateY(0) !important; }
-      .parallax-bg { transform: none !important; }
+      padding: 60px 0;
+      border-top: 1px solid var(--primary-soft);
     }
 
-    /* Responsive Design */
-    @media (min-width: 768px) {
-      .nav-links { display: flex; }
-      .about-content { grid-template-columns: 1fr 1fr; }
-      .bento-grid {
-        grid-template-columns: repeat(6, 1fr);
-        grid-auto-rows: minmax(150px, auto);
-      }
-      .bento-item-1 { grid-column: span 3; grid-row: span 2; }
-      .bento-item-2 { grid-column: span 3; grid-row: span 1; }
-      .bento-item-3 { grid-column: span 3; grid-row: span 1; }
-      .bento-item-4 { grid-column: span 2; grid-row: span 2; }
-      .bento-item-5 { grid-column: span 2; grid-row: span 1; }
-      .bento-item-6 { grid-column: span 2; grid-row: span 1; }
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    
-    @media (min-width: 992px) {
-      /* FIX 3: Break the template grid. Create a dynamic, bespoke composition. */
-      .hero-layout {
-        grid-template-columns: 45% 55%;
-        gap: 0;
+
+    .footer-logo {
+      color: var(--bg);
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    /* Custom Lotus Inline SVG Styling */
+    .lotus-glyph {
+      width: 60px;
+      height: 60px;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1023px) {
+      .hero-grid, .preise-grid, .about-grid, .kontakt-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
       }
-      .hero-content {
-        text-align: left;
-        padding-right: 2rem;
+
+      .nav-links {
+        display: none;
       }
-      .hero p { margin-left: 0; margin-right: 0; }
-      .hero-image {
-        position: absolute;
-        right: -25%;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 65%;
+
+      .horizontal-scroll-container {
+        padding: 80px 0;
+      }
+
+      .sticky-wrapper {
+        position: relative;
         height: auto;
-        max-height: 90vh;
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow);
-        z-index: 1;
+      }
+
+      .scroll-header-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 0 2rem;
+      }
+
+      .scroll-track {
+        flex-direction: column;
+        padding: 0 2rem;
+        gap: 2.5rem;
+      }
+
+      .scroll-card {
+        flex: 1 1 auto;
+        width: 100%;
+        height: auto;
+        min-height: 380px;
+      }
+
+      .progress-bar-container {
+        display: none;
       }
     }
-    @media (min-width: 1200px) {
-      .hero-image { right: -15%; width: 60%; }
+
+    /* Accessibility: Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+        transform: none !important;
+        backdrop-filter: none !important;
+      }
+      .glow-title {
+        animation: none !important;
+        filter: none !important;
+        background: var(--primary) !important;
+        -webkit-text-fill-color: initial !important;
+        -webkit-background-clip: initial !important;
+      }
+      .horizontal-scroll-container {
+        height: auto !important;
+      }
+      .sticky-wrapper {
+        position: relative !important;
+        height: auto !important;
+      }
+      .scroll-track {
+        flex-direction: column !important;
+        transform: none !important;
+      }
+      .scroll-arrow {
+        animation: none !important;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header class="main-header">
-    <nav class="main-nav container">
-      <a href="#" class="logo">Orathai</a>
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M50,25 C45,43 45,60 50,75 C55,60 55,43 50,25 Z" />
+          <path d="M50,40 C38,48 35,65 50,75" />
+          <path d="M50,40 C62,48 65,65 50,75" />
+        </svg>
+        <span>ORATHAI</span>
+      </a>
       <ul class="nav-links">
-        <li><a href="#services">Behandlungen</a></li>
-        <li><a href="#about">Philosophie</a></li>
-        <li><a href="#contact">Kontakt</a></li>
+        <li><a href="#leistungen">Philosophie</a></li>
+        <li><a href="#preise">Rituale</a></li>
+        <li><a href="#about">Über Uns</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
       </ul>
-      <a href="#contact" class="cta-button">Termin buchen</a>
-    </nav>
+      <a href="#kontakt" class="nav-cta">Reservieren</a>
+    </div>
   </header>
 
   <main>
-
-    <section class="hero" id="home">
-      <div class="container">
-        <div class="hero-layout">
-          <div class="hero-content">
-            <h1 class="kinetic-heading">Die Kunst der Berührung.</h1>
-            <p>Entdecken Sie im Herzen Münchens eine Oase der Ruhe, in der traditionelle thailändische Heilkunst auf moderne Wellness trifft.</p>
-            <a href="#services" class="cta-button">Unsere Rituale entdecken</a>
-          </div>
-          <div class="hero-image">
-            <!-- FIX 1: Thematic imagery is represented by appropriate alt text, while adhering to the rule to keep the src URL. -->
-            <img src="../assets/orathai-thai-spa-cream-1.jpeg" alt="Eine Frau genießt eine entspannende Thai-Massage in einem ruhigen, atmosphärischen Spa-Ambiente.">
-          </div>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="section-label">Traditionelle Thai-Wellness in München</span>
+          <h1 class="hero-title">
+            Die Kunst der <br><span class="italic glow-title">vollkommenen</span> Stille.
+          </h1>
+          <p class="hero-desc">
+            Erleben Sie im Herzen von München ein exklusives Refugium der Regeneration. Unsere traditionellen Rituale lösen tiefsitzende Blockaden und führen Körper und Geist zurück in ihre natürliche Harmonie.
+          </p>
+          <button class="btn-magnetic" id="magneticBtn">
+            <span class="btn-content">Ritual buchen</span>
+          </button>
+        </div>
+        <div class="hero-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=1200&q=80" alt="Traditionelle thailändische Massageanwendung im Orathai München" style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover">
         </div>
       </div>
     </section>
 
-    <section id="services">
-      <div class="container">
-        <div class="services-intro">
-          <p class="subheading reveal">Unsere Behandlungen</p>
-          <h2 class="reveal">Ein Weg zu innerer Harmonie</h2>
-        </div>
-        <div class="bento-grid">
-          <div class="bento-item bento-item-1 reveal">
-            <img src="../assets/orathai-thai-spa-cream-1.jpeg" alt="Eine Frau erhält eine entspannende Rückenmassage mit warmen Ölen.">
-            <h3>Traditionelle Thai-Massage</h3>
-            <p>Löst Blockaden und revitalisiert den Körper.</p>
+    <!-- Horizontal Scroll Section (Leistungen) -->
+    <section id="leistungen" class="horizontal-scroll-container">
+      <div class="sticky-wrapper">
+        <div class="scroll-header-wrapper">
+          <div class="scroll-header">
+            <span class="section-label">Unsere Philosophie</span>
+            <h2 class="display-font" style="font-size: 2.5rem;">Heilende Hände, zeitlose Ruhe</h2>
           </div>
-          <div class="bento-item bento-item-2 reveal">
-            <img src="../assets/orathai-thai-spa-cream-3.jpeg" alt="Aromatische Öle in kleinen Fläschchen, umgeben von Orchideen.">
-            <h3>Aroma-Öl-Massage</h3>
-            <p>Sinnliche Düfte für tiefe Entspannung.</p>
-          </div>
-          <div class="bento-item bento-item-3 text-card reveal">
-            <svg class="lotus-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.75c0-1.5-1.5-2.75-3.25-2.75S5.5 3.25 5.5 4.75c0 1.1.5 2.1 1.25 2.65M12 4.75c0-1.5 1.5-2.75 3.25-2.75S18.5 3.25 18.5 4.75c0 1.1-.5 2.1-1.25 2.65M12 4.75v14.5M12 19.25c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5-2 4.5-4.5 4.5zM7.5 14.75c0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5c0-.85-.25-1.65-.65-2.35M16.5 14.75c0-2.5-2-4.5-4.5-4.5s-4.5 2-4.5 4.5c0 .85.25 1.65.65 2.35" />
-            </svg>
-            <h3>Day Spa Pakete</h3>
-            <p>Gönnen Sie sich eine Auszeit vom Alltag.</p>
-          </div>
-          <div class="bento-item bento-item-4 reveal">
-             <img src="../assets/orathai-thai-spa-cream-4.jpeg" alt="Dunkle, glatte Hot Stones liegen auf dem Rücken einer Person.">
-            <h3>Hot-Stone-Ritual</h3>
-            <p>Wärme, die tief unter die Haut geht.</p>
-          </div>
-          <div class="bento-item bento-item-5 text-card reveal">
-            <h3>Rasul-Bad</h3>
-            <p>Reinigendes Dampfbad-Zeremoniell.</p>
-          </div>
-          <div class="bento-item bento-item-6 text-card reveal">
-            <h3>Paar-Angebote</h3>
-            <p>Gemeinsame Momente der Entspannung.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <section class="full-bleed-section">
-        <!-- FIX 4: Parallax effect implemented -->
-        <div class="parallax-bg" data-speed="0.2">
-            <img src="../assets/orathai-thai-spa-cream-5.jpeg" alt="Stimmungsvolles Bild eines Spa-Innenraums mit gedämpftem Licht und eleganten Details.">
-        </div>
-    </section>
-
-    <section class="about-section" id="about">
-      <div class="container">
-        <div class="about-content">
-          <div class="about-text reveal">
-            <p class="subheading">Unsere Philosophie</p>
-            <h2>Die Seele berühren, den Körper heilen.</h2>
-            <p>Im Orathai Spa glauben wir, dass wahre Schönheit und Wohlbefinden von innen kommen. Unsere Behandlungen sind mehr als nur Anwendungen – sie sind Rituale, die auf jahrhundertealtem Wissen basieren und darauf abzielen, Körper, Geist und Seele in Einklang zu bringen.</p>
-            <p>Jeder Handgriff, jeder Duft und jedes Detail in unserem Spa ist sorgfältig ausgewählt, um Ihnen eine tiefgreifende Erfahrung der Regeneration zu ermöglichen. Wir laden Sie ein, den Lärm der Welt hinter sich zu lassen und bei uns Ihre Mitte zu finden.</p>
-          </div>
-          <div class="about-image reveal">
-            <img src="../assets/orathai-thai-spa-cream-1.jpeg" alt="Detailaufnahme einer Orchideenblüte und einer Kerze in einem ruhigen Spa-Ambiente.">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-        <div class="container" style="text-align: center;">
-            <p class="subheading reveal">Kontakt & Termin</p>
-            <h2 class="reveal">Ihre Auszeit beginnt hier.</h2>
-            <p class="reveal" style="max-width: 50ch; margin: 2rem auto;">Wir freuen uns darauf, Sie im Orathai Thai Spa begrüßen zu dürfen. Kontaktieren Sie uns gerne telefonisch, um Ihren persönlichen Verwöhntermin zu vereinbaren.</p>
-            <div class="reveal">
-                <p style="font-size: 1.2rem; color: var(--text); font-weight: 500;">Telefon: 089 / 123 456 789</p>
-                <p style="color: var(--text-muted);">Isartorplatz 1, 80331 München</p>
-                <p style="color: var(--text-muted);">Geöffnet: Mo – Sa, 10:00 – 20:00 Uhr</p>
+          <!-- Interactive Carousel Indicators -->
+          <div class="scroll-navigation">
+            <span class="scroll-hint">Entdecken</span>
+            <div class="scroll-dots" id="scrollDots">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
             </div>
+            <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
         </div>
+        <div class="scroll-track" id="scrollTrack">
+          <!-- Card 1 -->
+          <div class="scroll-card">
+            <div>
+              <svg class="lotus-glyph" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M50,20 C45,40 45,60 50,80 C55,60 55,40 50,20 Z" />
+                <path d="M50,35 C35,45 32,65 50,80" />
+                <path d="M50,35 C65,45 68,65 50,80" />
+                <path d="M50,50 C20,55 20,75 50,80" />
+                <path d="M50,50 C80,55 80,75 50,80" />
+              </svg>
+              <h3>Nuad Thai</h3>
+              <p>Die traditionelle thailändische Massage ist eine jahrtausendealte Kunst der Akupressur und des passiven Yoga. Sie dehnt den Körper sanft und stellt den Energiefluss wieder her.</p>
+            </div>
+            <span class="section-label" style="margin: 0;">01 / Heilung</span>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="scroll-card">
+            <div>
+              <div style="height: 60px; margin-bottom: 2rem; display: flex; align-items: center;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5">
+                  <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/>
+                  <path d="M12 8v8M8 12h8"/>
+                </svg>
+              </div>
+              <h3>Aroma-Ölmassage</h3>
+              <p>Verbindung aus sanften Streichbewegungen und der Tiefenwirkung erwärmter, thailändischer Kräuteressenzen. Perfekt zur tiefenwirksamen Entspannung des Nervensystems.</p>
+            </div>
+            <span class="section-label" style="margin: 0;">02 / Balance</span>
+          </div>
+
+          <!-- Card 3: Immersive Break Card (Image only to let the user breathe) -->
+          <div class="scroll-card break-card">
+            <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=800&q=80" alt="Luxuriöse Massage-Details im Orathai">
+          </div>
+
+          <!-- Card 4 -->
+          <div class="scroll-card">
+            <div>
+              <div style="height: 60px; margin-bottom: 2rem; display: flex; align-items: center;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/>
+                </svg>
+              </div>
+              <h3>Hot Stone Ritual</h3>
+              <p>Die Wärme vulkanischer Basaltsteine dringt tief in die Muskelschichten ein. In Kombination mit wertvollen Ölen löst dieses Ritual selbst chronische Verspannungen.</p>
+            </div>
+            <span class="section-label" style="margin: 0;">03 / Wärme</span>
+          </div>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
     </section>
 
+    <!-- Rituale & Preise -->
+    <section id="preise" class="preise">
+      <div class="container preise-grid">
+        <div class="preise-image">
+          <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1000&q=80" alt="Ruheraum und thailändische Ästhetik" style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover">
+        </div>
+        <div>
+          <span class="section-label">Ausgewählte Rituale</span>
+          <h2 class="display-font" style="font-size: 3rem; margin-bottom: 3rem;">Eine Investition in Ihre Vitalität</h2>
+          
+          <div class="preise-list">
+            <div class="preis-item">
+              <div class="preis-header">
+                <span class="preis-title">Nuad Thai Traditionell</span>
+                <span class="preis-value">85 €</span>
+              </div>
+              <p class="preis-desc">Ganzkörperanwendung nach traditioneller Wat-Pho-Methode. Dauer: 60 Minuten.</p>
+            </div>
+
+            <div class="preis-item">
+              <div class="preis-header">
+                <span class="preis-title">Aroma-Kräuteröl-Massage</span>
+                <span class="preis-value">95 €</span>
+              </div>
+              <p class="preis-desc">Sanfte Entspannung mit warmen, biologischen Ölen. Dauer: 60 Minuten.</p>
+            </div>
+
+            <div class="preis-item">
+              <div class="preis-header">
+                <span class="preis-title">Orathai Signature Ritual</span>
+                <span class="preis-value">145 €</span>
+              </div>
+              <p class="preis-desc">Kombination aus Kräuterstempel, Hot Stone und Akupressur. Dauer: 90 Minuten.</p>
+            </div>
+
+            <div class="preis-item">
+              <div class="preis-header">
+                <span class="preis-title">Fussreflexzonen-Harmonie</span>
+                <span class="preis-value">75 €</span>
+              </div>
+              <p class="preis-desc">Aktivierung der Selbstheilungskräfte über die Meridiane. Dauer: 45 Minuten.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Über Uns -->
+    <section id="about" class="about">
+      <div class="container about-grid">
+        <div class="about-content">
+          <span class="section-label">Authentische Herkunft</span>
+          <h2 class="about-title">Meisterhafte Hände aus Bangkok</h2>
+          <p class="about-text">
+            Orathai bringt die unverfälschte Philosophie thailändischer Heilkunst nach München. Unsere Therapeutinnen wurden an den renommiertesten Schulen Bangkoks ausgebildet und verfügen über langjährige Erfahrung.
+          </p>
+          <p class="about-text" style="color: var(--text-muted); font-size: 0.95rem;">
+            Jede Berührung folgt dem tiefen Verständnis der Energiebahnen (Sen-Linien). Wir betrachten den Körper als Ganzes und passen jedes Ritual individuell an Ihre Bedürfnisse an.
+          </p>
+        </div>
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" alt="Atmosphärischer Spa-Bereich im Orathai" style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover">
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontakt & Buchung -->
+    <section id="kontakt" class="kontakt">
+      <div class="container kontakt-grid">
+        <div class="kontakt-info">
+          <span class="section-label">Reservierung</span>
+          <h2 class="kontakt-title">Beginnen Sie Ihre Reise</h2>
+          
+          <div class="info-block">
+            <div class="info-label">Adresse</div>
+            <div class="info-value">Prinzregentenstraße 12, 80538 München</div>
+          </div>
+
+          <div class="info-block">
+            <div class="info-label">Öffnungszeiten</div>
+            <div class="info-value">Montag — Sonntag: 10:00 bis 21:00 Uhr</div>
+          </div>
+
+          <div class="info-block">
+            <div class="info-label">Kontakt</div>
+            <div class="info-value">Telefon: +49 (0) 89 123 456 78<br>E-Mail: info@orathai-spa.de</div>
+          </div>
+        </div>
+
+        <div class="booking-form">
+          <h3 class="display-font" style="font-size: 2rem; margin-bottom: 2rem;">Wunschtermin anfragen</h3>
+          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Vielen Dank für Ihre Anfrage. Wir werden uns in Kürze bei Ihnen melden.');">
+            <div class="form-group">
+              <label class="form-label" for="name">Name</label>
+              <input class="form-input" type="text" id="name" required placeholder="Ihr vollständiger Name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">E-Mail-Adresse</label>
+              <input class="form-input" type="email" id="email" required placeholder="ihre.adresse@beispiel.de">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="date">Wunschdatum</label>
+              <input class="form-input" type="date" id="date" required>
+            </div>
+            <button type="submit" class="btn-magnetic" style="width: 100%; margin-top: 1.5rem;">
+              <span class="btn-content">Anfrage senden</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="main-footer">
-    <div class="container">
-      <div class="logo">Orathai</div>
-      <p>&copy; 2024 Orathai Thai Spa München. Alle Rechte vorbehalten.</p>
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-container">
+      <a href="#" class="logo footer-logo">
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M50,25 C45,43 45,60 50,75 C55,60 55,43 50,25 Z" />
+          <path d="M50,40 C38,48 35,65 50,75" />
+          <path d="M50,40 C62,48 65,65 50,75" />
+        </svg>
+        <span style="color: var(--bg);">ORATHAI</span>
+      </a>
+      <span class="footer-copy">© 2026 Orathai Thai Spa München. Alle Rechte vorbehalten.</span>
     </div>
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Kinetic Typography Animation
-      const kineticHeading = document.querySelector('.kinetic-heading');
-      if (kineticHeading) {
-        const text = kineticHeading.textContent.trim();
-        kineticHeading.innerHTML = text.split(' ').map(word => `<span class="word-wrapper"><span class="word">${word}</span></span>`).join(' ');
-        const wordSpans = kineticHeading.querySelectorAll('.word');
-        wordSpans.forEach((span, index) => {
-          span.style.transitionDelay = `${index * 0.15 + 0.2}s`;
-        });
-      }
+    // Horizontal Scroll Logic
+    const track = document.getElementById('scrollTrack');
+    const container = document.getElementById('leistungen');
+    const progressBar = document.getElementById('progressBar');
+    const dots = document.querySelectorAll('#scrollDots .dot');
 
-      // Intersection Observer for reveal animations
-      const revealElements = document.querySelectorAll('.reveal, .hero');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+    function handleScroll() {
+      if (window.innerWidth < 1024) {
+        track.style.transform = 'none';
+        return;
+      }
+      const rect = container.getBoundingClientRect();
+      const viewHeight = window.innerHeight;
+      
+      if (rect.top <= 0 && rect.bottom >= viewHeight) {
+        const totalScroll = rect.height - viewHeight;
+        const scrolled = -rect.top;
+        const percentage = Math.max(0, Math.min(1, scrolled / totalScroll));
+        
+        // Calculate maximum horizontal travel distance
+        const maxTranslate = track.scrollWidth - window.innerWidth + (window.innerWidth * 0.2);
+        track.style.transform = `translateX(-${percentage * maxTranslate}px)`;
+        
+        if (progressBar) {
+          progressBar.style.width = `${percentage * 100}%`;
+        }
+
+        // Update active dot based on scroll percentage
+        const activeIndex = Math.min(
+          dots.length - 1,
+          Math.floor(percentage * dots.length)
+        );
+        dots.forEach((dot, idx) => {
+          if (idx === activeIndex) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
           }
         });
-      }, { threshold: 0.1 });
-      revealElements.forEach(el => observer.observe(el));
-      
-      // FIX 4: Parallax Effect Logic
-      const parallaxBg = document.querySelector('.parallax-bg');
-      if (parallaxBg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-          const speed = parseFloat(parallaxBg.dataset.speed) || 0.5;
-          window.addEventListener('scroll', () => {
-              const section = parallaxBg.parentElement;
-              const rect = section.getBoundingClientRect();
-              // Only run animation when section is in viewport
-              if (rect.top < window.innerHeight && rect.bottom > 0) {
-                const y = rect.top;
-                parallaxBg.style.transform = `translate3d(0, ${-y * speed}px, 0)`;
-              }
-          }, { passive: true });
+      } else if (rect.top > 0) {
+        track.style.transform = 'translateX(0px)';
+        if (progressBar) progressBar.style.width = '0%';
+        dots.forEach((dot, idx) => {
+          if (idx === 0) dot.classList.add('active');
+          else dot.classList.remove('active');
+        });
+      } else if (rect.bottom < viewHeight) {
+        const maxTranslate = track.scrollWidth - window.innerWidth + (window.innerWidth * 0.2);
+        track.style.transform = `translateX(-${maxTranslate}px)`;
+        if (progressBar) progressBar.style.width = '100%';
+        dots.forEach((dot, idx) => {
+          if (idx === dots.length - 1) dot.classList.add('active');
+          else dot.classList.remove('active');
+        });
       }
-    });
-  </script>
+    }
 
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+
+    // Magnetic Button Logic
+    const btn = document.getElementById('magneticBtn');
+    if (btn) {
+      const content = btn.querySelector('.btn-content');
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        // Translate button content up to 12px
+        const xc = (x / rect.width) * 12;
+        const yc = (y / rect.height) * 12;
+        content.style.transform = `translate(${xc}px, ${yc}px)`;
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        content.style.transform = 'translate(0px, 0px)';
+      });
+    }
+  </script>
 </body>
 </html>

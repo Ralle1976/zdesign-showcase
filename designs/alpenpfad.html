@@ -1,551 +1,1393 @@
 <!doctype html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpenpfad — Zertifizierte Bergwanderführer</title>
-    <meta name="description" content="Geführte Mehrtagestouren, Hüttenwochen und Klettersteige in den Alpen. Erleben Sie die Berge mit staatlich geprüften Bergführern.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg: #f5f4ed;
-        --surface: #faf9f5;
-        --surface-2: #edebe2;
-        --primary: #141413;
-        --primary-soft: #30302e;
-        --accent: #c96442;
-        --accent-soft: #d97757;
-        --text: #141413;
-        --text-muted: #5e5d59;
-        --border: #e8e6dc;
-        --border-soft: #f0eee6;
-        --radius: 12px;
-        --radius-sm: 8px;
-        --radius-lg: 18px;
-        --shadow: 0 0 0 1px #e8e6dc, 0 1px 2px rgba(20, 20, 19, 0.04);
-        --ring: 0 0 0 1px #d1cfc5;
-        --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-        --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
-      }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpenpfad — Zertifizierte Bergwanderführer & Alpine Abenteuer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --surface: #F3EFE6;
+      --surface-2: #EAE3D2;
+      --primary: #1C3325;
+      --primary-soft: #2D4F3B;
+      --accent: #B85C2C;
+      --accent-soft: #D17342;
+      --text: #1E2620;
+      --text-muted: #5A665D;
+      --border: #E0D8C3;
+      --border-soft: #EAE3D2;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --radius-lg: 24px;
+      --shadow: 0 4px 20px rgba(28, 51, 37, 0.04), 0 1px 3px rgba(28, 51, 37, 0.02);
+      --shadow-hover: 0 16px 32px rgba(28, 51, 37, 0.08), 0 2px 8px rgba(28, 51, 37, 0.04);
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-      *, *::before, *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-      html {
-        scroll-behavior: smooth;
-      }
+    html {
+      scroll-behavior: smooth;
+    }
 
-      body {
-        background-color: var(--bg);
-        color: var(--text);
-        font-family: var(--font-body);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        position: relative;
-      }
-      
-      body::after {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuODUiIG51bU9jdGF2ZXM9IjEwIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiLz48L3N2Zz4=');
-        opacity: 0.03;
-        z-index: 100;
-        pointer-events: none;
-      }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-      h1, h2, h3 {
-        font-family: var(--font-display);
-        font-weight: 500;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-      }
+    /* Film-/Papier-Korn */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      mix-blend-mode: overlay;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
 
-      h1 { font-size: clamp(3.5rem, 10vw, 7rem); }
-      h2 { font-size: clamp(2.5rem, 7vw, 4rem); }
-      h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
-      p { max-width: 65ch; }
+    /* Scroll-Reveal Base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
 
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-      /* KREATIV-DNA: Sticky-Pin / Layering */
-      main > section {
-        position: sticky;
-        top: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 120px 0;
-      }
-      main > section:nth-of-type(1) { z-index: 1; }
-      main > section:nth-of-type(2) { z-index: 2; }
-      main > section:nth-of-type(3) { z-index: 3; }
-      main > section:nth-of-type(4) { z-index: 4; }
-      main > section:nth-of-type(5) { z-index: 5; }
-      
-      .section-content {
-        background-color: var(--bg);
-        padding: 64px 0;
-        width: 100%;
-      }
+    /* Animated Background */
+    .animated-bg {
+      background: linear-gradient(120deg, var(--bg), var(--surface), var(--bg));
+      background-size: 200% 200%;
+      animation: shiftBg 16s ease-in-out infinite;
+    }
 
-      /* Header & Navigation */
-      .site-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 24px 0;
-        z-index: 50;
-        display: flex;
-        justify-content: center;
-      }
-      .header-inner {
-        width: 100%;
-        max-width: 1200px;
-        padding: 0 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(245, 244, 237, 0.7);
-        backdrop-filter: blur(8px);
-        border: 1px solid var(--border-soft);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-      }
-      .logo {
-        font-family: var(--font-display);
-        font-weight: 600;
-        font-size: 1.5rem;
-        text-decoration: none;
-        color: var(--text);
-      }
-      .nav-links {
-        display: none; /* Mobile first: hide nav links */
-      }
-      @media (min-width: 768px) {
-        .nav-links {
-          display: flex;
-          gap: 32px;
-        }
-        .nav-links a {
-          text-decoration: none;
-          color: var(--text-muted);
-          transition: color 0.2s;
-        }
-        .nav-links a:hover {
-          color: var(--text);
-        }
-      }
+    @keyframes shiftBg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-      /* Hero Section */
-      #hero {
-        text-align: center;
-        background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-28%2F0e083166-2df5-4e8d-9396-e43841c9ae78_aigc.jpeg?Expires=1782663303&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=3q6gTaD1FOQV9lSZxHbqLCsOt88%3D');
-        background-size: cover;
-        background-position: center;
-        color: var(--surface);
-      }
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--primary);
+      line-height: 1.2;
+    }
 
-      /* KREATIV-DNA: Text-Gradient + Glow */
-      .glowing-headline {
-        background: linear-gradient(110deg, var(--surface) 20%, var(--accent-soft) 40%, var(--accent) 60%, var(--surface) 80%);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: text-shine 10s linear infinite;
-      }
-      @keyframes text-shine {
-        to { background-position: 200% center; }
-      }
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      letter-spacing: -0.02em;
+    }
 
-      .hero-subtitle {
-        font-size: 1.25rem;
-        color: var(--border);
-        margin: 24px auto 40px;
-      }
+    h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      letter-spacing: -0.01em;
+    }
 
-      /* KREATIV-DNA: Magnetic CTA & Neon-Glow */
-      .cta-magnetic {
-        display: inline-block;
-        background-color: var(--accent);
-        color: var(--surface);
-        padding: 16px 32px;
-        border-radius: var(--radius-sm);
-        text-decoration: none;
-        font-weight: 500;
-        position: relative;
-        transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-        box-shadow: 0 0 0px 0px rgba(201, 100, 66, 0); /* Initial state for glow */
-      }
-      .cta-magnetic:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 24px 0px var(--accent); /* Neon-Glow */
-      }
-      .cta-magnetic span {
-        display: inline-block;
-        transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-      }
+    h3 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+    }
 
-      /* Touren Section */
-      .tours-grid {
-        display: grid;
+    p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header Nav */
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 6px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero - Immersive Full-bleed */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 6rem 3rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.8) contrast(1.02);
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28, 51, 37, 0.9) 0%, rgba(28, 51, 37, 0.3) 50%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      color: var(--bg);
+    }
+
+    .hero-content h1 {
+      color: var(--bg);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content p {
+      color: var(--surface);
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      margin-bottom: 3rem;
+      max-width: 700px;
+      font-family: var(--font-display);
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background-color: var(--accent);
+      color: var(--bg);
+      padding: 1.1rem 2.2rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(184, 92, 44, 0.2);
+    }
+
+    .btn:hover {
+      background-color: var(--accent-soft);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(184, 92, 44, 0.3);
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid rgba(250, 248, 245, 0.4);
+      color: var(--bg);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(250, 248, 245, 0.1);
+      border-color: var(--bg);
+      color: var(--bg);
+      box-shadow: none;
+    }
+
+    /* Section Layouts */
+    section {
+      padding: 10rem 3rem;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      max-width: 700px;
+      margin-bottom: 6rem;
+    }
+
+    .section-header span {
+      display: block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    /* Featured Tours Grid (Fix 1 & Fix 4) */
+    .tours-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 3rem;
+    }
+
+    .tour-card {
+      background-color: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border: 1px solid var(--border-soft);
+    }
+
+    .tour-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .tour-img-container {
+      position: relative;
+      height: 260px;
+      overflow: hidden;
+    }
+
+    .tour-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .tour-card:hover .tour-img-container img {
+      transform: scale(1.06);
+    }
+
+    .tour-badge {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background-color: var(--primary);
+      color: var(--bg);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .tour-badge.expert {
+      background-color: var(--accent);
+    }
+
+    .tour-content {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .tour-content h3 {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+
+    .tour-content p {
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .tour-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .spec-item svg {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .spec-item strong {
+      color: var(--primary);
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+
+    .tour-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+    }
+
+    .tour-price {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .tour-price span {
+      display: block;
+      font-size: 1.4rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Certified Mountain Guides Section (Fix 2) */
+    .guides-section {
+      background-color: var(--surface);
+    }
+
+    .guides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 4rem;
+      margin-top: 4rem;
+    }
+
+    .guide-card {
+      text-align: center;
+      background-color: var(--bg);
+      padding: 3rem 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-soft);
+      transition: transform 0.3s ease;
+    }
+
+    .guide-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .guide-portrait {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 2rem;
+      border: 4px solid var(--surface-2);
+      box-shadow: var(--shadow);
+    }
+
+    .guide-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .guide-role {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .guide-bio {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Story Section (Über uns) - Immersive Split */
+    .story-section {
+      background-color: var(--bg);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 90vh;
+    }
+
+    .story-content {
+      padding: 10rem 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .story-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 4rem;
+      background-color: var(--surface);
+      align-items: center;
+      position: relative;
+    }
+
+    .story-img-wrapper {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 100%;
+      min-height: 350px;
+    }
+
+    .story-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story-img-wrapper:first-child {
+      transform: translateY(-30px);
+    }
+
+    .story-img-wrapper:last-child {
+      transform: translateY(30px);
+    }
+
+    /* Testimonials Section (Fix 3) */
+    .testimonials-section {
+      background-color: var(--primary);
+      color: var(--bg);
+    }
+
+    .testimonials-section h2, .testimonials-section .section-header span {
+      color: var(--bg);
+    }
+
+    .testimonials-section .section-header span {
+      color: var(--accent-soft);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 3rem;
+    }
+
+    .testimonial-card {
+      background-color: rgba(250, 248, 245, 0.05);
+      padding: 3rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(250, 248, 245, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .testimonial-quote {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 2rem;
+      color: var(--surface);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .testimonial-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .testimonial-author-info h4 {
+      color: var(--bg);
+      font-size: 1.1rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+    }
+
+    .testimonial-author-info span {
+      font-size: 0.85rem;
+      color: var(--surface-2);
+    }
+
+    /* FAQ Section (Fix 3) */
+    .faq-section {
+      background-color: var(--bg);
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 0;
+    }
+
+    .faq-item:first-child {
+      padding-top: 0;
+    }
+
+    .faq-trigger {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .faq-trigger svg {
+      transition: transform 0.3s ease;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-left: 1.5rem;
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, margin-top 0.3s ease;
+    }
+
+    .faq-content p {
+      padding-top: 1rem;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .faq-item.active .faq-trigger svg {
+      transform: rotate(180deg);
+    }
+
+    .faq-item.active .faq-content {
+      max-height: 300px;
+    }
+
+    /* Preise & Termine Sektion */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 3rem;
+    }
+
+    .pricing-row {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr 1.2fr 1fr;
+      padding: 1.8rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .pricing-row.header-row {
+      font-weight: 600;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    .pricing-row:not(.header-row):hover {
+      background-color: var(--surface);
+    }
+
+    .pricing-cell {
+      padding: 0.5rem;
+    }
+
+    .pricing-cell.title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .pricing-cell.price {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    /* Kontakt Sektion */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info p {
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-details {
+      list-style: none;
+    }
+
+    .contact-details li {
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      color: var(--text);
+    }
+
+    .contact-details svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .contact-form {
+      background-color: var(--surface);
+      padding: 4.5rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-soft);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      background-color: var(--bg);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(184, 92, 44, 0.12);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: var(--bg);
+      padding: 6rem 3rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 6rem;
+    }
+
+    .footer-brand h2 {
+      color: var(--bg);
+      margin-bottom: 1.5rem;
+      font-size: 2.2rem;
+    }
+
+    .footer-brand p {
+      color: var(--border);
+      max-width: 360px;
+      line-height: 1.7;
+    }
+
+    .footer-links h4 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin-bottom: 1.8rem;
+      color: var(--bg);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--border);
+      transition: color 0.2s ease, padding-left 0.2s ease;
+      display: inline-block;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-soft);
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      max-width: 1300px;
+      margin: 5rem auto 0;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(250, 248, 245, 0.1);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--border);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+      header {
+        padding: 1.5rem 2rem;
+      }
+      section {
+        padding: 8rem 2rem;
+      }
+      .story-grid {
         grid-template-columns: 1fr;
-        gap: 48px;
-        margin-top: 48px;
       }
-      @media (min-width: 768px) {
-        .tours-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 32px;
-        }
+      .story-content {
+        padding: 6rem 2rem;
       }
-      .tour-card {
-        border: 1px solid var(--border);
-        background-color: var(--surface);
-        border-radius: var(--radius);
-        padding: 24px;
-        box-shadow: var(--shadow);
-        transition: transform 0.2s, box-shadow 0.2s;
+      .story-images {
+        padding: 4rem 2rem;
+        min-height: 500px;
+      }
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+      }
+      .footer-brand {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; /* Mobile Menu simplification for clean aesthetic */
+      }
+      .hero {
+        padding: 4rem 1.5rem;
+      }
+      .tours-grid {
+        grid-template-columns: 1fr;
+      }
+      .pricing-row {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 1.5rem 1rem;
+      }
+      .pricing-row.header-row {
+        display: none;
+      }
+      .contact-form {
+        padding: 2.5rem 1.5rem;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-brand {
+        grid-column: span 1;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+
+    /* Accessibility: Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .animated-bg {
+        animation: none !important;
+      }
+      .btn, .tour-card, .tour-card img {
+        transition: none !important;
       }
       .tour-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 0 0 1px var(--border), 0 8px 16px rgba(20, 20, 19, 0.06);
+        transform: none !important;
       }
-      .tour-card svg {
-        width: 40px;
-        height: 40px;
-        color: var(--accent);
-        margin-bottom: 16px;
-      }
-      .tour-card h3 {
-        margin-bottom: 8px;
-      }
-      .tour-card p {
-        color: var(--text-muted);
-        font-size: 0.9rem;
-      }
-
-      /* Philosophie Section */
-      #philosophie .container {
-        display: flex;
-        flex-direction: column;
-        gap: 48px;
-        align-items: center;
-      }
-      @media (min-width: 992px) {
-        #philosophie .container {
-          flex-direction: row;
-        }
-      }
-      .philosophie-text {
-        flex: 1;
-      }
-      .philosophie-image {
-        flex: 1;
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--border);
-      }
-      .philosophie-image img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .philosophie-text h2 { margin-bottom: 24px; }
-      .philosophie-text p { margin-bottom: 16px; color: var(--text-muted); }
-
-      /* Preise Section */
-      #preise {
-        text-align: center;
-      }
-      #preise h2 {
-        margin-bottom: 16px;
-      }
-      #preise .subtitle {
-        max-width: 60ch;
-        margin: 0 auto 48px;
-        color: var(--text-muted);
-      }
-      .pricing-card {
-        background-color: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 40px;
-        max-width: 400px;
-        margin: 0 auto;
-        box-shadow: var(--shadow);
-      }
-      .pricing-card h3 {
-        font-family: var(--font-body);
-        font-weight: 600;
-        font-size: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--text-muted);
-      }
-      .price {
-        font-family: var(--font-display);
-        font-size: 4rem;
-        font-weight: 500;
-        margin: 16px 0;
-      }
-      .price span {
-        font-size: 1.25rem;
-        font-family: var(--font-body);
-        color: var(--text-muted);
-      }
-      .features-list {
-        list-style: none;
-        margin: 24px 0;
-        text-align: left;
-      }
-      .features-list li {
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-      .features-list svg {
-        width: 20px;
-        height: 20px;
-        color: var(--accent);
-        flex-shrink: 0;
-      }
-
-      /* Kontakt Section */
-      #kontakt .container {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-      @media (min-width: 992px) {
-        #kontakt .container {
-          grid-template-columns: 1fr 1fr;
-          gap: 64px;
-        }
-      }
-      .kontakt-image {
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--border);
-        min-height: 400px;
-      }
-      .kontakt-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .kontakt-form h2 { margin-bottom: 24px; }
-      .kontakt-form p { margin-bottom: 32px; color: var(--text-muted); }
-      .form-group { margin-bottom: 24px; }
-      .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-      }
-      .form-group input, .form-group textarea {
-        width: 100%;
-        padding: 12px;
-        border-radius: var(--radius-sm);
-        border: 1px solid var(--border);
-        background-color: var(--surface);
-        font-family: var(--font-body);
-        font-size: 1rem;
-        transition: border-color 0.2s, box-shadow 0.2s;
-      }
-      .form-group input:focus, .form-group textarea:focus {
-        outline: none;
-        border-color: var(--accent-soft);
-        box-shadow: var(--ring);
-      }
-      textarea { resize: vertical; min-height: 120px; }
-
-      .submit-button {
-        background-color: var(--primary);
-        color: var(--surface);
-        padding: 16px 32px;
-        border-radius: var(--radius-sm);
-        text-decoration: none;
-        font-weight: 500;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.2s;
-      }
-      .submit-button:hover {
-        background-color: var(--primary-soft);
-      }
-
-      /* Accessibility */
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-        }
-        .cta-magnetic:hover, .tour-card:hover {
-          transform: none;
-        }
-      }
-    </style>
+    }
+  </style>
 </head>
 <body>
 
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="#hero" class="logo">Alpenpfad</a>
-            <nav class="nav-links">
-                <a href="#touren">Touren</a>
-                <a href="#philosophie">Philosophie</a>
-                <a href="#preise">Preise</a>
-                <a href="#kontakt">Kontakt</a>
-            </nav>
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <header>
+    <div class="logo">Alpenpfad</div>
+    <nav class="nav-links">
+      <a href="#touren">Touren</a>
+      <a href="#philosophie">Philosophie</a>
+      <a href="#bergfuehrer">Bergführer</a>
+      <a href="#termine">Termine</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- Section 1: Hero (Immersive Full-bleed) -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80" alt="Erhabener Blick auf schroffe Alpengipfel im warmen Morgenlicht">
+    </div>
+    <div class="hero-content reveal">
+      <h1>Dem Himmel entgegen.</h1>
+      <p>Staatlich geprüfte Bergwanderführer für anspruchsvolle Mehrtagestouren, alpine Hüttenwochen und Klettersteige im Herz der Alpen.</p>
+      <div class="btn-group">
+        <a href="#touren" class="btn">
+          Touren entdecken
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="#kontakt" class="btn btn-secondary">Abenteuer planen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Featured Tours (Fix 1 & Fix 4) -->
+  <section id="touren" class="animated-bg">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Geführte Expeditionen</span>
+        <h2>Unsere exklusiven Alpentouren</h2>
+      </div>
+
+      <div class="tours-grid">
+        <!-- Tour 1 -->
+        <div class="tour-card reveal">
+          <div class="tour-img-container">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Dolomiten Höhenweg">
+            <span class="tour-badge">Mehrtägig</span>
+          </div>
+          <div class="tour-content">
+            <h3>Dolomiten-Höhenweg Nr. 1</h3>
+            <p>Der Klassiker unter den alpinen Weitwanderwegen. Erleben Sie die monumentale Schönheit der Drei Zinnen und übernachten Sie in traditionsreichen, urigen Schutzhütten.</p>
+            
+            <div class="tour-specs">
+              <div class="spec-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Dauer <strong>7 Tage</strong>
+              </div>
+              <div class="spec-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                Gruppe <strong>Max. 6</strong>
+              </div>
+              <div class="spec-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                Höhe <strong>+4.800m</strong>
+              </div>
+            </div>
+
+            <div class="tour-footer">
+              <div class="tour-price">Preis p.P. <span>€ 1.250,-</span></div>
+              <a href="#kontakt" class="btn" style="padding: 0.75rem 1.5rem; font-size: 0.85rem;">Anfragen</a>
+            </div>
+          </div>
         </div>
-    </header>
 
-    <main>
-        <section id="hero">
-            <div class="container">
-                <h1 class="glowing-headline">Gipfel, die rufen.<br>Wege, die prägen.</h1>
-                <p class="hero-subtitle">Geführte Bergtouren mit staatlich geprüften Experten. <br>Dein Abenteuer beginnt hier.</p>
-                <a href="#touren" class="cta-magnetic" id="magnetic-cta">
-                    <span>Unsere Touren entdecken</span>
-                </a>
+        <!-- Tour 2 -->
+        <div class="tour-card reveal">
+          <div class="tour-img-container">
+            <img src="https://images.unsplash.com/photo-1486916856992-e4db22c8df33?auto=format&fit=crop&w=800&q=80" alt="Watzmann Überschreitung">
+            <span class="tour-badge expert">Anspruchsvoll</span>
+          </div>
+          <div class="tour-content">
+            <h3>Watzmann-Überschreitung</h3>
+            <p>Die ultimative Gratüberschreitung für schwindelfreie Alpinisten. Atemberaubende Tiefblicke auf den Königssee und anspruchsvolle Kletterpassagen unter Profi-Führung.</p>
+            
+            <div class="tour-specs">
+              <div class="spec-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Dauer <strong>3 Tage</strong>
+              </div>
+              <div class="spec-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                Gruppe <strong>Max. 4</strong>
+              </div>
+              <div class="spec-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                Höhe <strong>+2.300m</strong>
+              </div>
             </div>
-        </section>
 
-        <section id="touren">
-            <div class="section-content">
-                <div class="container">
-                    <h2>Erlebnisse, die bleiben</h2>
-                    <div class="tours-grid">
-                        <div class="tour-card">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
-                            <h3>Mehrtagestouren</h3>
-                            <p>Von Hütte zu Hütte, durchqueren wir die schönsten Massive der Alpen. Für Einsteiger und erfahrene Alpinisten. Dauer: 3-7 Tage.</p>
-                        </div>
-                        <div class="tour-card">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L7 22h10L12 2z"/><path d="M12 15l-5 7h10l-5-7z"/><path d="M2 15h20"/></svg>
-                            <h3>Klettersteige</h3>
-                            <p>Vertikale Abenteuer an Felswänden, gesichert am Drahtseil. Wir führen dich sicher durch die spektakulärsten Via Ferratas. Inklusive Leihausrüstung.</p>
-                        </div>
-                        <div class="tour-card">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.58A5 5 0 0 0 15 12.58V12a5 5 0 0 0-10 0v.58A5 5 0 0 0 0 17.58V22h20v-4.42z"/><path d="M10 12V5a2 2 0 1 1 4 0v7"/></svg>
-                            <h3>Schneeschuh-Winter</h3>
-                            <p>Entdecke die Stille der verschneiten Bergwelt. Sicher abseits der Pisten durch unberührte Winterlandschaften. Eine einzigartige Erfahrung.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="tour-footer">
+              <div class="tour-price">Preis p.P. <span>€ 490,-</span></div>
+              <a href="#kontakt" class="btn" style="padding: 0.75rem 1.5rem; font-size: 0.85rem;">Anfragen</a>
             </div>
-        </section>
+          </div>
+        </div>
 
-        <section id="philosophie">
-            <div class="section-content">
-                <div class="container">
-                    <div class="philosophie-text">
-                        <h2>Unsere Philosophie: <br>Respekt & Abenteuer</h2>
-                        <p>Wir glauben, dass die Berge mehr sind als nur ein Ziel. Sie sind ein Raum für Wachstum, Stille und echte Verbindung. Unsere Aufgabe ist es, diesen Raum für dich sicher zugänglich zu machen.</p>
-                        <p>Jede Tour wird mit größtem Respekt vor der Natur geplant und durchgeführt. Wir hinterlassen nichts als Spuren im Schnee und nehmen nichts mit als unvergessliche Erinnerungen. Sicherheit ist dabei unser oberstes Gebot – garantiert durch unsere staatliche Prüfung und ständige Weiterbildung.</p>
-                    </div>
-                    <div class="philosophie-image">
-                        <img src="../assets/alpenpfad-cream-1.jpeg" alt="Ein Bergsteiger auf einem schmalen Grat mit Blick auf ein beeindruckendes Bergpanorama bei Sonnenuntergang.">
-                    </div>
-                </div>
+        <!-- Tour 3 -->
+        <div class="tour-card reveal">
+          <div class="tour-img-container">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Wilder Kaiser">
+            <span class="tour-badge">Hüttenwoche</span>
+          </div>
+          <div class="tour-content">
+            <h3>Wilder Kaiser Durchquerung</h3>
+            <p>Eine landschaftlich unvergleichliche Durchquerung des markanten Kaisergebirges. Perfekt ausbalancierte Tagesetappen mit gemütlichen Hüttenabenden.</p>
+            
+            <div class="tour-specs">
+              <div class="spec-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Dauer <strong>5 Tage</strong>
+              </div>
+              <div class="spec-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                Gruppe <strong>Max. 8</strong>
+              </div>
+              <div class="spec-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                Höhe <strong>+3.100m</strong>
+              </div>
             </div>
-        </section>
 
-        <section id="preise">
-            <div class="section-content">
-                <div class="container">
-                    <h2>Transparent & Fair</h2>
-                    <p class="subtitle">Ein unvergessliches Erlebnis hat seinen Wert. Wir bieten Tourenpakete, die auf Qualität, Sicherheit und kleine Gruppengrößen ausgelegt sind.</p>
-                    <div class="pricing-card">
-                        <h3>Hüttenwoche "Dolomiten"</h3>
-                        <div class="price">890€ <span>/ Person</span></div>
-                        <ul class="features-list">
-                            <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>7 Tage Führung durch staatl. gepr. Bergführer</li>
-                            <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>6 Übernachtungen auf Berghütten mit HP</li>
-                            <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Organisation und Reservierung der Unterkünfte</li>
-                            <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Maximal 6 Teilnehmer für intensive Betreuung</li>
-                        </ul>
-                        <a href="#kontakt" class="submit-button">Termine anfragen</a>
-                    </div>
-                </div>
+            <div class="tour-footer">
+              <div class="tour-price">Preis p.P. <span>€ 820,-</span></div>
+              <a href="#kontakt" class="btn" style="padding: 0.75rem 1.5rem; font-size: 0.85rem;">Anfragen</a>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <section id="kontakt">
-            <div class="section-content">
-                <div class="container">
-                    <div class="kontakt-form">
-                        <h2>Dein Weg zum Gipfel</h2>
-                        <p>Bereit für dein nächstes Abenteuer? Schildere uns deine Wünsche und wir stellen eine maßgeschneiderte Tour für dich zusammen oder finden den perfekten Termin in unseren Gruppen.</p>
-                        <form>
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">E-Mail</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Deine Nachricht (Wunschtour, Zeitraum, Erfahrung)</label>
-                                <textarea id="message" name="message" required></textarea>
-                            </div>
-                            <button type="submit" class="submit-button">Anfrage senden</button>
-                        </form>
-                    </div>
-                    <div class="kontakt-image">
-                         <img src="../assets/alpenpfad-cream-2.jpeg" alt="Eine gemütliche Berghütte in den Alpen, umgeben von Felsen und grünen Wiesen.">
-                    </div>
-                </div>
+  <!-- Section 3: Certified Mountain Guides (Fix 2) -->
+  <section id="bergfuehrer" class="guides-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Vertrauen am Seil</span>
+        <h2>Ihre zertifizierten Bergführer</h2>
+      </div>
+
+      <div class="guides-grid">
+        <!-- Guide 1 -->
+        <div class="guide-card reveal">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=400&q=80" alt="Lukas Brandner" class="guide-portrait">
+          <h3>Lukas Brandner</h3>
+          <span class="guide-role">Staatlich geprüfter Berg- & Skiführer</span>
+          <p class="guide-bio">Mit über 15 Jahren Erfahrung in den West- und Ostalpen leitet Lukas unsere anspruchsvollsten Klettersteige und Hochtouren. Seine Ruhe und alpine Expertise garantieren maximale Sicherheit.</p>
+        </div>
+
+        <!-- Guide 2 -->
+        <div class="guide-card reveal">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80" alt="Anna Lindner" class="guide-portrait">
+          <h3>Anna Lindner</h3>
+          <span class="guide-role">Zertifizierte Bergwanderführerin</span>
+          <p class="guide-bio">Als studierte Geologin und leidenschaftliche Alpinistin bringt Anna Ihnen nicht nur die schönsten Gipfel näher, sondern teilt auch faszinierende Einblicke in die Entstehung der Alpen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Über uns / Philosophie (Immersive Split) -->
+  <section id="philosophie" class="story-section">
+    <div class="story-grid">
+      <div class="story-content reveal">
+        <div class="section-header" style="margin-bottom: 2.5rem;">
+          <span>Die Philosophie</span>
+          <h2>Ehrliche Schritte, bleibende Spuren</h2>
+        </div>
+        <p style="margin-bottom: 1.5rem;">Ein Gipfelsieg ist nur so wertvoll wie der Weg, den man dafür zurückgelegt hat. Als zertifizierte Bergwanderführer begleiten wir Sie nicht nur physisch, sondern vermitteln Ihnen ein tiefes Verständnis für das fragile Ökosystem der Alpen.</p>
+        <p style="margin-bottom: 2.5rem;">Wir meiden Hektik und künstliche Rekorde. Uns geht es um das bewusste Erleben: den rauen Fels unter den Fingern, den ersten Sonnenstrahl im Gesicht und das Gefühl tiefer Zufriedenheit beim Erreichen des Tagesziels.</p>
+        <div>
+          <a href="#kontakt" class="btn">Unsere Geschichte</a>
+        </div>
+      </div>
+      <div class="story-images">
+        <div class="story-img-wrapper reveal">
+          <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80" alt="Bergsteiger blickt über ein weites Wolkenmeer im Hochgebirge">
+        </div>
+        <div class="story-img-wrapper reveal">
+          <img src="https://images.unsplash.com/photo-1475503572774-15a45e5d60b9?auto=format&fit=crop&w=800&q=80" alt="Majestätischer Blick auf ein schroffes Gipfelkreuz bei Sonnenaufgang">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Testimonials (Fix 3) -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Erlebnisse</span>
+        <h2>Stimmen unserer Gäste</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <p class="testimonial-quote">"Die Watzmann-Überschreitung mit Lukas war ein absoluter Lebenstraum. Perfekt organisiert, absolut sicher geführt und menschlich einfach großartig."</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80" alt="Michael K.">
+            <div class="testimonial-author-info">
+              <h4>Michael K.</h4>
+              <span>München</span>
             </div>
-        </section>
-    </main>
+          </div>
+        </div>
 
-    <script>
-        const cta = document.getElementById('magnetic-cta');
-        if (cta) {
-            const ctaSpan = cta.querySelector('span');
-            const magneticStrength = 0.4;
-            const resetTransition = 'transform 0.4s cubic-bezier(0.19, 1, 0.22, 1)';
+        <div class="testimonial-card reveal">
+          <p class="testimonial-quote">"Anna hat uns auf dem Dolomiten-Höhenweg begleitet. Ihre Begeisterung für die Geologie und die Natur hat die Tour zu einem unvergesslichen Erlebnis gemacht."</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80" alt="Sabine R.">
+            <div class="testimonial-author-info">
+              <h4>Sabine R.</h4>
+              <span>Innsbruck</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            cta.addEventListener('mousemove', (e) => {
-                const rect = cta.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                ctaSpan.style.transition = 'none';
-                ctaSpan.style.transform = `translate(${x * magneticStrength}px, ${y * magneticStrength}px)`;
-            });
+  <!-- Section 6: Preise & Termine -->
+  <section id="termine">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Planung & Tarife</span>
+        <h2>Aktuelle Touren & Termine 2024</h2>
+      </div>
 
-            cta.addEventListener('mouseleave', () => {
-                ctaSpan.style.transition = resetTransition;
-                ctaSpan.style.transform = 'translate(0, 0)';
-            });
+      <div class="reveal">
+        <div class="pricing-table">
+          <div class="pricing-row header-row">
+            <div class="pricing-cell">Tour & Beschreibung</div>
+            <div class="pricing-cell">Termin</div>
+            <div class="pricing-cell">Teilnehmer</div>
+            <div class="pricing-cell">Preis</div>
+          </div>
+          
+          <div class="pricing-row">
+            <div class="pricing-cell title">Watzmann-Überschreitung</div>
+            <div class="pricing-cell">12.07. – 14.07.2024</div>
+            <div class="pricing-cell">Max. 4 Personen</div>
+            <div class="pricing-cell price">€ 490,-</div>
+          </div>
+
+          <div class="pricing-row">
+            <div class="pricing-cell title">Dolomiten-Höhenweg Nr. 1</div>
+            <div class="pricing-cell">03.08. – 09.08.2024</div>
+            <div class="pricing-cell">Max. 6 Personen</div>
+            <div class="pricing-cell price">€ 1.250,-</div>
+          </div>
+
+          <div class="pricing-row">
+            <div class="pricing-cell title">Klettersteigkurs für Einsteiger</div>
+            <div class="pricing-cell">24.08. – 27.08.2024</div>
+            <div class="pricing-cell">Max. 5 Personen</div>
+            <div class="pricing-cell price">€ 580,-</div>
+          </div>
+
+          <div class="pricing-row">
+            <div class="pricing-cell title">Wilder Kaiser Durchquerung</div>
+            <div class="pricing-cell">11.09. – 15.09.2024</div>
+            <div class="pricing-cell">Max. 8 Personen</div>
+            <div class="pricing-cell price">€ 820,-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: FAQ Section (Fix 3) -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span>Fragen & Antworten</span>
+        <h2>Häufig gestellte Fragen</h2>
+      </div>
+
+      <div class="faq-container reveal">
+        <div class="faq-item">
+          <button class="faq-trigger">
+            Welche Ausrüstung muss ich selbst mitbringen?
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-content">
+            <p>Sie benötigen gut eingelaufene, knöchelhohe Wanderschuhe mit Profilsohle, funktionale Wanderbekleidung und einen Rucksack. Technische Sicherheitsausrüstung wie Klettersteigsets, Gurte und Helme werden bei Bedarf komplett von uns gestellt.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger">
+            Was passiert bei schlechtem Wetter?
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-content">
+            <p>Sicherheit hat oberste Priorität. Bei extremem Wetter oder Sicherheitsrisiken planen wir die Route flexibel um oder weichen auf eine sichere Alternative aus. Unsere Bergführer sind darin geschult, die Bedingungen kontinuierlich zu bewerten.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger">
+            Wie fit muss ich für die Touren sein?
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-content">
+            <p>Die Anforderungen variieren je nach Tour. Für unsere Hüttenwochen reicht eine solide Grundkondition für Gehzeiten von 4 bis 6 Stunden. Für anspruchsvolle Touren wie die Watzmann-Überschreitung sind absolute Schwindelfreiheit und Trittsicherheit zwingend erforderlich.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Kontakt & Buchungsformular (Fix 3) -->
+  <section id="kontakt" class="animated-bg">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-info reveal">
+          <div class="section-header" style="margin-bottom: 2rem;">
+            <span>Anfrage</span>
+            <h2>Bereit für das Abenteuer?</h2>
+          </div>
+          <p>Haben Sie Fragen zu einer Tour oder möchten Sie ein individuelles Gipfelziel anfragen? Schreiben Sie uns. Wir antworten persönlich und beraten Sie umfassend zur nötigen Kondition und Ausrüstung.</p>
+          
+          <ul class="contact-details">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span>servus@alpenpfad-guiding.de</span>
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span>+49 (0) 8022 987 654</span>
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>Rottach-Egern, Tegernseer Alpentäler</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact-form reveal">
+          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir melden uns innerhalb von 24 Stunden bei Ihnen.');">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Ihr Name</label>
+                <input type="text" id="name" required placeholder="z.B. Maria Schmid">
+              </div>
+              <div class="form-group">
+                <label for="email">E-Mail-Adresse</label>
+                <input type="email" id="email" required placeholder="name@beispiel.de">
+              </div>
+              <div class="form-group full-width">
+                <label for="tour">Gewünschte Tour / Interesse</label>
+                <select id="tour">
+                  <option value="dolomiten">Dolomiten-Höhenweg Nr. 1</option>
+                  <option value="watzmann">Watzmann-Überschreitung</option>
+                  <option value="kaiser">Wilder Kaiser Durchquerung</option>
+                  <option value="custom">Individuelle Privatführung</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label for="message">Ihre Nachricht</label>
+                <textarea id="message" rows="5" required placeholder="Teilen Sie uns Ihre alpine Vorerfahrung und Ihre Wünsche mit..."></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn" style="width: 100%; justify-content: center;">
+              Anfrage unverbindlich senden
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h2>Alpenpfad</h2>
+        <p>Staatlich geprüfte Bergwanderführer. Sicherheit, Leidenschaft und Respekt vor der Natur seit über 15 Jahren.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#touren">Touren</a></li>
+          <li><a href="#philosophie">Philosophie</a></li>
+          <li><a href="#bergfuehrer">Bergführer</a></li>
+          <li><a href="#termine">Termine</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">AGB & Haftung</a></li>
+          <li><a href="#">Ausrüstungsliste</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Alpenpfad Guiding. Alle Rechte vorbehalten.</p>
+      <p>Zertifiziert nach VDBS Standard.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const revealOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
         }
-    </script>
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    revealElements.forEach(el => {
+      revealOnScroll.observe(el);
+    });
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const trigger = item.querySelector('.faq-trigger');
+      trigger.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        faqItems.forEach(i => i.classList.remove('active'));
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>

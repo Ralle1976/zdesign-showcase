@@ -3,513 +3,741 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studio Beton – Architektur aus Licht und Material</title>
-  <meta name="description" content="Preisgekröntes Architekturbüro für minimalistische Wohn- und Hotelbauten. Unsere Philosophie: Licht & Material.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Studio Beton — Minimalistische Architektur & Raumkunst</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f5f4ed;
-      --surface: #faf9f5;
-      --surface-2: #edebe2;
-      --primary: #141413;
-      --primary-soft: #30302e;
-      --accent: #c96442;
-      --accent-soft: #d97757;
-      --text: #141413;
-      --text-muted: #5e5d59;
-      --border: #e8e6dc;
-      --border-soft: #f0eee6;
-      --radius: 12px;
-      --radius-sm: 8px;
-      --radius-lg: 18px;
-      --shadow: 0 0 0 1px #e8e6dc, 0 1px 2px rgba(20, 20, 19, 0.04);
-      --ring: 0 0 0 1px #d1cfc5;
-      --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
+      --bg: #f4f3ef;
+      --surface: #faf9f6;
+      --surface-2: #eae8e0;
+      --primary: #101010;
+      --primary-soft: #2c2c2a;
+      --accent: #d44b24;
+      --accent-soft: #e2623d;
+      --text: #101010;
+      --text-muted: #5a5954;
+      --border: #d5d2c8;
+      --border-soft: #e5e2d8;
+      --radius: 4px;
+      --radius-sm: 2px;
+      --radius-lg: 8px;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    
+    /* Reset & Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     html {
       scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
-
     body {
       background-color: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
-      line-height: 1.6;
-      font-size: 16px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+    a, button {
+      cursor: none;
     }
 
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    
-    section {
-      padding: clamp(4rem, 10vh, 8rem) 0;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: var(--font-display);
-      font-weight: 500;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--primary);
+    /* Grain Overlay */
+    .grain {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 9999;
     }
 
-    h1 { font-size: clamp(3.5rem, 10vw, 7rem); }
-    h2 { font-size: clamp(2.5rem, 6vw, 4rem); }
-    h3 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
-    p { max-width: 65ch; color: var(--text-muted); margin-bottom: 1rem; }
-    .lead { font-size: 1.25rem; color: var(--text); }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 24px;
-      font-family: var(--font-body);
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: var(--radius-sm);
-      transition: background-color 0.2s ease, color 0.2s ease;
-    }
-    .btn-primary {
+    /* Custom Cursor */
+    .custom-cursor {
+      width: 12px;
+      height: 12px;
       background-color: var(--accent);
-      color: var(--surface);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 10000;
+      mix-blend-mode: difference;
+      transform: translate3d(-50%, -50%, 0);
+      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s;
     }
-    .btn-primary:hover {
+    .custom-cursor.active {
+      width: 48px;
+      height: 48px;
       background-color: var(--accent-soft);
     }
-
-    /* --- Header --- */
-    .main-header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 24px 0;
-      z-index: 100;
+    @media (pointer: coarse) {
+      .custom-cursor { display: none; }
+      body { cursor: auto; }
+      a, button { cursor: pointer; }
     }
-    .main-header .container {
+
+    /* Typography */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+    p {
+      line-height: 1.65;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* Layout Elements */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+    }
+    section {
+      padding: 140px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 900;
+      background-color: rgba(244, 243, 239, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .nav-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 90px;
     }
     .logo {
       font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: 1.6rem;
+      text-decoration: none;
+      color: var(--primary);
       font-weight: 600;
-      text-decoration: none;
-      color: var(--primary);
+      letter-spacing: 0.05em;
     }
-    .main-nav a {
-      color: var(--primary);
-      text-decoration: none;
-      margin-left: 24px;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    /* --- Hero & Kinetic Typography --- */
-    .hero {
-      min-height: 100vh;
+    .nav-links {
       display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      padding: 0;
+      gap: 40px;
     }
-    .hero-background {
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      transition: color 0.3s ease;
+      position: relative;
+      padding: 4px 0;
+    }
+    .nav-links a::after {
+      content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
+      bottom: 0; left: 0; width: 100%; height: 1px;
+      background-color: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
     }
-    .hero-background img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      filter: brightness(0.8);
+    .nav-links a:hover {
+      color: var(--primary);
     }
-    .hero-content {
-      position: relative;
-      z-index: 1;
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
     }
-    .hero h1 {
-      color: var(--surface);
-    }
-    .hero h1 .word {
-      display: inline-block;
-      overflow: hidden;
-      transform: translate3d(0, 100%, 0);
-      opacity: 0;
-    }
-    .hero h1.animate .word {
-      animation: reveal-word 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-    }
-    @keyframes reveal-word {
-      to {
-        transform: translate3d(0, 0, 0);
-        opacity: 1;
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
       }
     }
 
-    /* --- Card Stack Section --- */
-    .card-stack-container {
-      position: relative;
-      background-color: var(--surface-2);
-    }
-    .card-stack-panel {
-      height: 100vh;
-      position: sticky;
-      top: 0;
+    /* Hero Section */
+    .hero-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
       align-items: center;
-      gap: 2rem;
-      overflow: hidden;
-      background-color: var(--surface);
-      box-shadow: var(--shadow);
+      padding-top: 60px;
     }
-    .card-stack-panel:not(:first-child) {
-      transform: scale(0.92) translateY(5vh);
-      transform-origin: bottom center;
-      opacity: 0;
-      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
-    }
-    .card-stack-panel.is-visible {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-    }
-    .card-stack-image {
-      width: 100%;
-      height: 100%;
-    }
-    .card-stack-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .card-stack-content {
-      padding: 5vw;
-    }
-    .card-stack-content .category {
-      font-family: var(--font-body);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    /* --- Philosophy Section --- */
-    .philosophy-section {
-      background-color: var(--bg);
-    }
-    .philosophy-section .container {
+    .hero-content {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
+      gap: 36px;
     }
-    .awards-list {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      color: var(--text-muted);
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      font-weight: 600;
     }
-
-    /* --- Team/Gallery Section & 3D Tilt --- */
-    .gallery-section {
-      background-color: var(--surface);
+    .hero-title {
+      font-size: clamp(3.2rem, 6vw, 5.2rem);
+      line-height: 0.95;
+      color: var(--primary);
     }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      margin-top: 4rem;
+    .hero-desc {
+      font-size: 1.2rem;
+      max-width: 520px;
     }
-    .gallery-item {
-      aspect-ratio: 4 / 5;
+    .hero-image-container {
+      position: relative;
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
-      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+      aspect-ratio: 4 / 5;
+      background-color: var(--surface-2);
     }
-    .gallery-item img {
+    .hero-image-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: grayscale(100%) contrast(1.15) brightness(0.9);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .tilt-card {
-      transform-style: preserve-3d;
-      transform: perspective(1000px);
+    .hero-image-container:hover img {
+      transform: scale(1.04);
     }
-
-    /* --- Contact Section --- */
-    .contact-section {
-      background-color: var(--primary);
-      color: var(--surface);
-      text-align: center;
-    }
-    .contact-section h2, .contact-section p {
-      color: var(--surface);
-    }
-    .contact-section p {
-      color: var(--border);
-    }
-    .contact-section .btn {
-      margin-top: 2rem;
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 56px;
+        padding-top: 40px;
+      }
+      .hero-image-container {
+        aspect-ratio: 16 / 10;
+      }
     }
 
-    /* --- Footer --- */
-    .main-footer {
-      padding: 2rem 0;
-      background-color: var(--bg);
+    /* Leistungen (Services) - Rebalanced Layout */
+    .services-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+    }
+    .services-sticky-header {
+      position: sticky;
+      top: 140px;
+      height: fit-content;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .service-card {
+      background-color: var(--surface);
+      padding: 48px;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .service-card:hover {
+      border-color: var(--accent);
+      background-color: var(--surface-2);
+    }
+    .service-icon {
+      width: 32px;
+      height: 32px;
+      stroke: var(--accent);
+      stroke-width: 1.25;
+      fill: none;
+    }
+    .service-card h3 {
+      font-size: 2rem;
+    }
+    @media (max-width: 1024px) {
+      .services-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .services-sticky-header {
+        position: static;
+      }
+    }
+
+    /* Preise (Phasen) */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 48px;
+    }
+    .pricing-row {
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 2fr 1.2fr;
+      padding: 40px 0;
+      align-items: center;
+      gap: 32px;
+    }
+    .pricing-row:first-child {
       border-top: 1px solid var(--border);
     }
-    .main-footer .container {
+    .phase-num {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+    .phase-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+    .phase-price {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      text-align: right;
+      font-weight: 400;
+      color: var(--primary);
+    }
+    @media (max-width: 768px) {
+      .pricing-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 32px 0;
+      }
+      .phase-price {
+        text-align: left;
+        margin-top: 8px;
+      }
+    }
+
+    /* Über uns (Editorial Layout) */
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .editorial-content {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .editorial-text {
+      column-count: 2;
+      column-gap: 40px;
+    }
+    @media (max-width: 1024px) {
+      .editorial-grid {
+        grid-template-columns: 1fr;
+        gap: 56px;
+      }
+      .editorial-text {
+        column-count: 1;
+      }
+    }
+    .drop-cap::first-letter {
+      font-family: var(--font-display);
+      font-size: 5.2rem;
+      float: left;
+      line-height: 0.8;
+      padding-right: 16px;
+      color: var(--accent);
+    }
+    .editorial-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .editorial-img-wrapper {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      aspect-ratio: 3 / 4;
+      background-color: var(--surface-2);
+    }
+    .editorial-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.15) brightness(0.9);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .editorial-img-wrapper:hover img {
+      transform: scale(1.04);
+    }
+    .editorial-caption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* Kontakt */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+    }
+    @media (max-width: 1024px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 56px;
+      }
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .contact-item h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .contact-item p {
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .form-group label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+    .form-group input, .form-group textarea {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .btn {
+      align-self: flex-start;
+      background-color: var(--primary);
+      color: var(--bg);
+      border: none;
+      padding: 18px 36px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      transition: background-color 0.3s, transform 0.2s;
+      border-radius: var(--radius-sm);
+    }
+    .btn:hover {
+      background-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary);
+      color: var(--bg);
+      padding: 80px 0;
+    }
+    .footer-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.9rem;
-      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--bg);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .footer-meta {
+      font-size: 0.85rem;
+      color: rgba(244, 243, 239, 0.5);
+    }
+    .footer-meta a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-meta a:hover {
+      color: var(--accent-soft);
     }
 
-    /* --- Accessibility --- */
+    /* Accessibility */
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
+      * {
+        animation: none !important;
+        transition: none !important;
       }
-      .hero h1 .word {
-        transform: translate3d(0, 0, 0);
-        opacity: 1;
-      }
-      .card-stack-panel:not(:first-child) {
-        transform: none;
-        opacity: 1;
+      .custom-cursor {
+        display: none !important;
       }
     }
-    
-    @media (max-width: 768px) {
-      .card-stack-panel {
-        grid-template-columns: 1fr;
-        height: auto;
-        min-height: 100vh;
-        position: relative; /* Disable sticky on mobile for better scroll */
-        transform: none !important;
-        opacity: 1 !important;
-      }
-      .card-stack-image {
-        height: 50vh;
-      }
-       .card-stack-content {
-        padding: 2rem 1.5rem;
-      }
-      .main-header {
-        position: relative;
-        background-color: var(--bg);
-      }
-      .hero {
-        min-height: 60vh;
-      }
-    }
-
   </style>
 </head>
 <body>
 
-  <header class="main-header">
-    <div class="container">
-      <a href="#" class="logo">Studio Beton</a>
-      <nav class="main-nav">
+  <div class="grain"></div>
+  <div class="custom-cursor"></div>
+
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">STUDIO BETON</a>
+      <nav class="nav-links">
         <a href="#projekte">Projekte</a>
-        <a href="#philosophie">Philosophie</a>
+        <a href="#leistungen">Leistungen</a>
+        <a href="#preise">Phasen</a>
+        <a href="#ueber-uns">Über Uns</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <!-- Hero Section -->
+  <section id="projekte" style="padding-top: 180px;">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="hero-eyebrow">München — Zürich — Bozen</span>
+        <h1 class="hero-title">Poesie der Reduktion.</h1>
+        <p class="hero-desc">Wir entwerfen monolithische Wohn- und Hotelbauten, die im Spiel von Licht und Schatten ihre zeitlose Kraft entfalten. Beton, Glas und Naturstein im Einklang.</p>
+        <div style="margin-top: 16px;">
+          <a href="#kontakt" class="btn" style="text-decoration: none; display: inline-block;">Projekt anfragen</a>
+        </div>
+      </div>
+      <div class="hero-image-container">
+        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80" alt="Minimalistische Beton- und Glasfassade mit dramatischem Schattenwurf">
+      </div>
+    </div>
+  </section>
 
-    <section class="hero" id="home">
-      <div class="hero-background">
-        <img src="../assets/studio-beton-cream-1.jpeg" alt="Minimalistischer Innenraum eines modernen Gebäudes mit starken Schattenwürfen.">
+  <!-- Leistungen (Rebalanced Desktop Layout) -->
+  <section id="leistungen">
+    <div class="container services-layout">
+      <div class="services-sticky-header">
+        <span class="hero-eyebrow">Disziplinen</span>
+        <h2 class="section-title" style="font-size: clamp(2.5rem, 4vw, 3.8rem); margin-top: 16px;">Unsere Expertise</h2>
+        <p style="margin-top: 24px;">Ganzheitliche Architekturplanung von der ersten Skizze bis zur finalen Übergabe. Wir begleiten Sie durch alle Phasen Ihres Bauvorhabens.</p>
       </div>
-      <div class="hero-content container">
-        <h1 class="kinetic-heading">
-          <span class="word-wrapper"><span class="word">Architektur</span></span>
-          <span class="word-wrapper"><span class="word">aus</span></span>
-          <span class="word-wrapper"><span class="word">Licht</span></span>
-          <span class="word-wrapper"><span class="word">und</span></span>
-          <span class="word-wrapper"><span class="word">Material.</span></span>
-        </h1>
+      <div class="services-grid">
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <h3>Wohnbauten</h3>
+          <p>Individuelle Villen und exklusive Apartmenthäuser, die sich durch skulpturale Klarheit und präzise Raumführung auszeichnen.</p>
+        </div>
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="9" y1="3" x2="9" y2="21"></line>
+            <line x1="15" y1="3" x2="15" y2="21"></line>
+          </svg>
+          <h3>Hotel & Spa</h3>
+          <p>Rückzugsorte mit monolithischer Eleganz. Wir schaffen Räume der Stille, die Luxus durch Materialität und Reduktion definieren.</p>
+        </div>
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 24 24">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          <h3>Konzeptstudien</h3>
+          <p>Machbarkeitsanalysen und städtebauliche Entwürfe, die das Potenzial eines Grundstücks radikal und visionär ausloten.</p>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="card-stack-container" id="projekte">
-      <div class="card-stack-panel">
-        <div class="card-stack-image">
-          <img src="../assets/studio-beton-cream-2.jpeg" alt="Moderne Fassade eines Wohnhauses mit klaren Linien und großen Glasflächen.">
-        </div>
-        <div class="card-stack-content">
-          <p class="category">Wohnbauten</p>
-          <h3>Private Refugien, die Ruhe und Klarheit atmen.</h3>
-          <p>Wir gestalten Lebensräume, die sich auf das Wesentliche konzentrieren. Jedes Projekt ist ein Dialog zwischen den Bedürfnissen der Bewohner und der umgebenden Landschaft, geformt aus rohen, ehrlichen Materialien.</p>
-        </div>
-      </div>
-      <div class="card-stack-panel">
-        <div class="card-stack-content">
-          <p class="category">Hotel & Gewerbe</p>
-          <h3>Räume, die Identität stiften und Erlebnisse formen.</h3>
-          <p>Für Hotels und gewerbliche Bauten schaffen wir unverwechselbare Architekturen, die Marke und Ort miteinander verbinden. Unsere Entwürfe sind funktional, ästhetisch und schaffen bleibende Eindrücke.</p>
-        </div>
-        <div class="card-stack-image">
-          <img src="../assets/studio-beton-cream-3.jpeg" alt="Detailaufnahme einer Betonwand mit Lichteinfall, die die Textur des Materials hervorhebt.">
-        </div>
-      </div>
-      <div class="card-stack-panel">
-        <div class="card-stack-image">
-           <img src="../assets/studio-beton-cream-1.jpeg" alt="Ein heller, minimalistischer Raum, der das Zusammenspiel von Licht und Schatten zeigt.">
-        </div>
-        <div class="card-stack-content">
-          <p class="category">Innenarchitektur</p>
-          <h3>Die Essenz des Materials im Detail.</h3>
-          <p>Unsere Gestaltungsphilosophie setzt sich im Inneren fort. Wir kuratieren Materialien, Licht und Objekte, um eine Atmosphäre von zurückhaltender Eleganz und spürbarer Qualität zu schaffen.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="philosophy-section" id="philosophie">
-      <div class="container">
-        <h2>Reduktion auf das Wesentliche.</h2>
-        <p class="lead">Unsere Arbeit ist eine Suche nach Stille in einer lauten Welt. Wir formen Räume, in denen Licht zum Baustoff und Material zur Erzählung wird. Seit unserer Gründung haben wir 24 Projekte realisiert, die diese Vision tragen.</p>
-        <div class="awards-list">
-          Ausgezeichnet durch BDA &nbsp;•&nbsp; ArchDaily Building of the Year &nbsp;•&nbsp; AIT-Award
-        </div>
-      </div>
-    </section>
-
-    <section class="gallery-section">
-      <div class="container">
-        <h2>Ein Team, eine Vision.</h2>
-        <p>Ein Team von 6 Architekten, Planern und Visionären, vereint durch die Leidenschaft für puristische Ästhetik und kompromisslose Qualität. Wir glauben an die Kraft der Zusammenarbeit, um außergewöhnliche Architektur zu schaffen.</p>
-        <div class="gallery-grid">
-          <div class="gallery-item tilt-card">
-            <img src="../assets/studio-beton-cream-1.jpeg" alt="Architektonisches Detail 1">
-          </div>
-          <div class="gallery-item tilt-card">
-            <img src="../assets/studio-beton-cream-2.jpeg" alt="Architektonisches Detail 2">
-          </div>
-          <div class="gallery-item tilt-card">
-            <img src="../assets/studio-beton-cream-3.jpeg" alt="Architektonisches Detail 3">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact-section" id="kontakt">
-      <div class="container">
-        <h2>Beginnen wir ein Gespräch.</h2>
-        <p>Ihr Projekt verdient eine einzigartige Vision. Kontaktieren Sie uns, um herauszufinden, wie wir gemeinsam außergewöhnliche Räume schaffen können.</p>
-        <a href="mailto:hallo@studiobeton.de" class="btn btn-primary">Projekt anfragen</a>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="main-footer">
+  <!-- Preise / Phasen -->
+  <section id="preise">
     <div class="container">
-      <span>&copy; 2024 Studio Beton</span>
-      <span>Impressum & Datenschutz</span>
+      <div class="section-header" style="max-width: 600px; margin-bottom: 64px;">
+        <span class="hero-eyebrow">Transparenz</span>
+        <h2 class="section-title" style="font-size: clamp(2.5rem, 4vw, 3.8rem); margin-top: 16px;">Phasen & Honorare</h2>
+        <p style="margin-top: 24px;">Architektur ist ein Prozess. Wir strukturieren unsere Zusammenarbeit in klare Phasen mit verlässlicher Honorargestaltung.</p>
+      </div>
+      <div class="pricing-table">
+        <div class="pricing-row">
+          <div class="phase-num">Phase I</div>
+          <div>
+            <h3 class="phase-title">Konzept & Vorentwurf</h3>
+            <p>Grundlagenermittlung, erste Entwurfsskizzen, 3D-Visualisierungen und Kostenschätzung.</p>
+          </div>
+          <div class="phase-price">ab 12.500 €</div>
+        </div>
+        <div class="pricing-row">
+          <div class="phase-num">Phase II</div>
+          <div>
+            <h3 class="phase-title">Genehmigungsplanung</h3>
+            <p>Ausarbeitung der Pläne für die Baubehörde, Koordination der Fachplaner und Einreichung des Bauantrags.</p>
+          </div>
+          <div class="phase-price">ab 18.000 €</div>
+        </div>
+        <div class="pricing-row">
+          <div class="phase-num">Phase III</div>
+          <div>
+            <h3 class="phase-title">Ausführungsplanung</h3>
+            <p>Detaillierte Werkpläne im Maßstab 1:50 bis 1:1, Materialdefinition und Vorbereitung der Vergabe.</p>
+          </div>
+          <div class="phase-price">Nach HOAI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Über Uns (Editorial) -->
+  <section id="ueber-uns">
+    <div class="container editorial-grid">
+      <div class="editorial-content">
+        <span class="hero-eyebrow">Philosophie</span>
+        <h2 class="section-title" style="line-height: 1.1; font-size: clamp(2.5rem, 4vw, 3.8rem);">Gegründet 2014 in Weimar. 18 Auszeichnungen weltweit.</h2>
+        <div class="editorial-text">
+          <p class="drop-cap">Baton ist mehr als ein Baustoff. Es ist die physische Manifestation von Beständigkeit und Ruhe. In einer lauten Welt suchen wir die Stille im Raum. Unsere Architektur verzichtet auf Dekoration; sie lässt die Struktur selbst sprechen.</p>
+          <p>Jeder Entwurf entsteht aus dem Dialog mit dem Ort. Wir analysieren den Sonnenlauf, die Topografie und die umgebende Natur, um Gebäude zu schaffen, die wie natürlich gewachsen wirken. Präzise Fugenbilder und die ehrliche Haptik roher Oberflächen prägen unsere Handschrift.</p>
+        </div>
+      </div>
+      <div class="editorial-images">
+        <div>
+          <div class="editorial-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" alt="Minimalistischer Wellnessbereich aus rohem Beton mit klaren Linien">
+          </div>
+          <p class="editorial-caption">Haus Am Hang, Bozen — Detail Sichtbeton</p>
+        </div>
+        <div style="margin-top: 40px;">
+          <div class="editorial-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80" alt="Minimalistischer Beton-Innenraum mit starkem Licht- und Schattenspiel">
+          </div>
+          <p class="editorial-caption">Atriumhaus, Weimar — Innenraum</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt -->
+  <section id="kontakt">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <div>
+          <span class="hero-eyebrow">Dialog</span>
+          <h2 class="section-title" style="font-size: clamp(2.5rem, 4vw, 3.8rem); margin-top: 16px;">Lassen Sie uns bauen.</h2>
+        </div>
+        <div class="contact-item">
+          <h4>Studio München</h4>
+          <p>Klenzestraße 48, 80469 München</p>
+          <p>muenchen@studiobeton.de</p>
+        </div>
+        <div class="contact-item">
+          <h4>Studio Zürich</h4>
+          <p>Neugasse 29, 8005 Zürich</p>
+          <p>zuerich@studiobeton.de</p>
+        </div>
+        <!-- Minimalist Floorplan Outline (SVG) -->
+        <svg viewBox="0 0 200 100" style="width: 100%; max-width: 300px; stroke: var(--border); stroke-width: 1; fill: none; margin-top: 16px;">
+          <rect x="10" y="10" width="180" height="80"></rect>
+          <line x1="60" y1="10" x2="60" y2="90"></line>
+          <line x1="130" y1="10" x2="130" y2="60"></line>
+          <line x1="130" y1="80" x2="130" y2="90"></line>
+          <circle cx="95" cy="50" r="12" stroke="var(--accent)" stroke-dasharray="2 2"></circle>
+        </svg>
+      </div>
+      <div>
+        <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Vielen Dank. Wir setzen uns zeitnah mit Ihnen in Verbindung.');">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="project">Projektart</label>
+            <input type="text" id="project" placeholder="z.B. Wohnhaus, Hotel, Umbau">
+          </div>
+          <div class="form-group">
+            <label for="message">Nachricht</label>
+            <textarea id="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn">Anfrage senden</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-container">
+      <a href="#" class="footer-logo">STUDIO BETON</a>
+      <div class="footer-meta">
+        <span>© 2026 Studio Beton. Alle Rechte vorbehalten.</span>
+        <span style="margin-left: 24px;"><a href="#">Impressum</a></span>
+      </div>
     </div>
   </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      // 1. Kinetic Typography
-      const kineticHeading = document.querySelector('.kinetic-heading');
-      if (kineticHeading) {
-        const words = kineticHeading.querySelectorAll('.word');
-        words.forEach((word, index) => {
-          word.style.animationDelay = `${index * 120}ms`;
+      const cursor = document.querySelector('.custom-cursor');
+      if (cursor) {
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
         });
-        // Use IntersectionObserver to trigger animation only when visible
-        const heroObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              kineticHeading.classList.add('animate');
-              heroObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.5 });
-        heroObserver.observe(document.querySelector('.hero'));
-      }
 
-      // 2. Card Stack
-      if (!prefersReducedMotion && window.innerWidth > 768) {
-        const stackPanels = document.querySelectorAll('.card-stack-panel');
-        if (stackPanels.length > 1) {
-          const stackObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              // Target the panel *after* the first one
-              const targetPanel = entry.target.nextElementSibling;
-              if (targetPanel) {
-                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-                  targetPanel.classList.add('is-visible');
-                } else {
-                  // Optional: reverse animation if needed
-                  // targetPanel.classList.remove('is-visible');
-                }
-              }
-            });
-          }, { threshold: 0.5 }); // Trigger when 50% of the panel is visible
-
-          stackPanels.forEach(panel => stackObserver.observe(panel));
+        function animate() {
+          let dx = mouseX - cursorX;
+          let dy = mouseY - cursorY;
+          cursorX += dx * 0.15;
+          cursorY += dy * 0.15;
+          cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+          requestAnimationFrame(animate);
         }
-      } else {
-        // On mobile or reduced motion, make all cards visible by default
-        document.querySelectorAll('.card-stack-panel').forEach(p => p.classList.add('is-visible'));
-      }
+        animate();
 
-
-      // 3. 3D Tilt Effect
-      if (!prefersReducedMotion) {
-        const tiltCards = document.querySelectorAll('.tilt-card');
-        tiltCards.forEach(card => {
-          const tiltIntensity = 15;
-          card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const { width, height } = rect;
-            const rotateX = (y / height - 0.5) * -tiltIntensity;
-            const rotateY = (x / width - 0.5) * tiltIntensity;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-          });
-
-          card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-          });
+        document.querySelectorAll('a, button, input, textarea').forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
         });
       }
     });
   </script>
-
 </body>
 </html>

@@ -1,496 +1,764 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forno Nero – Echte neapolitanische Pizza in Berlin</title>
-    <meta name="description" content="Entdecken Sie authentische neapolitanische Pizza aus dem Holzofen bei Forno Nero in Berlin. Handwerklicher Teig mit Lievito Madre, 72 Stunden gereift.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg: #f5f4ed;
-        --surface: #faf9f5;
-        --surface-2: #edebe2;
-        --primary: #141413;
-        --primary-soft: #30302e;
-        --accent: #c96442;
-        --accent-soft: #d97757;
-        --text: #141413;
-        --text-muted: #5e5d59;
-        --border: #e8e6dc;
-        --border-soft: #f0eee6;
-        --radius: 12px;
-        --radius-sm: 8px;
-        --radius-lg: 18px;
-        --shadow: 0 0 0 1px var(--border), 0 1px 2px rgba(20, 20, 19, 0.04);
-        --ring: 0 0 0 1px #d1cfc5;
-        --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-        --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
-      }
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      html { scroll-behavior: smooth; }
-      body {
-        background-color: var(--bg);
-        color: var(--text);
-        font-family: var(--font-body);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        overflow-x: hidden;
-      }
-      body::after {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
-        opacity: 0.03;
-        pointer-events: none;
-        z-index: 100;
-      }
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-      section {
-        padding: clamp(4rem, 10vh, 8rem) 0;
-      }
-      h1, h2, h3 {
-        font-family: var(--font-display);
-        font-weight: 500;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-        color: var(--primary);
-      }
-      h1 { font-size: clamp(3rem, 8vw, 6rem); }
-      h2 { font-size: clamp(2.5rem, 6vw, 4rem); text-align: center; margin-bottom: 3rem; }
-      h3 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
-      p { max-width: 65ch; color: var(--text-muted); margin-bottom: 1rem; }
-      .text-lead { font-size: 1.25rem; color: var(--text); }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forno Nero — Neapolitanische Pizzeria Berlin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* CLAUDE EDITORIAL DESIGN SYSTEM TOKENS */
+    :root {
+      --bg: #f4f3ec;
+      --surface: #faf9f5;
+      --surface-2: #eae8df;
+      --primary: #121211;
+      --primary-soft: #2c2c2a;
+      --accent: #b84e2d;
+      --accent-soft: #cd6241;
+      --text: #1c1c1a;
+      --text-muted: #615f5a;
+      --border: #dfddd2;
+      --border-soft: #e8e6dc;
+      --radius: 8px;
+      --radius-sm: 4px;
+      --radius-lg: 16px;
+      --shadow: 0 10px 30px -15px rgba(18, 18, 17, 0.08), 0 1px 3px rgba(18, 18, 17, 0.02);
+      --ring: 0 0 0 1px #cfcdc0;
+      --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    }
 
-      .nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 24px 0;
-      }
-      .nav-logo {
-        font-family: var(--font-display);
-        font-size: 1.5rem;
-        font-weight: 600;
-        text-decoration: none;
-        color: var(--primary);
-      }
-      .nav-links { display: none; }
-      @media (min-width: 768px) {
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--primary); }
-      }
+    /* BASE RESETS & SETUP */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.65;
+    }
 
-      .btn {
-        display: inline-block;
-        padding: 12px 24px;
-        border-radius: var(--radius-sm);
-        text-decoration: none;
-        font-weight: 500;
-        transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s;
-      }
-      .btn-primary {
-        background-color: var(--accent);
-        color: var(--surface);
-      }
-      .btn-primary:hover {
-        background-color: var(--accent-soft);
-        transform: translateY(-2px);
-      }
-      .btn-secondary {
-        background-color: transparent;
-        color: var(--primary);
-        box-shadow: var(--ring);
-      }
-      .btn-secondary:hover {
-        background-color: var(--surface-2);
-        transform: translateY(-2px);
-      }
+    /* NOISE OVERLAY FOR MATERIALITY */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
 
+    /* CUSTOM CURSOR (DESKTOP ONLY) */
+    .custom-cursor {
+      width: 16px;
+      height: 16px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 10000;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%) scale(1);
+      transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+      display: none;
+    }
+    .custom-cursor.active {
+      transform: translate(-50%, -50%) scale(3);
+      background-color: var(--accent-soft);
+    }
+    @media (pointer: fine) {
+      .custom-cursor { display: block; }
+      body { cursor: none; }
+      a, button, .interactive, .slide, .magnet { cursor: none; }
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+    }
+    p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      font-weight: 300;
+    }
+    .italic {
+      font-family: var(--font-display);
+      font-style: italic;
+    }
+
+    /* BUTTONS / CTAS */
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background-color: var(--primary);
+      color: var(--surface);
+      padding: 16px 32px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .cta-button:hover {
+      background-color: var(--accent);
+    }
+
+    /* HEADER */
+    header {
+      padding: 40px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-soft);
+      background-color: transparent;
+    }
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      color: var(--primary);
+      transition: color 0.3s ease;
+    }
+    .logo:hover {
+      color: var(--accent);
+    }
+    nav {
+      display: flex;
+      gap: 40px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO (EDITORIAL-ASYMMETRIC) */
+    .hero {
+      padding: 120px 8% 160px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 100px;
+      align-items: center;
+    }
+    .hero-content {
+      max-width: 640px;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 50px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 32px;
+      font-weight: 500;
+    }
+    .glow-title {
+      font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+      margin-bottom: 32px;
+      font-weight: 300;
+      line-height: 1.1;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+    .hero-image-wrapper {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      aspect-ratio: 4/5;
+    }
+    .hero-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .hero-image-wrapper:hover img {
+      transform: scale(1.03);
+    }
+
+    /* HORIZONTAL SCROLL SECTION (CREATIVE DNA) */
+    .scroll-track {
+      position: relative;
+      height: 300vh;
+      background-color: var(--surface-2);
+    }
+    .sticky-container {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .scroll-header {
+      padding: 0 8vw;
+      margin-bottom: 48px;
+    }
+    .scroll-header h2 {
+      font-size: 3.5rem;
+      font-weight: 300;
+    }
+    .horizontal-slider {
+      display: flex;
+      will-change: transform;
+      padding: 0 8vw;
+      gap: 48px;
+    }
+    .slide {
+      flex: 0 0 460px;
+      max-width: 85vw;
+      background: var(--surface);
+      padding: 36px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 520px;
+      border: 1px solid var(--border-soft);
+    }
+    .slide-image {
+      width: 100%;
+      height: 260px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .slide-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .slide:hover .slide-image img {
+      transform: scale(1.04);
+    }
+    .slide h3 {
+      font-size: 1.9rem;
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+    .slide p {
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+    .scroll-progress-container {
+      position: absolute;
+      bottom: 60px;
+      left: 8vw;
+      width: 84vw;
+      height: 2px;
+      background-color: var(--border);
+    }
+    .scroll-progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: var(--accent);
+      transition: width 0.1s ease-out;
+    }
+
+    /* PREISE / SPEISEKARTE (INCREASED BREATHING ROOM) */
+    .menu-section {
+      padding: 180px 8% 200px;
+      background-color: var(--surface);
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .menu-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 100px;
+    }
+    .menu-header .section-subtitle {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: block;
+      font-weight: 500;
+    }
+    .section-title {
+      font-size: 4rem;
+      font-weight: 300;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 64px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .menu-item {
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.3s ease;
+    }
+    .menu-item:hover {
+      border-color: var(--accent-soft);
+    }
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+    .menu-item-header h3 {
+      font-size: 1.8rem;
+      font-weight: 400;
+    }
+    .menu-price {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .menu-item p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* ÜBER UNS / STIMMUNG (EDITORIAL ASYMMETRIC) */
+    .about-section {
+      padding: 180px 8%;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 120px;
+      align-items: center;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .about-text h2 {
+      font-size: 3.8rem;
+      margin-bottom: 36px;
+      font-weight: 300;
+    }
+    .about-text p {
+      margin-bottom: 28px;
+      font-size: 1.15rem;
+      line-height: 1.7;
+    }
+    .about-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+    .about-images img {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .about-images img:hover {
+      transform: translateY(-8px);
+    }
+    .about-images .img-tall {
+      aspect-ratio: 3/4;
+    }
+    .about-images .img-square {
+      aspect-ratio: 1/1;
+      margin-top: 40px;
+    }
+
+    /* KONTAKT */
+    .contact-section {
+      padding: 160px 8%;
+      background-color: var(--surface-2);
+      text-align: center;
+      border-top: 1px solid var(--border-soft);
+    }
+    .contact-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .contact-container h2 {
+      font-size: 4rem;
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+    .contact-container p {
+      font-size: 1.2rem;
+      max-width: 500px;
+      margin: 0 auto 48px;
+    }
+    .contact-info {
+      margin: 48px 0 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-info p {
+      font-size: 1.35rem;
+      font-family: var(--font-display);
+      margin: 0;
+      color: var(--primary);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 48px 8%;
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background-color: var(--bg);
+    }
+
+    /* ACCESSIBILITY: PREFERS REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+        transform: none !important;
+      }
+      .scroll-track {
+        height: auto;
+      }
+      .sticky-container {
+        position: static;
+        height: auto;
+      }
+      .horizontal-slider {
+        flex-direction: column;
+        padding: 60px 8%;
+      }
+      .slide {
+        flex: 1 1 auto;
+        height: auto;
+      }
+      .scroll-progress-container {
+        display: none;
+      }
+    }
+
+    /* RESPONSIVENESS */
+    @media (max-width: 1100px) {
       .hero {
-        min-height: 80vh;
-        display: grid;
-        align-items: center;
-        gap: 2rem;
+        grid-template-columns: 1fr;
+        gap: 60px;
+        padding-top: 80px;
+        text-align: center;
       }
-      @media (min-width: 992px) {
-        .hero { grid-template-columns: 1fr 1fr; gap: 4rem; }
+      .hero-content {
+        margin: 0 auto;
       }
       .hero-image-wrapper {
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        aspect-ratio: 4/5;
-        max-height: 70vh;
-      }
-      .hero-image-wrapper img {
+        aspect-ratio: 16/10;
+        max-width: 700px;
+        margin: 0 auto;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
       }
-
-      .animated-headline {
-        background: linear-gradient(90deg, var(--accent) 0%, var(--primary-soft) 50%, var(--accent) 100%);
-        background-size: 200% 100%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: shine 8s linear infinite;
-      }
-      @keyframes shine {
-        to { background-position: 200% center; }
-      }
-      @media (prefers-reduced-motion: no-preference) {
-        .animated-headline {
-            text-shadow: 0 0 24px rgba(201, 100, 66, 0.2);
-        }
-      }
-
-      .mosaic-gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        grid-auto-rows: 250px;
-        grid-auto-flow: dense;
-        gap: 1.5rem;
-      }
-      .mosaic-item {
-        position: relative;
-        border-radius: var(--radius);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        transition: transform 0.3s ease, z-index 0s 0.3s;
-        z-index: 1;
-      }
-      .mosaic-item:hover {
-        transform: scale(1.03);
-        z-index: 10;
-        transition: transform 0.3s ease, z-index 0s 0s;
-      }
-      .mosaic-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .mosaic-item-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 1.5rem;
-        background: linear-gradient(to top, rgba(20, 20, 19, 0.8), transparent);
-        color: var(--surface);
-      }
-      .mosaic-item-content h3 {
-        color: var(--surface);
-        font-weight: 600;
-        line-height: 1.2;
-      }
-      @media (min-width: 768px) {
-        .mosaic-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-        .mosaic-item:nth-child(4) { grid-column: span 2; }
-        .mosaic-item:nth-child(5) { grid-row: span 2; }
-      }
-      
-      .menu-grid {
-        display: grid;
-        gap: 1.5rem;
-        perspective: 1000px;
-      }
-      @media (min-width: 768px) {
-        .menu-grid { grid-template-columns: repeat(2, 1fr); }
-      }
-      @media (min-width: 1024px) {
-        .menu-grid { grid-template-columns: repeat(3, 1fr); }
-      }
-      .menu-card {
-        background: var(--surface);
-        padding: 2rem;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        transform-style: preserve-3d;
-      }
-      .menu-card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 0.5rem;
-        margin-bottom: 1rem;
-      }
-      .menu-card-header h3 { font-size: 1.25rem; font-weight: 600; }
-      .menu-card-price { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--accent); }
-      .menu-card p { font-size: 0.9rem; margin-bottom: 0; }
-
       .about-section {
-        display: grid;
-        gap: 2rem;
-        align-items: center;
+        grid-template-columns: 1fr;
+        gap: 80px;
       }
-      @media (min-width: 992px) {
-        .about-section { grid-template-columns: 1fr 1fr; gap: 4rem; }
-        .about-section .about-image-wrapper { order: 2; }
+      .about-images .img-square {
+        margin-top: 0;
       }
-      .about-image-wrapper {
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        aspect-ratio: 5/4;
-      }
-      .about-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-
-      .contact-section { text-align: center; }
-      .contact-section h2 { margin-bottom: 1rem; }
-      .contact-section .text-lead { max-width: 60ch; margin: 0 auto 2.5rem; }
-      .contact-info {
-        margin-top: 3rem;
-        display: flex;
+    }
+    @media (max-width: 768px) {
+      header {
         flex-direction: column;
-        gap: 1.5rem;
-        align-items: center;
-        color: var(--text-muted);
+        gap: 24px;
+        padding: 32px 5%;
       }
-      @media (min-width: 768px) {
-        .contact-info { flex-direction: row; justify-content: center; gap: 4rem; }
+      nav {
+        gap: 24px;
       }
-      .contact-info strong {
-        display: block;
-        font-family: var(--font-display);
-        color: var(--primary);
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin-bottom: 0.25rem;
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
       }
-
+      .section-title {
+        font-size: 3rem;
+      }
+      .about-text h2 {
+        font-size: 3rem;
+      }
+      .contact-container h2 {
+        font-size: 3rem;
+      }
       footer {
+        flex-direction: column;
+        gap: 16px;
         text-align: center;
-        padding: 2rem 0;
-        border-top: 1px solid var(--border);
-        color: var(--text-muted);
-        font-size: 0.9rem;
       }
-
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-        }
-        .animated-headline { animation: none; }
-        .mosaic-item:hover, .btn:hover { transform: none; }
-      }
-    </style>
+    }
+  </style>
 </head>
 <body>
 
-    <header class="container">
-        <nav class="nav">
-            <a href="#" class="nav-logo">Forno Nero</a>
-            <div class="nav-links">
-                <a href="#philosophie">Philosophie</a>
-                <a href="#karte">Speisekarte</a>
-                <a href="#ambiente">Ambiente</a>
-                <a href="#kontakt">Kontakt</a>
-            </div>
-            <a href="#kontakt" class="btn btn-secondary magnet-target">Reservieren</a>
-        </nav>
-    </header>
+  <!-- Custom Cursor Element -->
+  <div class="custom-cursor" id="cursor"></div>
 
-    <main>
-        <section class="hero-section">
-            <div class="container hero">
-                <div class="hero-content">
-                    <h1 class="animated-headline">Die Seele Neapels, im Herzen Berlins.</h1>
-                    <p class="text-lead">Erleben Sie authentische Pizza Napoletana, gebacken in unserem handgefertigten Holzofen. Unser Teig reift 72 Stunden mit Lievito Madre für einen unvergleichlichen Geschmack.</p>
-                    <a href="#karte" class="btn btn-primary magnet-target">Zur Speisekarte</a>
-                </div>
-                <div class="hero-image-wrapper magnet-target">
-                    <img src="../assets/forno-nero-cream-1.jpeg" alt="Frisch gebackene neapolitanische Pizza Margherita auf einem Holzteller.">
-                </div>
-            </div>
-        </section>
+  <!-- HEADER -->
+  <header>
+    <a href="#" class="logo magnet">FORNO NERO</a>
+    <nav>
+      <a href="#philosophie" class="magnet">Philosophie</a>
+      <a href="#karte" class="magnet">Speisekarte</a>
+      <a href="#philosophie" class="magnet">Über Uns</a>
+      <a href="#kontakt" class="magnet">Reservierung</a>
+    </nav>
+  </header>
 
-        <section id="philosophie" class="container">
-            <h2>Unsere Philosophie</h2>
-            <div class="mosaic-gallery">
-                <div class="mosaic-item magnet-target">
-                    <img src="../assets/forno-nero-cream-2.jpeg" alt="Nahaufnahme von Pizzateig, der mit frischen Tomaten und Kräutern belegt wird.">
-                    <div class="mosaic-item-content">
-                        <h3>Lievito Madre & 72h Teigruhe</h3>
-                    </div>
-                </div>
-                <div class="mosaic-item magnet-target">
-                    <div class="mosaic-item-content">
-                        <h3>Original Holzofen</h3>
-                    </div>
-                </div>
-                <div class="mosaic-item magnet-target">
-                    <div class="mosaic-item-content">
-                        <h3>D.O.P. Zutaten</h3>
-                    </div>
-                </div>
-                <div class="mosaic-item magnet-target">
-                    <img src="../assets/forno-nero-cream-3.jpeg" alt="Gemütliches, warm beleuchtetes Interieur des Restaurants Forno Nero.">
-                    <div class="mosaic-item-content">
-                        <h3>Vini Italiani</h3>
-                    </div>
-                </div>
-                <div class="mosaic-item magnet-target">
-                    <div class="mosaic-item-content">
-                        <h3>VPN Zertifiziert</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">VPN-Zertifiziert #942</span>
+      <h1 class="glow-title">Die Seele Neapels im <span class="italic">Herzen Berlins</span>.</h1>
+      <p>Traditionelle Holzofen-Pizzakultur. 48 Stunden Teigruhe, sanftes Buchenholzfeuer und erlesene kampanische Weine vereint in einem zeitlosen, handwerklichen Erlebnis.</p>
+      <a href="#kontakt" class="cta-button magnet">
+        Tisch reservieren
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-image-wrapper magnet">
+      <img src="https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=1200&q=80" alt="Glühender neapolitanischer Holzofen mit frischer Pizza" loading="lazy">
+    </div>
+  </section>
 
-        <section id="karte" style="background-color: var(--surface-2);">
-            <div class="container">
-                <h2>Ein Auszug aus der Karte</h2>
-                <div class="menu-grid">
-                    <div class="menu-card tilt-target">
-                        <div class="menu-card-header">
-                            <h3>Margherita D.O.P.</h3>
-                            <span class="menu-card-price">12.50 €</span>
-                        </div>
-                        <p>San Marzano Tomaten, Mozzarella di Bufala Campana D.O.P., frisches Basilikum, Olivenöl extra vergine.</p>
-                    </div>
-                    <div class="menu-card tilt-target">
-                        <div class="menu-card-header">
-                            <h3>Diavola</h3>
-                            <span class="menu-card-price">14.50 €</span>
-                        </div>
-                        <p>San Marzano Tomaten, Fior di Latte, scharfe Salami (Spianata Calabra), Olivenöl extra vergine.</p>
-                    </div>
-                    <div class="menu-card tilt-target">
-                        <div class="menu-card-header">
-                            <h3>Nduja e Burrata</h3>
-                            <span class="menu-card-price">16.00 €</span>
-                        </div>
-                        <p>Fior di Latte, 'Nduja di Spilinga, nach dem Backen mit frischer Burrata und Basilikum verfeinert.</p>
-                    </div>
-                    <div class="menu-card tilt-target">
-                        <div class="menu-card-header">
-                            <h3>Salsiccia e Friarielli</h3>
-                            <span class="menu-card-price">15.50 €</span>
-                        </div>
-                        <p>Provola affumicata (geräuchert), Salsiccia fresca, Friarielli (Stängelkohl), Olivenöl extra vergine.</p>
-                    </div>
-                    <div class="menu-card tilt-target">
-                        <div class="menu-card-header">
-                            <h3>Quattro Formaggi</h3>
-                            <span class="menu-card-price">15.00 €</span>
-                        </div>
-                        <p>Fior di Latte, Gorgonzola, Provola affumicata, Parmigiano Reggiano, frisches Basilikum.</p>
-                    </div>
-                    <div class="menu-card tilt-target">
-                        <div class="menu-card-header">
-                            <h3>Marinara</h3>
-                            <span class="menu-card-price">9.50 €</span>
-                        </div>
-                        <p>San Marzano Tomaten, Knoblauch aus Vessalico, Oregano vom Vesuv, Olivenöl extra vergine.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="ambiente" class="container">
-            <div class="about-section">
-                <div class="about-content">
-                    <h2>Handwerk & Herz</h2>
-                    <p class="text-lead">Forno Nero ist mehr als eine Pizzeria. Es ist ein Ort der Begegnung, an dem die Liebe zu ehrlichen Zutaten und traditionellem Handwerk im Mittelpunkt steht.</p>
-                    <p>Unser Herzstück ist der Stefano Ferrara Ofen aus Neapel, in dem jede Pizza bei 485°C in nur 60-90 Sekunden zur Perfektion gebacken wird. Wir laden Sie ein, diese Leidenschaft mit uns zu teilen.</p>
-                </div>
-                <div class="about-image-wrapper magnet-target">
-                    <img src="../assets/forno-nero-cream-3.jpeg" alt="Das warme und einladende Ambiente des Forno Nero Restaurants mit gedämpftem Licht.">
-                </div>
-            </div>
-        </section>
-
-        <section id="kontakt" class="contact-section" style="background-color: var(--surface);">
-            <div class="container">
-                <h2>Besuchen Sie uns</h2>
-                <p class="text-lead">Wir freuen uns darauf, Sie im Forno Nero begrüßen zu dürfen. Reservieren Sie Ihren Tisch für ein unvergessliches kulinarisches Erlebnis.</p>
-                <a href="#" class="btn btn-primary magnet-target">Online Reservieren</a>
-                <div class="contact-info">
-                    <div>
-                        <strong>Adresse</strong>
-                        <span>Via Napoli 12, 10115 Berlin</span>
-                    </div>
-                    <div>
-                        <strong>Öffnungszeiten</strong>
-                        <span>Di – So: 17:00 – 23:00 Uhr</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            &copy; 2024 Forno Nero. Alle Rechte vorbehalten.
+  <!-- HORIZONTAL SCROLL SECTION (CREATIVE DNA) -->
+  <section class="scroll-track" id="scrollTrack">
+    <div class="sticky-container">
+      <div class="scroll-header">
+        <h2>Unser Handwerk</h2>
+      </div>
+      <div class="horizontal-slider" id="slider">
+        <!-- Slide 1 -->
+        <div class="slide">
+          <div class="slide-image">
+            <img src="https://images.unsplash.com/photo-1573821663912-569905455b1c?auto=format&fit=crop&w=800&q=80" alt="Frische Pizza wird mit einer Schaufel in den glühenden Holzofen geschoben" loading="lazy">
+          </div>
+          <div>
+            <h3>485°C Backtemperatur</h3>
+            <p>In exakt 60 bis 90 Sekunden backen wir unsere Pizzen im handgemauerten Ofen aus Neapel. Das Resultat ist der typisch luftige, leicht leoparden-gemusterte Rand.</p>
+          </div>
         </div>
-    </footer>
+        <!-- Slide 2 -->
+        <div class="slide">
+          <div class="slide-image">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Pizzabäcker formt den Teig von Hand" loading="lazy">
+          </div>
+          <div>
+            <h3>Echtes Handwerk</h3>
+            <p>Nur original San Marzano Tomaten D.O.P. vom Fuße des Vesuvs, feinster Fior di Latte und handgezogener Sauerteig finden den Weg auf unsere Teller.</p>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="slide">
+          <div class="slide-image">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Italienischer Rotwein wird elegant in ein Glas eingeschenkt" loading="lazy">
+          </div>
+          <div>
+            <h3>Kampanische Weine</h3>
+            <p>Unsere Weinkarte konzentriert sich auf autochthone Rebsorten Süditaliens — perfekt abgestimmt auf die rauchigen Aromen unseres Holzofens.</p>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (isReducedMotion) return;
+  <!-- SPEISEKARTE (PREISE) -->
+  <section class="menu-section" id="karte">
+    <div class="menu-header">
+      <span class="section-subtitle">Ausgewählte Zutaten</span>
+      <h2 class="section-title">Die Auswahl</h2>
+    </div>
+    <div class="menu-grid">
+      <!-- Item 1 -->
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <h3>Marinara</h3>
+          <span class="menu-price">€ 11,50</span>
+        </div>
+        <p>San Marzano Tomaten D.O.P., frischer Knoblauch, wilder Oregano, extra natives Olivenöl.</p>
+      </div>
+      <!-- Item 2 -->
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <h3>Margherita D.O.P.</h3>
+          <span class="menu-price">€ 13,80</span>
+        </div>
+        <p>San Marzano Tomaten D.O.P., Fior di Latte, frisches Basilikum, extra natives Olivenöl.</p>
+      </div>
+      <!-- Item 3 -->
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <h3>Diavola</h3>
+          <span class="menu-price">€ 15,50</span>
+        </div>
+        <p>San Marzano Tomaten, scharfe Spianata Calabrese, Nduja, Fior di Latte, Basilikum.</p>
+      </div>
+      <!-- Item 4 -->
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <h3>Fiano di Avellino</h3>
+          <span class="menu-price">€ 8,50</span>
+        </div>
+        <p>Eleganter Weißwein aus Kampanien. Aromen von Birne, gerösteten Haselnüssen und feiner Mineralität. (0,15l)</p>
+      </div>
+    </div>
+  </section>
 
-        // --- Cursor Magnet Effect ---
-        const magnetTargets = document.querySelectorAll('.magnet-target');
-        const magnetStrength = 10;
+  <!-- ÜBER UNS / STIMMUNG -->
+  <section class="about-section" id="philosophie">
+    <div class="about-text">
+      <h2>Die Kunst der <span class="italic">Langsamkeit</span></h2>
+      <p>Für unsere Pizza nutzen wir ausschließlich die traditionelle Sauerteig-Führung. Mit einer Reifezeit von mindestens 48 Stunden bei kontrollierter Temperatur spalten sich die komplexen Stärken optimal auf — für eine unvergleichliche Bekömmlichkeit.</p>
+      <p>Zertifiziert nach den strengen Richtlinien der Associazione Verace Pizza napoletana (AVPN) bewahren wir das kulinarische Erbe Neapels mitten in Berlin.</p>
+    </div>
+    <div class="about-images">
+      <!-- Image 1: Top-Down Pizza Shot (Fulfills brief requirement) -->
+      <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=1000&q=80" alt="Wunderschöne Margherita Pizza von oben fotografiert mit frischem Basilikum" class="img-tall" loading="lazy">
+      <!-- Image 2: Editorial detail of Neapolitan crust -->
+      <img src="https://images.unsplash.com/photo-1598346762291-aee88549193f?auto=format&fit=crop&w=1000&q=80" alt="Nahaufnahme einer neapolitanischen Pizza mit typischem Leopardenmuster-Rand" class="img-square" loading="lazy">
+    </div>
+  </section>
 
-        magnetTargets.forEach(target => {
-          target.addEventListener('mousemove', (e) => {
-            const { offsetX, offsetY, target: { clientWidth, clientHeight } } = e;
-            const x = (offsetX / clientWidth - 0.5) * magnetStrength * 2;
-            const y = (offsetY / clientHeight - 0.5) * magnetStrength * 2;
-            target.style.transition = 'transform 0.1s ease-out';
-            target.style.transform = `translate(${x}px, ${y}px)`;
-          });
+  <!-- KONTAKT / RESERVIERUNG -->
+  <section class="contact-section" id="kontakt">
+    <div class="contact-container">
+      <h2>Besuchen Sie uns</h2>
+      <p>Aufgrund der begrenzten Plätze am Ofen empfehlen wir eine frühzeitige Reservierung.</p>
+      <div class="contact-info">
+        <p>Reichenberger Str. 124, 10999 Berlin</p>
+        <p>Dienstag — Sonntag: 17:00 bis 22:30 Uhr</p>
+        <p>Telefon: +49 (0) 30 484 920 11</p>
+      </div>
+      <a href="mailto:ciao@fornonero.de" class="cta-button magnet">
+        Anfrage senden
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+      </a>
+    </div>
+  </section>
 
-          target.addEventListener('mouseleave', () => {
-            target.style.transition = 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)';
-            target.style.transform = 'translate(0, 0)';
-          });
-        });
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Forno Nero Berlin. Alle Rechte vorbehalten.</p>
+    <p>Associazione Verace Pizza napoletana Mitglied #942</p>
+  </footer>
 
-        // --- 3D Hover Tilt Effect ---
-        const tiltTargets = document.querySelectorAll('.tilt-target');
-        const tiltStrength = 15;
+  <!-- MINIMAL INLINE JS FOR INTERACTION & CREATIVE DNA -->
+  <script>
+    // 1. Custom Cursor with Lerp
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
 
-        tiltTargets.forEach(target => {
-          target.addEventListener('mousemove', (e) => {
-            const { left, top, width, height } = target.getBoundingClientRect();
-            const x = e.clientX - left;
-            const y = e.clientY - top;
-            const rotateX = (y / height - 0.5) * -tiltStrength;
-            const rotateY = (x / width - 0.5) * tiltStrength;
-            
-            target.style.transition = 'transform 0.1s linear';
-            target.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-          });
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
 
-          target.addEventListener('mouseleave', () => {
-            target.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            target.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-          });
-        });
+    function animateCursor() {
+      const lerp = 0.15;
+      cursorX += (mouseX - cursorX) * lerp;
+      cursorY += (mouseY - cursorY) * lerp;
+      cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover Scaling for Cursor
+    document.querySelectorAll('a, button, .magnet, .slide').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+    });
+
+    // 2. Cursor Magnet Effect
+    document.querySelectorAll('.magnet').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        el.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
       });
-    </script>
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'translate(0, 0)';
+      });
+    });
 
+    // 3. Horizontal Scroll Translation
+    const track = document.getElementById('scrollTrack');
+    const slider = document.getElementById('slider');
+    const progressBar = document.getElementById('progressBar');
+
+    window.addEventListener('scroll', () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      
+      const rect = track.getBoundingClientRect();
+      const trackHeight = rect.height - window.innerHeight;
+      const scrolled = -rect.top;
+      let percentage = scrolled / trackHeight;
+      percentage = Math.max(0, Math.min(1, percentage));
+
+      const maxTranslate = slider.scrollWidth - window.innerWidth + (window.innerWidth * 0.16);
+      slider.style.transform = `translateX(-${percentage * maxTranslate}px)`;
+      progressBar.style.width = `${percentage * 100}%`;
+    });
+  </script>
 </body>
 </html>
