@@ -1,1404 +1,804 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sattva — Vinyasa & Yin Yoga Studio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --bg: #f5f4ed;
-      --surface: #faf9f5;
-      --surface-2: #edebe2;
-      --primary: #141413;
-      --primary-soft: #30302e;
-      --accent: #c96442;
-      --accent-soft: #d97757;
-      --text: #141413;
-      --text-muted: #5e5d59;
-      --border: #e8e6dc;
-      --border-soft: #f0eee6;
-      --radius: 12px;
-      --radius-sm: 8px;
-      --radius-lg: 18px;
-      --shadow: 0 0 0 1px #e8e6dc, 0 4px 20px rgba(20, 20, 19, 0.02);
-      --ring: 0 0 0 1px #d1cfc5;
-      --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
-      
-      --accent-rgb: 201, 100, 66;
-      --primary-rgb: 20, 20, 19;
-    }
-
-    /* Reset & Base */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* Grainy Paper Texture Overlay */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.04;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    /* Custom Cursor (Desktop only) */
-    .custom-cursor {
-      width: 24px;
-      height: 24px;
-      border: 1px solid var(--accent);
-      background-color: rgba(var(--accent-rgb), 0.05);
-      border-radius: 50%;
-      position: fixed;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 10000;
-      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s;
-      display: none;
-    }
-
-    @media (pointer: fine) {
-      .custom-cursor {
-        display: block;
-      }
-      body {
-        cursor: none;
-      }
-      a, button, input, select, textarea, [role="button"] {
-        cursor: none;
-      }
-    }
-
-    .custom-cursor.hover {
-      width: 48px;
-      height: 48px;
-      background-color: rgba(var(--accent-rgb), 0.15);
-      border-color: var(--accent-soft);
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, .font-serif {
-      font-family: var(--font-display);
-      font-weight: 500;
-      line-height: 1.15;
-      color: var(--primary);
-      letter-spacing: -0.01em;
-    }
-
-    p {
-      color: var(--text-muted);
-    }
-
-    /* Container & Layout */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    section {
-      padding: 120px 0;
-      position: relative;
-    }
-
-    /* Header & Navigation */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      background-color: rgba(245, 244, 237, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 80px;
-    }
-
-    .logo {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-style: italic;
-      text-decoration: none;
-      color: var(--primary);
-      font-weight: 500;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .nav-cta {
-      padding: 10px 20px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      color: var(--text);
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .nav-cta:hover {
-      border-color: var(--accent);
-      background: var(--surface-2);
-    }
-
-    /* Hero Section - Asymmetric Layout */
-    .hero {
-      padding-top: 180px;
-      padding-bottom: 120px;
-      background: radial-gradient(circle at 80% 20%, var(--surface-2) 0%, var(--bg) 60%);
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .hero-tagline {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      margin-bottom: 20px;
-      display: inline-block;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.8rem, 5vw, 4.5rem);
-      margin-bottom: 24px;
-    }
-
-    .hero p {
-      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-      margin-bottom: 40px;
-      line-height: 1.6;
-    }
-
-    /* Overlapping Image Frame for Hero */
-    .hero-gallery {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .hero-img-main {
-      width: 85%;
-      height: 520px;
-      object-fit: cover;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-
-    .hero-img-sub {
-      position: absolute;
-      bottom: -30px;
-      left: -10px;
-      width: 45%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: var(--radius);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      border: 6px solid var(--bg);
-    }
-
-    /* Magnetic CTA Button */
-    .magnetic-wrap {
-      display: inline-block;
-      position: relative;
-    }
-
-    .magnetic-cta {
-      display: inline-block;
-      padding: 18px 36px;
-      background-color: var(--accent);
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      transition: background-color 0.3s ease, transform 0.1s ease;
-    }
-
-    .magnetic-cta:hover {
-      background-color: var(--accent-soft);
-    }
-
-    /* Bento Grid (Leistungen) */
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-auto-rows: minmax(280px, auto);
-      gap: 24px;
-      margin-top: 48px;
-    }
-
-    .bento-card {
-      background-color: var(--surface);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border-soft);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .bento-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--ring), var(--shadow);
-    }
-
-    .bento-card.span-7 { grid-column: span 7; }
-    .bento-card.span-5 { grid-column: span 5; }
-
-    .bento-card h3 {
-      font-size: 2rem;
-      margin-bottom: 16px;
-    }
-
-    .bento-card p {
-      font-size: 1rem;
-      max-width: 480px;
-    }
-
-    .bento-card .icon-wrap {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-sm);
-      background-color: var(--surface-2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-
-    .bento-card .icon-wrap svg {
-      width: 24px;
-      height: 24px;
-      stroke-width: 1.5;
-    }
-
-    .bento-card.image-card {
-      padding: 0;
-    }
-
-    .bento-card.image-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .bento-card.image-card:hover img {
-      transform: scale(1.04);
-    }
-
-    /* Stagger-Fade Animation Class */
-    .fade-in-element {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      transition-delay: calc(var(--i, 0) * 80ms);
-    }
-
-    .fade-in-element.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Atmosphere / Über Uns */
-    .atmosphere {
-      background-color: var(--surface-2);
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .atmosphere-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .atmosphere-text h2 {
-      font-size: clamp(2.2rem, 4vw, 3.5rem);
-      margin-bottom: 24px;
-    }
-
-    .atmosphere-text p {
-      font-size: 1.05rem;
-      margin-bottom: 20px;
-    }
-
-    .atmosphere-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 40px;
-      border-top: 1px solid var(--border);
-      padding-top: 32px;
-    }
-
-    .stat-item .num {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      color: var(--accent);
-      display: block;
-    }
-
-    .stat-item .label {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* Overlapping Editorial Image Layout */
-    .atmosphere-images {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      align-items: center;
-    }
-
-    .atmosphere-img-1 {
-      grid-column: 1 / 10;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      z-index: 2;
-    }
-
-    .atmosphere-img-2 {
-      grid-column: 7 / 13;
-      z-index: 3;
-      margin-top: 120px;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-      border: 8px solid var(--surface-2);
-    }
-
-    .atmosphere-images img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Studio Features (Resolves sterile empty space) */
-    .features-section {
-      background-color: var(--surface);
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      margin-top: 48px;
-    }
-
-    .feature-item {
-      padding: 32px;
-      background: var(--bg);
-      border-radius: var(--radius);
-      border: 1px solid var(--border-soft);
-    }
-
-    .feature-item h3 {
-      font-size: 1.5rem;
-      margin-bottom: 12px;
-    }
-
-    /* Team Section (Resolves empty space & adds warmth) */
-    .team-section {
-      background-color: var(--surface-2);
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      margin-top: 48px;
-    }
-
-    .team-card {
-      background: var(--surface);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-soft);
-    }
-
-    .team-img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-    }
-
-    .team-info {
-      padding: 24px;
-    }
-
-    .team-role {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent);
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .team-info h3 {
-      font-size: 1.6rem;
-      margin-bottom: 12px;
-    }
-
-    /* Weekly Schedule Section */
-    .schedule-section {
-      background-color: var(--bg);
-    }
-
-    .schedule-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 48px;
-      background: var(--surface);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-soft);
-    }
-
-    .schedule-row {
-      display: grid;
-      grid-template-columns: 1.5fr 2fr 2fr 1.5fr;
-      border-bottom: 1px solid var(--border-soft);
-      padding: 24px 32px;
-      align-items: center;
-    }
-
-    .schedule-row.header-row {
-      background-color: var(--surface-2);
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 16px 32px;
-    }
-
-    .schedule-row:last-child {
-      border-bottom: none;
-    }
-
-    .schedule-time {
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .schedule-class {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: var(--primary);
-    }
-
-    .schedule-instructor {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    .schedule-level {
-      justify-self: end;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 4px 12px;
-      background-color: var(--surface-2);
-      border-radius: 20px;
-      color: var(--text-muted);
-    }
-
-    /* Pricing Section */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      margin-top: 64px;
-    }
-
-    .pricing-card {
-      background-color: var(--surface);
-      border-radius: var(--radius-lg);
-      padding: 48px 40px;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border: 1px solid var(--border-soft);
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .pricing-card:hover {
-      border-color: var(--accent-soft);
-      transform: translateY(-2px);
-    }
-
-    .pricing-card.featured {
-      background-color: var(--primary);
-      color: var(--surface);
-      border-color: var(--primary);
-    }
-
-    .pricing-card.featured h3,
-    .pricing-card.featured .price {
-      color: var(--surface);
-    }
-
-    .pricing-card.featured p {
-      color: var(--border);
-    }
-
-    .pricing-card h3 {
-      font-size: 1.8rem;
-      margin-bottom: 8px;
-    }
-
-    .pricing-card .price {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      color: var(--primary);
-      margin: 24px 0;
-      display: block;
-    }
-
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 40px;
-    }
-
-    .pricing-features li {
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.95rem;
-    }
-
-    .pricing-features svg {
-      width: 18px;
-      height: 18px;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .pricing-card.featured .pricing-features svg {
-      color: var(--accent-soft);
-    }
-
-    .pricing-btn {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      text-align: center;
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      border: 1px solid var(--border);
-      background-color: var(--surface);
-      color: var(--text);
-    }
-
-    .pricing-card.featured .pricing-btn {
-      background-color: var(--accent);
-      border-color: var(--accent);
-      color: #ffffff;
-    }
-
-    .pricing-card.featured .pricing-btn:hover {
-      background-color: var(--accent-soft);
-      border-color: var(--accent-soft);
-    }
-
-    .pricing-btn:hover {
-      border-color: var(--accent);
-      background-color: var(--surface-2);
-    }
-
-    /* Contact Section */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 5fr 7fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    .contact-info h2 {
-      font-size: 3rem;
-      margin-bottom: 24px;
-    }
-
-    .contact-details {
-      margin-top: 48px;
-    }
-
-    .contact-item {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 32px;
-    }
-
-    .contact-item svg {
-      width: 24px;
-      height: 24px;
-      color: var(--accent);
-      flex-shrink: 0;
-      margin-top: 4px;
-    }
-
-    .contact-item h4 {
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
-
-    .contact-form {
-      background-color: var(--surface);
-      padding: 48px;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-soft);
-    }
-
-    .form-group {
-      margin-bottom: 24px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 8px;
-      color: var(--text-muted);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid var(--border);
-      background-color: var(--surface-2);
-      border-radius: var(--radius-sm);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      color: var(--text);
-      transition: border-color 0.3s, background-color 0.3s;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      background-color: var(--surface);
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 16px;
-      background-color: var(--primary);
-      color: var(--surface);
-      border: none;
-      border-radius: var(--radius-sm);
-      font-size: 1rem;
-      font-weight: 500;
-      transition: background-color 0.3s;
-    }
-
-    .submit-btn:hover {
-      background-color: var(--primary-soft);
-    }
-
-    /* Section Header */
-    .section-header {
-      text-align: center;
-      margin-bottom: 64px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .section-header h2 {
-      font-size: clamp(2.2rem, 4vw, 3.5rem);
-      margin-bottom: 16px;
-    }
-
-    /* Footer */
-    footer {
-      background-color: var(--primary);
-      color: var(--surface-2);
-      padding: 80px 0 40px 0;
-      border-top: 1px solid var(--primary-soft);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 64px;
-      margin-bottom: 64px;
-    }
-
-    .footer-brand .logo {
-      color: var(--surface);
-      margin-bottom: 24px;
-      display: inline-block;
-    }
-
-    .footer-brand p {
-      color: var(--border);
-      max-width: 320px;
-    }
-
-    .footer-links h4 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 24px;
-      color: var(--surface);
-    }
-
-    .footer-links ul {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 12px;
-    }
-
-    .footer-links a {
-      color: var(--border);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: var(--accent-soft);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid var(--primary-soft);
-      padding-top: 40px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      color: var(--border);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 900px) {
-      section {
-        padding: 80px 0;
-      }
-      .nav-links, .nav-cta {
-        display: none;
-      }
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        text-align: center;
-      }
-      .hero-gallery {
-        margin-top: 32px;
-      }
-      .hero-img-main {
-        width: 100%;
-        height: 380px;
-      }
-      .hero-img-sub {
-        display: none;
-      }
-      .bento-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: auto;
-      }
-      .bento-card.span-7, .bento-card.span-5 {
-        grid-column: span 12;
-      }
-      .bento-card.image-card {
-        height: 300px;
-      }
-      .atmosphere-grid, .contact-grid, .features-grid, .team-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-      .atmosphere-img-2 {
-        margin-top: 40px;
-      }
-      .schedule-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        padding: 16px;
-      }
-      .schedule-row.header-row {
-        display: none;
-      }
-      .schedule-level {
-        justify-self: start;
-        grid-column: span 2;
-      }
-      .pricing-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-    }
-
-    /* Accessibility: Reduced motion settings */
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in-element {
-        transition: opacity 0.3s ease !important;
-        transform: none !important;
-        transition-delay: 0s !important;
-      }
-      .custom-cursor {
-        display: none !important;
-      }
-      body {
-        cursor: auto !important;
-      }
-      .bento-card, .pricing-card {
-        transition: none !important;
-        transform: none !important;
-      }
-      .bento-card:hover, .pricing-card:hover {
-        transform: none !important;
-      }
-      .magnetic-cta {
-        transition: none !important;
-        transform: none !important;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sattva Yoga — Vinyasa, Yin & Natur im Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#EFE6D6;
+    --sand-deep:#E4D7BE;
+    --cream:#F7F0E1;
+    --paper:#FBF6EA;
+    --sage:#7C8A6E;
+    --sage-deep:#4F5C45;
+    --sage-shadow:#3A4534;
+    --terra:#B8593A;
+    --terra-deep:#8E3F26;
+    --ink:#2A2620;
+    --ink-soft:#5C5447;
+    --rule:rgba(42,38,32,.18);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ATMENDER UNTERGRUND */
+  .breath{
+    position:fixed;inset:0;z-index:-2;
+    background:linear-gradient(120deg,#F7F0E1 0%, #EFE6D6 30%, #E4D7BE 55%, #DDD0B5 75%, #EFE6D6 100%);
+    background-size:200% 200%;
+    animation:breathe 16s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%{background-position:0% 0%}
+    50%{background-position:100% 100%}
+    100%{background-position:0% 0%}
+  }
+  .breath::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(124,138,110,.18), transparent 50%),
+      radial-gradient(ellipse at 85% 70%, rgba(184,89,58,.10), transparent 55%);
+    pointer-events:none;
+  }
+
+  /* GLAS-NAV */
+  nav{
+    position:fixed;top:18px;left:50%;transform:translateX(-50%);
+    z-index:100;width:min(1180px, calc(100% - 36px));
+    background:rgba(251,246,234,.75);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border:1px solid rgba(255,255,255,.5);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 8px 32px rgba(80,60,30,.08);
+    border-radius:2px;
+    padding:12px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{
+    font-family:'Fraunces',serif;font-weight:500;font-size:22px;
+    letter-spacing:-.01em;color:var(--ink);text-decoration:none;
+    display:flex;align-items:center;gap:10px;
+  }
+  .brand-mark{
+    width:26px;height:26px;border-radius:50%;
+    background:linear-gradient(135deg,var(--terra),var(--terra-deep));
+    position:relative;
+  }
+  .brand-mark::after{
+    content:"";position:absolute;inset:6px;border-radius:50%;
+    background:var(--cream);
+  }
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{
+    color:var(--ink);text-decoration:none;font-size:14px;font-weight:400;
+    letter-spacing:.01em;position:relative;padding:4px 0;
+    transition:color .25s ease;
+  }
+  .nav-links a:hover{color:var(--terra-deep)}
+  .nav-links a:focus-visible{outline:2px solid var(--terra);outline-offset:4px}
+  .nav-cta{
+    border:1px solid var(--ink);padding:8px 18px;
+    background:var(--ink);color:var(--cream)!important;
+    transition:background .25s ease;
+  }
+  .nav-cta:hover{background:var(--terra-deep);border-color:var(--terra-deep)}
+
+  /* BILDER WÄRME-FILTER */
+  img {
+    filter: sepia(0.15) saturate(1.15) contrast(1.05);
+    background-color: var(--sand-deep);
+  }
+
+  /* HERO — EDITORIAL */
+  .hero{
+    padding:130px 32px 60px;
+    max-width:1280px;margin:0 auto;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr 1fr;
+    gap:50px;align-items:end;
+  }
+  .eyebrow{
+    font-family:'Inter',sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:.22em;text-transform:uppercase;
+    color:var(--sage-deep);
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:24px;
+  }
+  .eyebrow::before{
+    content:"";width:36px;height:1px;background:var(--sage-deep);
+  }
+  .eyebrow .pg{margin-left:auto;color:var(--ink-soft);letter-spacing:.18em}
+
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(44px, 7.5vw, 100px);
+    line-height:.94;
+    letter-spacing:-.035em;
+    color:var(--ink);
+    margin-bottom:28px;
+  }
+  h1 em{
+    font-style:italic;font-weight:400;
+    color:var(--terra-deep);
+    font-variation-settings:"opsz" 120;
+  }
+  .hero-lede{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:19px;line-height:1.5;color:var(--ink-soft);
+    max-width:520px;margin-bottom:36px;
+  }
+  .hero-actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:12px;
+    padding:16px 28px;font-size:14px;font-weight:500;
+    text-decoration:none;letter-spacing:.02em;
+    transition:transform .3s ease, background .25s ease;
+    border-radius:2px;
+  }
+  .btn-primary{
+    background:var(--terra);color:var(--cream);
+    box-shadow:0 6px 24px rgba(184,89,58,.28);
+  }
+  .btn-primary:hover{background:var(--terra-deep)}
+  .btn-ghost{color:var(--ink);border-bottom:1px solid var(--ink);padding:16px 4px}
+  .btn svg{transition:transform .3s ease}
+  .btn:hover svg{transform:translateX(4px)}
+
+  .hero-figure{position:relative}
+  .hero-figure img{
+    width:100%;height:520px;object-fit:cover;
+    border-radius:2px;
+  }
+  .figure-caption{
+    font-family:'Fraunces',serif;font-style:italic;
+    font-size:13px;color:var(--ink-soft);
+    margin-top:14px;padding-left:14px;
+    border-left:2px solid var(--terra);
+    max-width:340px;line-height:1.5;
+  }
+  .figure-caption b{
+    font-style:normal;font-family:'Inter',sans-serif;font-weight:500;
+    color:var(--ink);text-transform:uppercase;letter-spacing:.14em;
+    font-size:10px;display:block;margin-bottom:4px;
+  }
+
+  /* MANIFEST — MAGAZIN SPALTEN */
+  .manifest{
+    padding:80px 32px;
+    max-width:1280px;margin:0 auto;
+    border-top:1px solid var(--rule);
+  }
+  .manifest-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:40px;flex-wrap:wrap;gap:20px;
+  }
+  .section-title{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(32px, 4vw, 52px);
+    letter-spacing:-.02em;line-height:1.05;
+    max-width:680px;
+  }
+  .section-title em{font-style:italic;color:var(--terra-deep)}
+  .marginalia{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:500;
+  }
+
+  .manifest-body{
+    columns:2;column-gap:64px;
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:17px;line-height:1.65;color:var(--ink);
+  }
+  .manifest-body p{margin-bottom:18px;break-inside:avoid}
+  .manifest-figure{margin:28px 0;break-inside:avoid}
+  .manifest-figure img{width:100%;height:auto;border-radius:2px;}
+  .dropcap{
+    float:left;font-family:'Fraunces',serif;
+    font-weight:400;font-style:normal;
+    font-size:84px;line-height:.85;
+    color:var(--terra-deep);
+    margin:6px 12px 0 0;
+    font-variation-settings:"opsz" 144;
+  }
+  .pullquote{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+    font-size:24px;line-height:1.35;color:var(--sage-deep);
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    padding:24px 0;margin:24px 0;
+    break-inside:avoid;
+  }
+
+  /* STUDIO GALLERY (Replaces Grey Placeholder) */
+  .gallery {
+    padding: 60px 32px 80px;
+    max-width: 1280px; margin: 0 auto;
+  }
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  }
+  .gallery-grid figure { position: relative; overflow: hidden; border-radius: 2px; }
+  .gallery-grid figure:nth-child(2) { margin-top: 48px; }
+  .gallery-grid img {
+    width: 100%; height: 460px; object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+  .gallery-grid figure:hover img { transform: scale(1.03); }
+
+  /* PRAXIS — 3 SPALTEN FEATURE */
+  .praxis{
+    padding:80px 32px;
+    background:linear-gradient(180deg, transparent, rgba(124,138,110,.06) 40%, transparent);
+  }
+  .praxis-inner{max-width:1280px;margin:0 auto}
+  .praxis-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:1px;margin-top:40px;
+    background:var(--rule);
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+  }
+  .praxis-card{
+    background:rgba(251,246,234,.5);
+    backdrop-filter:blur(6px);
+    padding:42px 32px 48px;
+    transition:background .35s ease;
+  }
+  .praxis-card:hover{background:var(--paper)}
+  .praxis-icon{
+    width:48px;height:48px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:28px;
+    transition:transform .35s ease;
+  }
+  .praxis-card:hover .praxis-icon{transform:translateY(-4px)}
+  .praxis-icon svg{width:100%;height:100%;stroke:var(--sage-deep);fill:none;stroke-width:1.4}
+  .praxis-tag{
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--terra);font-weight:600;margin-bottom:10px;
+  }
+  .praxis-card h3{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:30px;line-height:1.1;letter-spacing:-.015em;
+    margin-bottom:14px;color:var(--ink);
+  }
+  .praxis-card p{
+    font-size:15px;line-height:1.55;color:var(--ink-soft);
+    margin-bottom:22px;
+  }
+  .praxis-meta{
+    font-family:'Fraunces',serif;font-style:italic;
+    font-size:13px;color:var(--sage-deep);
+    padding-top:18px;border-top:1px dashed var(--rule);
+  }
+
+  /* RETREAT — EDITORIAL SPLIT */
+  .retreat{
+    padding:80px 32px;
+    max-width:1280px;margin:0 auto;
+  }
+  .retreat-grid{
+    display:grid;grid-template-columns:1fr 1.1fr;
+    gap:60px;align-items:center;
+  }
+  .retreat-figure{position:relative}
+  .retreat-figure img{
+    width:100%;height:480px;object-fit:cover;border-radius:2px;
+  }
+  .retreat-figure .stamp{
+    position:absolute;top:-22px;left:-22px;
+    width:120px;height:120px;border-radius:50%;
+    background:var(--terra);color:var(--cream);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+    text-align:center;line-height:1.1;
+    box-shadow:0 12px 32px rgba(184,89,58,.3);
+  }
+  .stamp b{
+    font-family:'Inter',sans-serif;font-style:normal;font-weight:600;
+    font-size:24px;letter-spacing:-.02em;display:block;
+  }
+  .stamp span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:4px}
+
+  .retreat-text h2{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(34px, 4.5vw, 56px);
+    line-height:1.02;letter-spacing:-.025em;
+    margin:18px 0 24px;
+  }
+  .retreat-text h2 em{font-style:italic;color:var(--terra-deep)}
+  .retreat-text > p{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:18px;line-height:1.6;color:var(--ink-soft);
+    margin-bottom:32px;
+  }
+  .retreat-facts{
+    display:grid;grid-template-columns:1fr 1fr;gap:20px 40px;
+    margin-bottom:36px;padding:24px 0;
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+  }
+  .fact-label{
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:6px;
+  }
+  .fact-value{
+    font-family:'Fraunces',serif;font-size:18px;color:var(--ink);font-weight:400;
+  }
+
+  /* AUSBILDUNG */
+  .ausbildung{
+    padding:80px 32px;
+    background:var(--sage-deep);color:var(--cream);
+    position:relative;overflow:hidden;
+  }
+  .ausbildung::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(120deg, rgba(255,255,255,.04), transparent 50%, rgba(255,255,255,.04));
+    background-size:200% 200%;
+    animation:breathe 18s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .ausbildung-inner{
+    max-width:1280px;margin:0 auto;position:relative;
+    display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+  }
+  .ausbildung .eyebrow{color:rgba(247,240,225,.7)}
+  .ausbildung .eyebrow::before{background:rgba(247,240,225,.7)}
+  .ausbildung h2{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(34px, 4.5vw, 56px);
+    line-height:1.02;letter-spacing:-.025em;
+    margin-bottom:24px;color:var(--cream);
+  }
+  .ausbildung h2 em{font-style:italic;color:#E8B89A}
+  .ausbildung p{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:18px;line-height:1.6;color:rgba(247,240,225,.78);
+    margin-bottom:18px;
+  }
+  .curriculum{
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.12);
+    padding:36px;
+  }
+  .curriculum h3{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+    font-size:22px;color:#E8B89A;margin-bottom:24px;
+  }
+  .curriculum ul{list-style:none}
+  .curriculum li{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1);
+    font-size:15px;
+  }
+  .curriculum li:last-child{border-bottom:none}
+  .curriculum li span:first-child{color:var(--cream)}
+  .curriculum li span:last-child{
+    font-family:'Fraunces',serif;font-style:italic;
+    font-size:13px;color:rgba(247,240,225,.6);
+  }
+
+  /* CTA */
+  .cta{
+    padding:80px 32px 100px;
+    max-width:1280px;margin:0 auto;
+    text-align:center;position:relative;
+  }
+  .cta-frame{
+    padding:60px 40px;
+    background:linear-gradient(135deg, rgba(184,89,58,.08), rgba(124,138,110,.08));
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .cta-frame::before,.cta-frame::after{
+    content:"";position:absolute;width:40px;height:40px;
+    border:1px solid var(--terra);
+  }
+  .cta-frame::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .cta-frame::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+  .cta h2{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(36px, 5vw, 64px);
+    line-height:1;letter-spacing:-.03em;
+    margin-bottom:24px;
+  }
+  .cta h2 em{font-style:italic;color:var(--terra-deep)}
+  .cta p{
+    font-family:'Fraunces',serif;font-weight:300;font-size:19px;
+    color:var(--ink-soft);max-width:540px;margin:0 auto 36px;
+    line-height:1.5;
+  }
+  .cta .btn-primary{font-size:15px;padding:18px 36px}
+
+  /* FOOTER */
+  footer{
+    background:var(--ink);color:var(--cream);
+    padding:60px 32px 40px;
+  }
+  .footer-inner{
+    max-width:1280px;margin:0 auto;
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:50px;margin-bottom:50px;
+  }
+  .footer-brand{
+    font-family:'Fraunces',serif;font-weight:300;font-size:32px;
+    letter-spacing:-.02em;margin-bottom:18px;
+  }
+  .footer-brand em{font-style:italic;color:#E8B89A}
+  .footer-tag{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+    color:rgba(247,240,225,.6);font-size:15px;line-height:1.5;
+    max-width:280px;
+  }
+  .footer-col h4{
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:#E8B89A;margin-bottom:18px;font-weight:600;
+  }
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:10px;font-size:14px;color:rgba(247,240,225,.78)}
+  .footer-col a{color:inherit;text-decoration:none;transition:color .25s}
+  .footer-col a:hover{color:var(--cream)}
+  .footer-bottom{
+    max-width:1280px;margin:0 auto;
+    padding-top:24px;border-top:1px solid rgba(247,240,225,.12);
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:12px;color:rgba(247,240,225,.5);flex-wrap:wrap;gap:14px;
+  }
+
+  /* CURSOR-MAGNET ELEMENTE */
+  .magnet{transition:transform .4s cubic-bezier(.2,.7,.3,1)}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease, transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* RESPONSIVE */
+  @media (max-width:980px){
+    .nav-links{display:none}
+    .hero{padding:110px 22px 50px}
+    .hero-grid,.retreat-grid,.ausbildung-inner{grid-template-columns:1fr;gap:40px}
+    .hero-figure img{height:420px}
+    .manifest-body{columns:1}
+    .gallery-grid{grid-template-columns:1fr;gap:24px}
+    .gallery-grid figure:nth-child(2){margin-top:0}
+    .gallery-grid img{height:360px}
+    .praxis-grid{grid-template-columns:1fr}
+    .footer-inner{grid-template-columns:1fr 1fr;gap:40px}
+    .retreat-figure .stamp{width:90px;height:90px;left:12px;top:12px}
+    .retreat-figure .stamp b{font-size:18px}
+  }
+  @media (max-width:560px){
+    .hero{padding:100px 18px 40px}
+    .retreat,.praxis,.manifest,.gallery,.ausbildung,.cta{padding-left:18px;padding-right:18px}
+    .footer-inner{grid-template-columns:1fr}
+    .retreat-facts{grid-template-columns:1fr}
+    .curriculum{padding:28px}
+  }
+
+  /* A11Y */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:.001ms!important;
+      animation-iteration-count:1!important;
+      transition-duration:.001ms!important;
+    }
+    .reveal{opacity:1;transform:none}
+    .magnet{transform:none!important}
+    html{scroll-behavior:auto}
+  }
+  :focus-visible{outline:2px solid var(--terra);outline-offset:3px;border-radius:2px}
+</style>
 </head>
 <body>
 
-  <!-- Custom trailing cursor -->
-  <div class="custom-cursor"></div>
+<div class="breath" aria-hidden="true"></div>
 
-  <!-- Header Navigation -->
-  <header>
-    <div class="container nav-container">
-      <a href="#" class="logo">Sattva</a>
-      <ul class="nav-links">
-        <li><a href="#klassen">Klassen</a></li>
-        <li><a href="#studio">Das Studio</a></li>
-        <li><a href="#team">Unser Team</a></li>
-        <li><a href="#plan">Wochenplan</a></li>
-        <li><a href="#preise">Preise</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
+<nav>
+  <a href="#" class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    Sattva
+  </a>
+  <div class="nav-links">
+    <a href="#praxis">Praxis</a>
+    <a href="#studio">Atelier</a>
+    <a href="#retreat">Retreat</a>
+    <a href="#ausbildung">Ausbildung</a>
+    <a href="#cta" class="nav-cta">Stunde buchen</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid">
+    <div class="reveal">
+      <div class="eyebrow">
+        Studio Lissabon — Estrela
+        <span class="pg">№ 01 / Frühling 2025</span>
+      </div>
+      <h1>Licht, das <em>wärmt</em>.<br>Holz, das dich <em>trägt</em>.</h1>
+      <p class="hero-lede">
+        Sattva ist ein lichtdurchflutetes Studio für Vinyasa und Yin, getragen von der Ruhe der Natur. Ein warmer Eichendielenboden, atmende Pflanzen und eine Tür, die den Lärm der Stadt aussperrt. Wir unterrichten kleine Klassen — geerdet, fokussiert und mit tiefem Respekt für deinen Raum.
+      </p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-primary magnet" data-magnet>
+          Erstes Probetraining
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#praxis" class="btn btn-ghost">Wochenplan ansehen</a>
+      </div>
+    </div>
+    <figure class="hero-figure reveal magnet" data-magnet>
+      <img src="https://images.unsplash.com/photo-1545205597-3d9d02c2959f?auto=format&fit=crop&w=1200&q=80" alt="Morgenlicht fällt auf den warmen Holzboden und die grünen Pflanzen im Sattva Yogastudio">
+      <figcaption class="figure-caption">
+        <b>Atelier — Morgenlicht</b>
+        Das Hauptraum-Atelier um 07:14 Uhr. Das erste Licht des Tages berührt die Blätter der Monstera, bevor die Praxis beginnt.
+      </figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- MANIFEST -->
+<section class="manifest" id="manifest">
+  <div class="manifest-head reveal">
+    <h2 class="section-title">Yoga ist bei uns kein <em>Dienstleistungsangebot</em>, sondern ein Zurückkehren zur eigenen Natur.</h2>
+    <span class="marginalia">Editorial — S. 02</span>
+  </div>
+  <div class="manifest-body reveal">
+    <p><span class="dropcap">W</span>ir haben Sattva gegründet, um einen Raum zu schaffen, der atmet. Der alte Holzboden knarrt leise unter den Füßen, Farne und Geigenfeigen filtern die Luft, und wenn das Morgenlicht durch die großen Fenster fällt, wird die Praxis fast von selbst ruhiger.</p>
+    
+    <figure class="manifest-figure magnet" data-magnet>
+      <img src="https://images.unsplash.com/photo-1599901575207-077f8837c449?auto=format&fit=crop&w=800&q=80" alt="Üppige grüne Pflanzen und warmer Holzboden im Yogastudio im weichen Morgenlicht">
+    </figure>
+
+    <p class="pullquote">„Ein Raum voller Pflanzen und Licht ist kein Dekor — er ist die physische Erweiterung unseres Atems."</p>
+
+    <p>Darum arbeiten wir ohne Drop-in-Massen: Jede Klasse hat maximal zwölf Plätze. Du spürst das Holz unter dir, die frische Luft um dich herum, und hast eine Lehrerin, die wirklich hinsieht. Jeder Atemzug wird begleitet, jede Asana bekommt den Raum, den sie braucht.</p>
+
+    <p>Wer zu Sattva findet, bleibt meist über Jahre. Das ist keine Metrik, die wir erzwingen — es ist einfach das, was passiert, wenn eine Praxis im Einklang mit der Umgebung zur Gewohnheit wird.</p>
+  </div>
+</section>
+
+<!-- STUDIO GALLERY (Replaces Grey Placeholder) -->
+<section class="gallery" id="studio">
+  <div class="manifest-head reveal" style="margin-bottom: 24px;">
+    <h2 class="section-title">Unser <em>Raum</em>.</h2>
+    <span class="marginalia">S. 03 — Das Atelier</span>
+  </div>
+  <div class="gallery-grid">
+    <figure class="reveal magnet" data-magnet>
+      <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=800&q=80" alt="Warmes Licht im Yoga Studio mit Holzboden">
+    </figure>
+    <figure class="reveal magnet" data-magnet>
+      <img src="https://images.unsplash.com/photo-1600618528240-fb9fc964b853?auto=format&fit=crop&w=800&q=80" alt="Monstera Pflanze im Studio">
+    </figure>
+    <figure class="reveal magnet" data-magnet>
+      <img src="https://images.unsplash.com/photo-1552196563-552592596167?auto=format&fit=crop&w=800&q=80" alt="Detailaufnahme der Yoga Praxis im warmen Licht">
+    </figure>
+  </div>
+</section>
+
+<!-- PRAXIS -->
+<section class="praxis" id="praxis">
+  <div class="praxis-inner">
+    <div class="manifest-head reveal">
+      <h2 class="section-title">Drei Säulen, eine <em>Praxis</em>.</h2>
+      <span class="marginalia">S. 04 — Das Programm</span>
+    </div>
+    <div class="praxis-grid">
+      <article class="praxis-card reveal">
+        <div class="praxis-icon magnet" data-magnet>
+          <svg viewBox="0 0 48 48"><path d="M24 6c-4 6-4 12 0 18s4 12 0 18M14 12c4 4 4 8 0 12s-4 8 0 12M34 12c-4 4-4 8 0 12s4 8 0 12M8 24h32"/></svg>
+        </div>
+        <div class="praxis-tag">Praxis 01</div>
+        <h3>Vinyasa<br><em style="font-style:italic;color:var(--terra-deep);font-weight:300">Fluss</em></h3>
+        <p>Dynamische Sequenzen auf festem Holz. Wir unterrichten langsam — kein Jump-Through-Zirkus, sondern geerdeter Stand, saubere Übergänge und der Rhythmus des eigenen Atems im lichtdurchfluteten Raum.</p>
+        <div class="praxis-meta">Di &amp; Do · 07:30 &amp; 18:30 · 75 Min.</div>
+      </article>
+
+      <article class="praxis-card reveal">
+        <div class="praxis-icon magnet" data-magnet>
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14"/><path d="M24 10v28M10 24h28M14 14l20 20M34 14L14 34"/></svg>
+        </div>
+        <div class="praxis-tag">Praxis 02</div>
+        <h3>Yin<br><em style="font-style:italic;color:var(--terra-deep);font-weight:300">Stille</em></h3>
+        <p>Lange gehaltene Asanas zwischen drei und acht Minuten. Wenn das Studio in sanftes Morgen- oder Abendlicht getaucht ist, arbeiten wir an den tiefen Faszien. Für das Nervensystem und echte physische Entspannung.</p>
+        <div class="praxis-meta">Mi &amp; So · 19:00 · 90 Min.</div>
+      </article>
+
+      <article class="praxis-card reveal">
+        <div class="praxis-icon magnet" data-magnet>
+          <svg viewBox="0 0 48 48"><path d="M16 24c0-6 4-12 8-12s8 6 8 12-4 12-8 12-8-6-8-12ZM6 24c0 0 6-8 18-8s18 8 18 8-6 8-18 8S6 24 6 24ZM24 14v20"/></svg>
+        </div>
+        <div class="praxis-tag">Praxis 03</div>
+        <h3>Pranayama<br><em style="font-style:italic;color:var(--terra-deep);font-weight:300">Atem</em></h3>
+        <p>Atemarbeit zwischen den Pflanzen. Nadi Shodhana, Bhramana und Kapalabhati. Eine eigene Stunde, in der die sauerstoffreiche Luft unseres grünen Studios die Praxis tiefgreifend unterstützt.</p>
+        <div class="praxis-meta">Sa · 08:00 · 60 Min.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RETREAT -->
+<section class="retreat" id="retreat">
+  <div class="retreat-grid">
+    <figure class="retreat-figure reveal">
+      <div class="stamp magnet" data-magnet>
+        <b>7</b>
+        <span>Tage Natur</span>
+      </div>
+      <img src="https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?auto=format&fit=crop&w=1000&q=80" alt="Eine Küstenlandschaft in der Algarve mit Felsformationen und ruhigem Wasser beim Sattva-Retreat in Portugal">
+      <figcaption class="figure-caption">
+        <b>Retreat Quinta — Aljezur</b>
+        Die Klippen von Praia da Arrifana, acht Gehminuten von der Quinta. Hier finden die Morgenpraxen unter freiem Himmel statt.
+      </figcaption>
+    </figure>
+    <div class="retreat-text reveal">
+      <div class="eyebrow">Retreat — Algarve <span class="pg">S. 08</span></div>
+      <h2>Sieben Tage <em>Natur</em> an der Algarve.</h2>
+      <p>Vom 4. bis 11. Mai 2025 ziehen wir uns in eine kleine Quinta bei Aljezur zurück — zwölf Plätze, Holzböden in den Praxisräumen, ein wilder Garten und das Meer in Gehweite. Morgens Vinyasa im Licht, mittags Schweigen, abends Yin. Dazwischen: Zeit, die nicht verplant ist.</p>
+
+      <div class="retreat-facts">
+        <div>
+          <div class="fact-label">Termin</div>
+          <div class="fact-value">4. – 11. Mai 2025</div>
+        </div>
+        <div>
+          <div class="fact-label">Ort</div>
+          <div class="fact-value">Quinta Aljezur, Portugal</div>
+        </div>
+        <div>
+          <div class="fact-label">Plätze</div>
+          <div class="fact-value">12 — davon 4 noch frei</div>
+        </div>
+        <div>
+          <div class="fact-label">Investition</div>
+          <div class="fact-value">ab 1.240 € inkl. Unterkunft</div>
+        </div>
+      </div>
+
+      <a href="#" class="btn btn-primary magnet" data-magnet>
+        Bewerbung senden
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- AUSBILDUNG -->
+<section class="ausbildung" id="ausbildung">
+  <div class="ausbildung-inner">
+    <div class="reveal">
+      <div class="eyebrow">Lehrer-Ausbildung — 200h YA <span class="pg" style="color:rgba(247,240,225,.5)">S. 12</span></div>
+      <h2>Ein Jahr, das deine <em>Wurzeln</em> stärkt.</h2>
+      <p>Unsere 200-Stunden-Ausbildung beginnt jedes Jahr im Oktober und endet im Juni. Sie ist zertifiziert durch Yoga Alliance und richtet sich an Menschen, die bereits mindestens drei Jahre praktizieren — nicht an alle, die einen Schein brauchen.</p>
+      <p>Wir arbeiten in vier Gruppen zu maximal acht Personen. Anatomie mit einem Physiotherapeuten, Philosophie fundiert an den Quellentexten, Sequencing mit Inês. Asana wird nicht demonstriert, sondern auf dem Holzboden unseres Studios von Grund auf verstanden und unterrichtet.</p>
+    </div>
+    <div class="curriculum reveal magnet" data-magnet>
+      <h3>Curriculum 2025 / 26</h3>
+      <ul>
+        <li><span>Technik &amp; Praxis</span><span>100 h</span></li>
+        <li><span>Methodik des Unterrichtens</span><span>40 h</span></li>
+        <li><span>Anatomie &amp; Physiologie</span><span>30 h</span></li>
+        <li><span>Philosophie &amp; Ethik</span><span>20 h</span></li>
+        <li><span>Praktikum &amp; Mentoring</span><span>10 h</span></li>
+        <li><span>Beginn</span><span>04. Okt 2025</span></li>
+        <li><span>Kosten</span><span>3.450 € — Raten möglich</span></li>
       </ul>
-      <a href="#kontakt" class="nav-cta">Probestunde vereinbaren</a>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <span class="hero-tagline fade-in-element" style="--i: 1">Vinyasa & Yin Yoga</span>
-        <h1 class="fade-in-element" style="--i: 2">Ein Ort zum Innehalten und Atmen.</h1>
-        <p class="fade-in-element" style="--i: 3">Erlebe Yoga in einem lichtdurchfluteten Studio mit massiven Holzdielen, sanftem Morgenlicht und einer klaren, erdenden Atmosphäre.</p>
-        <div class="magnetic-wrap fade-in-element" style="--i: 4">
-          <a href="#klassen" class="magnetic-cta">Klassen entdecken</a>
-        </div>
-      </div>
-      <div class="hero-gallery fade-in-element" style="--i: 5">
-        <!-- FIX 3: Wider, professionally shot yoga pose showing beautiful wooden floor & studio environment clearly -->
-        <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=1200&q=80" alt="Lichtdurchflutetes Yoga Studio mit Holzdielen und Pflanzen" class="hero-img-main">
-        <!-- FIX 4 & FIX 2: Indoor detail shot showing lush indoor plants and soft morning light filtering through windows -->
-        <img src="https://images.unsplash.com/photo-1592156379490-457236090494?auto=format&fit=crop&w=600&q=80" alt="Lush monstera plant in soft morning light inside the studio" class="hero-img-sub">
-      </div>
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="cta-frame reveal">
+    <div class="eyebrow" style="justify-content:center;margin-bottom:24px">Probetraining — kostenfrei</div>
+    <h2>Komm ins Licht.<br><em>Den Rest machen wir</em>.</h2>
+    <p>Das erste Probetraining ist kostenfrei und unverbindlich. Schreib uns zwei Sätze über deine Praxis — wir melden uns innerhalb von 24 Stunden mit einem Terminvorschlag für deine erste Matte bei uns.</p>
+    <a href="mailto:hallo@sattva-yoga.pt" class="btn btn-primary magnet" data-magnet>
+      Termin vereinbaren
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Sattva <em>Yoga</em></div>
+      <p class="footer-tag">Ein Boutique-Studio in Lissabon. Vinyasa, Yin &amp; Pranayama auf warmem Holz — gegründet 2021 von Inês, Mariana und Sofia.</p>
     </div>
-  </section>
-
-  <!-- Bento Grid (Leistungen) -->
-  <section id="klassen">
-    <div class="container">
-      <div class="section-header fade-in-element" style="--i: 1">
-        <h2>Unsere Praxis</h2>
-        <p>Wir unterrichten achtsames Yoga, das Kraft aufbaut und den Geist beruhigt. Finde den Stil, der heute zu deiner Energie passt.</p>
-      </div>
-      
-      <div class="bento-grid">
-        <!-- Vinyasa Flow -->
-        <div class="bento-card span-7 fade-in-element" style="--i: 2">
-          <div>
-            <div class="icon-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            </div>
-            <h3>Vinyasa Flow</h3>
-            <p>Dynamische, fließende Sequenzen, die Bewegung und Atem harmonisch verbinden. Kräftigend, reinigend und energetisierend für Körper und Geist.</p>
-          </div>
-          <span class="font-serif" style="font-style: italic; margin-top: 24px; color: var(--accent);">Dynamisch & Fokussiert</span>
-        </div>
-
-        <!-- Image Card 1 -->
-        <div class="bento-card span-5 image-card fade-in-element" style="--i: 3">
-          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80" alt="Yogaschülerin in meditativer Haltung">
-        </div>
-
-        <!-- Image Card 2 (Featuring Plants & Wood) -->
-        <div class="bento-card span-5 image-card fade-in-element" style="--i: 4">
-          <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=80" alt="Studio-Interieur mit Holz und Pflanzen">
-        </div>
-
-        <!-- Yin Yoga -->
-        <div class="bento-card span-7 fade-in-element" style="--i: 5">
-          <div>
-            <div class="icon-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/><path d="M12 3a9 9 0 0 0 0 18V3z"/></svg>
-            </div>
-            <h3>Yin Yoga</h3>
-            <p>Langsam gehaltene Asanas ohne Muskelanspannung. Wirkt tief auf das Fasziengewebe, beruhigt das Nervensystem und führt in eine tiefe innere Stille.</p>
-          </div>
-          <span class="font-serif" style="font-style: italic; margin-top: 24px; color: var(--accent);">Sanft & Regenerativ</span>
-        </div>
-      </div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <ul>
+        <li>Rua Domingos Sequeira 47</li>
+        <li>1350-119 Lissabon</li>
+        <li>Estrela, Portugal</li>
+        <li><a href="tel:+351210000000">+351 21 000 0000</a></li>
+      </ul>
     </div>
-  </section>
-
-  <!-- Atmosphere / Über Uns -->
-  <section id="studio" class="atmosphere">
-    <div class="container atmosphere-grid">
-      <div class="atmosphere-text fade-in-element" style="--i: 1">
-        <h2>Ein Raum, der atmet.</h2>
-        <p>Unser Studio im Herzen der Stadt ist ein Rückzugsort vom Trubel des Alltags. Mit handverlesenen Naturmaterialien, massiven Eichendielen und einer Fülle an luftreinigenden Pflanzen haben wir einen Ort geschaffen, der sofort Ruhe ausstrahlt.</p>
-        <p>Hier übst du in kleinen Gruppen von maximal 12 Personen — persönlich betreut, individuell korrigiert und in deinem eigenen Rhythmus.</p>
-        
-        <div class="atmosphere-stats">
-          <div class="stat-item">
-            <span class="num">2018</span>
-            <span class="label">Gegründet</span>
-          </div>
-          <div class="stat-item">
-            <span class="num">2</span>
-            <span class="label">Kursräume</span>
-          </div>
-          <div class="stat-item">
-            <span class="num">12</span>
-            <span class="label">Max. Teilnehmer</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="atmosphere-images fade-in-element" style="--i: 3">
-        <div class="atmosphere-img-1">
-          <!-- FIX 2: Plant details in warm studio light -->
-          <img src="https://images.unsplash.com/photo-1602192509154-0b900ee1f851?auto=format&fit=crop&w=800&q=80" alt="Atmosphärisches Yoga-Zubehör im Morgenlicht mit Pflanzen">
-        </div>
-        <div class="atmosphere-img-2">
-          <img src="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?auto=format&fit=crop&w=600&q=80" alt="Yoga-Praxis auf Holzboden">
-        </div>
-      </div>
+    <div class="footer-col">
+      <h4>Öffnungszeiten</h4>
+      <ul>
+        <li>Mo – Fr · 07:00 – 21:00</li>
+        <li>Sa · 08:00 – 13:00</li>
+        <li>So · 09:00 – 12:00</li>
+        <li><a href="#">Wochenplan als PDF</a></li>
+      </ul>
     </div>
-  </section>
-
-  <!-- FIX 1: Studio Features Section to populate empty spaces -->
-  <section class="features-section">
-    <div class="container">
-      <div class="section-header fade-in-element" style="--i: 1">
-        <h2>Das Studio-Erlebnis</h2>
-        <p>Wir glauben, dass die Umgebung einen wesentlichen Beitrag zur Praxis leistet. Jedes Detail in unserem Raum ist bewusst gewählt.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-item fade-in-element" style="--i: 2">
-          <h3>Echte Holzdielen</h3>
-          <p>Unsere massiven, geölten Eichendielen bieten ein warmes, natürliches Gefühl unter den Händen und Füßen.</p>
-        </div>
-        <div class="feature-item fade-in-element" style="--i: 3">
-          <h3>Grüne Oase</h3>
-          <p>Zahlreiche luftreinigende Pflanzen wie Monstera und Bogenhanf sorgen für ein optimales Raumklima und frischen Sauerstoff.</p>
-        </div>
-        <div class="feature-item fade-in-element" style="--i: 4">
-          <h3>Premium Equipment</h3>
-          <p>Wir stellen dir hochwertige Matten, Korkblöcke, Gurte und kuschelige Decken aus Bio-Baumwolle kostenlos zur Verfügung.</p>
-        </div>
-      </div>
+    <div class="footer-col">
+      <h4>Links</h4>
+      <ul>
+        <li><a href="#manifest">Über uns</a></li>
+        <li><a href="#retreat">Retreat 2025</a></li>
+        <li><a href="#ausbildung">Ausbildung</a></li>
+        <li><a href="mailto:hallo@sattva-yoga.pt">hallo@sattva-yoga.pt</a></li>
+      </ul>
     </div>
-  </section>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Sattva Yoga Lda. — Lissabon</span>
+    <span>Impressum · Datenschutz · AGB</span>
+  </div>
+</footer>
 
-  <!-- FIX 1: Team Section to populate empty spaces and add human connection -->
-  <section id="team" class="team-section">
-    <div class="container">
-      <div class="section-header fade-in-element" style="--i: 1">
-        <h2>Unsere Lehrerinnen</h2>
-        <p>Erfahrene Begleiterinnen, die dich mit Herz, fundiertem Wissen und viel Einfühlungsvermögen auf deinem Weg unterstützen.</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-card fade-in-element" style="--i: 2">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Sarah K. - Gründerin & Vinyasa Lehrerin" class="team-img">
-          <div class="team-info">
-            <span class="team-role">Gründerin & Vinyasa</span>
-            <h3>Sarah K.</h3>
-            <p>Sarah unterrichtet kraftvolle, fließende Klassen mit Fokus auf präzise Ausrichtung und anatomische Balance.</p>
-          </div>
-        </div>
-        <div class="team-card fade-in-element" style="--i: 3">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80" alt="Elena B. - Yin Yoga & Meditation" class="team-img">
-          <div class="team-info">
-            <span class="team-role">Yin Yoga & Meditation</span>
-            <h3>Elena B.</h3>
-            <p>Elenas sanfte Art schafft einen sicheren Raum, um loszulassen und tief in die meditative Stille einzutauchen.</p>
-          </div>
-        </div>
-        <div class="team-card fade-in-element" style="--i: 4">
-          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=500&q=80" alt="Michael G. - Vinyasa & Pranayama" class="team-img">
-          <div class="team-info">
-            <span class="team-role">Vinyasa & Pranayama</span>
-            <h3>Michael G.</h3>
-            <p>Michael verbindet traditionelle Atemtechniken mit modernen, dynamischen Flows für neue Energie im Alltag.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Weekly Schedule Section -->
-  <section id="plan" class="schedule-section">
-    <div class="container">
-      <div class="section-header fade-in-element" style="--i: 1">
-        <h2>Wochenplan</h2>
-        <p>Finde den passenden Kurs für deine Routine. Wir empfehlen eine frühzeitige Anmeldung über unsere App oder per Mail.</p>
-      </div>
-
-      <div class="schedule-table fade-in-element" style="--i: 2">
-        <div class="schedule-row header-row">
-          <div>Zeit</div>
-          <div>Klasse</div>
-          <div>Lehrer</div>
-          <div style="justify-self: end;">Level</div>
-        </div>
-        <div class="schedule-row">
-          <div class="schedule-time">Mo. 08:30 - 09:45</div>
-          <div class="schedule-class">Rise & Shine Flow</div>
-          <div class="schedule-instructor">mit Sarah K.</div>
-          <div class="schedule-level">Alle Level</div>
-        </div>
-        <div class="schedule-row">
-          <div class="schedule-time">Di. 18:00 - 19:15</div>
-          <div class="schedule-class">Vinyasa Core Strength</div>
-          <div class="schedule-instructor">mit Michael G.</div>
-          <div class="schedule-level">Mittelstufe</div>
-        </div>
-        <div class="schedule-row">
-          <div class="schedule-time">Mi. 19:30 - 20:45</div>
-          <div class="schedule-class">Deep Release Yin Yoga</div>
-          <div class="schedule-instructor">mit Elena B.</div>
-          <div class="schedule-level">Alle Level</div>
-        </div>
-        <div class="schedule-row">
-          <div class="schedule-time">Do. 07:00 - 08:00</div>
-          <div class="schedule-class">Early Bird Vinyasa</div>
-          <div class="schedule-instructor">mit Sarah K.</div>
-          <div class="schedule-level">Fortgeschritten</div>
-        </div>
-        <div class="schedule-row">
-          <div class="schedule-time">Fr. 17:30 - 19:00</div>
-          <div class="schedule-class">Weekend Reset Flow</div>
-          <div class="schedule-instructor">mit Elena B.</div>
-          <div class="schedule-level">Alle Level</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing Section -->
-  <section id="preise" style="border-top: 1px solid var(--border-soft);">
-    <div class="container">
-      <div class="section-header fade-in-element" style="--i: 1">
-        <h2>Deine Investition</h2>
-        <p>Wähle den flexiblen Weg für deine regelmäßige Praxis. Keine versteckten Gebühren, faire Laufzeiten.</p>
-      </div>
-
-      <div class="pricing-grid">
-        <!-- Card 1 -->
-        <div class="pricing-card fade-in-element" style="--i: 2">
-          <div>
-            <h3>Probestunde</h3>
-            <p>Für alle, die uns kennenlernen möchten.</p>
-            <span class="price">15 €</span>
-            <ul class="pricing-features">
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Gültig für alle regulären Klassen
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Inklusive Leihmatte & Tee
-              </li>
-            </ul>
-          </div>
-          <a href="#kontakt" class="pricing-btn">Jetzt buchen</a>
-        </div>
-
-        <!-- Card 2 (Featured) -->
-        <div class="pricing-card featured fade-in-element" style="--i: 3">
-          <div>
-            <h3>Sattva Flat</h3>
-            <p>Für die engagierte wöchentliche Praxis.</p>
-            <span class="price">79 € <span style="font-size: 1rem; font-weight: normal; color: var(--border-soft);">/ Monat</span></span>
-            <ul class="pricing-features">
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Unbegrenzter Zugang zu allen Kursen
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                10 % Rabatt auf alle Workshops
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Monatlich kündbar
-              </li>
-            </ul>
-          </div>
-          <a href="#kontakt" class="pricing-btn">Mitglied werden</a>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="pricing-card fade-in-element" style="--i: 4">
-          <div>
-            <h3>10er-Karte</h3>
-            <p>Maximale Flexibilität ohne Bindung.</p>
-            <span class="price">160 €</span>
-            <ul class="pricing-features">
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                6 Monate lang gültig
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Übertragbar auf Freunde
-              </li>
-            </ul>
-          </div>
-          <a href="#kontakt" class="pricing-btn">Karte erwerben</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="kontakt" style="background-color: var(--surface-2); border-top: 1px solid var(--border);">
-    <div class="container contact-grid">
-      <div class="contact-info fade-in-element" style="--i: 1">
-        <h2>Tritt ein.</h2>
-        <p>Hast du Fragen zu unseren Kursen oder möchtest dich für eine Probestunde anmelden? Schreib uns einfach oder komm im Studio vorbei.</p>
-        
-        <div class="contact-details">
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <div>
-              <h4>Adresse</h4>
-              <p>Lindenallee 14, 20144 Hamburg</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <div>
-              <h4>E-Mail</h4>
-              <p>hello@sattva-yoga.de</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact-form fade-in-element" style="--i: 3">
-        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir melden uns in Kürze.');">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" required placeholder="Dein vollständiger Name">
-          </div>
-          <div class="form-group">
-            <label for="email">E-Mail-Adresse</label>
-            <input type="email" id="email" required placeholder="deine@email.com">
-          </div>
-          <div class="form-group">
-            <label for="message">Deine Nachricht</label>
-            <textarea id="message" rows="5" required placeholder="Wie können wir dir helfen?"></textarea>
-          </div>
-          <button type="submit" class="submit-btn">Nachricht senden</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="#" class="logo">Sattva</a>
-          <p>Ein Ort der Achtsamkeit und Ruhe im Herzen von Hamburg. Gegründet, um dir Raum für dich selbst zu schenken.</p>
-        </div>
-        <div class="footer-links">
-          <h4>Studio</h4>
-          <ul>
-            <li><a href="#klassen">Klassen</a></li>
-            <li><a href="#studio">Das Studio</a></li>
-            <li><a href="#team">Unser Team</a></li>
-            <li><a href="#plan">Wochenplan</a></li>
-            <li><a href="#preise">Preise</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Rechtliches</h4>
-          <ul>
-            <li><a href="#">Impressum</a></li>
-            <li><a href="#">Datenschutz</a></li>
-            <li><a href="#">AGB</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Sattva Yoga Studio. Alle Rechte vorbehalten.</p>
-        <p>Gestaltet mit Fokus auf das Wesentliche.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Custom Cursor trailing logic
-    const cursor = document.querySelector('.custom-cursor');
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function step() {
-      let distX = mouseX - cursorX;
-      let distY = mouseY - cursorY;
-      
-      cursorX = cursorX + distX * 0.15;
-      cursorY = cursorY + distY * 0.15;
-      
-      if (cursor) {
-        cursor.style.left = cursorX + 'px';
-        cursor.style.top = cursorY + 'px';
-      }
-      requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-
-    // Add hover states for interactive elements
-    const hoverables = document.querySelectorAll('a, button, input, textarea, .bento-card, .team-card');
-    hoverables.forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
-
-    // Magnetic CTA Button Effect
-    const ctaWrap = document.querySelector('.magnetic-wrap');
-    const ctaBtn = document.querySelector('.magnetic-cta');
-
-    if (ctaWrap && ctaBtn) {
-      ctaWrap.addEventListener('mousemove', (e) => {
-        const rect = ctaWrap.getBoundingClientRect();
-        const relX = e.clientX - rect.left - rect.width / 2;
-        const relY = e.clientY - rect.top - rect.height / 2;
-        
-        ctaBtn.style.transform = `translate(${relX * 0.3}px, ${relY * 0.3}px) scale(1.03)`;
-        ctaBtn.style.boxShadow = '0 12px 24px rgba(var(--accent-rgb), 0.15)';
+<script>
+  // CURSOR-MAGNET
+  (function(){
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+    const magnets = document.querySelectorAll('[data-magnet]');
+    magnets.forEach(el => {
+      const strength = 10;
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        el.style.transform = `translate(${x*strength}px, ${y*strength}px)`;
       });
-
-      ctaWrap.addEventListener('mouseleave', () => {
-        ctaBtn.style.transform = '';
-        ctaBtn.style.boxShadow = '';
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
       });
+    });
+  })();
+
+  // REVEAL ON SCROLL
+  (function(){
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll('.reveal');
+    if(reduce || !('IntersectionObserver' in window)){
+      items.forEach(i => i.classList.add('in'));
+      return;
     }
-
-    // Intersection Observer for Staggered Fade-in
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if(en.isIntersecting){
+          en.target.classList.add('in');
+          io.unobserve(en.target);
         }
       });
-    }, observerOptions);
+    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    items.forEach(i => io.observe(i));
+  })();
+</script>
 
-    document.querySelectorAll('.fade-in-element').forEach(el => {
-      observer.observe(el);
-    });
-  </script>
 </body>
 </html>
