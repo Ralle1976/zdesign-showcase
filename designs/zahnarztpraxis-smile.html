@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smile Clinic — Implantate & Ästhetik in München</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #E6F0F9;
+    --sand-deep: #D0E1F2;
+    --cream: #FFFFFF;
+    --paper: #F8FAFC;
+    --sage: #8CB4D6;
+    --sage-deep: #1E4B7A;
+    --terra: #0284C7;
+    --terra-deep: #0369A1;
+    --ink: #0F172A;
+    --ink-soft: #475569;
+    --rule: rgba(15,23,42,.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ATMENDER UNTERGRUND */
+  .breath {
+    position: fixed; inset: 0; z-index: -2;
+    background: linear-gradient(120deg, #FFFFFF 0%, #E6F0F9 30%, #D0E1F2 55%, #BBD0E8 75%, #E6F0F9 100%);
+    background-size: 200% 200%;
+    animation: breathe 16s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+  }
+  .breath::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 15% 20%, rgba(140,180,214,.15), transparent 50%),
+                radial-gradient(ellipse at 85% 70%, rgba(2,132,199,.08), transparent 55%);
+    pointer-events: none;
+  }
+
+  /* GLAS-NAV */
+  nav {
+    position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+    z-index: 100; width: min(1180px, calc(100% - 32px));
+    background: rgba(248,250,252,.85);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    border: 1px solid rgba(255,255,255,.6);
+    box-shadow: 0 4px 24px rgba(15,23,42,.04);
+    border-radius: 4px;
+    padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand {
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 20px;
+    letter-spacing: -.01em; color: var(--ink); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .brand-mark {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--terra), var(--terra-deep));
+    position: relative;
+  }
+  .brand-mark::after {
+    content: ""; position: absolute; inset: 6px; border-radius: 50%;
+    background: var(--cream);
+  }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500;
+    transition: color .2s ease;
+  }
+  .nav-links a:hover { color: var(--terra-deep); }
+  .nav-cta {
+    background: var(--ink); color: var(--cream)!important;
+    padding: 8px 16px; border-radius: 2px; transition: background .2s ease;
+  }
+  .nav-cta:hover { background: var(--terra-deep); }
+
+  /* TYPOGRAPHY & REUSABLES */
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--sage-deep); display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  }
+  .eyebrow::before { content: ""; width: 32px; height: 1px; background: currentColor; }
+  
+  h1, h2 { font-family: 'Fraunces', serif; font-weight: 300; color: var(--ink); letter-spacing: -.03em; line-height: 1.05; }
+  h1 { font-size: clamp(40px, 7vw, 96px); margin-bottom: 24px; }
+  h2 { font-size: clamp(32px, 5vw, 56px); margin-bottom: 20px; }
+  em { font-style: italic; color: var(--terra-deep); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 28px; font-size: 14px; font-weight: 500;
+    text-decoration: none; border-radius: 2px; transition: all .3s ease;
+  }
+  .btn-primary { background: var(--terra); color: var(--cream); box-shadow: 0 4px 16px rgba(2,132,199,.2); }
+  .btn-primary:hover { background: var(--terra-deep); transform: translateY(-2px); }
+  .btn-ghost { color: var(--ink); border-bottom: 1px solid var(--ink); padding: 14px 4px; }
+  .btn svg { transition: transform .3s ease; }
+  .btn:hover svg { transform: translateX(4px); }
+
+  /* HERO */
+  .hero { padding: 140px 24px 60px; max-width: 1280px; margin: 0 auto; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+  .hero-lede { font-family: 'Fraunces', serif; font-size: 19px; color: var(--ink-soft); margin-bottom: 36px; max-width: 500px; }
+  .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .hero-figure img { width: 100%; height: 520px; object-fit: cover; border-radius: 4px; }
+  .figure-caption {
+    font-family: 'Fraunces', serif; font-style: italic; font-size: 13px; color: var(--ink-soft);
+    margin-top: 12px; padding-left: 12px; border-left: 2px solid var(--terra);
+  }
+
+  /* MANIFEST */
+  .manifest { padding: 80px 24px; max-width: 1280px; margin: 0 auto; }
+  .manifest-head { margin-bottom: 40px; }
+  .manifest-body {
+    columns: 2; column-gap: 48px; font-family: 'Fraunces', serif;
+    font-size: 18px; line-height: 1.6; color: var(--ink);
+  }
+  .manifest-body p { margin-bottom: 16px; break-inside: avoid; }
+  .dropcap {
+    float: left; font-family: 'Fraunces', serif; font-size: 72px; line-height: .8;
+    color: var(--terra-deep); margin: 8px 12px 0 0;
+  }
+
+  /* MID-PAGE VISUAL (FIX 1) */
+  .mid-visual { max-width: 1280px; margin: 0 auto; padding: 0 24px 80px; }
+  .mid-visual img { width: 100%; height: 500px; object-fit: cover; border-radius: 4px; box-shadow: 0 12px 40px rgba(15,23,42,.08); }
+
+  /* PRAXIS GRID (FIX 4) */
+  .praxis { padding: 80px 24px; background: rgba(255,255,255,.4); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .praxis-inner { max-width: 1280px; margin: 0 auto; }
+  .praxis-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px;
+  }
+  .praxis-card {
+    background: var(--cream); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,.02); transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .praxis-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.06); }
+  .praxis-icon { width: 40px; height: 40px; margin-bottom: 20px; color: var(--sage-deep); }
+  .praxis-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.5; }
+  .praxis-card h3 { font-family: 'Fraunces', serif; font-size: 26px; margin-bottom: 12px; }
+  .praxis-card p { font-size: 15px; color: var(--ink-soft); margin-bottom: 20px; }
+  .praxis-meta { font-size: 12px; font-weight: 500; color: var(--terra); text-transform: uppercase; letter-spacing: .1em; }
+
+  /* RETREAT / AESTHETICS */
+  .retreat { padding: 80px 24px; max-width: 1280px; margin: 0 auto; }
+  .retreat-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center; }
+  .retreat-figure { position: relative; }
+  .retreat-figure img { width: 100%; height: 480px; object-fit: cover; border-radius: 4px; }
+  .retreat-text p { font-family: 'Fraunces', serif; font-size: 18px; color: var(--ink-soft); margin-bottom: 28px; }
+  .retreat-facts {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    padding: 24px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 32px;
+  }
+  .fact-label { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; }
+  .fact-value { font-family: 'Fraunces', serif; font-size: 17px; color: var(--ink); }
+
+  /* DARK BLOCK - TESTIMONIALS & USPS (FIX 2) */
+  .dark-block {
+    padding: 80px 24px; background: var(--sage-deep); color: var(--cream);
+    position: relative; overflow: hidden;
+  }
+  .dark-block::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at top right, rgba(255,255,255,.1), transparent 60%);
+  }
+  .dark-block-inner {
+    max-width: 1280px; margin: 0 auto; position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center;
+  }
+  .dark-block .eyebrow { color: var(--sage); }
+  .dark-block .eyebrow::before { background: var(--sage); }
+  .testimonial blockquote {
+    font-family: 'Fraunces', serif; font-size: clamp(24px, 4vw, 36px); font-weight: 300;
+    line-height: 1.3; margin-bottom: 24px; color: var(--cream);
+  }
+  .testimonial cite { font-style: normal; font-size: 14px; color: var(--sage); letter-spacing: .05em; text-transform: uppercase; }
+  
+  .usp-list { list-style: none; border-top: 1px solid rgba(255,255,255,.1); }
+  .usp-list li {
+    padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,.1);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .usp-list strong { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 400; color: var(--cream); }
+  .usp-list span { font-size: 14px; color: rgba(255,255,255,.7); }
+  .btn-white { background: var(--cream); color: var(--sage-deep); margin-top: 32px; }
+  .btn-white:hover { background: var(--sand); color: var(--ink); }
+
+  /* CTA */
+  .cta { padding: 80px 24px 100px; max-width: 1280px; margin: 0 auto; text-align: center; }
+  .cta-frame {
+    padding: 60px 24px; background: linear-gradient(135deg, rgba(2,132,199,.05), rgba(30,75,122,.05));
+    border: 1px solid var(--rule); border-radius: 6px;
+  }
+  .cta p { font-family: 'Fraunces', serif; font-size: 19px; color: var(--ink-soft); max-width: 500px; margin: 0 auto 32px; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: var(--cream); padding: 60px 24px 30px; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .footer-brand { font-family: 'Fraunces', serif; font-size: 28px; margin-bottom: 16px; }
+  .footer-brand em { color: var(--sage); }
+  .footer-tag { font-family: 'Fraunces', serif; font-style: italic; color: rgba(255,255,255,.6); font-size: 15px; max-width: 260px; }
+  .footer-col h4 { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 8px; font-size: 14px; color: rgba(255,255,255,.7); }
+  .footer-col a { color: inherit; text-decoration: none; transition: color .2s; }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom {
+    max-width: 1280px; margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1);
+    display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,.5);
+  }
+
+  /* ANIMATIONS & UTILS */
+  .magnet { transition: transform .4s cubic-bezier(.2,.7,.3,1); }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 980px) {
+    .nav-links { display: none; }
+    .hero-grid, .retreat-grid, .dark-block-inner { grid-template-columns: 1fr; gap: 40px; }
+    .manifest-body { columns: 1; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 120px 16px 40px; }
+    .manifest, .mid-visual, .praxis, .retreat, .dark-block, .cta { padding-left: 16px; padding-right: 16px; }
+    .praxis-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+  }
+
+  /* A11Y */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms!important; transition-duration: .001ms!important; }
+    .reveal { opacity: 1; transform: none; }
+    .magnet { transform: none!important; }
+    html { scroll-behavior: auto; }
+  }
+  :focus-visible { outline: 2px solid var(--terra); outline-offset: 3px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="breath" aria-hidden="true"></div>
+
+<nav>
+  <a href="#" class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    Smile Clinic
+  </a>
+  <div class="nav-links">
+    <a href="#praxis">Leistungen</a>
+    <a href="#retreat">Ästhetik</a>
+    <a href="#usps">Philosophie</a>
+    <a href="#cta" class="nav-cta">Termin buchen</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid">
+    <div class="reveal">
+      <div class="eyebrow">Zahnarztpraxis München</div>
+      <h1>Gesundheit, die <em>bleibt</em>.<br>Ein Lächeln, das <em>strahlt</em>.</h1>
+      <p class="hero-lede">
+        Smile Clinic ist eine Fachpraxis für Implantologie und ästhetische Zahnmedizin. Modernste Technologie, einfühlsame Behandlung und ein Team, das sich Zeit nimmt.
+      </p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-primary magnet" data-magnet>
+          Erste Beratung
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#praxis" class="btn btn-ghost">Leistungen ansehen</a>
+      </div>
+    </div>
+    <figure class="hero-figure reveal magnet" data-magnet>
+      <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&q=80" alt="Modernes Behandlungszimmer der Smile Clinic">
+      <figcaption class="figure-caption">Klinik Zentrum — Modernste Ausstattung für präzise Diagnostik.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- MANIFEST -->
+<section class="manifest" id="manifest">
+  <div class="manifest-head reveal">
+    <h2>Zahnmedizin ist keine Reparatur, sondern die <em>Wiederherstellung</em> von Lebensqualität.</h2>
+  </div>
+  <div class="manifest-body reveal">
+    <p><span class="dropcap">W</span>ir haben die Smile Clinic gegründet, um einen Raum zu schaffen, in dem der Arzt noch sieht, wenn ein Patient anspannt. Eine Behandlung, in der Aufklärung nicht die letzten sechs Minuten sind, sondern die ersten dreißig.</p>
+    <p>Darum arbeiten wir ohne überfüllte Wartezimmer: Jeder Patient erhält zu Beginn eine ausführliche Diagnostik, jeder Schritt wird transparent erklärt, jeder Eingriff schonend begleitet. Wer zu uns findet, bleibt oft ein Leben lang.</p>
+  </div>
+</section>
+
+<!-- MID-PAGE VISUAL (FIX 1 & 4) -->
+<section class="mid-visual reveal">
+  <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1600&q=80" alt="Helles, einladendes Interieur der Smile Clinic">
+</section>
+
+<!-- PRAXIS GRID (FIX 4) -->
+<section class="praxis" id="praxis">
+  <div class="praxis-inner">
+    <div class="eyebrow reveal">Unsere Kernkompetenzen</div>
+    <h2 class="reveal">Strukturierte <em>Exzellenz</em>.</h2>
+    <div class="praxis-grid">
+      <article class="praxis-card reveal">
+        <div class="praxis-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Implantologie</h3>
+        <p>Künstliche Zahnwurzeln aus Titan oder Vollkeramik. Minimalinvasiv, 3D-geplant und sicher verankert für ein Gefühl wie beim eigenen Zahn.</p>
+        <div class="praxis-meta">3D-Diagnostik · Knochenaufbau</div>
+      </article>
+      <article class="praxis-card reveal">
+        <div class="praxis-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
+        <h3>Ästhetische Zahnmedizin</h3>
+        <p>Hauchdünne Veneers, schonendes Bleaching und vollkeramischer Zahnersatz. Individuelle Maßarbeit für ein absolut harmonisches Lächeln.</p>
+        <div class="praxis-meta">Veneers · Aligners · Bleaching</div>
+      </article>
+      <article class="praxis-card reveal">
+        <div class="praxis-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Prophylaxe & Erhalt</h3>
+        <p>Professionelle Zahnreinigung und Parodontitis-Therapie. Echte Prävention, die Bohren in den meisten Fällen überflüssig macht.</p>
+        <div class="praxis-meta">PZR · Parodontologie</div>
+      </article>
+      <article class="praxis-card reveal">
+        <div class="praxis-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Digital Dentistry</h3>
+        <p>Abdruckfreie Intraoralscanner und computergestützte Fertigung (CEREC). Hochpräziser Zahnersatz oft in nur einer einzigen Sitzung.</p>
+        <div class="praxis-meta">CEREC · Intraoralscan</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RETREAT / AESTHETICS -->
+<section class="retreat" id="retreat">
+  <div class="retreat-grid">
+    <figure class="retreat-figure reveal magnet" data-magnet>
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80" alt="Strahlendes, natürliches Lächeln nach einer Veneer-Behandlung">
+    </figure>
+    <div class="retreat-text reveal">
+      <div class="eyebrow">Fokus Ästhetik</div>
+      <h2>Natürliche <em>Perfektion</em> für dein Lächeln.</h2>
+      <p>Mit hauchdünnen Keramikschalen korrigieren wir Fehlstellungen, Lücken oder Verfärbungen. Minimalinvasiv, schmerzfrei und in unserem Meisterlabor individuell gefertigt.</p>
+      <div class="retreat-facts">
+        <div><div class="fact-label">Material</div><div class="fact-value">Vollkeramik (E-Max)</div></div>
+        <div><div class="fact-label">Labor</div><div class="fact-value">In-House Meisterlabor</div></div>
+        <div><div class="fact-label">Dauer</div><div class="fact-value">2 bis 3 Sitzungen</div></div>
+        <div><div class="fact-label">Haltbarkeit</div><div class="fact-value">15+ Jahre</div></div>
+      </div>
+      <a href="#cta" class="btn btn-primary">Beratung buchen</a>
+    </div>
+  </div>
+</section>
+
+<!-- DARK BLOCK - TESTIMONIALS & USPS (FIX 2) -->
+<section class="dark-block" id="usps">
+  <div class="dark-block-inner">
+    <div class="testimonial reveal">
+      <div class="eyebrow">Patientenstimme</div>
+      <blockquote>„Ich hatte jahrelang Angst vor dem Zahnarzt. Das Team der Smile Clinic hat mir diese Angst komplett genommen. Das Ergebnis meiner Implantat-Behandlung ist schlichtweg perfekt.“</blockquote>
+      <cite>— Sarah M., München</cite>
+    </div>
+    <div class="usps reveal">
+      <div class="eyebrow">Unsere Spezialisierungen</div>
+      <ul class="usp-list">
+        <li>
+          <strong>Implantologie & Chirurgie</strong>
+          <span>Minimalinvasiv, 3D-geplant & sicher</span>
+        </li>
+        <li>
+          <strong>Ästhetische Zahnmedizin</strong>
+          <span>Veneers, Bleaching & unsichtbare Schienen</span>
+        </li>
+        <li>
+          <strong>Angstpatienten</strong>
+          <span>Einfühlsame Behandlung, optional mit Dämmerschlaf</span>
+        </li>
+      </ul>
+      <a href="#cta" class="btn btn-primary btn-white magnet" data-magnet>Termin vereinbaren</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="cta-frame reveal">
+    <div class="eyebrow" style="justify-content:center">Erstberatung — Unverbindlich</div>
+    <h2>Lass uns starten.<br><em>Den Rest machen wir</em>.</h2>
+    <p>Die erste Beratung ist absolut unverbindlich. Schreib uns kurz, worum es geht — wir melden uns innerhalb von 24 Stunden mit einem passenden Terminvorschlag.</p>
+    <a href="mailto:hallo@smile-clinic.de" class="btn btn-primary magnet" data-magnet>
+      Nachricht senden
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Smile <em>Clinic</em></div>
+      <p class="footer-tag">Moderne Fachpraxis in München. Implantologie & Ästhetik auf höchstem Niveau.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Praxis</h4>
+      <ul>
+        <li>Maximilianstraße 47</li>
+        <li>80539 München</li>
+        <li><a href="tel:+49890000000">+49 89 000 0000</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Sprechzeiten</h4>
+      <ul>
+        <li>Mo – Do · 08:00 – 19:00</li>
+        <li>Fr · 08:00 – 15:00</li>
+        <li>Sa · Nach Vereinbarung</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Links</h4>
+      <ul>
+        <li><a href="#praxis">Leistungen</a></li>
+        <li><a href="#retreat">Ästhetik</a></li>
+        <li><a href="mailto:hallo@smile-clinic.de">Kontakt</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Smile Clinic GmbH</span>
+    <span>Impressum · Datenschutz</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce){
+      document.querySelectorAll('[data-magnet]').forEach(el => {
+        el.addEventListener('mousemove', e => {
+          const r = el.getBoundingClientRect();
+          const x = ((e.clientX - r.left) / r.width - 0.5) * 20;
+          const y = ((e.clientY - r.top) / r.height - 0.5) * 20;
+          el.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        el.addEventListener('mouseleave', () => el.style.transform = '');
+      });
+    }
+    const items = document.querySelectorAll('.reveal');
+    if(reduce || !('IntersectionObserver' in window)){
+      items.forEach(i => i.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if(en.isIntersecting){
+            en.target.classList.add('in');
+            io.unobserve(en.target);
+          }
+        });
+      }, {threshold: 0.1, rootMargin: '0px 0px -5% 0px'});
+      items.forEach(i => io.observe(i));
+    }
+  })();
+</script>
+</body>
+</html>

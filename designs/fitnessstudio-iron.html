@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iron Works — Functional Training & Coaching in Leipzig</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-base: #0a0a0a;
+    --bg-panel: #141414;
+    --bg-card: #1c1c1c;
+    --text-main: #f0f0f0;
+    --text-muted: #999999;
+    --accent: #d34e24;
+    --accent-hover: #b53d19;
+    --rule: rgba(255, 255, 255, 0.12);
+    --rule-strong: rgba(255, 255, 255, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; background: var(--bg-base); }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text-main);
+    background: var(--bg-base);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* INDUSTRIAL TEXTURE OVERLAY */
+  .texture {
+    position: fixed; inset: 0; z-index: -2; pointer-events: none;
+    background-image: url('https://images.unsplash.com/photo-1601628828688-632f38a5a7d0?auto=format&fit=crop&w=1920&q=40');
+    background-size: cover;
+    opacity: 0.06;
+    mix-blend-mode: screen;
+  }
+  .spotlight {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(circle at 50% 0%, rgba(211, 78, 36, 0.08), transparent 60%);
+  }
+
+  /* TYPOGRAPHY */
+  h1, h2, h3, h4, .brand, .price {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+  em { font-style: normal; color: var(--accent); }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand {
+    font-weight: 700; font-size: 24px;
+    letter-spacing: 1px; color: var(--text-main); text-decoration: none;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .brand-mark {
+    width: 20px; height: 20px;
+    background: var(--accent);
+    display: inline-block;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+  }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: var(--text-main); text-decoration: none; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    transition: color 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    border: 1px solid var(--accent); padding: 10px 20px;
+    background: transparent; color: var(--accent) !important;
+    transition: all 0.25s ease;
+  }
+  .nav-cta:hover { background: var(--accent); color: #fff !important; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 32px; font-size: 14px; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: all 0.3s ease; border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    box-shadow: 0 4px 20px rgba(211, 78, 36, 0.2);
+  }
+  .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--text-main);
+    border-color: var(--rule-strong);
+  }
+  .btn-ghost:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
+  .btn svg { transition: transform 0.3s ease; }
+  .btn:hover svg { transform: translateX(4px); }
+
+  /* HERO */
+  .hero {
+    padding: 180px 32px 100px;
+    max-width: 1400px; margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .eyebrow {
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 24px;
+  }
+  .eyebrow::before { content: ""; width: 40px; height: 1px; background: var(--accent); }
+  
+  h1 {
+    font-size: clamp(48px, 7vw, 96px);
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+  }
+  .hero-lede {
+    font-size: 18px; color: var(--text-muted);
+    max-width: 540px; margin-bottom: 48px;
+    line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .hero-figure { position: relative; }
+  .hero-figure img {
+    width: 100%; height: 640px; object-fit: cover;
+    filter: grayscale(0.6) contrast(1.2) brightness(0.8);
+    border: 1px solid var(--rule);
+  }
+  .figure-caption {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--bg-panel); border: 1px solid var(--rule);
+    padding: 20px; max-width: 300px;
+    font-size: 13px; color: var(--text-muted);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .figure-caption b {
+    font-family: 'Oswald', sans-serif; color: var(--text-main);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    font-size: 14px; display: block; margin-bottom: 8px;
+  }
+
+  /* MANIFESTO */
+  .manifest {
+    padding: 100px 32px;
+    max-width: 1400px; margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+  .manifest-head { margin-bottom: 60px; }
+  .section-title {
+    font-size: clamp(32px, 4vw, 56px);
+    max-width: 800px; letter-spacing: 0.02em;
+  }
+  .manifest-body {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    font-size: 16px; color: var(--text-muted);
+  }
+  .manifest-body p { margin-bottom: 24px; }
+  .pullquote {
+    font-family: 'Oswald', sans-serif; font-size: 24px;
+    color: var(--text-main); text-transform: uppercase;
+    border-left: 2px solid var(--accent); padding-left: 24px;
+    margin: 32px 0; line-height: 1.4;
+  }
+
+  /* PRAXIS / TRAINING */
+  .praxis {
+    padding: 100px 32px;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--rule);
+  }
+  .praxis-inner { max-width: 1400px; margin: 0 auto; }
+  .praxis-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 60px;
+  }
+  .praxis-card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    padding: 48px 32px;
+    transition: all 0.3s ease;
+  }
+  .praxis-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .praxis-icon {
+    width: 48px; height: 48px; margin-bottom: 32px;
+  }
+  .praxis-icon svg { width: 100%; height: 100%; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+  .praxis-tag {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 12px; font-weight: 600;
+  }
+  .praxis-card h3 { font-size: 32px; margin-bottom: 16px; }
+  .praxis-card p { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
+  .praxis-meta {
+    font-size: 12px; color: var(--text-main); font-weight: 500;
+    padding-top: 20px; border-top: 1px solid var(--rule);
+    letter-spacing: 0.05em;
+  }
+
+  /* PRICING / MEMBERSHIPS (Replaces empty green block) */
+  .pricing {
+    padding: 100px 32px;
+    max-width: 1400px; margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 60px;
+  }
+  .price-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--rule);
+    padding: 48px 32px;
+    display: flex; flex-direction: column;
+  }
+  .price-card.popular {
+    border-color: var(--accent);
+    position: relative;
+  }
+  .price-card.popular::before {
+    content: 'Most Chosen';
+    position: absolute; top: -14px; left: 32px;
+    background: var(--accent); color: #fff;
+    padding: 4px 12px; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .price-card h3 { font-size: 24px; color: var(--text-muted); }
+  .price { font-size: 56px; color: var(--text-main); margin: 16px 0 32px; }
+  .price span { font-size: 16px; color: var(--text-muted); font-family: 'Inter', sans-serif; text-transform: none; }
+  .price-card ul { list-style: none; margin-bottom: 40px; flex-grow: 1; }
+  .price-card li {
+    padding: 12px 0; border-bottom: 1px solid var(--rule);
+    font-size: 14px; color: var(--text-muted);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .price-card li::before {
+    content: ""; display: block; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+  }
+  .price-card .btn { width: 100%; justify-content: center; }
+
+  /* RETREAT / BOOTCAMP */
+  .retreat {
+    padding: 100px 32px;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--rule);
+  }
+  .retreat-inner { max-width: 1400px; margin: 0 auto; }
+  .retreat-grid {
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    gap: 80px; align-items: center;
+  }
+  .retreat-figure { position: relative; }
+  .retreat-figure img {
+    width: 100%; height: 560px; object-fit: cover;
+    filter: grayscale(0.8) contrast(1.3);
+    border: 1px solid var(--rule);
+  }
+  .stamp {
+    position: absolute; top: -24px; left: -24px;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .stamp b { font-family: 'Oswald', sans-serif; font-size: 32px; line-height: 1; }
+  .stamp span { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; font-weight: 600; }
+  
+  .retreat-text h2 { font-size: clamp(36px, 5vw, 64px); margin: 16px 0 24px; }
+  .retreat-text > p { font-size: 16px; color: var(--text-muted); margin-bottom: 40px; }
+  .retreat-facts {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    margin-bottom: 40px; padding: 32px 0;
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .fact-label {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 8px; font-weight: 600;
+  }
+  .fact-value { font-family: 'Oswald', sans-serif; font-size: 20px; color: var(--text-main); }
+
+  /* CTA */
+  .cta {
+    padding: 120px 32px;
+    max-width: 1400px; margin: 0 auto;
+    text-align: center;
+  }
+  .cta-frame {
+    padding: 80px 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    position: relative;
+  }
+  .cta-frame::before, .cta-frame::after {
+    content: ""; position: absolute; width: 60px; height: 60px;
+    border: 2px solid var(--accent);
+  }
+  .cta-frame::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+  .cta-frame::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+  .cta h2 { font-size: clamp(40px, 6vw, 80px); margin-bottom: 24px; }
+  .cta p {
+    font-size: 18px; color: var(--text-muted);
+    max-width: 600px; margin: 0 auto 40px; line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #000; border-top: 1px solid var(--rule);
+    padding: 80px 32px 40px;
+  }
+  .footer-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 60px; margin-bottom: 60px;
+  }
+  .footer-brand { font-size: 32px; margin-bottom: 16px; }
+  .footer-tag { color: var(--text-muted); font-size: 14px; max-width: 320px; }
+  .footer-col h4 {
+    font-size: 14px; letter-spacing: 0.1em; color: var(--text-main);
+    margin-bottom: 24px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 12px; font-size: 14px; color: var(--text-muted); }
+  .footer-col a { color: inherit; text-decoration: none; transition: color 0.25s; }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom {
+    max-width: 1400px; margin: 0 auto;
+    padding-top: 32px; border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--text-muted); flex-wrap: wrap; gap: 16px;
+  }
+
+  /* UTILS & ANIMATIONS */
+  .magnet { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1); }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .hero-grid, .retreat-grid, .manifest-body { grid-template-columns: 1fr; gap: 48px; }
+    .hero-figure img { height: 480px; }
+    .figure-caption { position: relative; bottom: 0; right: 0; width: 100%; max-width: none; border-top: none; }
+    .praxis-grid, .pricing-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 48px; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero { padding: 140px 24px 80px; }
+    .manifest, .praxis, .pricing, .retreat, .cta { padding: 80px 24px; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .retreat-facts { grid-template-columns: 1fr; }
+    .stamp { width: 90px; height: 90px; left: 16px; top: 16px; }
+    .stamp b { font-size: 24px; }
+  }
+
+  /* A11Y */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    .reveal { opacity: 1; transform: none; }
+    .magnet { transform: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+</style>
+</head>
+<body>
+
+<div class="texture" aria-hidden="true"></div>
+<div class="spotlight" aria-hidden="true"></div>
+
+<nav>
+  <a href="#" class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    Iron Works
+  </a>
+  <div class="nav-links">
+    <a href="#praxis">Training</a>
+    <a href="#pricing">Memberships</a>
+    <a href="#retreat">Bootcamp</a>
+    <a href="#cta" class="nav-cta">Drop-In</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid">
+    <div class="reveal">
+      <div class="eyebrow">
+        Leipzig — Plagwitz
+        <span style="margin-left:auto; color:var(--text-muted);">№ 01 / Est. 2021</span>
+      </div>
+      <h1>Kraft, die <em>bleibt</em>.<br>Wille, der <em>formt</em>.</h1>
+      <p class="hero-lede">
+        Iron Works ist eine Halle für Functional Training, Olympic Weightlifting und Conditioning in einer alten Gießerei. Zwanzig Racks, rohes Eisen, keine Spiegel. Wir trainieren in kleinen Squads — nicht als Trend, sondern weil nur so echte Kraft entsteht.
+      </p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-primary magnet" data-magnet>
+          Probetraining starten
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#pricing" class="btn btn-ghost">Memberships ansehen</a>
+      </div>
+    </div>
+    <figure class="hero-figure reveal magnet" data-magnet>
+      <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=80" alt="Athlet beim schweren Kreuzheben in einer dunklen, industriellen Trainingshalle">
+      <figcaption class="figure-caption">
+        <b>Main Rack — Halle 1</b>
+        Die Plattform morgens um 06:14 Uhr. Schweres Eisen, Kreide und absoluter Fokus.
+      </figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- MANIFESTO -->
+<section class="manifest" id="manifest">
+  <div class="manifest-head reveal">
+    <div class="eyebrow">Das Manifest</div>
+    <h2 class="section-title">Training ist kein <em>Dienstleistungsangebot</em>, sondern Widerstand gegen die Bequemlichkeit.</h2>
+  </div>
+  <div class="manifest-body reveal">
+    <div>
+      <p>Wir haben Iron Works 2021 gegründet, nachdem wir Jahre in kommerziellen Studios verbracht hatten — in Räumen voller Maschinen, die den Körper isolieren statt ihn als Ganzes zu fordern. Was uns fehlte, war nicht mehr Equipment, sondern weniger Ablenkung.</p>
+      <p>Eine Halle, in der ein Coach noch sieht, wenn die Form beim Deadlift einbricht. Ein Workout, bei dem das Warm-Up nicht übersprungen wird.</p>
+    </div>
+    <div>
+      <p class="pullquote">„Zwölf Athleten sind kein Limit — sie sind die Bedingung, unter der echtes Coaching überhaupt erst möglich wird."</p>
+      <p>Darum arbeiten wir ohne anonyme Massen: Jede Klasse hat maximal zwölf Plätze, jeder Athlet wird individuell korrigiert, jede Wiederholung zählt. Wer zu Iron Works findet, bleibt durchschnittlich vier Jahre. Das ist keine Statistik, die wir pflegen — es ist das Resultat harter Arbeit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRAXIS (TRAINING) -->
+<section class="praxis" id="praxis">
+  <div class="praxis-inner">
+    <div class="manifest-head reveal">
+      <div class="eyebrow">Das Programm</div>
+      <h2 class="section-title">Drei Säulen, ein <em>Fundament</em>.</h2>
+    </div>
+    <div class="praxis-grid">
+      <article class="praxis-card reveal">
+        <div class="praxis-icon magnet" data-magnet>
+          <svg viewBox="0 0 48 48"><path d="M24 6c-4 6-4 12 0 18s4 12 0 18M14 12c4 4 4 8 0 12s-4 8 0 12M34 12c-4 4-4 8 0 12s4 8 0 12M8 24h32"/></svg>
+        </div>
+        <div class="praxis-tag">Säule 01</div>
+        <h3>Strength</h3>
+        <p>Schwere Grundübungen: Squats, Deadlifts, Presses. Wir trainieren nach progressiven Zyklen — strukturierter Aufbau von Maximalkraft, sauberer Technik und robuster Physis.</p>
+        <div class="praxis-meta">Mo, Mi &amp; Fr · 17:30 &amp; 19:00</div>
+      </article>
+
+      <article class="praxis-card reveal">
+        <div class="praxis-icon magnet" data-magnet>
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14"/><path d="M24 10v28M10 24h28M14 14l20 20M34 14L14 34"/></svg>
+        </div>
+        <div class="praxis-tag">Säule 02</div>
+        <h3>Conditioning</h3>
+        <p>Intensive metabolische Einheiten. Kettlebells, Rower, Assault Bikes und Bodyweight. Wir pushen das Herz-Kreislauf-System an seine Grenzen — kontrolliert und messbar.</p>
+        <div class="praxis-meta">Di &amp; Do · 18:30 · 60 Min.</div>
+      </article>
+
+      <article class="praxis-card reveal">
+        <div class="praxis-icon magnet" data-magnet>
+          <svg viewBox="0 0 48 48"><path d="M16 24c0-6 4-12 8-12s8 6 8 12-4 12-8 12-8-6-8-12ZM6 24c0 0 6-8 18-8s18 8 18 8-6 8-18 8S6 24 6 24ZM24 14v20"/></svg>
+        </div>
+        <div class="praxis-tag">Säule 03</div>
+        <h3>Mobility</h3>
+        <p>Aktive Gelenkgesundheit und Range of Motion. Keine passiven Dehnübungen, sondern gezielte Arbeit an der Mechanik. Wer schwer heben will, muss sich bewegen können.</p>
+        <div class="praxis-meta">Sa · 10:00 · 60 Min.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING (Replaces empty green block) -->
+<section class="pricing" id="pricing">
+  <div class="manifest-head reveal">
+    <div class="eyebrow">Memberships</div>
+    <h2 class="section-title">Wähle dein <em>Commitment</em>.</h2>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <h3>Drop-In</h3>
+      <div class="price">20€ <span>/ Session</span></div>
+      <ul>
+        <li>Teilnahme an einem WOD</li>
+        <li>Open Gym Access (Tagespass)</li>
+        <li>Nutzung der Recovery-Area</li>
+      </ul>
+      <a href="#cta" class="btn btn-ghost magnet" data-magnet>Buchen</a>
+    </div>
+
+    <div class="price-card popular reveal">
+      <h3>Squad Basic</h3>
+      <div class="price">89€ <span>/ Monat</span></div>
+      <ul>
+        <li>3 Classes pro Woche</li>
+        <li>Open Gym Access</li>
+        <li>Individuelles Programming</li>
+        <li>Monatlicher Technik-Check</li>
+      </ul>
+      <a href="#cta" class="btn btn-primary magnet" data-magnet>Mitglied werden</a>
+    </div>
+
+    <div class="price-card reveal">
+      <h3>Unlimited</h3>
+      <div class="price">129€ <span>/ Monat</span></div>
+      <ul>
+        <li>Unbegrenzte Classes</li>
+        <li>24/7 Access zur Halle</li>
+        <li>1-on-1 Coaching Session (1x/Monat)</li>
+        <li>Priority Booking für Events</li>
+      </ul>
+      <a href="#cta" class="btn btn-ghost magnet" data-magnet>Mitglied werden</a>
+    </div>
+  </div>
+</section>
+
+<!-- RETREAT / BOOTCAMP -->
+<section class="retreat" id="retreat">
+  <div class="retreat-inner">
+    <div class="retreat-grid">
+      <figure class="retreat-figure reveal">
+        <div class="stamp magnet" data-magnet>
+          <b>4</b>
+          <span>Tage Grind</span>
+        </div>
+        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=80" alt="Schwere Kettlebells in einer rauen, industriellen Trainingsumgebung">
+      </figure>
+      <div class="retreat-text reveal">
+        <div class="eyebrow">Industrial Bootcamp</div>
+        <h2>Vier Tage <em>Fokus</em> fernab der Stadt.</h2>
+        <p>Vom 12. bis 15. September 2025 ziehen wir uns in eine alte Fabrikhalle im Harz zurück — vierzig Athleten, rohes Equipment, der Wald direkt vor der Tür. Morgens schweres Lifting, mittags Trail-Runs, abends Recovery. Dazwischen: Essen, das Kraft gibt.</p>
+
+        <div class="retreat-facts">
+          <div>
+            <div class="fact-label">Termin</div>
+            <div class="fact-value">12. – 15. Sept 2025</div>
+          </div>
+          <div>
+            <div class="fact-label">Ort</div>
+            <div class="fact-value">Maschinenhalle, Harz</div>
+          </div>
+          <div>
+            <div class="fact-label">Plätze</div>
+            <div class="fact-value">40 — (8 frei)</div>
+          </div>
+          <div>
+            <div class="fact-label">Investition</div>
+            <div class="fact-value">ab 590 €</div>
+          </div>
+        </div>
+
+        <a href="#cta" class="btn btn-primary magnet" data-magnet>
+          Platz sichern
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="cta-frame reveal">
+    <div class="eyebrow" style="justify-content:center; margin-bottom:24px;">Probetraining — Drop-In</div>
+    <h2>Komm trainieren.<br><em>Den Rest machen wir</em>.</h2>
+    <p>Das erste Probetraining zeigt dir, wie wir arbeiten. Schreib uns kurz, wie dein bisheriges Training aussah — wir melden uns innerhalb von 24 Stunden mit einem Slot für dein erstes WOD.</p>
+    <a href="mailto:hallo@iron-works.de" class="btn btn-primary magnet" data-magnet>
+      Slot anfragen
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Iron <em>Works</em></div>
+      <p class="footer-tag">Eine Halle für Functional Training in Leipzig. Kraft, Ausdauer &amp; Mobility in kleinen Squads — gegründet 2021.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Halle</h4>
+      <ul>
+        <li>Gießerstraße 47</li>
+        <li>04229 Leipzig</li>
+        <li>Plagwitz, Deutschland</li>
+        <li><a href="tel:+493410000000">+49 341 000 0000</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Öffnungszeiten</h4>
+      <ul>
+        <li>Mo – Fr · 06:00 – 21:00</li>
+        <li>Sa · 09:00 – 14:00</li>
+        <li>So · Open Gym (Members)</li>
+        <li><a href="#">Trainingsplan als PDF</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Links</h4>
+      <ul>
+        <li><a href="#manifest">Philosophie</a></li>
+        <li><a href="#pricing">Memberships</a></li>
+        <li><a href="#retreat">Bootcamp 2025</a></li>
+        <li><a href="mailto:hallo@iron-works.de">hallo@iron-works.de</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Iron Works GmbH — Leipzig</span>
+    <span>Impressum · Datenschutz · AGB</span>
+  </div>
+</footer>
+
+<script>
+  // CURSOR-MAGNET
+  (function(){
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+    const magnets = document.querySelectorAll('[data-magnet]');
+    magnets.forEach(el => {
+      const strength = 12;
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        el.style.transform = `translate(${x*strength}px, ${y*strength}px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
+      });
+    });
+  })();
+
+  // REVEAL ON SCROLL
+  (function(){
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll('.reveal');
+    if(reduce || !('IntersectionObserver' in window)){
+      items.forEach(i => i.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if(en.isIntersecting){
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, {threshold: 0.1, rootMargin: '0px 0px -5% 0px'});
+    items.forEach(i => io.observe(i));
+  })();
+</script>
+
+</body>
+</html>

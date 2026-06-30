@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blütenwerk — Hochzeitsfloristik, Saisonsträuße & Werkstatt</title>
+<meta name="description" content="Blütenwerk kreiert individuelle Hochzeitsfloristik, handgebundene Saisonsträuße und florale Konzepte. Natürliche Formen, bewusste Herkunft und echte Handarbeit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lehm:#b8633a;
+    --lehm-dunkel:#8a3f1e;
+    --lehm-hell:#d68a5c;
+    --sand:#e8dcc4;
+    --sand-hell:#f3ecdb;
+    --moos:#3d4a35;
+    --moos-tief:#26301f;
+    --stein:#7a7468;
+    --nacht:#1a1814;
+    --tinte:#2a261f;
+    --creme:#fbf6ea;
+    --rahmen:rgba(42,38,31,.18);
+    --rahmen-creme:rgba(251,246,234,.22);
+    --maxw:1280px;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--tinte);
+    background:var(--creme);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  ul{list-style:none}
+
+  .atmend{
+    background:linear-gradient(120deg,var(--sand-hell) 0%,var(--sand) 35%,var(--sand-hell) 70%,var(--sand) 100%);
+    background-size:200% 200%;
+    animation:atmen 14s ease-in-out infinite;
+  }
+  @keyframes atmen{
+    0%{background-position:0% 0%}
+    50%{background-position:100% 100%}
+    100%{background-position:0% 0%}
+  }
+
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:18px 0;
+    background:rgba(251,246,234,.82);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--rahmen);
+  }
+  .nav-inn{
+    max-width:var(--maxw);margin:0 auto;padding:0 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .marke{display:flex;align-items:center;gap:12px;font-family:'Fraunces',serif;font-weight:600;font-size:22px;letter-spacing:-.02em;color:var(--moos-tief)}
+  .marke svg{width:34px;height:34px;flex-shrink:0}
+  .nav-links{display:flex;gap:30px;font-size:14px;font-weight:500}
+  .nav-links a{position:relative;padding:6px 0;color:var(--tinte);transition:color .25s}
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--lehm);transition:width .3s var(--ease)}
+  .nav-links a:hover,.nav-links a:focus-visible{color:var(--lehm-dunkel)}
+  .nav-links a:hover::after,.nav-links a:focus-visible::after{width:100%}
+  .nav-cta{
+    background:var(--moos);color:var(--creme);
+    padding:11px 22px;border-radius:3px;
+    font-weight:500;font-size:14px;letter-spacing:.01em;
+    transition:background .3s var(--ease),transform .3s var(--ease);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .nav-cta:hover,.nav-cta:focus-visible{background:var(--moos-tief);transform:translateY(-2px)}
+  .nav-cta:focus-visible{outline:2px solid var(--lehm);outline-offset:3px}
+  @media(max-width:880px){.nav-links{display:none}}
+
+  .hero{
+    position:relative;
+    padding:150px 32px 90px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    max-width:var(--maxw);margin:0 auto;
+    display:grid;grid-template-columns:1.15fr 1fr;gap:70px;align-items:center;
+    position:relative;z-index:2;
+  }
+  @media(max-width:980px){.hero-grid{grid-template-columns:1fr;gap:50px}}
+
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(46px,7.4vw,98px);
+    line-height:.96;
+    letter-spacing:-.035em;
+    color:var(--moos-tief);
+    margin-bottom:28px;
+    font-variation-settings:"opsz" 144;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--lehm-dunkel);
+    font-variation-settings:"opsz" 144;
+  }
+  .hero-lead{
+    font-size:18px;line-height:1.65;
+    max-width:540px;
+    color:var(--tinte);
+    margin-bottom:38px;
+  }
+  .hero-lead strong{font-weight:600;color:var(--moos-tief)}
+
+  .hero-cta-gruppe{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .btn-primary{
+    background:var(--lehm);color:var(--creme);
+    padding:16px 30px;border-radius:3px;
+    font-weight:600;font-size:15px;letter-spacing:.01em;
+    display:inline-flex;align-items:center;gap:10px;
+    transition:transform .35s var(--ease),background .3s var(--ease),box-shadow .3s var(--ease);
+    box-shadow:0 6px 22px -10px rgba(138,63,30,.6);
+  }
+  .btn-primary:hover,.btn-primary:focus-visible{
+    background:var(--lehm-dunkel);
+    transform:translateY(-3px);
+    box-shadow:0 14px 30px -12px rgba(138,63,30,.7);
+  }
+  .btn-primary:focus-visible{outline:2px solid var(--moos);outline-offset:3px}
+  .btn-ghost{
+    color:var(--moos-tief);font-weight:500;font-size:15px;
+    padding:16px 8px;
+    display:inline-flex;align-items:center;gap:8px;
+    border-bottom:1.5px solid var(--moos-tief);
+    transition:color .3s,border-color .3s,gap .3s var(--ease);
+  }
+  .btn-ghost:hover,.btn-ghost:focus-visible{color:var(--lehm-dunkel);border-color:var(--lehm-dunkel);gap:14px}
+
+  .hero-visuell{position:relative}
+  .hero-bild{
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 30px 70px -30px rgba(26,24,20,.55);
+    aspect-ratio:4/5;
+    background:var(--sand);
+  }
+  .hero-bild img{width:100%;height:100%;object-fit:cover}
+  .hero-badge{
+    position:absolute;bottom:-22px;left:-22px;
+    background:var(--moos-tief);color:var(--creme);
+    padding:18px 22px;border-radius:5px;
+    font-family:'Fraunces',serif;font-weight:500;
+    box-shadow:0 18px 40px -18px rgba(26,24,20,.6);
+    max-width:230px;
+  }
+  .hero-badge .gross{
+    display:block;font-size:38px;line-height:1;letter-spacing:-.02em;color:var(--lehm-hell);
+    font-variation-settings:"opsz" 144;
+  }
+  .hero-badge .klein{display:block;font-family:'Inter',sans-serif;font-size:12px;font-weight:400;letter-spacing:.04em;opacity:.85;margin-top:6px;line-height:1.4}
+
+  .magnet{transition:transform .4s var(--ease);will-change:transform}
+
+  .stats{
+    background:var(--moos-tief);color:var(--creme);
+    padding:48px 32px;
+    position:relative;
+    overflow:hidden;
+  }
+  .stats::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(120deg,rgba(184,99,58,.0) 0%,rgba(184,99,58,.18) 50%,rgba(184,99,58,0) 100%);
+    background-size:200% 200%;
+    animation:atmen 18s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .stats-grid{
+    max-width:var(--maxw);margin:0 auto;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+    position:relative;z-index:2;
+  }
+  @media(max-width:780px){.stats-grid{grid-template-columns:repeat(2,1fr);gap:36px}}
+  .stat{border-left:1px solid var(--rahmen-creme);padding-left:22px}
+  .stat-zahl{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:clamp(38px,5vw,56px);line-height:1;
+    color:var(--lehm-hell);letter-spacing:-.02em;
+    font-variation-settings:"opsz" 144;
+  }
+  .stat-zahl .einheit{font-size:.55em;color:var(--sand);margin-left:4px;font-style:italic}
+  .stat-label{margin-top:10px;font-size:13px;color:var(--sand);line-height:1.5;letter-spacing:.01em}
+
+  section{position:relative}
+  .abschnitt{
+    padding:110px 32px;
+  }
+  .abschnitt-kopf{
+    max-width:var(--maxw);margin:0 auto 60px;
+    display:grid;grid-template-columns:1fr 1.4fr;gap:50px;align-items:end;
+  }
+  @media(max-width:880px){.abschnitt-kopf{grid-template-columns:1fr;gap:24px}}
+  .kicker{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--lehm-dunkel);margin-bottom:18px;
+  }
+  .kicker::before{content:'';width:28px;height:1.5px;background:var(--lehm)}
+  .abschnitt-titel{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:clamp(34px,4.6vw,58px);
+    line-height:1.02;letter-spacing:-.025em;
+    color:var(--moos-tief);
+    font-variation-settings:"opsz" 144;
+  }
+  .abschnitt-titel em{font-style:italic;color:var(--lehm-dunkel);font-weight:500}
+  .abschnitt-beschreibung{
+    font-size:17px;line-height:1.7;color:var(--tinte);max-width:560px;
+  }
+
+  .mosaik-wrap{max-width:var(--maxw);margin:0 auto}
+  .mosaik{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:180px;
+    gap:14px;
+    grid-auto-flow:dense;
+  }
+  @media(max-width:880px){
+    .mosaik{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px;gap:10px}
+  }
+  .kachel{
+    position:relative;border-radius:5px;overflow:hidden;
+    background:var(--sand);
+    transition:transform .45s var(--ease),box-shadow .45s var(--ease),z-index 0s;
+    transform-style:preserve-3d;
+    will-change:transform;
+  }
+  .kachel img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .6s var(--ease),filter .4s;
+    filter:saturate(.95) contrast(1.02);
+  }
+  .kachel::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(26,24,20,0) 35%,rgba(26,24,20,.78) 100%);
+    opacity:.85;transition:opacity .4s;
+    pointer-events:none;
+  }
+  .kachel:hover{
+    transform:scale(1.025);z-index:5;
+    box-shadow:0 26px 50px -20px rgba(26,24,20,.55);
+  }
+  .kachel:hover img{transform:scale(1.08);filter:saturate(1.05) contrast(1.05)}
+  .kachel:hover::after{opacity:1}
+
+  .kachel-info{
+    position:absolute;left:18px;right:18px;bottom:16px;z-index:2;color:var(--creme);
+    transform:translateY(6px);transition:transform .4s var(--ease);
+  }
+  .kachel:hover .kachel-info{transform:translateY(0)}
+  .kachel-kat{
+    font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--lehm-hell);margin-bottom:6px;
+  }
+  .kachel-titel{
+    font-family:'Fraunces',serif;font-weight:500;font-size:20px;line-height:1.15;
+    letter-spacing:-.01em;
+    font-variation-settings:"opsz" 96;
+  }
+  .kachel-meta{font-size:12px;color:var(--sand);margin-top:6px;opacity:.9}
+
+  .span-2x1{grid-column:span 2}
+  .span-1x2{grid-row:span 2}
+  .span-2x2{grid-column:span 2;grid-row:span 2}
+  @media(max-width:880px){
+    .span-2x1{grid-column:span 2}
+    .span-1x2{grid-row:span 1}
+    .span-2x2{grid-column:span 2;grid-row:span 2}
+  }
+
+  .touren{background:var(--sand-hell);position:relative}
+  .touren-grid{
+    max-width:var(--maxw);margin:0 auto;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  }
+  @media(max-width:1100px){.touren-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:680px){.touren-grid{grid-template-columns:1fr}}
+
+  .tour-karte{
+    background:var(--creme);
+    border:1px solid var(--rahmen);
+    border-radius:6px;
+    padding:32px 28px 28px;
+    position:relative;
+    transition:transform .25s var(--ease),box-shadow .35s var(--ease),border-color .3s;
+    transform-style:preserve-3d;
+    will-change:transform;
+    display:flex;flex-direction:column;
+  }
+  .tour-karte:hover{
+    box-shadow:0 30px 50px -25px rgba(26,24,20,.3);
+    border-color:var(--lehm-hell);
+  }
+  .tour-icon{
+    width:48px;height:48px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--sand);border-radius:50%;
+    margin-bottom:22px;
+    transition:transform .4s var(--ease),background .3s;
+  }
+  .tour-icon svg{width:24px;height:24px;stroke:var(--lehm-dunkel);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .tour-karte:hover .tour-icon{background:var(--lehm-hell);transform:rotate(-6deg)}
+  .tour-karte:hover .tour-icon svg{stroke:var(--creme)}
+
+  .tour-nummer{
+    position:absolute;top:24px;right:28px;
+    font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+    font-size:14px;color:var(--stein);
+  }
+  .tour-karte h3{
+    font-family:'Fraunces',serif;font-weight:500;
+    font-size:24px;line-height:1.15;letter-spacing:-.015em;
+    color:var(--moos-tief);margin-bottom:14px;
+    font-variation-settings:"opsz" 96;
+  }
+  .tour-karte p{font-size:14.5px;line-height:1.65;color:var(--tinte);margin-bottom:22px;flex-grow:1}
+  .tour-details{
+    display:flex;flex-direction:column;gap:8px;
+    padding-top:18px;border-top:1px solid var(--rahmen);
+    font-size:13px;color:var(--tinte);
+  }
+  .tour-details li{display:flex;align-items:center;gap:10px}
+  .tour-details svg{width:15px;height:15px;stroke:var(--lehm-dunkel);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+  .ausruestung{background:var(--moos-tief);color:var(--creme);position:relative;overflow:hidden}
+  .ausruestung::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(120deg,rgba(184,99,58,.12) 0%,rgba(184,99,58,0) 50%,rgba(184,99,58,.12) 100%);
+    background-size:200% 200%;
+    animation:atmen 16s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .ausruestung-grid{
+    max-width:var(--maxw);margin:0 auto;
+    display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;
+    position:relative;z-index:2;
+  }
+  @media(max-width:880px){.ausruestung-grid{grid-template-columns:1fr;gap:50px}}
+
+  .ausruestung .kicker{color:var(--lehm-hell)}
+  .ausruestung .kicker::before{background:var(--lehm-hell)}
+  .ausruestung h2{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:clamp(32px,4.2vw,52px);
+    line-height:1.05;letter-spacing:-.025em;
+    color:var(--creme);margin-bottom:24px;
+    font-variation-settings:"opsz" 144;
+  }
+  .ausruestung h2 em{font-style:italic;color:var(--lehm-hell);font-weight:500}
+  .ausruestung-text p{font-size:16px;line-height:1.7;color:var(--sand);margin-bottom:18px}
+  .ausruestung-text strong{color:var(--creme);font-weight:600}
+
+  .ausruestung-liste{
+    margin-top:30px;display:grid;gap:14px;
+  }
+  .ausruestung-liste li{
+    display:flex;gap:14px;align-items:flex-start;
+    padding:14px 0;border-top:1px solid var(--rahmen-creme);
+    font-size:14.5px;color:var(--sand);
+  }
+  .ausruestung-liste li:last-child{border-bottom:1px solid var(--rahmen-creme)}
+  .ausruestung-liste svg{width:18px;height:18px;stroke:var(--lehm-hell);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:2px}
+  .ausruestung-liste strong{display:block;color:var(--creme);font-weight:600;font-size:15px;margin-bottom:2px}
+
+  .ausruestung-bild{
+    border-radius:6px;overflow:hidden;
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.6);
+    aspect-ratio:5/6;
+    position:relative;
+  }
+  .ausruestung-bild img{width:100%;height:100%;object-fit:cover}
+  .ausruestung-bild::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 60%,rgba(26,24,20,.4) 100%);
+    pointer-events:none;
+  }
+
+  .cta{padding:120px 32px}
+  .cta-inn{
+    max-width:1000px;margin:0 auto;text-align:center;
+    background:linear-gradient(120deg,var(--lehm) 0%,var(--lehm-dunkel) 50%,var(--lehm) 100%);
+    background-size:200% 200%;
+    animation:atmen 14s ease-in-out infinite;
+    color:var(--creme);
+    padding:80px 40px;
+    border-radius:8px;
+    position:relative;overflow:hidden;
+    box-shadow:0 40px 80px -30px rgba(138,63,30,.5);
+  }
+  .cta-inn::before{
+    content:'';position:absolute;inset:0;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'><path d='M0 30 L60 30 M30 0 L30 60' stroke='%23fbf6ea' stroke-width='.4' opacity='.08'/></svg>");
+    pointer-events:none;
+  }
+  .cta-inn > *{position:relative;z-index:2}
+  .cta h2{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:clamp(34px,5vw,62px);
+    line-height:1.02;letter-spacing:-.03em;
+    margin-bottom:22px;
+    font-variation-settings:"opsz" 144;
+  }
+  .cta h2 em{font-style:italic;font-weight:500}
+  .cta p{
+    font-size:17px;line-height:1.6;max-width:560px;margin:0 auto 36px;
+    color:var(--sand-hell);
+  }
+  .cta .btn-primary{
+    background:var(--moos-tief);color:var(--creme);
+    box-shadow:0 10px 30px -10px rgba(0,0,0,.4);
+  }
+  .cta .btn-primary:hover,.cta .btn-primary:focus-visible{background:var(--nacht);transform:translateY(-3px)}
+  .cta-meta{margin-top:24px;font-size:13px;color:var(--sand-hell);opacity:.85}
+
+  footer{
+    background:var(--nacht);color:var(--sand);
+    padding:80px 32px 36px;
+  }
+  .footer-grid{
+    max-width:var(--maxw);margin:0 auto;
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:50px;
+    padding-bottom:50px;border-bottom:1px solid var(--rahmen-creme);
+  }
+  @media(max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;gap:36px}}
+  @media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
+
+  .footer-marke .marke{color:var(--creme);margin-bottom:18px}
+  .footer-marke p{font-size:14px;line-height:1.65;color:var(--sand);max-width:320px;opacity:.85}
+  .footer-col h4{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:12px;
+    letter-spacing:.14em;text-transform:uppercase;
+    color:var(--lehm-hell);margin-bottom:18px;
+  }
+  .footer-col ul{display:flex;flex-direction:column;gap:11px}
+  .footer-col a{font-size:14px;color:var(--sand);opacity:.85;transition:color .25s,opacity .25s}
+  .footer-col a:hover,.footer-col a:focus-visible{color:var(--lehm-hell);opacity:1}
+
+  .footer-unten{
+    max-width:var(--maxw);margin:36px auto 0;
+    display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+    font-size:13px;color:var(--sand);opacity:.7;
+  }
+
+  a:focus-visible,button:focus-visible{outline:2px solid var(--lehm);outline-offset:3px;border-radius:2px}
+
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      animation-duration:.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.001ms !important;
+      scroll-behavior:auto !important;
+    }
+    .atmend,.stats::before,.ausruestung::before,.cta-inn{animation:none;background-position:50% 50%}
+    .magnet{transform:none !important}
+    .kachel:hover{transform:none}
+    .tour-karte:hover{transform:none}
+  }
+
+  ::selection{background:var(--lehm);color:var(--creme)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inn">
+    <a href="#" class="marke magnet" aria-label="Blütenwerk Startseite">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M20 33 V18 M20 18 C15 18 10 22 10 28 C10 33 15 33 20 28 C25 33 30 33 30 28 C30 22 25 18 20 18 Z" fill="#3d4a35"/>
+        <circle cx="28" cy="11" r="2.4" fill="#b8633a"/>
+      </svg>
+      <span>Blütenwerk</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#philosophie">Philosophie</a></li>
+      <li><a href="#cta">Kontakt</a></li>
+    </ul>
+    <a href="#cta" class="nav-cta magnet">
+      Beratung anfragen
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+<header class="hero atmend" role="banner">
+  <div class="hero-grid">
+    <div>
+      <span class="kicker">Meisterfloristik · seit 2014</span>
+      <h1>Wo die Natur spricht, <em>blüht</em> das Handwerk.</h1>
+      <p class="hero-lead">
+        Blütenwerk kreiert individuelle Hochzeitsfloristik, handgebundene Saisonsträuße und florale Konzepte. <strong>Natürliche Formen</strong>, bewusste Herkunft und echte Handarbeit — für Momente, die in Erinnerung bleiben.
+      </p>
+      <div class="hero-cta-gruppe">
+        <a href="#cta" class="btn-primary magnet">
+          Konzept anfragen
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#portfolio" class="btn-ghost">Portfolio ansehen</a>
+      </div>
+    </div>
+    <div class="hero-visuell">
+      <div class="hero-bild magnet">
+        <img src="http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-30%2Fab5a6931-eafd-4b38-b8fe-ce861f148b66_aigc.jpeg?Expires=1782847137&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=KW1WBVCD6jZSD9DWfYijREjZIkY%3D" alt="Romantisches florales Arrangement mit natürlichen, wilden Blüten">
+      </div>
+      <div class="hero-badge magnet" aria-hidden="true">
+        <span class="gross">12</span>
+        <span class="klein">Jahre Erfahrung mit floralen Konzepten und Hochzeitsdekorationen.</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="stats" aria-label="Kennzahlen">
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-zahl">340<span class="einheit">Paare</span></div>
+      <div class="stat-label">Begleitete Brautpaare mit individuell abgestimmten floralen Konzepten.</div>
+    </div>
+    <div class="stat">
+      <div class="stat-zahl">85<span class="einheit">%</span></div>
+      <div class="stat-label">Regionale Blüten aus ausgewählten Partnerbetrieben und eigenen Schnittgärten.</div>
+    </div>
+    <div class="stat">
+      <div class="stat-zahl">4<span class="einheit">Floristinnen</span></div>
+      <div class="stat-label">Ausgebildete Meisterinnen und Gestalterinnen arbeiten gemeinsam im Atelier.</div>
+    </div>
+    <div class="stat">
+      <div class="stat-zahl">12<span class="einheit">Workshops</span></div>
+      <div class="stat-label">Pro Jahr, in denen wir unser Wissen über Botanik und Bindetechnik teilen.</div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<section class="abschnitt" id="portfolio" aria-labelledby="portfolio-titel">
+  <div class="abschnitt-kopf">
+    <div>
+      <span class="kicker">Unsere Werkstücke</span>
+      <h2 class="abschnitt-titel" id="portfolio-titel">Vom Brautstrauß bis zur <em>Saaldekoration</em>.</h2>
+    </div>
+    <p class="abschnitt-beschreibung">
+      Einblicke in unsere aktuellen Arbeiten. Jedes Werkstück wird individuell konzipiert, handgebunden und auf die Stimmung des Anlasses abgestimmt — natürlich, wild und unperfekt perfekt.
+    </p>
+  </div>
+
+  <div class="mosaik-wrap">
+    <div class="mosaik">
+
+      <article class="kachel span-2x2" data-tilt>
+        <img src="http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-30%2Fab5a6931-eafd-4b38-b8fe-ce861f148b66_aigc.jpeg?Expires=1782847137&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=KW1WBVCD6jZSD9DWfYijREjZIkY%3D" alt="Üppiger Brautstrauß in warmen Erdtönen und zartem Rosa" loading="lazy">
+        <div class="kachel-info">
+          <div class="kachel-kat">Hochzeitsfloristik</div>
+          <div class="kachel-titel">Boho-Elegance Brautstrauß</div>
+          <div class="kachel-meta">Freilandrosen · Eukalyptus · Pampasgras</div>
+        </div>
+      </article>
+
+      <article class="kachel span-1x2" data-tilt>
+        <img src="http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-30%2F35e7da88-8ad7-4d5c-afef-af42147e7008_aigc.jpeg?Expires=1782847136&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=NME3noIddBbGsaDAljZNmW6D0Vg%3D" alt="Detailaufnahme einer floralen Tischdekoration" loading="lazy">
+        <div class="kachel-info">
+          <div class="kachel-kat">Event-Styling</div>
+          <div class="kachel-titel">Table Setting</div>
+          <div class="kachel-meta">Intimes Dinner · Naturmaterialien</div>
+        </div>
+      </article>
+
+      <article class="kachel span-2x1" data-tilt>
+        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80" alt="Festlich geschmückter Traubogen im Freien" loading="lazy">
+        <div class="kachel-info">
+          <div class="kachel-kat">Zeremonie</div>
+          <div class="kachel-titel">Traubogen im Grünen</div>
+          <div class="kachel-meta">Asymmetrisches Design</div>
+        </div>
+      </article>
+
+      <article class="kachel" data-tilt>
+        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=800&q=80" alt="Frischer, handgebundener Saisonstrauß" loading="lazy">
+        <div class="kachel-info">
+          <div class="kachel-kat">Saisonsträuße</div>
+          <div class="kachel-titel">Frühlingserwachen</div>
+        </div>
+      </article>
+
+      <article class="kachel span-1x2" data-tilt>
+        <img src="https://images.unsplash.com/photo-1603953531631-016f4d0089a8?auto=format&fit=crop&w=800&q=80" alt="Teilnehmerinnen bei einem Blumen-Workshop" loading="lazy">
+        <div class="kachel-info">
+          <div class="kachel-kat">Atelier</div>
+          <div class="kachel-titel">Kranzbinde-Workshop</div>
+          <div class="kachel-meta">Technik & Botanik</div>
+        </div>
+      </article>
+
+      <article class="kachel span-2x1" data-tilt>
+        <img src="http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-30%2F4573a760-a291-4352-a63f-1fd54c8679fe_aigc.jpeg?Expires=1782847140&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=XnDNON7fja8wXpUcrq0B6WVEElI%3D" alt="Floristin arrangiert Blüten in einer Vase" loading="lazy">
+        <div class="kachel-info">
+          <div class="kachel-kat">Handwerk</div>
+          <div class="kachel-titel">Arbeit im Atelier</div>
+          <div class="kachel-meta">Vorbereitung für das Wochenende</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="abschnitt touren" id="leistungen" aria-labelledby="leistungen-titel">
+  <div class="abschnitt-kopf">
+    <div>
+      <span class="kicker">Unsere Leistungen</span>
+      <h2 class="abschnitt-titel" id="leistungen-titel">Vier Bereiche, <em>eine</em> Handschrift.</h2>
+    </div>
+    <p class="abschnitt-beschreibung">
+      Wir arbeiten nicht nach Katalog, sondern nach Gefühl und Saison. Jedes Konzept ist ein Unikat — vom intimen Elopement bis zur großen Feier, vom tagesaktuellen Strauß bis zum kreativen Workshop.
+    </p>
+  </div>
+
+  <div class="touren-grid">
+
+    <article class="tour-karte" data-tilt>
+      <span class="tour-nummer">01</span>
+      <div class="tour-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/>
+        </svg>
+      </div>
+      <h3>Hochzeitsfloristik</h3>
+      <p>Von Brautstrauß und Anstecker über den Traubogen bis hin zur kompletten Saaldekoration. Wir entwickeln ein florales Gesamtkonzept, das genau zu eurer Geschichte passt.</p>
+      <ul class="tour-details">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Erstgespräch & Moodboard</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg> Individuelles Farbkonzept</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/></svg> Inklusive Aufbau vor Ort</li>
+      </ul>
+    </article>
+
+    <article class="tour-karte" data-tilt>
+      <span class="tour-nummer">02</span>
+      <div class="tour-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2C12 2 5 6 5 12C5 18 12 22 12 22C12 22 19 18 19 12C19 6 12 2 12 2Z"/>
+        </svg>
+      </div>
+      <h3>Event-Styling</h3>
+      <p>Florale Konzepte für Firmenfeiern, Taufen, Jubiläen und Shootings. Wir setzen Räume und Tische mit ausgewählten Blüten und passenden Gefäßen atmosphärisch in Szene.</p>
+      <ul class="tour-details">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Flexible Größenordnungen</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg> Passend zur Corporate Identity</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/></svg> Verleih von Vasen & Kerzenständern</li>
+      </ul>
+    </article>
+
+    <article class="tour-karte" data-tilt>
+      <span class="tour-nummer">03</span>
+      <div class="tour-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 22V12M8 22L10 12M16 22L14 12M12 12C12 12 8 8 8 5C8 2 12 2 12 2C12 2 16 2 16 5C16 8 12 12 12 12Z"/>
+        </svg>
+      </div>
+      <h3>Saisonale Sträuße</h3>
+      <p>Handgebundene Unikate aus tagesaktuellen, vorwiegend regionalen Blüten. Jeder Strauß spiegelt die Jahreszeit wider — locker gebunden im natürlichen Wuchs der Stiele.</p>
+      <ul class="tour-details">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Vorbestellung im Atelier</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg> Fokus auf Slow-Flowers</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/></svg> Plastikfreie Verpackung</li>
+      </ul>
+    </article>
+
+    <article class="tour-karte" data-tilt>
+      <span class="tour-nummer">04</span>
+      <div class="tour-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><line x1="8" y1="16" x2="18" y2="6"/><line x1="16" y1="16" x2="6" y2="6"/>
+        </svg>
+      </div>
+      <h3>Kreativ-Workshops</h3>
+      <p>Tauche ein in die Welt der Floristik. In unseren Workshops lernst du die Grundlagen des Kranzbindens, das Arrangieren von Trockenblumen oder das perfekte Table-Styling.</p>
+      <ul class="tour-details">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 2–3 Stunden Dauer</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg> Materialien & Werkzeug inkl.</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/></svg> Snacks & Getränke im Atelier</li>
+      </ul>
+    </article>
+
+  </div>
+</section>
+
+<section class="abschnitt ausruestung" id="philosophie" aria-labelledby="philosophie-titel">
+  <div class="ausruestung-grid">
+    <div class="ausruestung-text">
+      <span class="kicker">Wie wir arbeiten — was uns wichtig ist</span>
+      <h2 id="philosophie-titel">Qualität ist <em>keine</em> Nebensache.</h2>
+      <p>
+        Wer einmal den Duft von ungespritzten Freilandrosen gerochen hat, kennt den Unterschied. Wir legen Wert auf natürliche Wuchsformen, nachhaltige Materialien und den bewussten Umgang mit der Natur.
+      </p>
+      <p>
+        <strong>Dein florales Konzept</strong> besprechen wir vorab in Ruhe bei uns im Atelier — damit am Ende jedes Blatt und jede Blüte genau das ausdrückt, was dir am Herzen liegt.
+      </p>
+
+      <ul class="ausruestung-liste">
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          <span><strong>Regionale Herkunft</strong>Fokus auf Slow-Flowers, saisonale Verfügbarkeit und kurze Transportwege durch lokale Partner.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          <span><strong>Nachhaltige Technik</strong>Wir verzichten weitestgehend auf Steckschaum und arbeiten stattdessen mit Kenzan und Hasendraht.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          <span><strong>Individuelle Beratung</strong>Keine Standardlösungen aus dem Katalog, sondern persönliche Konzepte, die zu dir passen.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="ausruestung-bild magnet">
+      <img src="http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-30%2F4573a760-a291-4352-a63f-1fd54c8679fe_aigc.jpeg?Expires=1782847140&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=XnDNON7fja8wXpUcrq0B6WVEElI%3D" alt="Floristin bei der Arbeit an einem floralen Arrangement in der Werkstatt">
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="cta-inn">
+    <h2>Bereit für dein <em>Blütenkonzept</em>?</h2>
+    <p>Lass uns bei einer Tasse Kaffee in unserem Atelier über deine Wünsche und Vorstellungen sprechen.</p>
+    <a href="#kontakt" class="btn-primary magnet">
+      Erstgespräch vereinbaren
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <div class="cta-meta">Unverbindliche Anfrage · Antwort innerhalb von 48 Stunden</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-marke">
+      <a href="#" class="marke">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 33 V18 M20 18 C15 18 10 22 10 28 C10 33 15 33 20 28 C25 33 30 33 30 28 C30 22 25 18 20 18 Z" stroke="#fbf6ea" stroke-width="2"/>
+        </svg>
+        <span>Blütenwerk</span>
+      </a>
+      <p>Handgebundene Floristik und individuelle Konzepte für Hochzeiten und Events. Natürlich, wild und unperfekt perfekt.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Leistungen</h4>
+      <ul>
+        <li><a href="#">Hochzeitsfloristik</a></li>
+        <li><a href="#">Event-Styling</a></li>
+        <li><a href="#">Saisonsträuße</a></li>
+        <li><a href="#">Workshops</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Atelier</h4>
+      <ul>
+        <li><a href="#">Über uns</a></li>
+        <li><a href="#">Philosophie</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Kontakt</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Rechtliches</h4>
+      <ul>
+        <li><a href="#">Impressum</a></li>
+        <li><a href="#">Datenschutz</a></li>
+        <li><a href="#">AGB</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-unten">
+    <span>© 2026 Blütenwerk. Alle Rechte vorbehalten.</span>
+    <span>Gestaltet mit Liebe zur Natur.</span>
+  </div>
+</footer>
+
+</body>
+</html>

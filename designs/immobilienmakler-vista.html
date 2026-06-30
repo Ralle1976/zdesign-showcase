@@ -1,0 +1,1091 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vista Estates — Exklusive Immobilien & Private Brokerage</title>
+<meta name="description" content="Vista Estates. Ein handverlesenes Portfolio an Luxusvillen, Penthouses und Off-Market-Investments. Diskrete Vermittlung und fundierte Expertise in Bestlage.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F2EBDD;
+    --ivory-deep:#E8DFC9;
+    --black:#0E0D0B;
+    --black-soft:#1A1815;
+    --gold:#C9A24A;
+    --gold-bright:#E4BE63;
+    --gold-deep:#8E6E2A;
+    --paper:#FBF6EA;
+    --rule:rgba(14,13,11,.18);
+    --shadow-hard:6px 6px 0 var(--black);
+    --shadow-gold:0 0 28px rgba(228,190,99,.45);
+    --font-display:'Cormorant Garamond',Georgia,serif;
+    --font-body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --border:2.5px solid var(--black);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    background:var(--ivory);
+    color:var(--black);
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ATMENDER UNTERGRUND */
+  .breath{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:linear-gradient(120deg,
+      var(--ivory) 0%,
+      var(--ivory-deep) 35%,
+      var(--paper) 60%,
+      var(--ivory) 100%);
+    background-size:200% 200%;
+    animation:breathe 16s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%{background-position:0% 0%}
+    50%{background-position:100% 100%}
+    100%{background-position:0% 0%}
+  }
+  .noise{
+    position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.35;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.05  0 0 0 0 0.04  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode:multiply;
+  }
+
+  /* PARALLAX DEKO */
+  .deco{position:absolute;pointer-events:none;z-index:1}
+  .deco-circle{
+    border:2px solid var(--gold);border-radius:50%;
+    width:340px;height:340px;
+    opacity:.35;
+  }
+  .deco-cross{
+    width:42px;height:42px;
+    background:
+      linear-gradient(var(--gold),var(--gold)) center/100% 2px no-repeat,
+      linear-gradient(var(--gold),var(--gold)) center/2px 100% no-repeat;
+  }
+  .deco-square{
+    border:2px solid var(--black);
+    width:120px;height:120px;
+    background:var(--gold);
+    opacity:.85;
+  }
+
+  /* LAYOUT */
+  .wrap{position:relative;z-index:2;max-width:1380px;margin:0 auto;padding:0 32px}
+  section{position:relative;padding:120px 0}
+  @media(max-width:720px){section{padding:80px 0} .wrap{padding:0 20px}}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,235,221,.85);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--black);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 0;
+  }
+  .brand{
+    font-family:var(--font-display);
+    font-size:26px;font-weight:500;letter-spacing:.04em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .brand-mark{
+    display:inline-block;width:14px;height:14px;
+    background:var(--gold);
+    transform:rotate(45deg);
+    box-shadow:0 0 18px rgba(228,190,99,.7);
+  }
+  .nav-links{display:flex;gap:36px;list-style:none;align-items:center}
+  .nav-links a{
+    color:var(--black);text-decoration:none;
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:400;
+    position:relative;padding:6px 0;
+    transition:color .25s ease;
+  }
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+    background:var(--gold);transition:width .3s ease;
+  }
+  .nav-links a:hover{color:var(--gold-deep)}
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{
+    border:2px solid var(--black);
+    padding:10px 20px;
+    background:var(--black);color:var(--ivory);
+    text-decoration:none;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    transition:background .2s ease,color .2s ease;
+  }
+  .nav-cta:hover{background:var(--gold);color:var(--black)}
+  @media(max-width:840px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{padding-top:60px;padding-bottom:80px}
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr 1fr;
+    gap:60px;align-items:end;
+    position:relative;
+  }
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:14px;
+    font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:500;
+    margin-bottom:32px;
+  }
+  .eyebrow::before{
+    content:"";display:inline-block;width:42px;height:1.5px;background:var(--gold);
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-weight:300;
+    font-size:clamp(56px,9vw,138px);
+    line-height:.92;
+    letter-spacing:-.02em;
+    color:var(--black);
+    margin-bottom:36px;
+  }
+  .hero h1 em{
+    font-style:italic;font-weight:400;
+    color:var(--gold-deep);
+    position:relative;
+  }
+  .hero h1 .glow{
+    color:var(--gold-bright);
+    text-shadow:0 0 32px rgba(228,190,99,.65),0 0 60px rgba(228,190,99,.35);
+  }
+  .hero p.lede{
+    font-size:18px;line-height:1.65;max-width:520px;
+    color:var(--black-soft);font-weight:300;
+    margin-bottom:44px;
+  }
+  .hero-actions{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .btn{
+    display:inline-flex;align-items:center;gap:12px;
+    padding:18px 32px;
+    font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    text-decoration:none;font-weight:500;
+    border:2.5px solid var(--black);
+    transition:transform .15s ease,box-shadow .2s ease,background .2s ease;
+    cursor:pointer;
+  }
+  .btn-primary{
+    background:var(--black);color:var(--ivory);
+    box-shadow:var(--shadow-hard);
+  }
+  .btn-primary:hover{
+    transform:translate(-2px,-2px);
+    box-shadow:9px 9px 0 var(--gold);
+    background:var(--black);
+  }
+  .btn-ghost{background:transparent;color:var(--black)}
+  .btn-ghost:hover{background:var(--black);color:var(--ivory)}
+  .btn svg{width:14px;height:14px}
+
+  .hero-figure{
+    position:relative;
+    border:var(--border);
+    box-shadow:var(--shadow-hard);
+    background:var(--black);
+    overflow:hidden;
+  }
+  .hero-figure img{
+    width:100%;height:560px;object-fit:cover;display:block;
+    filter:contrast(1.05) saturate(.95);
+  }
+  @media(max-width:900px){.hero-figure img{height:420px}}
+  .hero-figure figcaption{
+    position:absolute;left:0;bottom:0;right:0;
+    padding:18px 22px;
+    background:rgba(14,13,11,.78);color:var(--ivory);
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    display:flex;justify-content:space-between;align-items:center;
+    border-top:2px solid var(--gold);
+  }
+  .hero-figure figcaption span:last-child{color:var(--gold-bright)}
+
+  .hero-meta{
+    margin-top:80px;
+    border-top:2px solid var(--black);
+    border-bottom:2px solid var(--black);
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  @media(max-width:720px){.hero-meta{grid-template-columns:repeat(2,1fr)}}
+  .hero-meta div{
+    padding:26px 22px;
+    border-right:2px solid var(--black);
+  }
+  .hero-meta div:last-child{border-right:none}
+  @media(max-width:720px){
+    .hero-meta div:nth-child(2){border-right:none}
+    .hero-meta div:nth-child(-n+2){border-bottom:2px solid var(--black)}
+  }
+  .hero-meta .num{
+    font-family:var(--font-display);
+    font-size:46px;font-weight:400;line-height:1;
+    color:var(--black);display:block;margin-bottom:8px;
+  }
+  .hero-meta .num em{color:var(--gold-deep);font-style:normal}
+  .hero-meta .lbl{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--black-soft);
+  }
+
+  /* SECTION HEADER */
+  .sec-head{
+    display:grid;grid-template-columns:1fr 2fr;gap:50px;
+    margin-bottom:80px;align-items:end;
+  }
+  @media(max-width:900px){.sec-head{grid-template-columns:1fr;gap:24px}}
+  .sec-head h2{
+    font-family:var(--font-display);
+    font-weight:300;
+    font-size:clamp(40px,6vw,84px);
+    line-height:.95;letter-spacing:-.015em;
+  }
+  .sec-head h2 em{font-style:italic;color:var(--gold-deep)}
+  .sec-head .intro{font-size:16px;line-height:1.7;color:var(--black-soft);max-width:560px}
+  .sec-num{
+    font-family:var(--font-body);
+    font-size:12px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:500;
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:24px;
+  }
+  .sec-num::before{
+    content:"";width:30px;height:1.5px;background:var(--gold);
+  }
+
+  /* COLLECTION */
+  .collection{background:var(--ivory-deep);border-top:2px solid var(--black);border-bottom:2px solid var(--black)}
+  .perfume-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border:2px solid var(--black);
+    background:var(--black);
+  }
+  @media(max-width:900px){.perfume-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.perfume-grid{grid-template-columns:1fr}}
+  .perfume{
+    background:var(--paper);
+    padding:36px 30px 32px;
+    border-right:2px solid var(--black);
+    border-bottom:2px solid var(--black);
+    position:relative;
+    transition:background .3s ease;
+    cursor:pointer;
+  }
+  .perfume:nth-child(3n){border-right:none}
+  .perfume:nth-last-child(-n+3){border-bottom:none}
+  @media(max-width:900px){
+    .perfume{border-right:2px solid var(--black)!important;border-bottom:2px solid var(--black)!important}
+    .perfume:nth-child(2n){border-right:none!important}
+  }
+  @media(max-width:560px){
+    .perfume{border-right:none!important}
+  }
+  .perfume:hover{background:var(--ivory)}
+  .perfume-head{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    margin-bottom:24px;
+  }
+  .perfume-no{
+    font-family:var(--font-body);
+    font-size:11px;letter-spacing:.24em;color:var(--gold-deep);
+    font-weight:500;
+  }
+  .perfume-mac{
+    font-family:var(--font-body);
+    font-size:10px;letter-spacing:.18em;color:var(--black-soft);
+    text-transform:uppercase;
+  }
+  .perfume h3{
+    font-family:var(--font-display);
+    font-size:42px;font-weight:400;line-height:1;
+    margin-bottom:6px;letter-spacing:-.01em;
+  }
+  .perfume h3 em{font-style:italic;color:var(--gold-deep)}
+  .perfume .sub{
+    font-family:var(--font-display);font-style:italic;
+    color:var(--black-soft);font-size:15px;
+    margin-bottom:22px;
+  }
+  .perfume .notes{
+    font-size:13px;line-height:1.7;color:var(--black-soft);
+    border-top:1px solid var(--rule);
+    padding-top:18px;
+    margin-bottom:18px;
+  }
+  .perfume .notes strong{
+    display:block;font-family:var(--font-body);font-weight:500;
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold-deep);margin-bottom:6px;
+  }
+  .perfume .price{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:13px;
+  }
+  .perfume .price .euro{
+    font-family:var(--font-display);font-size:24px;font-weight:500;
+  }
+
+  /* ATELIER */
+  .atelier{position:relative;overflow:hidden}
+  .atelier-grid{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:80px;align-items:center;
+  }
+  @media(max-width:900px){.atelier-grid{grid-template-columns:1fr;gap:50px}}
+  .atelier-figure{
+    position:relative;
+    border:var(--border);
+    box-shadow:var(--shadow-hard);
+  }
+  .atelier-figure img{
+    width:100%;height:620px;object-fit:cover;display:block;
+    filter:contrast(1.05);
+  }
+  @media(max-width:900px){.atelier-figure img{height:440px}}
+  .atelier-tag{
+    position:absolute;top:-2px;left:-2px;
+    background:var(--gold);color:var(--black);
+    padding:10px 18px;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    border:2px solid var(--black);
+  }
+  .atelier-content h2{
+    font-family:var(--font-display);
+    font-weight:300;
+    font-size:clamp(40px,5.5vw,76px);
+    line-height:.98;letter-spacing:-.015em;
+    margin-bottom:28px;
+  }
+  .atelier-content h2 em{font-style:italic;color:var(--gold-deep)}
+  .atelier-content p{
+    font-size:16px;line-height:1.75;color:var(--black-soft);
+    margin-bottom:20px;
+  }
+  .atelier-list{
+    list-style:none;margin:32px 0;
+    border-top:1px solid var(--rule);
+  }
+  .atelier-list li{
+    display:grid;grid-template-columns:80px 1fr auto;
+    gap:20px;align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid var(--rule);
+    font-size:14px;
+  }
+  .atelier-list .step{
+    font-family:var(--font-display);font-style:italic;
+    color:var(--gold-deep);font-size:22px;
+  }
+  .atelier-list .what{font-weight:400;color:var(--black)}
+  .atelier-list .dur{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--black-soft);
+  }
+
+  /* SERVICES */
+  .services{background:var(--black);color:var(--ivory);border-top:2px solid var(--black)}
+  .services .sec-head h2{color:var(--ivory)}
+  .services .sec-head h2 em{color:var(--gold-bright)}
+  .services .sec-head .intro{color:rgba(242,235,221,.7)}
+  .services .sec-num{color:var(--gold-bright)}
+  .services .sec-num::before{background:var(--gold-bright)}
+  .service-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border:2px solid var(--gold);
+  }
+  @media(max-width:900px){.service-grid{grid-template-columns:1fr}}
+  .service{
+    padding:42px 32px;
+    border-right:2px solid var(--gold);
+    position:relative;
+    transition:background .3s ease;
+  }
+  .service:last-child{border-right:none}
+  @media(max-width:900px){.service{border-right:none;border-bottom:2px solid var(--gold)}.service:last-child{border-bottom:none}}
+  .service:hover{background:rgba(228,190,99,.06)}
+  .service-icon{
+    width:54px;height:54px;
+    border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:28px;
+    color:var(--gold-bright);
+  }
+  .service-icon svg{width:26px;height:26px}
+  .service h3{
+    font-family:var(--font-display);
+    font-size:32px;font-weight:400;line-height:1.1;
+    margin-bottom:14px;color:var(--ivory);
+  }
+  .service h3 em{font-style:italic;color:var(--gold-bright)}
+  .service p{
+    font-size:14px;line-height:1.7;color:rgba(242,235,221,.72);
+    margin-bottom:24px;
+  }
+  .service .meta{
+    display:flex;justify-content:space-between;
+    border-top:1px solid rgba(228,190,99,.3);
+    padding-top:18px;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold-bright);
+  }
+  .service .meta span:last-child{color:rgba(242,235,221,.6)}
+
+  /* PROCESS */
+  .process-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border:2px solid var(--black);
+  }
+  @media(max-width:900px){.process-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.process-grid{grid-template-columns:1fr}}
+  .process-step{
+    background:var(--paper);
+    padding:36px 28px;
+    border-right:2px solid var(--black);
+    position:relative;
+  }
+  .process-step:last-child{border-right:none}
+  @media(max-width:900px){
+    .process-step{border-right:2px solid var(--black);border-bottom:2px solid var(--black)}
+    .process-step:nth-child(2n){border-right:none}
+    .process-step:nth-last-child(-n+2){border-bottom:none}
+  }
+  @media(max-width:560px){.process-step{border-right:none!important;border-bottom:2px solid var(--black)!important}.process-step:last-child{border-bottom:none!important}}
+  .process-step .pn{
+    font-family:var(--font-display);
+    font-size:64px;font-weight:300;line-height:1;
+    color:var(--gold);font-style:italic;
+    margin-bottom:18px;display:block;
+  }
+  .process-step h4{
+    font-family:var(--font-display);
+    font-size:24px;font-weight:500;
+    margin-bottom:12px;
+  }
+  .process-step p{
+    font-size:13px;line-height:1.65;color:var(--black-soft);
+  }
+
+  /* QUOTE */
+  .quote-sec{
+    background:var(--ivory-deep);
+    border-top:2px solid var(--black);
+    border-bottom:2px solid var(--black);
+    text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .quote-sec blockquote{
+    font-family:var(--font-display);
+    font-weight:300;font-style:italic;
+    font-size:clamp(28px,4vw,52px);
+    line-height:1.25;letter-spacing:-.01em;
+    max-width:920px;margin:0 auto 28px;
+    color:var(--black);
+  }
+  .quote-sec blockquote span{color:var(--gold-deep)}
+  .quote-sec cite{
+    font-style:normal;
+    font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--black-soft);
+  }
+  .quote-sec cite::before{
+    content:"";display:inline-block;width:30px;height:1px;
+    background:var(--gold);vertical-align:middle;margin-right:14px;
+  }
+  .quote-image {
+    width: 80px; height: 80px; border-radius: 50%;
+    object-fit: cover; margin: 0 auto 32px; display: block;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 24px rgba(228,190,99,.3);
+  }
+
+  /* CTA */
+  .cta{padding:140px 0;position:relative;overflow:hidden}
+  .cta-box{
+    border:var(--border);
+    background:var(--black);
+    color:var(--ivory);
+    padding:80px 60px;
+    box-shadow:14px 14px 0 var(--gold);
+    position:relative;
+    overflow:hidden;
+  }
+  @media(max-width:720px){.cta-box{padding:50px 28px}}
+  .cta-box::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(120deg,rgba(228,190,99,0) 0%,rgba(228,190,99,.18) 50%,rgba(228,190,99,0) 100%);
+    background-size:200% 200%;
+    animation:breathe 14s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .cta-eyebrow{
+    font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--gold-bright);font-weight:500;
+    margin-bottom:24px;display:inline-flex;align-items:center;gap:14px;
+  }
+  .cta-eyebrow::before{content:"";width:42px;height:1.5px;background:var(--gold-bright)}
+  .cta-box h2{
+    font-family:var(--font-display);
+    font-weight:300;
+    font-size:clamp(40px,6vw,84px);
+    line-height:.98;letter-spacing:-.015em;
+    margin-bottom:24px;
+    position:relative;
+  }
+  .cta-box h2 em{font-style:italic;color:var(--gold-bright)}
+  .cta-box h2 .glow{
+    color:var(--gold-bright);
+    text-shadow:0 0 28px rgba(228,190,99,.7),0 0 56px rgba(228,190,99,.4);
+  }
+  .cta-box p{
+    font-size:17px;line-height:1.7;color:rgba(242,235,221,.78);
+    max-width:560px;margin-bottom:40px;
+    position:relative;
+  }
+  .cta-actions{display:flex;gap:18px;flex-wrap:wrap;position:relative}
+  .btn-gold{
+    background:var(--gold);color:var(--black);
+    box-shadow:0 0 24px rgba(228,190,99,.5);
+  }
+  .btn-gold:hover{
+    background:var(--gold-bright);
+    box-shadow:0 0 36px rgba(228,190,99,.8);
+    transform:translate(-2px,-2px);
+  }
+  .btn-outline-light{
+    background:transparent;color:var(--ivory);
+    border-color:var(--ivory);
+  }
+  .btn-outline-light:hover{background:var(--ivory);color:var(--black)}
+
+  /* FOOTER */
+  footer{
+    background:var(--black);color:var(--ivory);
+    border-top:2px solid var(--gold);
+    padding:80px 0 40px;
+  }
+  .foot-grid{
+    display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:60px;margin-bottom:60px;
+  }
+  @media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;gap:40px}}
+  @media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
+  .foot-brand{
+    font-family:var(--font-display);
+    font-size:38px;font-weight:500;letter-spacing:.02em;
+    margin-bottom:18px;
+  }
+  .foot-brand em{font-style:italic;color:var(--gold-bright)}
+  .foot-grid p{font-size:14px;line-height:1.7;color:rgba(242,235,221,.65);max-width:340px}
+  .foot-col h5{
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gold-bright);font-weight:500;
+    margin-bottom:22px;
+  }
+  .foot-col ul{list-style:none}
+  .foot-col li{margin-bottom:12px}
+  .foot-col a{
+    color:rgba(242,235,221,.75);text-decoration:none;
+    font-size:14px;transition:color .2s ease;
+  }
+  .foot-col a:hover{color:var(--gold-bright)}
+  .foot-bottom{
+    border-top:1px solid rgba(228,190,99,.25);
+    padding-top:28px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:12px;color:rgba(242,235,221,.5);
+    letter-spacing:.06em;
+  }
+  @media(max-width:560px){.foot-bottom{flex-direction:column;gap:14px;text-align:center}}
+
+  /* FOCUS */
+  a:focus-visible,button:focus-visible{
+    outline:2.5px solid var(--gold-bright);
+    outline-offset:3px;
+  }
+
+  /* REDUCED MOTION */
+  @media (prefers-reduced-motion: reduce){
+    .breath,.cta-box::before{animation:none;background-position:static}
+    .deco{transform:none!important}
+    *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<div class="breath" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+
+<!-- DEKO ELEMENTS -->
+<div class="deco deco-circle" data-speed="0.25" style="top:240px;right:-120px" aria-hidden="true"></div>
+<div class="deco deco-cross" data-speed="0.35" style="top:780px;left:5%" aria-hidden="true"></div>
+<div class="deco deco-square" data-speed="0.2" style="top:1500px;right:8%;transform:rotate(12deg)" aria-hidden="true"></div>
+<div class="deco deco-circle" data-speed="0.3" style="top:2200px;left:-100px;width:200px;height:200px" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Vista Estates
+      </a>
+      <ul class="nav-links">
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#office">Private Office</a></li>
+        <li><a href="#advisory">Advisory</a></li>
+        <li><a href="#verfahren">Verfahren</a></li>
+      </ul>
+      <a href="#termin" class="nav-cta">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Vista Estates — München, Bogenhausen</span>
+        <h1>Exklusive Objekte.<br><em>Diskrete</em> Vermittlung in<br><span class="glow">bester Lage.</span></h1>
+        <p class="lede">Eine Immobilienboutique ohne Kompromisse. Wir kuratieren ein streng limitiertes Portfolio an Luxusvillen, Penthouses und Off-Market-Investments — mit absoluter Diskretion, fundierter Expertise und einer Geduld, die in dieser Branche selten geworden ist.</p>
+        <div class="hero-actions">
+          <a href="#portfolio" class="btn btn-primary">
+            Portfolio entdecken
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#termin" class="btn btn-ghost">Private Viewing</a>
+        </div>
+      </div>
+
+      <figure class="hero-figure">
+        <img src="http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-30%2F9f22d9cb-8001-47a0-abd5-e7247b512480_aigc.jpeg?Expires=1782846956&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=prAGJHnL%2Frf1dAqRYeTlUOWxmY8%3D" alt="Luxuriöses Penthouse mit Panoramablick, vermittelt durch Vista Estates">
+        <figcaption>
+          <span>Objekt Nº III — Villa Aurum</span>
+          <span>Off-Market</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="hero-meta">
+      <div>
+        <span class="num">12</span>
+        <span class="lbl">Off-Market Objekte</span>
+      </div>
+      <div>
+        <span class="num"><em>45</em></span>
+        <span class="lbl">Tage Ø Vermarktung</span>
+      </div>
+      <div>
+        <span class="num">18</span>
+        <span class="lbl">Jahre Marktexpertise</span>
+      </div>
+      <div>
+        <span class="num">2006</span>
+        <span class="lbl">Gegründet in München</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="collection" id="portfolio">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">Kapitel 01 — Portfolio</div>
+        <h2>Die exklusiven<br><em>Residenzen</em></h2>
+      </div>
+      <p class="intro">Ein handverlesenes Portfolio. Keine Massenvermarktung, keine öffentlichen Portale — nur ausgewählte Objekte, die unseren strengen Kriterien entsprechen. Jedes Exposé enthält verifizierte Kennzahlen und wird nur an geprüfte Interessenten ausgehändigt.</p>
+    </div>
+
+    <div class="perfume-grid">
+      <article class="perfume">
+        <div class="perfume-head">
+          <span class="perfume-no">Nº I</span>
+          <span class="perfume-mac">Ref. 24-04</span>
+        </div>
+        <h3>Villa <em>Lumina</em></h3>
+        <p class="sub">Ein architektonisches Meisterwerk am See.</p>
+        <div class="notes">
+          <strong>Lage</strong>
+          Starnberger See, Ostufer, privater Seezugang.
+        </div>
+        <div class="notes">
+          <strong>Details</strong>
+          450 m² Wohnfläche, Infinity-Pool, Smart Home.
+        </div>
+        <div class="price">
+          <span class="euro">4.250.000 €</span>
+          <span class="perfume-mac">Off-Market</span>
+        </div>
+      </article>
+
+      <article class="perfume">
+        <div class="perfume-head">
+          <span class="perfume-no">Nº II</span>
+          <span class="perfume-mac">Ref. 24-02</span>
+        </div>
+        <h3>Penthouse <em>Ciel</em></h3>
+        <p class="sub">Über den Dächern der Altstadt.</p>
+        <div class="notes">
+          <strong>Lage</strong>
+          München Lehel, direkt am Englischen Garten.
+        </div>
+        <div class="notes">
+          <strong>Details</strong>
+          280 m², Dachterrasse, privater Aufzug.
+        </div>
+        <div class="price">
+          <span class="euro">3.800.000 €</span>
+          <span class="perfume-mac">Exklusiv</span>
+        </div>
+      </article>
+
+      <article class="perfume">
+        <div class="perfume-head">
+          <span class="perfume-no">Nº III</span>
+          <span class="perfume-mac">Ref. 23-09</span>
+        </div>
+        <h3>Chalet <em>Montagne</em></h3>
+        <p class="sub">Alpiner Luxus inmitten der Berge.</p>
+        <div class="notes">
+          <strong>Lage</strong>
+          Kitzbühel, Sonnbühel, direkter Ski-in/Ski-out.
+        </div>
+        <div class="notes">
+          <strong>Details</strong>
+          320 m², Spa-Bereich, offener Kamin.
+        </div>
+        <div class="price">
+          <span class="euro">5.900.000 €</span>
+          <span class="perfume-mac">Off-Market</span>
+        </div>
+      </article>
+
+      <article class="perfume">
+        <div class="perfume-head">
+          <span class="perfume-no">Nº IV</span>
+          <span class="perfume-mac">Ref. 24-01</span>
+        </div>
+        <h3>Palais <em>Historique</em></h3>
+        <p class="sub">Repräsentatives Stadtpalais.</p>
+        <div class="notes">
+          <strong>Lage</strong>
+          Wien Innere Stadt, in unmittelbarer Hofburg-Nähe.
+        </div>
+        <div class="notes">
+          <strong>Details</strong>
+          650 m², Original-Stuckdecken, historischer Weinkeller.
+        </div>
+        <div class="price">
+          <span class="euro">8.500.000 €</span>
+          <span class="perfume-mac">Exklusiv</span>
+        </div>
+      </article>
+
+      <article class="perfume">
+        <div class="perfume-head">
+          <span class="perfume-no">Nº V</span>
+          <span class="perfume-mac">Ref. 23-11</span>
+        </div>
+        <h3>Estate <em>Riviera</em></h3>
+        <p class="sub">Mediterrane Küstenvilla.</p>
+        <div class="notes">
+          <strong>Lage</strong>
+          Côte d'Azur, Cap Ferrat, unverbaubarer Meerblick.
+        </div>
+        <div class="notes">
+          <strong>Details</strong>
+          550 m², separates Gästehaus, privater Bootsanleger.
+        </div>
+        <div class="price">
+          <span class="euro">12.000.000 €</span>
+          <span class="perfume-mac">Off-Market</span>
+        </div>
+      </article>
+
+      <article class="perfume">
+        <div class="perfume-head">
+          <span class="perfume-no">Nº VI</span>
+          <span class="perfume-mac">Ref. 24-03</span>
+        </div>
+        <h3>Loft <em>Industriel</em></h3>
+        <p class="sub">Purer Raum auf zwei Ebenen.</p>
+        <div class="notes">
+          <strong>Lage</strong>
+          Berlin Mitte, im Zentrum des Galerienviertels.
+        </div>
+        <div class="notes">
+          <strong>Details</strong>
+          340 m², 6m Deckenhöhe, 24/7 Concierge-Service.
+        </div>
+        <div class="price">
+          <span class="euro">2.950.000 €</span>
+          <span class="perfume-mac">Exklusiv</span>
+        </div>
+      </article>
+
+      <article class="perfume">
+        <div class="perfume-head">
+          <span class="perfume-no">Nº VII</span>
+          <span class="perfume-mac">Ref. 23-12</span>
+        </div>
+        <h3>Residenz <em>Parc</em></h3>
+        <p class="sub">Wohnen im privaten Park.</p>
+        <div class="notes">
+          <strong>Lage</strong>
+          Hamburg Harvestehude, direkter Alsterblick.
+        </div>
+        <div class="notes">
+          <strong>Details</strong>
+          410 m², weitläufiger Privatgarten, Tiefgarage.
+        </div>
+        <div class="price">
+          <span class="euro">6.400.000 €</span>
+          <span class="perfume-mac">Off-Market</span>
+        </div>
+      </article>
+
+      <article class="perfume" style="background:var(--black);color:var(--ivory);display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <div class="perfume-head">
+            <span class="perfume-no" style="color:var(--gold-bright)">Off-Market</span>
+            <span class="perfume-mac" style="color:rgba(242,235,221,.5)">Auf Anfrage</span>
+          </div>
+          <h3 style="color:var(--ivory)">Diskreter <em style="color:var(--gold-bright)">Suchauftrag</em></h3>
+          <p class="sub" style="color:rgba(242,235,221,.65)">Ein Objekt, das noch nicht auf dem Markt ist.</p>
+          <p style="font-size:13px;line-height:1.7;color:rgba(242,235,221,.7)">Über unser weitreichendes Netzwerk finden wir Immobilien, die niemals öffentlich inseriert werden. Für Investoren und Eigennutzer mit höchsten Ansprüchen.</p>
+        </div>
+        <a href="#termin" class="btn btn-gold" style="margin-top:24px;align-self:flex-start;padding:14px 22px;font-size:11px">Mandat anfragen</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ATELIER -->
+<section class="atelier" id="office">
+  <div class="wrap">
+    <div class="atelier-grid">
+      <figure class="atelier-figure">
+        <span class="atelier-tag">Im Private Office</span>
+        <img src="http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-30%2Fc510fe21-2620-4465-9018-d239e00045bf_aigc.jpeg?Expires=1782846957&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=kFetSf80i3%2FVbMeCRswf8GRPIjc%3D" alt="Diskretes Beratungsgespräch im Private Office von Vista Estates">
+      </figure>
+
+      <div class="atelier-content">
+        <div class="sec-num">Kapitel 02 — Private Office</div>
+        <h2>Wo Werte<br><em>gesichert</em> werden.</h2>
+        <p>Unser Private Office liegt im Herzen von Bogenhausen, abseits der Laufkundschaft. Keine Schaufenster, keine Leuchtreklame. Ein Ort für diskrete Gespräche, detaillierte Marktanalysen und eine Regel: Wir vermitteln nur Objekte, deren Wertstabilität wir belegen können.</p>
+        <p>Geleitet wird das Office von Elena Mercier, die vor Vista Estates achtzehn Jahre im Private Banking tätig war. Jedes Dossier wird von ihr persönlich geprüft, bevor es an unsere Klienten weitergegeben wird.</p>
+
+        <ul class="atelier-list">
+          <li>
+            <span class="step">i.</span>
+            <span class="what">Portfolio-Analyse</span>
+            <span class="dur">90 Min · Kostenfrei</span>
+          </li>
+          <li>
+            <span class="step">ii.</span>
+            <span class="what">Off-Market-Zugang</span>
+            <span class="dur">Nach Bonitätsprüfung</span>
+          </li>
+          <li>
+            <span class="step">iii.</span>
+            <span class="what">Investment-Mandat</span>
+            <span class="dur">Individuelles Honorar</span>
+          </li>
+        </ul>
+
+        <a href="#termin" class="btn btn-primary">Office-Termin buchen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="advisory">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">Kapitel 03 — Dienstleistungen</div>
+        <h2>Drei Wege zum<br><em>Investment</em>.</h2>
+      </div>
+      <p class="intro">Immobilienkauf ist Vertrauenssache. Wer zu uns kommt, durchläuft eine präzise Bedarfsanalyse — über Renditeziele, Architekturvorlieben und langfristige Strategien. Drei Formate, je nachdem, wie Sie investieren möchten.</p>
+    </div>
+
+    <div class="service-grid">
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v3M3 12h3M21 12h-3M12 21v-3M5.6 5.6l2.1 2.1M18.4 5.6l-2.1 2.1M5.6 18.4l2.1-2.1M18.4 18.4l-2.1-2.1"/>
+            <circle cx="12" cy="12" r="3.5"/>
+          </svg>
+        </div>
+        <h3>Markt- <em>Sondierung</em></h3>
+        <p>Eine 90-minütige Sitzung mit unserem Analysten-Team. Sie bewerten aktuelle Marktdaten, wir dokumentieren Ihre Anlageziele. Am Ende erhalten Sie ein schriftliches Profil Ihrer Investmentstrategie.</p>
+        <div class="meta">
+          <span>90 Minuten</span>
+          <span>Kostenfrei</span>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7l9-4 9 4-9 4-9-4z"/>
+            <path d="M3 12l9 4 9-4M3 17l9 4 9-4"/>
+          </svg>
+        </div>
+        <h3>Private <em>Viewing</em></h3>
+        <p>Wir kuratieren eine Auswahl aus unserem Off-Market-Portfolio. Ziel ist nicht der schnelle Abschluss, sondern ein Objekt, das perfekt zu Ihnen passt. Inklusive detaillierter Due Diligence.</p>
+        <div class="meta">
+          <span>Flexibel</span>
+          <span>Exklusiv</span>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l2.4 5.4L20 8.2l-4 3.9.9 5.9L12 15.3l-4.9 2.7.9-5.9-4-3.9 5.6-.8L12 2z"/>
+          </svg>
+        </div>
+        <h3>Family <em>Office</em></h3>
+        <p>Ganzheitliche Betreuung Ihres Immobilienvermögens. Von der strategischen Akquise bis zur diskreten Veräußerung. Sie erhalten einen persönlichen Berater, der Ihre Interessen langfristig vertritt.</p>
+        <div class="meta">
+          <span>Langfristig</span>
+          <span>Auf Anfrage</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="verfahren">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">Kapitel 04 — Verfahren</div>
+        <h2>Vom Erstgespräch<br>zum <em>Notar</em>.</h2>
+      </div>
+      <p class="intro">Vier Stationen, die bei jeder Transaktion mit höchster Präzision ablaufen. Keine Abkürzungen, kein Outsourcing. Absolute Transparenz in jedem Schritt.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-step">
+        <span class="pn">01</span>
+        <h4>Evaluation</h4>
+        <p>Fundierte Wertermittlung und bautechnische Due Diligence. Jedes Objekt wird von unabhängigen Gutachtern vorab geprüft und lückenlos dokumentiert.</p>
+      </div>
+      <div class="process-step">
+        <span class="pn">02</span>
+        <h4>Strategie</h4>
+        <p>Diskrete Platzierung. Wir verzichten auf öffentliche Portale und nutzen ausschließlich unser verifiziertes Netzwerk aus Family Offices und Privatinvestoren.</p>
+      </div>
+      <div class="process-step">
+        <span class="pn">03</span>
+        <h4>Verhandlung</h4>
+        <p>Professionelle Moderation zwischen den Parteien. Wir bereiten alle vertragsrelevanten Dokumente vor und klären steuerliche sowie rechtliche Rahmenbedingungen.</p>
+      </div>
+      <div class="process-step">
+        <span class="pn">04</span>
+        <h4>Abschluss</h4>
+        <p>Begleitung bis zur notariellen Beurkundung und Schlüsselübergabe. Auch danach bleiben wir Ihr verlässlicher Ansprechpartner für das Immobilienmanagement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-sec">
+  <div class="wrap">
+    <img src="http://hailuo-image-algeng-data-us.oss-us-east-1.aliyuncs.com/image_inference_output%2Ftalkie%2Fprod%2Fimg%2F2026-06-30%2F1ee51f06-b0e9-4782-8fce-d12202091bd3_aigc.jpeg?Expires=1782846957&OSSAccessKeyId=LTAI5tRDTcyEYLLuBEpJRwCi&Signature=TTN1dPUbbas4uZpKAgHBnFC2nxE%3D" alt="Architektur Detail Vista Estates" class="quote-image">
+    <blockquote>
+      „Wahrer Luxus bei Immobilien ist nicht der Preis, sondern die <span>Gewissheit</span>, das Einzigartige gefunden zu haben.“
+    </blockquote>
+    <cite>Elena Mercier, Managing Partner — Handelsblatt, März 2024</cite>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="termin">
+  <div class="wrap">
+    <div class="cta-box">
+      <span class="cta-eyebrow">Private Viewing</span>
+      <h2>Besuchen Sie uns in<br>Bogenhausen <em class="glow">42.</em></h2>
+      <p>Termine werden ausschließlich nach vorheriger Vereinbarung vergeben. Schreiben Sie uns kurz über Ihr Suchprofil — wir melden uns innerhalb von 24 Stunden mit einem diskreten Terminvorschlag.</p>
+      <div class="cta-actions">
+        <a href="mailto:office@vista-estates.de" class="btn btn-gold">
+          Termin anfragen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="tel:+498912345678" class="btn btn-outline-light">+49 89 123 456 78</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Vista <em>Estates</em></div>
+        <p>Eine unabhängige Immobilienboutique für exklusive Wohn- und Investmentobjekte in Bestlage.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#office">Private Office</a></li>
+          <li><a href="#advisory">Advisory</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Rechtliches</h5>
+        <ul>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">AGB</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Kontakt</h5>
+        <ul>
+          <li><a href="mailto:office@vista-estates.de">office@vista-estates.de</a></li>
+          <li><a href="tel:+498912345678">+49 89 123 456 78</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2024 Vista Estates. Alle Rechte vorbehalten.</span>
+      <span>Design by Art Director</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
